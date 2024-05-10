@@ -1,0 +1,1 @@
+// Grundlegende Funktionen, die für alle HTML-Seiten relevant sind! Muss dann in jede HTML-Datei eingebunden werden!

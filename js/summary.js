@@ -1,0 +1,1 @@
+// Funktionen, die nur für diese Seite relevant sind!

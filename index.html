@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+
+    <script src="./js/storage.js"></script>
+    <script src="./js/register.js"></script>
+   
+    <!-- Das ist die Start-Seite (Login-Seite)! Keine extra Datei für den Login! -->
+
+</head>
+
+<body onload="init()">
+
+    <h1>Login:</h1>
+
+    <form onsubmit="login(); return false;">
+        <input type="email" id="login_email" required>
+        <input type="password" id="login_password" required>
+        <button id="login_btn">Login</button>
+    </form>
+    
+    <div id="msg_box"></div>
+
+</body>
+
+<script src="./js/login.js"></script>           <!-- Diese Datei darf erst geladen werden, wenn das HTML komplett geladen ist! -->
+
+</html>

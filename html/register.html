@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrieren</title>
+
+    <script src="../js/storage.js"></script>
+    <script src="../js/register.js"></script>
+</head>
+
+<body onload="init()">
+
+    <h1>Nutzer anlegen:</h1>
+    
+    <form onsubmit="addUser(); return false;">
+        <input type="text" id="register_name" required>
+        <input type="email" id="register_email" required>
+        <input type="password" id="register_password" required>
+        <button id="register_btn">Registrieren</button>
+    </form>
+    
+</body>
+</html>
