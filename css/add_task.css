@@ -1,1 +1,71 @@
 /* Code/ Design, der nur für die Add Task Seite relevant ist! */
+
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../font/inter-v13-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .content > h1 {
+    font-size: 61px;
+    margin-left: 80px;
+  }
+
+  .information-container {
+    display: flex;
+    margin-left: 80px;
+  }
+
+  .sides {
+    display: flex;
+    flex-direction: column;
+    margin-right: 96px;
+  }
+
+  .input {
+    padding: 12px 21px;
+    color: #D1D1D1;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    margin-top: 6px;
+    margin-bottom: 16px;
+  }
+
+.prio-btns {
+    display: flex;
+    align-items: center;
+    margin-top: 6px;
+    margin-bottom: 16px;
+}
+
+.prio-btn {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 0;
+    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
+    padding: 16px 10px;
+    border-radius: 10px;
+    margin-right: 8px;
+}
+
+.no-border {
+    border: 0;
+}
+
+  .clear-create-container {
+    display: flex;
+    align-items: center;
+    margin-left: 80px;
+    margin-top: 200px;
+  }
+
+  .red-star {
+    color: red;
+  }
