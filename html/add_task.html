@@ -11,12 +11,11 @@
     <link rel="icon" type="image/x-icon" href="../assets/img/00_general-elements/join-logo-dark.svg">
 </head>
 <body onload="includeHTML()">
-    <header w3-include-html="./header.html"></header>
-
     <div class="container">
         <nav w3-include-html="./navbar.html"></nav>
-        
-        <div class="content">
+        <div class="content-container">
+            <header w3-include-html="./header.html"></header>
+            <div class="content">
                 <h1>Add Task</h1>
                 <div class="information-container">
                     <div class="left-side">
@@ -90,6 +89,7 @@
                         <button class="prio-btn create-btn">Create Task <img class="cancel-blue" src="../assets/img/00_general-elements/close-white.svg"></button>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </body>
