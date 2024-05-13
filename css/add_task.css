@@ -8,64 +8,112 @@
     src: url('../font/inter-v13-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
   }
 
-  .content {
-    width: 100%;
-  }
+.container {
+  height: 100vh;
+}
 
-  .content > h1 {
-    font-size: 61px;
-    margin-left: 80px;
-  }
+.content {
+  width: 100%;
+  font-size: 20px;
+}
 
-  .information-container {
-    display: flex;
-    margin-left: 80px;
-  }
+.content > h1 {
+  font-size: 61px;
+  margin-left: 80px;
+}
 
-  .sides {
-    display: flex;
-    flex-direction: column;
-    margin-right: 96px;
-  }
+.information-container {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 70px;
+  margin-right: 70px;
+}
 
-  .input {
-    padding: 12px 21px;
-    color: #D1D1D1;
-    border-radius: 10px;
-    border: 1px solid #D1D1D1;
-    margin-top: 6px;
-    margin-bottom: 16px;
-  }
+.left-side {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+}
+
+.line {
+  border-left: 1px solid #D1D1D1;
+}
+
+.input {
+  padding: 12px 21px;
+  color: #D1D1D1;
+  border-radius: 10px;
+  border: 1px solid #D1D1D1;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  font-size: 20px;
+  width: 396px;
+}
+
+.input-textarea {
+  font-family: "Inter";
+}
 
 .prio-btns {
-    display: flex;
-    align-items: center;
-    margin-top: 6px;
-    margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  gap: 16px;
 }
 
 .prio-btn {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    border: 0;
-    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
-    padding: 16px 10px;
-    border-radius: 10px;
-    margin-right: 8px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: 0;
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.1);
+  padding: 16px 10px;
+  border-radius: 10px;
+  font-size: 20px;
+  gap: 8px;
 }
 
-.no-border {
-    border: 0;
+.prio-width {
+width: 136px;
+justify-content: center;
 }
 
-  .clear-create-container {
-    display: flex;
-    align-items: center;
-    margin-left: 80px;
-    margin-top: 200px;
-  }
+.sub-task-div {
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
 
-  .red-star {
-    color: red;
-  }
+.sub-task-input {
+  border: 0;
+  font-size: 20px;
+  flex: 1;
+  outline: none;
+}
+
+.select-field {
+  width: 440px;
+}
+
+.clear-create-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 80px;
+  margin-right: 80px;
+  margin-top: 200px;
+}
+
+.dark-btn {
+  background-color: #2A3647;
+  color: white;
+}
+
+.red-star {
+  color: red;
+}

@@ -62,7 +62,7 @@ header {
 
 nav {
     height: 100vh;
-    width: 232px;
+    min-width: 232px;
     background-color: #2A3647;
     display: flex;
     justify-content: space-between;

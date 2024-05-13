@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=+, initial-scale=1.0">
+    <meta name="viewport" content="initial-scale=1.0">
     <title>JOIN - Add Task</title>
     <link rel="stylesheet" href="../css/templates.css">
     <link rel="stylesheet" href="../css/add_task.css">
@@ -18,51 +18,52 @@
         <div class="content">
                 <h1>Add Task</h1>
                 <div class="information-container">
-                    <div class="sides">
+                    <div class="left-side">
                         <span>Title<span class="red-star">*</span></span>
                         <input class="input" type="text" placeholder="Enter a title">
 
                         <span>Title</span>
-                        <input class="input" type="text" placeholder="Enter a Description">
+                        <textarea class="input input-textarea" cols="30" rows="5" placeholder="Enter a Description"></textarea>
 
                         <label for="contacts">Assignet to</label>
-                        <select class="input" name="contacts" id="contacts">
+                        <select class="input select-field" name="contacts" id="contacts">
                             <option value="name1">Name 1</option>
                             <option value="name2">Name 2</option>
                             <option value="name3">Name 3</option>
                             <option value="name4">Name 4</option>
                         </select>
                     </div>
-                    <div class="sides">
+                    <div class="line"></div>
+                    <div class="right-side">
                         <span>Due Date<span class="red-star">*</span></span>
-                        <input class="input" type="date" placeholder="Enter a Description">
+                        <input class="input" type="date">
 
                         <span>Prio</span>
                         <div class="prio-btns">
-                            <button class="prio-btn">Urgent <img src="../img/urgent_red.svg"></button>
-                            <button class="prio-btn">Medium <img src="../img/medium_orange.svg"></button>
-                            <button class="prio-btn">Low <img src="../img/low_green.svg"></button>
+                            <button class="prio-btn prio-width ">Urgent <img src="../assets/img/03_addtask/prio_urgent_red.svg"></button>
+                            <button class="prio-btn prio-width ">Medium <img src="../assets/img/03_addtask/prio_medium_orange.svg"></button>
+                            <button class="prio-btn prio-width ">Low <img src="../assets/img/03_addtask/prio_low_green.svg"></button>
                         </div>
 
                         <label for="contacts">Category<span class="red-star">*</span></label>
-                        <select class="input" name="contacts" id="contacts">
+                        <select class="input select-field" name="contacts" id="contacts">
                             <option value="category1">Category 1</option>
                             <option value="category2">Category 2</option>
                         </select>
 
                         <span>Subtasks</span>
-                        <div class="input">
-                            <input class="no-border" type="text" placeholder="Add new subtask">
-                            <img src="../img/add.svg">
+                        <div class="input sub-task-div">
+                            <input class="sub-task-input" type="text" placeholder="Add new subtask">
+                            <img src="../assets/img/03_addtask/add.svg">
                         </div>
                     </div>
                 </div>
 
                 <div class="clear-create-container">
                     <span>This field is required<span class="red-star">*</span></span>
-                    <div class="prio-btns">
-                        <button class="prio-btn">Urgent <img src="../img/close.svg"></button>
-                        <button class="prio-btn">Medium <img src="../img/check.svg"></button>
+                    <div class="prio-btns clear-create-btn">
+                        <button class="prio-btn">Clear <img src="../assets/img/00_general-elements/close-dark.svg"></button>
+                        <button class="prio-btn dark-btn">Create Task <img src="../assets/img/00_general-elements/close-white.svg"></button>
                     </div>
                 </div>
         </div>
