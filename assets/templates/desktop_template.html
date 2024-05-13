@@ -11,16 +11,13 @@
     <link rel="icon" type="image/x-icon" href="../img/00_general-elements/join-logo-dark.svg">
 </head>
 <body onload="includeHTML()">
-
-    
-    <header w3-include-html="../assets/templates/header.html"></header>
-
     <div class="container">
-        <nav w3-include-html="../assets/templates/navbar.html"></nav>
-
-        <!-- Container zum erstellen der verschiedenen Seiten ! -->
-        <div class="content">
-
+        <nav w3-include-html="./navbar.html"></nav>
+        <div class="content-container">
+            <header w3-include-html="./header.html"></header>
+            <div class="content">
+                <!-- HIER den Code für die Seite eingeben ! -->
+            </div>
         </div>
     </div>
 </body>
