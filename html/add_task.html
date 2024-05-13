@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/templates.css">
     <link rel="stylesheet" href="../css/add_task.css">
     <script src="../js/templates.js"></script>
+    <script src="../js/add_task.js"></script>
     <link rel="icon" type="image/x-icon" href="../assets/img/00_general-elements/join-logo-dark.svg">
 </head>
 <body onload="includeHTML()">
@@ -24,14 +25,23 @@
 
                         <span>Title</span>
                         <textarea class="input input-textarea" cols="30" rows="5" placeholder="Enter a Description"></textarea>
-
-                        <label for="contacts">Assignet to</label>
-                        <select class="input select-field" name="contacts" id="contacts">
-                            <option value="name1">Name 1</option>
-                            <option value="name2">Name 2</option>
-                            <option value="name3">Name 3</option>
-                            <option value="name4">Name 4</option>
-                        </select>
+                        
+                        <span for="contacts">Assignet to</span>
+                        <input class="input outline-blue" onclick="assignMenu(); renderContacts()">
+                        <div id="contactContainer" class="contacts-container d-none">
+                            <ul class="list-options">
+                                <li id="listedNames" class="option">
+                                    <div class="short-and-fullname">
+                                        <div id="shortName" class="short-name">AM</div>
+                                        <span id="fullName">Anton Mayer</span>
+                                    </div>
+                                    <input type="checkbox" id="">
+                                </li>
+                            </ul>
+                        </div>
+                            
+                        
+                        
                     </div>
                     <div class="line"></div>
                     <div class="right-side">
@@ -45,25 +55,39 @@
                             <button class="prio-btn prio-width ">Low <img src="../assets/img/03_addtask/prio_low_green.svg"></button>
                         </div>
 
-                        <label for="contacts">Category<span class="red-star">*</span></label>
-                        <select class="input select-field" name="contacts" id="contacts">
-                            <option value="category1">Category 1</option>
-                            <option value="category2">Category 2</option>
-                        </select>
+                        <span for="contacts">Category</span>
+                        <input class="input outline-blue" onclick="categoryMenu()">
+                        <div id="categoryContainer" class="category-container d-none">
+                            <ul class="list-options">
+                                <li class="option">Kategorie 1</li>
+                                <li class="option">Kategorie 2</li>
+                                <li class="option">Kategorie 3</li>
+                            </ul>
+                        </div>
+                        
 
                         <span>Subtasks</span>
                         <div class="input sub-task-div">
                             <input class="sub-task-input" type="text" placeholder="Add new subtask">
-                            <img src="../assets/img/03_addtask/add.svg">
+                            <img class="add-icon" src="../assets/img/03_addtask/add.svg">
                         </div>
                     </div>
                 </div>
 
                 <div class="clear-create-container">
-                    <span>This field is required<span class="red-star">*</span></span>
+                    <span><span class="red-star">*</span>This field is required</span>
                     <div class="prio-btns clear-create-btn">
-                        <button class="prio-btn">Clear <img src="../assets/img/00_general-elements/close-dark.svg"></button>
-                        <button class="prio-btn dark-btn">Create Task <img src="../assets/img/00_general-elements/close-white.svg"></button>
+                        <button class="prio-btn clear-btn clear-x">Clear 
+                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <mask id="mask0_71720_5473" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
+                                <rect y="0.96582" width="24" height="24" fill="#D9D9D9"/>
+                                </mask>
+                                <g mask="url(#mask0_71720_5473)">
+                                    <path d="M11.9998 14.3659L7.0998 19.2659C6.91647 19.4492 6.68314 19.5409 6.3998 19.5409C6.11647 19.5409 5.88314 19.4492 5.6998 19.2659C5.51647 19.0825 5.4248 18.8492 5.4248 18.5659C5.4248 18.2825 5.51647 18.0492 5.6998 17.8659L10.5998 12.9659L5.6998 8.06587C5.51647 7.88254 5.4248 7.6492 5.4248 7.36587C5.4248 7.08254 5.51647 6.8492 5.6998 6.66587C5.88314 6.48254 6.11647 6.39087 6.3998 6.39087C6.68314 6.39087 6.91647 6.48254 7.0998 6.66587L11.9998 11.5659L16.8998 6.66587C17.0831 6.48254 17.3165 6.39087 17.5998 6.39087C17.8831 6.39087 18.1165 6.48254 18.2998 6.66587C18.4831 6.8492 18.5748 7.08254 18.5748 7.36587C18.5748 7.6492 18.4831 7.88254 18.2998 8.06587L13.3998 12.9659L18.2998 17.8659C18.4831 18.0492 18.5748 18.2825 18.5748 18.5659C18.5748 18.8492 18.4831 19.0825 18.2998 19.2659C18.1165 19.4492 17.8831 19.5409 17.5998 19.5409C17.3165 19.5409 17.0831 19.4492 16.8998 19.2659L11.9998 14.3659Z" fill="#2A3647"/>
+                                </g>
+                            </svg>
+                        </button>
+                        <button class="prio-btn create-btn">Create Task <img class="cancel-blue" src="../assets/img/00_general-elements/close-white.svg"></button>
                     </div>
                 </div>
         </div>
