@@ -26,21 +26,17 @@
                         <textarea class="input input-textarea" cols="30" rows="5" placeholder="Enter a Description"></textarea>
                         
                         <span for="contacts">Assignet to</span>
-                        <input class="input outline-blue" onclick="assignMenu(); renderContacts()">
-                        <div id="contactContainer" class="contacts-container d-none">
-                            <ul class="list-options">
-                                <li id="listedNames" class="option">
-                                    <div class="short-and-fullname">
-                                        <div id="shortName" class="short-name">AM</div>
-                                        <span id="fullName">Anton Mayer</span>
-                                    </div>
-                                    <input type="checkbox" id="">
-                                </li>
-                            </ul>
+                        <div class="input sub-task-div outline" onclick="assignMenu(); getContacts()">
+                            <input class="sub-task-input" type="text" placeholder="Select contacts to assign">
+                            <img id="arrowDropDownContact" class="add-icon" src="../assets/img/00_general-elements/arrow_drop_down.svg">
+                        </div>
+                        <div>
+                            <div id="contactContainer" class="contacts-container d-none">
+                                <ul id="listOptions" class="list-options">
+                                </ul>
+                            </div>
                         </div>
                             
-                        
-                        
                     </div>
                     <div class="line"></div>
                     <div class="right-side">
@@ -55,13 +51,15 @@
                         </div>
 
                         <span for="contacts">Category</span>
-                        <input class="input outline-blue" onclick="categoryMenu()">
-                        <div id="categoryContainer" class="category-container d-none">
-                            <ul class="list-options">
-                                <li class="option">Kategorie 1</li>
-                                <li class="option">Kategorie 2</li>
-                                <li class="option">Kategorie 3</li>
-                            </ul>
+                        <div class="input sub-task-div outline" onclick="categoryMenu(); getCategories()">
+                            <input class="sub-task-input" type="text" placeholder="Select task category">
+                            <img id="arrowDropDownCategory" class="add-icon" src="../assets/img/00_general-elements/arrow_drop_down.svg">
+                        </div>
+                        <div>
+                            <div id="categoryContainer" class="contacts-container d-none">
+                                <ul id="listOptionsCategory" class="list-options">
+                                </ul>
+                            </div>
                         </div>
                         
 
