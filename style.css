@@ -1,1 +1,18 @@
-/* Wird in jede HTML-Datei eingebunden! Grundlegende Styles, die bei jeder Seite verwendet werden! */
+:root {
+    --default-color: #2A3647;
+    --hover-color: #29ABE2;
+    --click-color: #091931;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: inherit
+}
+
+h1 {
+    font-size: 61px;
+    font-weight: 700;
+    color: #000000;
+}
