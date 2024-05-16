@@ -185,6 +185,7 @@ justify-content: center;
   max-height: 200px;
   overflow-y: auto;
   position: absolute;
+  z-index: 2;
 }
 
 .list-options {
@@ -243,4 +244,35 @@ justify-content: center;
 
 .outline:focus-within {
   border-color: #29ABE2;
+}
+
+.checked-contacts {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  z-index: 1;
+}
+
+.checked-contact {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -24px;
+}
+
+.urgent-btn-change {
+  background-color: #FF3D00 !important;
+  color: white;
+}
+
+.medium-btn-change {
+  background-color: #FFA800;
+  color: white;
+}
+
+.low-btn-change {
+  background-color: #7AE229;
+  color: white;
 }

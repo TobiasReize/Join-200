@@ -28,14 +28,18 @@
                         <span for="contacts">Assignet to</span>
                         <div class="input sub-task-div outline" onclick="assignMenu(); getContacts()">
                             <input class="sub-task-input" type="text" placeholder="Select contacts to assign">
-                            <img id="arrowDropDownContact" class="add-icon" src="../assets/img/00_general-elements/arrow_drop_down.svg">
+                            <img id="arrow_drop_down_contact" class="add-icon" src="../assets/img/00_general-elements/arrow_drop_down.svg">
                         </div>
                         <div>
-                            <div id="contactContainer" class="contacts-container d-none">
-                                <ul id="listOptions" class="list-options">
+                            <div id="contact_container" class="contacts-container d-none">
+                                <ul id="list_options" class="list-options">
                                 </ul>
                             </div>
                         </div>
+                        <div>
+                            <div class="checked-contacts" id="checked_contacts"></div>
+                        </div>
+                        
                             
                     </div>
                     <div class="line"></div>
@@ -45,19 +49,31 @@
 
                         <span>Prio</span>
                         <div class="prio-btns">
-                            <button class="prio-btn prio-width ">Urgent <img src="../assets/img/03_addtask/prio_urgent_red.svg"></button>
-                            <button class="prio-btn prio-width ">Medium <img src="../assets/img/03_addtask/prio_medium_orange.svg"></button>
-                            <button class="prio-btn prio-width ">Low <img src="../assets/img/03_addtask/prio_low_green.svg"></button>
+                            <button id="urgent_btn" class="prio-btn prio-width" onclick="colorChangeUrgent()">
+                                Urgent 
+                                <img id="img_urgent" src="../assets/img/03_addtask/prio_urgent_red.svg">
+                                <img id="img_urgent_white" class="d-none" src="../assets/img/03_add-task/urgent-white.svg">
+                            </button>
+                            <button id="medium_btn" class="prio-btn prio-width" onclick="colorChangeMedium()">
+                                Medium 
+                                <img id="img_medium" src="../assets/img/03_addtask/prio_medium_orange.svg">
+                                <img id="img_medium_white" class="d-none" src="../assets/img/03_add-task/medium-white.svg">
+                            </button>
+                            <button id="low_btn" class="prio-btn prio-width" onclick="colorChangeLow()">
+                                Low 
+                                <img id="img_low" src="../assets/img/03_addtask/prio_low_green.svg">
+                                <img id="img_low_white" class="d-none" src="../assets/img/03_add-task/low-white.svg">
+                            </button>
                         </div>
 
                         <span for="contacts">Category</span>
                         <div class="input sub-task-div outline" onclick="categoryMenu(); getCategories()">
                             <input class="sub-task-input" type="text" placeholder="Select task category">
-                            <img id="arrowDropDownCategory" class="add-icon" src="../assets/img/00_general-elements/arrow_drop_down.svg">
+                            <img id="arrow_drop_down_category" class="add-icon" src="../assets/img/00_general-elements/arrow_drop_down.svg">
                         </div>
                         <div>
-                            <div id="categoryContainer" class="contacts-container d-none">
-                                <ul id="listOptionsCategory" class="list-options">
+                            <div id="category_container" class="contacts-container d-none">
+                                <ul id="list_options_category" class="list-options">
                                 </ul>
                             </div>
                         </div>
