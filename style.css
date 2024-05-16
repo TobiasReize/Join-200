@@ -8,8 +8,9 @@
 
 :root {
     --default-color: #2A3647;
-    --hover-color: #29ABE2;
+    --hover-color: #29ABE2; /* hover-blue */
     --click-color: #091931;
+    /* --hover-grey: #D1D1D1; */
 }
 
 * {
@@ -43,6 +44,7 @@ h1 {
 
 .main-content {
     width: 100%;
+    /* flex: 1; --> evtl. die bessere Lösung*/
 }
 
 /* -------------------- header -------------------- */ 
