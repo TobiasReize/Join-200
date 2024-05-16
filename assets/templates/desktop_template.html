@@ -1,24 +1,25 @@
-<!-- Mustervorlage zum erstellen der Seiten - In das div mit der class="content" kommt der Code für die verschiedenen Seiten ! -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=+, initial-scale=1.0">
-    <title>JOIN - Add Task</title>
-    <link rel="stylesheet" href="../css/templates.css">
-    <script src="../../js/templates.js"></script>
-    <link rel="icon" type="image/x-icon" href="../img/00_general-elements/join-logo-dark.svg">
+    <meta name="viewport" content="initial-scale=1.0">
+    <title>JOIN</title>
+    
+    <link rel="stylesheet" href="../style.css">
+    <script src="../script.js"></script>
+
+    <link rel="icon" type="image/x-icon" href="../assets/img/00_general-elements/join-logo-dark.svg">
 </head>
+
 <body onload="includeHTML()">
-    <div class="container">
-        <nav w3-include-html="./navbar.html"></nav>
-        <div class="content-container">
-            <header w3-include-html="./header.html"></header>
+    <div class="page-content">
+        <nav w3-include-html="../assets/templates/navbar.html"></nav>
+        <main class="main-content">
+            <header w3-include-html="../assets/templates/header.html"></header>
             <div class="content">
-                <!-- HIER den Code für die Seite eingeben ! -->
+              <!-- Hier kommt der content eurer Seite rein !  --> 
             </div>
-        </div>
+        </main>
     </div>
 </body>
 </html>
