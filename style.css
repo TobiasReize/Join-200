@@ -45,6 +45,8 @@ h1 {
 .main-content {
     width: 100%;
     /* flex: 1; --> evtl. die bessere Lösung*/
+    display: flex;  /* --> muss dem template hinzugefügt werden! */
+    flex-direction: column; /* --> muss dem template hinzugefügt werden! */
 }
 
 /* -------------------- header -------------------- */ 

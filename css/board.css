@@ -1,4 +1,4 @@
-/* Board - Sektion */
+/* Section: Board Headline */
 .title-searchbar-container {
     display: flex;
     justify-content: space-between;
@@ -68,6 +68,7 @@
     align-items: center;
     gap: 4px;
     padding: 12px 16px;
+    margin-right: 16px;
     background-color: var(--default-color);
     border-radius: 10px;
     color: #ffffff;
@@ -78,4 +79,56 @@
 .add-task-button:hover {
     cursor: pointer;
     background-color: var(--hover-color);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.add-task-button:active {
+    background-color: var(--click-color);
+    box-shadow: none;
+}
+
+/* Column titles */
+.column-headlines-container {
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    gap: 34px;
+}
+
+.column-headline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 244px;
+}
+
+.column-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #42526E;
+}
+
+.add-icon:hover {
+    cursor: pointer;
+}
+
+.add-icon:hover rect, .add-icon:hover path {
+    stroke: var(--hover-color);
+}
+
+.add-icon:active rect, .add-icon:active path {
+    stroke: var(--click-color);
+}
+
+/* Section: Board distribution */
+.board-distribution {
+    margin-top: 8px;
+    display: flex;
+    gap: 26px;
+    flex: 1;
+}
+
+.board-columns {
+    border: 1px solid lightcoral;
+    width: 252px;
 }
