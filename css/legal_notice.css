@@ -1,0 +1,25 @@
+.legal-notice {
+    display: flex;
+    flex-direction: column;
+    width: 1014px;
+    height: 943px;
+    top: 311px;
+    left: 328px;
+    gap: 24px;
+}
+
+svg {
+    position: fixed;
+    top: 225px;
+    left: 1307px;
+    padding: 2.5px 0px 0px 0px;
+}
+
+.title-legal {
+    position: absolute;
+    width: Hug (371px)px;
+    height: Hug (73px)px;
+    top: 206px;
+    left: 328px;
+    gap: 30px;
+}
