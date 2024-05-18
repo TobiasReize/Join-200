@@ -22,10 +22,10 @@
 
                 <!-- Section: Board Headline -->
                 <section>
-                    <div class="title-searchbar-container ml-96 mt-110">
+                    <div class="title-searchbar-container ai-ctr-space-btwn ml-96 mt-110">
                         <h1>Board</h1>
-                        <div class="searchbar-button-container">
-                            <div class="searchbar">
+                        <div class="searchbar-button-container df-ai-ctr">
+                            <div class="searchbar df-ai-ctr">
                                 <input class="searchbar-inputfield" type="search" size="10" placeholder="Find Task">
                                 <div class="separator"></div>
                                 <svg class="searchbar-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,15 +37,15 @@
                                     </g>
                                 </svg>
                             </div>
-                            <div class="add-task-button">
+                            <div class="add-task-button df-ai-ctr">
                                 <span>Add task</span>
                                 <img src="../assets/img/00_general-elements/plus-white.svg" alt="">
                             </div>
                         </div>
                     </div>
                     <!-- Column headlines -->
-                    <div class="column-headlines-container ml-96">
-                        <div class="column-headline">
+                    <div class="column-headlines-container df-ai-ctr ml-96">
+                        <div class="column-headline ai-ctr-space-btwn">
                             <span class="column-title">To do</span>
                             <svg class="add-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
@@ -53,7 +53,7 @@
                                 <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                             </svg>
                         </div>
-                        <div class="column-headline">
+                        <div class="column-headline ai-ctr-space-btwn">
                             <span class="column-title">In progress</span>
                             <svg class="add-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
@@ -61,7 +61,7 @@
                                 <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                             </svg>
                         </div>
-                        <div class="column-headline">
+                        <div class="column-headline ai-ctr-space-btwn">
                             <span class="column-title">Await feedback</span>
                             <svg class="add-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
@@ -69,7 +69,7 @@
                                 <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                             </svg>
                         </div>
-                        <div>
+                        <div class="column-headline">
                             <span class="column-title">Done</span>
                         </div>
                     </div>
@@ -77,10 +77,33 @@
 
                 <!-- Section: Board distribution -->
                 <section class="board-distribution ml-96">
-                    <div class="board-columns"></div>
-                    <div class="board-columns"></div>
-                    <div class="board-columns"></div>
-                    <div class="board-columns"></div>
+                    <div class="board-columns"> <!-- Column: To Do -->
+                        <div class="empty-card">No tasks To do</div>
+                    </div>
+                    <div class="board-columns"> <!-- Column: In progress -->
+
+                    </div>
+                    <div class="board-columns"> <!-- Column: Await Feedback -->
+                        <div class="full-card">
+                            <div class="task-category">Technical Task</div>
+                            <div class="task-title">HTML Base Template Creation</div>
+                            <p class="task-description">Create reusable HTML base templates...</p>
+                            <div class="persons-priority-container ai-ctr-space-btwn">
+                                <div class="persons-container df-ai-ctr">
+                                    <div class="initials">DE</div>
+                                    <div class="initials">BZ</div>
+                                    <div class="initials">AS</div>
+                                </div>
+                                <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path class="prio-low" d="M10.3555 9.69779C10.1209 9.69819 9.89234 9.62335 9.70349 9.48427L0.800382 2.91453C0.684543 2.82898 0.586704 2.72146 0.512448 2.59812C0.438193 2.47478 0.388977 2.33803 0.367609 2.19569C0.324455 1.90821 0.397354 1.61537 0.57027 1.3816C0.743187 1.14782 1.00196 0.992265 1.28965 0.949143C1.57734 0.906021 1.8704 0.978866 2.10434 1.15165L10.3555 7.23414L18.6066 1.15165C18.7224 1.0661 18.854 1.00418 18.9938 0.969432C19.1336 0.934685 19.2788 0.927791 19.4213 0.949143C19.5637 0.970495 19.7006 1.01967 19.824 1.09388C19.9474 1.16808 20.055 1.26584 20.1407 1.3816C20.2263 1.49735 20.2883 1.62882 20.323 1.7685C20.3578 1.90818 20.3647 2.05334 20.3433 2.19569C20.322 2.33803 20.2727 2.47478 20.1985 2.59812C20.1242 2.72146 20.0264 2.82898 19.9106 2.91453L11.0075 9.48427C10.8186 9.62335 10.5901 9.69819 10.3555 9.69779Z" fill="white"/>
+                                    <path class="prio-low" d="M10.3555 15.4463C10.1209 15.4467 9.89234 15.3719 9.70349 15.2328L0.800381 8.66307C0.566436 8.49028 0.410763 8.2317 0.367609 7.94422C0.324455 7.65674 0.397354 7.3639 0.57027 7.13013C0.743187 6.89636 1.00196 6.7408 1.28965 6.69768C1.57734 6.65456 1.8704 6.7274 2.10434 6.90019L10.3555 12.9827L18.6066 6.90019C18.8405 6.7274 19.1336 6.65456 19.4213 6.69768C19.709 6.7408 19.9678 6.89636 20.1407 7.13013C20.3136 7.3639 20.3865 7.65674 20.3433 7.94422C20.3002 8.2317 20.1445 8.49028 19.9106 8.66307L11.0075 15.2328C10.8186 15.3719 10.5901 15.4467 10.3555 15.4463Z" fill="white"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="board-columns"> <!-- Column: Done -->
+                        <div class="empty-card">No tasks Done</div>
+                    </div>
                 </section>
             </main>
         </div>

@@ -3,7 +3,7 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    src: url('../font/inter-v13-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url('./font/inter-v13-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 :root {
@@ -44,7 +44,6 @@ h1 {
 
 .main-content {
     width: 100%;
-    /* flex: 1; --> evtl. die bessere Lösung*/
     display: flex;  /* --> muss dem template hinzugefügt werden! */
     flex-direction: column; /* --> muss dem template hinzugefügt werden! */
 }
