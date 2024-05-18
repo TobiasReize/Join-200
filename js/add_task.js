@@ -20,7 +20,7 @@ let contacts = [
 
 let colors = ['#9747FF', '#FF5EB3', '#6E52FF', '#9327FF', '#00BEE8', '#1FD7C1', '#FF745E', '#FF745E', '#FC71FF', '#FFC701', '#0038FF', '#C3FF2B', '#FFE62B', '#FF4646', '#FF4646'];
 
-let = categories = ['Test1', 'Test2', 'Test3'];
+let = categories = ['Einkaufen', 'Arbeit', 'Privat'];
 
 let priority = [false, false, false]
 
@@ -90,16 +90,21 @@ function renderCheckBox() {
     }
 }
 
-function getCategories() {
+function renderCategories() {
     let content = document.getElementById('list_options_category');
     content.innerHTML = '';
 
     for (let i = 0; i < categories.length; i++) {
         const category = categories[i];
         content.innerHTML += /* html */ `
-        <li class="categories-list" id="category_list${i}">${category}</li>
+        <li class="categories-list" id="category_list${i}" onclick="chooseCategory(${i})">${category}</li>
         `; 
     }
+}
+
+function chooseCategory(i) {
+    let inputField = document.getElementById('category_input');
+    inputField.value = categories[i];
 }
 
 function colorizeDropDownContacts() {
