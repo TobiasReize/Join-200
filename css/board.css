@@ -1,0 +1,197 @@
+/* standard / reusable classes */
+.ai-ctr-space-btwn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.df-ai-ctr {
+    display: flex;
+    align-items: center;
+}
+
+
+
+/* Section: Board Headline */
+.searchbar-button-container {
+    gap: 32px;
+}
+
+.searchbar {
+    Padding: 8px 16px;
+    width: 312px;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid #A8A8A8;
+}
+
+.searchbar:focus-within {
+    border: 1px solid var(--hover-color);
+}
+
+.searchbar:hover {
+    cursor: pointer;
+}
+
+.searchbar-inputfield {
+    border: unset;
+    font-size: 20px;
+    font-weight: 400;
+    color: #000000;
+    flex: 1;
+}
+
+.searchbar-inputfield::placeholder {
+    font-size: 20px;
+    font-weight: 400;
+    color: #D1D1D1;
+}
+
+.searchbar-inputfield:hover {
+    cursor: pointer;
+}
+
+.searchbar-inputfield:focus-visible {
+    outline: unset;
+}
+
+.separator {
+    height: 31px;
+    width: 1px;
+    background-color: #D1D1D1;
+    margin: 0 16px;
+}
+
+.searchbar-icon:hover {
+    background-color: #D1D1D1;
+    border-radius: 50%;
+}
+
+.add-task-button {
+    gap: 4px;
+    padding: 12px 16px;
+    margin-right: 16px;
+    background-color: var(--default-color);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.add-task-button:hover {
+    cursor: pointer;
+    background-color: var(--hover-color);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.add-task-button:active {
+    background-color: var(--click-color);
+    box-shadow: none;
+}
+
+/* Column titles */
+.column-headlines-container {
+    margin-top: 48px;
+    gap: 26px;
+}
+
+.column-headline {
+    width: 252px;
+}
+
+.column-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #42526E;
+}
+
+.add-icon:hover {
+    cursor: pointer;
+}
+
+.add-icon:hover rect, .add-icon:hover path {
+    stroke: var(--hover-color);
+}
+
+.add-icon:active rect, .add-icon:active path {
+    stroke: var(--click-color);
+}
+
+/* Section: Board distribution */
+.board-distribution {
+    margin-top: 8px;
+    display: flex;
+    gap: 26px;
+    flex: 1;
+}
+
+.board-columns {
+    width: 252px;
+}
+
+/* Board: cards */
+.empty-card {
+    width: 100%;
+    height: 48px;
+    text-align: center;
+    line-height: 48px;
+    color: #A8A8A8;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: #E7E7E7;
+    border: 1px dashed #A8A8A8;
+    border-radius: 10px;
+}
+
+.full-card {
+    width: 100%;
+    padding: 16px;
+    border-radius: 24px;
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
+}
+
+.task-category {
+    width: fit-content;
+    font-size: 16px;
+    font-weight: 400;
+    color: #FFFFFF;
+    padding: 4px 16px;
+    border-radius: 8px;
+    background-color: #1FD7C1;
+    margin-bottom: 20px;
+}
+
+.task-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--default-color);
+    margin-bottom: 8px;
+}
+
+.task-description {
+    font-size: 16px;
+    font-weight: 400;
+    color: #A8A8A8;
+    margin-bottom: 20px;
+}
+
+.initials {
+    background-color: lightcoral;
+    width: 32px;
+    height: 32px;
+    border-radius: 45px;
+    text-align: center;
+    line-height: 32px;
+    border: 1px solid #FFFFFF;
+    font-size: 12px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+.initials:not(:first-child) {
+    margin-left: -8px;
+}
+
+.prio-low {
+    fill: #7AE229;
+}
