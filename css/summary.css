@@ -1,0 +1,217 @@
+body {
+    background-color: lightgray;
+}
+
+.title-board {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 110px;
+    margin-left: 96px;
+}
+
+.title-board b {
+    font-size: 61px;
+    font-weight: 700;
+    padding-right: 30px;
+    border-right: 3px solid #29ABE2;
+}
+
+.title-board p {
+    font-size: 27px;
+    font-weight: 400;
+}
+
+.board {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 560px;
+    width: 562px;
+    margin-left: 96px;
+    margin-top: 59px;
+}
+
+.open-board {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 168px;
+}
+
+.open-todo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 264px;
+    height: 168px;
+    background-color: white;
+    border-radius: 30px;
+    gap: 18px;
+}
+
+.open-todo:hover {
+    background-color: #2A3647;
+    animation-duration: 100ms;
+    color: white;
+    padding: 10px 10px 10px 10px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.open-todo:hover path {
+    fill: #2A3647;
+}
+
+.open-todo:hover circle {
+    fill: white;
+}
+
+.open-todo b {
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.open-todo p {
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.open-done {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 264px;
+    height: 168px;
+    background-color: white;
+    border-radius: 30px;
+    gap: 18px;
+}
+
+.open-done:hover {
+    background-color: #2A3647;
+    animation-duration: 100ms;
+    color: white;
+    padding: 10px 10px 10px 10px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.open-done:hover path {
+    stroke: #2A3647;
+}
+
+.open-done:hover circle {
+    fill: white;
+}
+
+.open-done b {
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.open-done p {
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.urgent-board {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: white;
+    top: 531px;
+    width: 560px;
+    height: 168px;
+    gap: 61px;
+    border-radius: 30px;
+}
+
+.urgent-board:hover {
+    background-color: #2A3647;
+    animation-duration: 100ms;
+    color: white;
+    padding: 10px 10px 10px 10px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.urgent-number {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.urgent-number b {
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.urgent-number p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.task-board {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-numbers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 168px;
+    height: 168px;
+    background-color: white;
+    border-radius: 30px;
+}
+
+.task-numbers:hover {
+    width: 184px;
+    height: 184px;
+    top: 300px;
+    background-color: #2A3647;
+    animation-duration: 100ms;
+    color: white;
+    box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.task-numbers b {
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.task-numbers p {
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.greeting {
+    position: absolute;
+    width: Hug (338px)px;
+    height: Hug (56px)px;
+    top: 587.5px;
+    left: 968px;
+    gap: 3px;
+    
+
+}
+
+.greeting p {
+    font-family: Inter;
+    font-size: 47px;
+    font-weight: 500;
+    line-height: 56.4px;
+    margin: 0;
+    color: #2A3647;
+
+}
