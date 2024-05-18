@@ -3,14 +3,13 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    src: url('./font/inter-v13-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url('../font/inter-v13-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 :root {
     --default-color: #2A3647;
-    --hover-color: #29ABE2; /* hover-blue */
+    --hover-color: #29ABE2;
     --click-color: #091931;
-    /* --hover-grey: #D1D1D1; */
 }
 
 * {
@@ -81,29 +80,27 @@ header {
 
 .user-short {
     margin: 16px;
-    color: #29ABE2;
+    color: #29abe2;
     border-radius: 100%;
-    border: 3px solid #2A3647;
+    border: 3px solid #2a3647;
     padding: 10px;
 }
 
 .user-short:hover {
-    background-color: #0C2E621F;
+    background-color: #0c2e621f;
 }
 
-
-/* -------------------- Navigations-Bar -------------------- */ 
+/* -------------------- Navigations-Bar -------------------- */
 
 nav {
-    height: 100vh;
+    height: 100%;
     min-width: 232px;
-    background-color: #2A3647;
+    background-color: #2a3647;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
     color: #CDCDCD;
-}
 
 .logo-and-options {
     display: flex;
