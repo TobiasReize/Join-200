@@ -120,7 +120,7 @@ function allowDrop(event) {    //Funktion, die das Fallenlassen (Drop) in andere
 }
 
 
-function moveTo(id) {
+function moveTo(id) {   //Funktion, die die Tasks/Karten verschiebet (ergänzt und entfernt die aktuelle Task von dem jeweiligen Array)
     let targetArrayIndex = columns.findIndex(element => element.id == id);
     let targetArray = columns[targetArrayIndex]['array'];
     let startArrayIndex = columns.findIndex(element => element.id == currentDraggedElement.columnTitle);
@@ -132,9 +132,29 @@ function moveTo(id) {
 }
 
 
-function startDragging(columnID, taskID) {
+function startDragging(columnID, taskID) {  //Die Infos des aktuellen Drag-Elements werden in einer globalen Variable gespeichert
     currentDraggedElement = {
         columnTitle: columnID.id,
         taskNumber: taskID
+    }
+}
+
+
+function searchTasks() {
+    let searchField = document.getElementById('search_field');
+    let searchInput = searchField.value.trim().toLowerCase();
+
+    for (let i = 0; i < columns.length; i++) {
+        const searchedArray = columns[i]['array'];
+        
+        for (let j = 0; j < searchedArray.length; j++) {
+            const singleTask = searchedArray[j];
+            if (singleTask['title'].toLowerCase().includes(searchInput)) {
+                console.log('Ist enthalten in ' + columns[i]['title']);
+                
+            } else {
+                console.warn('Ist nicht enthalten in ' + columns[i]['title']);
+            }
+        }
     }
 }
