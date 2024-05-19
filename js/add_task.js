@@ -56,14 +56,19 @@ function getContacts() {
         let firstName = names['first-name'];
 
         content.innerHTML += /* html */ `
-            <li id="listed_names${i}" class="option">
+            <li id="listed_names${i}" class="option" onclick="changeCheckboxContacts(${i})">
                 <div class="short-and-fullname">
                     <div id="short_name${i}" class="short-name">${firstName.charAt(0) + name.charAt(0)}</div>
                     <span id="full_name">${firstName + ' ' + name}</span>
                 </div>
                 <input class="d-none" id="checkbox_contacts${i}" type="checkbox">
-                <img class="d-none" id="img_checkbox_contacts${i}" src="../assets/img/00_general-elements/check-button.svg" alt="Checkobox" onclick="changeCheckboxContacts(${i})">
-                <img class="d-none" id="img_checkbox_checked_contacts${i}" src="../assets/img/00_general-elements/check-button-checked.svg" alt="Checkobox" onclick="changeCheckboxContacts(${i})">
+                <svg class="d-none" id="img_checkbox_contacts${i}" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="4.96582" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>
+                </svg>
+                <svg class="d-none white-checkbox" id="img_checkbox_checked_contacts${i}" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 11.9658V17.9658C20 19.6227 18.6569 20.9658 17 20.9658H7C5.34315 20.9658 4 19.6227 4 17.9658V7.96582C4 6.30897 5.34315 4.96582 7 4.96582H15" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M8 12.9658L12 16.9658L20 5.46582" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </li>
          `;
     }
