@@ -19,8 +19,8 @@ let urgent = `
     </svg>
 `;
 
-let toDo = [];
-let inProgress = [
+let toDoTasks = [];
+let inProgressTasks = [
     {
         category: 'User Story',
         title: 'Daily Kochwelt Recipe',
@@ -29,7 +29,7 @@ let inProgress = [
         priority: medium
     }
 ];
-let awaitFeedback = [
+let awaitFeedbackTasks = [
     {
         category: 'Technical Task',
         title: 'HTML Base Template Creation',
@@ -45,33 +45,34 @@ let awaitFeedback = [
         priority: urgent
     }
 ];
-let done = [];
+let doneTasks = [];
 
-let columns = [
+let columns = [     //Hilfsarray, in dem nochmal alle Board-Arrays zusammengefasst sind!
     {
         title: 'To Do',
         id: 'to_do',
-        array: toDo
+        array: toDoTasks
     },
     {
         title: 'In Progress',
         id: 'in_progress',
-        array: inProgress
+        array: inProgressTasks
     },
     {
         title: 'Await Feedback',
         id: 'await_feedback',
-        array: awaitFeedback
+        array: awaitFeedbackTasks
     },
     {
         title: 'Done',
         id: 'done',
-        array: done
+        array: doneTasks
     }
 ];
+let currentDraggedElement;
 
 
-function renderAll() {
+function renderAll() {  //Diese Funktion rendert alle Board-Spalten mit ihren Karten
     for (let i = 0; i < columns.length; i++) {
         const column = columns[i];
         renderColumn(column.array, column.title, column.id);
@@ -79,7 +80,7 @@ function renderAll() {
 }
 
 
-function renderColumn(columnArray, columnTitle, columnID) {
+function renderColumn(columnArray, columnTitle, columnID) {     //Rendert die jeweilige Spalte mit ihren Karten
     let columnContainer = document.getElementById(columnID);
     columnContainer.innerHTML = '';
 
@@ -99,9 +100,9 @@ function renderColumn(columnArray, columnTitle, columnID) {
 }
 
 
-function taskCardHTML(columnID, i, task) {
+function taskCardHTML(columnID, i, task) {  //HTML-Template für ausgefüllte Karten
     return /*html*/ `
-        <div draggable="true" class="full-card">
+        <div draggable="true" class="full-card" ondragstart="startDragging(${columnID}, ${i})">
             <div class="task-category category-color-mint">${task.category}</div>
             <div class="task-title">${task.title}</div>
             <p class="task-description">${task.description}</p>
@@ -111,4 +112,29 @@ function taskCardHTML(columnID, i, task) {
             </div>
         </div>
     `;
+}
+
+
+function allowDrop(event) {    //Funktion, die das Fallenlassen (Drop) in andere Elemente ermöglicht (ist standardmäßig nicht erlaubt, daher muss es umgestellt werden!)
+    event.preventDefault();
+}
+
+
+function moveTo(id) {
+    let targetArrayIndex = columns.findIndex(element => element.id == id);
+    let targetArray = columns[targetArrayIndex]['array'];
+    let startArrayIndex = columns.findIndex(element => element.id == currentDraggedElement.columnTitle);
+    let startArray = columns[startArrayIndex]['array'];
+
+    targetArray.push(columns[startArrayIndex]['array'][currentDraggedElement.taskNumber]);
+    startArray.splice(currentDraggedElement.taskNumber, 1);
+    renderAll();
+}
+
+
+function startDragging(columnID, taskID) {
+    currentDraggedElement = {
+        columnTitle: columnID.id,
+        taskNumber: taskID
+    }
 }
