@@ -37,6 +37,7 @@ h1 {
     width: 100%;
     display: flex;  /* --> muss dem template hinzugefügt werden! */
     flex-direction: column; /* --> muss dem template hinzugefügt werden! */
+    background-color: #F6F7F8;
 }
 
 /* -------------------- header -------------------- */ 
@@ -49,6 +50,7 @@ header {
     font-weight: 400;
     font-size: 20px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    background-color: #FFFFFF;
 }
 
 .title {

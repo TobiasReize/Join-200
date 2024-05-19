@@ -24,6 +24,8 @@ let = categories = ['Einkaufen', 'Arbeit', 'Privat'];
 
 let priority = [false, false, false]
 
+let subtasks = [];
+
 function assignMenu() {
     let content = document.getElementById('contact_container');
     let arrow = document.getElementById('arrow_drop_down_contact');
@@ -109,7 +111,9 @@ function renderCategories() {
 
 function chooseCategory(i) {
     let inputField = document.getElementById('category_input');
+    let categoryContainer = document.getElementById('category_container');
     inputField.value = categories[i];
+    categoryMenu();
 }
 
 function colorizeDropDownContacts() {
@@ -129,7 +133,7 @@ function colorizeCheckedContacts() {
         let content = document.getElementById(`checked_contact${i}`);
         const color = colors[i];
         if (content == null) {
-            break
+            continue
         } else {
             content.style.backgroundColor += color;
         }
@@ -171,16 +175,81 @@ function colorChangeUrgent() {
     document.getElementById('urgent_btn').classList.toggle('urgent-btn-change');
     document.getElementById('img_urgent').classList.toggle('d-none');
     document.getElementById('img_urgent_white').classList.toggle('d-none');
+    document.getElementById('medium_btn').classList.remove('medium-btn-change');
+    document.getElementById('img_medium').classList.remove('d-none');
+    document.getElementById('img_medium_white').classList.add('d-none');
+    document.getElementById('low_btn').classList.remove('low-btn-change');
+    document.getElementById('img_low').classList.remove('d-none');
+    document.getElementById('img_low_white').classList.add('d-none');
 }
 
 function colorChangeMedium() {
     document.getElementById('medium_btn').classList.toggle('medium-btn-change');
     document.getElementById('img_medium').classList.toggle('d-none');
     document.getElementById('img_medium_white').classList.toggle('d-none');
+    document.getElementById('urgent_btn').classList.remove('urgent-btn-change');
+    document.getElementById('img_urgent').classList.remove('d-none');
+    document.getElementById('img_urgent_white').classList.add('d-none');
+    document.getElementById('low_btn').classList.remove('low-btn-change');
+    document.getElementById('img_low').classList.remove('d-none');
+    document.getElementById('img_low_white').classList.add('d-none');
 }
 
 function colorChangeLow() {
     document.getElementById('low_btn').classList.toggle('low-btn-change');
     document.getElementById('img_low').classList.toggle('d-none');
     document.getElementById('img_low_white').classList.toggle('d-none');
+    document.getElementById('urgent_btn').classList.remove('urgent-btn-change');
+    document.getElementById('img_urgent').classList.remove('d-none');
+    document.getElementById('img_urgent_white').classList.add('d-none');
+    document.getElementById('medium_btn').classList.remove('medium-btn-change');
+    document.getElementById('img_medium').classList.remove('d-none');
+    document.getElementById('img_medium_white').classList.add('d-none');
+}
+
+function changePrio(i) {
+    // Wenn der aktuelle Wert true ist, setze ihn auf false
+    if (priority[i]) {
+        priority[i] = false;
+    } else {
+        // Andernfalls setze alle Werte auf false
+        for (let j = 0; j < priority.length; j++) {
+            priority[j] = false;
+        }
+        // Setze den gewünschten Index auf true
+        priority[i] = true;
+    }
+}
+
+function renderSubtask() {
+    let addIcon = document.getElementById('add_icon');
+    let closeIcon = document.getElementById('close_icon');
+    let checkIcon = document.getElementById('check_icon');
+
+    addIcon.classList.add('d-none');
+    closeIcon.classList.remove('d-none');
+    checkIcon.classList.remove('d-none');
+}
+
+function addSubtasks() {
+    let input= document.getElementById('input_subtask');
+    let subtaskList = document.getElementById('list_subtasks');
+    
+    subtasks.push(input.value);
+    console.log(subtasks);
+
+    subtaskList.innerHTML = '';
+
+    for (let i = 0; i < subtasks.length; i++) {
+        const subtask = subtasks[i];
+        subtaskList.innerHTML += /* html */ `
+        <li>${subtask}</li>
+    `;
+    }
+    input.value = '';
+}
+
+function clearInputField() {
+    let input= document.getElementById('input_subtask');
+    input.value = '';
 }

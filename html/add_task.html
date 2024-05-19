@@ -50,17 +50,17 @@
 
                         <span>Prio</span>
                         <div class="prio-btns">
-                            <button id="urgent_btn" class="prio-btn prio-width" onclick="colorChangeUrgent()">
+                            <button id="urgent_btn" class="prio-btn prio-width" onclick="colorChangeUrgent(); changePrio(0)">
                                 Urgent 
                                 <img id="img_urgent" src="../assets/img/03_addtask/prio_urgent_red.svg">
                                 <img id="img_urgent_white" class="d-none" src="../assets/img/03_add-task/urgent-white.svg">
                             </button>
-                            <button id="medium_btn" class="prio-btn prio-width" onclick="colorChangeMedium()">
+                            <button id="medium_btn" class="prio-btn prio-width" onclick="colorChangeMedium();changePrio(1)">
                                 Medium 
                                 <img id="img_medium" src="../assets/img/03_addtask/prio_medium_orange.svg">
                                 <img id="img_medium_white" class="d-none" src="../assets/img/03_add-task/medium-white.svg">
                             </button>
-                            <button id="low_btn" class="prio-btn prio-width" onclick="colorChangeLow()">
+                            <button id="low_btn" class="prio-btn prio-width" onclick="colorChangeLow(); changePrio(2)">
                                 Low 
                                 <img id="img_low" src="../assets/img/03_addtask/prio_low_green.svg">
                                 <img id="img_low_white" class="d-none" src="../assets/img/03_add-task/low-white.svg">
@@ -78,13 +78,17 @@
                                 </ul>
                             </div>
                         </div>
-                        
 
                         <span>Subtasks</span>
-                        <div class="input sub-task-div">
-                            <input class="sub-task-input" type="text" placeholder="Add new subtask">
-                            <img class="add-icon" src="../assets/img/03_addtask/add.svg">
+                        <div class="input sub-task-div" onclick="renderSubtask()">
+                            <input id="input_subtask" class="sub-task-input" type="text" placeholder="Add new subtask">
+                            <div class="icons-subtask">
+                                <div id="add_icon" class="icon-box"><img class="add-icon" src="../assets/img/03_addtask/add.svg"></div>
+                                <div id="close_icon" class="d-none icon-box b-right" onclick="clearInputField()"><img  class="add-icon" src="../assets/img/03_add-task/close.svg"></div>
+                                <div id="check_icon" class="d-none icon-box" onclick="addSubtasks()" ><img  class="add-icon" src="../assets/img/03_add-task/check.svg" alt=""></div>
+                            </div>                         
                         </div>
+                        <ul id="list_subtasks"></ul> 
                     </div>
                 </div>
 
