@@ -22,9 +22,33 @@ let colors = ['#9747FF', '#FF5EB3', '#6E52FF', '#9327FF', '#00BEE8', '#1FD7C1', 
 
 let = categories = ['Einkaufen', 'Arbeit', 'Privat'];
 
-let priority = [false, false, false]
+let priority = [
+    {
+        'urgent' : false,
+        'medium' : false,
+        'low' : false
+    }
+]
 
 let subtasks = [];
+
+let tasks = [
+    {
+        'title' : '',
+        'description' : '',
+        'contact' : [],
+        'date' : '',
+        'priority' : [
+            {
+                'urgent' : false,
+                'medium' : false,
+                'low' : false
+            }
+        ],
+        'categories' : '',
+        'subtasks' : [...subtasks]
+    }
+]
 
 function assignMenu() {
     let content = document.getElementById('contact_container');
@@ -207,17 +231,17 @@ function colorChangeLow() {
     document.getElementById('img_medium_white').classList.add('d-none');
 }
 
-function changePrio(i) {
+function changePrio(number) {
     // Wenn der aktuelle Wert true ist, setze ihn auf false
-    if (priority[i]) {
-        priority[i] = false;
+    if (priority[0]) {
+        priority[0] = false;
     } else {
         // Andernfalls setze alle Werte auf false
         for (let j = 0; j < priority.length; j++) {
             priority[j] = false;
         }
         // Setze den gewünschten Index auf true
-        priority[i] = true;
+        priority[0] = true;
     }
 }
 
@@ -253,6 +277,7 @@ function addSubtasks() {
                 <div class="icon-box" onclick=""><img  class="add-icon" src="../assets/img/03_add-task/delete.svg" onclick="deleteSubtask(${i})"></div> 
             </div>
         </div>
+        <div id="edit_container${i}" class="edit-subtask-container"></div>
     `;
     }
     input.value = '';
@@ -270,7 +295,8 @@ function deleteSubtask(i) {
 }
 
 function editSubtask(i) {
-    let subtaskList = document.getElementById('list_subtasks');
+    let subtaskList = document.getElementById(`edit_container${i}`);
+    document.getElementById(`subtasks${i}`).innerHTML = '';
     subtaskList.innerHTML = /* html */ `
         <div class="edit-subtask-div">
             <input id="edit_input_subtask" class="edit-input-subtask" type="text">
@@ -289,7 +315,39 @@ function editSubtask(i) {
 function saveEditSubtask(i) {
     let input = document.getElementById('edit_input_subtask');
     subtasks[i] = input.value;
-    console.log(subtasks);
-
     addSubtasks();
+}
+
+function createNewTask() {
+    let inputTitle = document.getElementById('input_title');
+    let inputDescription = document.getElementById('input_description');
+    let inputDate = document.getElementById('input_date');
+    let inputCategory = document.getElementById('category_input');
+
+    for (let i = 0; i < tasks.length; i++) {
+        const task = tasks[i];
+        task['title'] = inputTitle.value;
+        task['description'] = inputDescription.value;
+        task['date'] = inputDate.value;
+        updatePrioToTasks(i)
+        task['categories'] = inputCategory.value;
+        task['subtasks'] = [...subtasks]
+    }
+
+    addCheckedContactsToTasks(contacts, tasks)
+
+    console.log(tasks);
+}
+
+function addCheckedContactsToTasks(contacts, tasks) {
+    const checkedContacts = contacts.filter(contact => contact.checked)
+                                    .map(contact => ({
+                                        'first-name': contact['first-name'],
+                                        'name': contact['name']
+                                    }));
+    tasks[0].contact = checkedContacts;
+}
+
+function updatePrioToTasks(i) {
+
 }

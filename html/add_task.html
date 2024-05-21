@@ -21,10 +21,11 @@
                 <div class="information-container">
                     <div class="left-side">
                         <span>Title<span class="red-star">*</span></span>
-                        <input class="input" type="text" placeholder="Enter a title">
+                        <input id="input_title" class="input m-bot-0" type="text" placeholder="Enter a title">
+                        <span id="required" class="required"></span>
 
-                        <span>Title</span>
-                        <textarea class="input input-textarea" cols="30" rows="5" placeholder="Enter a Description"></textarea>
+                        <span>Description</span>
+                        <textarea id="input_description" class="input input-textarea" cols="30" rows="5" placeholder="Enter a Description"></textarea>
                         
                         <span for="contacts">Assignet to</span>
                         <div class="input sub-task-div outline" onclick="assignMenu(); getContacts()">
@@ -46,11 +47,12 @@
                     <div class="line"></div>
                     <div class="right-side">
                         <span>Due Date<span class="red-star">*</span></span>
-                        <input class="input" type="date">
+                        <input id="input_date" class="input m-bot-0" type="date">
+                        <span class="required"></span>
 
                         <span>Prio</span>
                         <div class="prio-btns">
-                            <button id="urgent_btn" class="prio-btn prio-width" onclick="colorChangeUrgent(); changePrio(0)">
+                            <button id="urgent_btn" class="prio-btn prio-width" onclick="colorChangeUrgent(); changePrio(priority['urgent'])">
                                 Urgent 
                                 <img id="img_urgent" src="../assets/img/03_addtask/prio_urgent_red.svg">
                                 <img id="img_urgent_white" class="d-none" src="../assets/img/03_add-task/urgent-white.svg">
@@ -67,11 +69,12 @@
                             </button>
                         </div>
 
-                        <span for="contacts">Category</span>
-                        <div class="input sub-task-div outline" onclick="categoryMenu(); renderCategories()">
+                        <span for="contacts">Category<span class="red-star">*</span></span>
+                        <div class="input sub-task-div outline m-bot-0" onclick="categoryMenu(); renderCategories()">
                             <input id="category_input" class="sub-task-input" type="text" placeholder="Select task category">
                             <img id="arrow_drop_down_category" class="add-icon" src="../assets/img/00_general-elements/arrow_drop_down.svg">
                         </div>
+                        <span class="required"></span>
                         <div>
                             <div id="category_container" class="contacts-container d-none">
                                 <ul id="list_options_category" class="list-options">
@@ -106,7 +109,7 @@
                                 </g>
                             </svg>
                         </button>
-                        <button class="prio-btn create-btn">Create Task <img class="cancel-blue" src="../assets/img/00_general-elements/close-white.svg"></button>
+                        <button class="prio-btn create-btn" onclick="createNewTask()">Create Task <img class="cancel-blue" src="../assets/img/00_general-elements/close-white.svg"></button>
                     </div>
                 </div>
             </div>

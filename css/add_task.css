@@ -33,7 +33,6 @@
 
 .input {
   padding: 12px 21px;
-  color: #D1D1D1;
   background-color: #FFFFFF;
   border-radius: 10px;
   border: 1px solid #D1D1D1;
@@ -42,6 +41,10 @@
   font-size: 20px;
   width: 440px;
   cursor: pointer;
+}
+
+.input::placeholder {
+  color: #D1D1D1;
 }
 
 .input:focus {
@@ -320,8 +323,8 @@ ul {
   list-style: disc inside; /* Marker innerhalb des `li` setzen */
 }
 
-.li-subtask > li::marker {
-  padding-left: 16px;
+.li-subtask > li {
+  margin-left: 16px;
 }
 
 .edit-subtask-div {
@@ -336,4 +339,19 @@ ul {
   outline: none;
   border: none;
   flex: 1;
+}
+
+.edit-subtask-container {
+  margin-top: -6px;
+}
+
+.required {
+  font-size: 12px;
+  color: #FF8190;
+  height: 15px;
+  margin-bottom: 16px;
+}
+
+.m-bot-0 {
+  margin-bottom: 0;
 }
