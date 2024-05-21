@@ -297,3 +297,43 @@ justify-content: center;
   background-color: #7AE229;
   color: white;
 }
+
+.ul-subtasks {
+  margin-top: -24px;
+  position: absolute;
+  min-width: 440px;
+  font-size: 16px;
+}
+
+.li-subtask {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 16px;
+  border-radius: 10px;
+}
+
+.li-subtask:hover {
+  background-color: #EEEEEE;
+}
+
+ul {
+  list-style: disc inside; /* Marker innerhalb des `li` setzen */
+}
+
+.li-subtask > li::marker {
+  padding-left: 16px;
+}
+
+.edit-subtask-div {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 4px 16px;
+  border-bottom: 1px solid #29ABE2;
+}
+
+.edit-input-subtask {
+  outline: none;
+  border: none;
+  flex: 1;
+}

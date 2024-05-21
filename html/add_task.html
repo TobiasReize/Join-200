@@ -81,14 +81,15 @@
 
                         <span>Subtasks</span>
                         <div class="input sub-task-div" onclick="renderSubtask()">
-                            <input id="input_subtask" class="sub-task-input" type="text" placeholder="Add new subtask">
+                            <input id="input_subtask" class="sub-task-input" type="text" placeholder="Add new subtask" required>
                             <div class="icons-subtask">
                                 <div id="add_icon" class="icon-box"><img class="add-icon" src="../assets/img/03_addtask/add.svg"></div>
                                 <div id="close_icon" class="d-none icon-box b-right" onclick="clearInputField()"><img  class="add-icon" src="../assets/img/03_add-task/close.svg"></div>
                                 <div id="check_icon" class="d-none icon-box" onclick="addSubtasks()" ><img  class="add-icon" src="../assets/img/03_add-task/check.svg" alt=""></div>
                             </div>                         
                         </div>
-                        <ul id="list_subtasks"></ul> 
+                        <div><ul id="list_subtasks" class="ul-subtasks"></ul></div>
+                        
                     </div>
                 </div>
 

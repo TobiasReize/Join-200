@@ -226,30 +226,70 @@ function renderSubtask() {
     let closeIcon = document.getElementById('close_icon');
     let checkIcon = document.getElementById('check_icon');
 
-    addIcon.classList.add('d-none');
-    closeIcon.classList.remove('d-none');
-    checkIcon.classList.remove('d-none');
+    addIcon.classList.toggle('d-none');
+    closeIcon.classList.toggle('d-none');
+    checkIcon.classList.toggle('d-none');
 }
 
 function addSubtasks() {
     let input= document.getElementById('input_subtask');
     let subtaskList = document.getElementById('list_subtasks');
     
-    subtasks.push(input.value);
-    console.log(subtasks);
+    if (input.value == '') {
+        
+    } else {
+        subtasks.push(input.value);
+    }
 
     subtaskList.innerHTML = '';
 
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
         subtaskList.innerHTML += /* html */ `
-        <li>${subtask}</li>
+        <div id="subtasks${i}" class="li-subtask">
+            <li>${subtask}</li>
+            <div class="icons-subtask">
+                <div class="icon-box b-right"><img  class="add-icon" src="../assets/img/03_add-task/pencil.svg" onclick="editSubtask(${i})"></div>
+                <div class="icon-box" onclick=""><img  class="add-icon" src="../assets/img/03_add-task/delete.svg" onclick="deleteSubtask(${i})"></div> 
+            </div>
+        </div>
     `;
     }
     input.value = '';
+    
 }
 
 function clearInputField() {
     let input= document.getElementById('input_subtask');
     input.value = '';
+}
+
+function deleteSubtask(i) {
+    subtasks.splice(i, 1)
+    addSubtasks();
+}
+
+function editSubtask(i) {
+    let subtaskList = document.getElementById('list_subtasks');
+    subtaskList.innerHTML = /* html */ `
+        <div class="edit-subtask-div">
+            <input id="edit_input_subtask" class="edit-input-subtask" type="text">
+            <div>
+                <div class="icons-subtask">
+                    <div class="icon-box b-right"><img  class="add-icon" src="../assets/img/03_add-task/delete.svg" onclick="deleteSubtask(${i})"></div>
+                    <div class="icon-box" onclick=""><img  class="add-icon" src="../assets/img/03_add-task/check.svg" onclick="saveEditSubtask(${i})"></div> 
+                </div>
+            </div>
+        </div>
+    `;
+    let input = document.getElementById('edit_input_subtask');
+    input.value = subtasks[i];
+}
+
+function saveEditSubtask(i) {
+    let input = document.getElementById('edit_input_subtask');
+    subtasks[i] = input.value;
+    console.log(subtasks);
+
+    addSubtasks();
 }
