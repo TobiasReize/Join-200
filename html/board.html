@@ -15,7 +15,7 @@
         <link rel="icon" type="image/x-icon" href="../../assets/img/00_general-elements/join-logo-dark.svg">
     </head>
 
-    <body onload="includeHTML(), renderAll()">
+    <body onload="start()">
 
         <div class="page-content">
             <nav w3-include-html="../assets/templates/navbar.html"></nav>
@@ -80,10 +80,10 @@
 
                 <!-- Section: Board distribution -->
                 <section class="board-distribution ml-96 bg-color">
-                    <div id="to_do" class="board-columns" ondragover="allowDrop(event)" ondrop="moveTo('to_do')"></div> <!-- Column: To Do -->
-                    <div id="in_progress" class="board-columns" ondragover="allowDrop(event)" ondrop="moveTo('in_progress')"></div> <!-- Column: In progress -->
-                    <div id="await_feedback" class="board-columns" ondragover="allowDrop(event)" ondrop="moveTo('await_feedback')"></div> <!-- Column: Await Feedback -->
-                    <div id="done" class="board-columns" ondragover="allowDrop(event)" ondrop="moveTo('done')"></div> <!-- Column: Done -->
+                    <div id="to_do" class="board-columns" ondragover="allowDrop(event)" ondrop="moveTo('to_do')"></div>
+                    <div id="in_progress" class="board-columns" ondragover="allowDrop(event)" ondrop="moveTo('in_progress')"></div>
+                    <div id="await_feedback" class="board-columns" ondragover="allowDrop(event)" ondrop="moveTo('await_feedback')"></div>
+                    <div id="done" class="board-columns" ondragover="allowDrop(event)" ondrop="moveTo('done')"></div>
                 </section>
             </main>
         </div>

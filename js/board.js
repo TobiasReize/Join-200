@@ -47,7 +47,7 @@ let awaitFeedbackTasks = [
 ];
 let doneTasks = [];
 
-let columns = [     //Hilfsarray, in dem nochmal alle Board-Arrays zusammengefasst sind!
+let allBoardArrays = [     //Hilfsarray, in dem nochmal alle Board-Arrays zusammengefasst sind!
     {
         title: 'To Do',
         id: 'to_do',
@@ -69,18 +69,72 @@ let columns = [     //Hilfsarray, in dem nochmal alle Board-Arrays zusammengefas
         array: doneTasks
     }
 ];
+
+let renderedBoardArrays = [
+    {
+        title: 'To Do',
+        id: 'to_do',
+        array: []
+    },
+    {
+        title: 'In Progress',
+        id: 'in_progress',
+        array: []
+    },
+    {
+        title: 'Await Feedback',
+        id: 'await_feedback',
+        array: []
+    },
+    {
+        title: 'Done',
+        id: 'done',
+        array: []
+    }
+];
+
+let filteredBoardArrays = [
+    {
+        title: 'To Do',
+        id: 'to_do',
+        array: []
+    },
+    {
+        title: 'In Progress',
+        id: 'in_progress',
+        array: []
+    },
+    {
+        title: 'Await Feedback',
+        id: 'await_feedback',
+        array: []
+    },
+    {
+        title: 'Done',
+        id: 'done',
+        array: []
+    }
+];
+
 let currentDraggedElement;
 
 
+function start() {
+    includeHTML();
+    renderedBoardArrays = allBoardArrays;
+    renderAll();
+}
+
+
 function renderAll() {  //Diese Funktion rendert alle Board-Spalten mit ihren Karten
-    for (let i = 0; i < columns.length; i++) {
-        const column = columns[i];
-        renderColumn(column.array, column.title, column.id);
+    for (let i = 0; i < renderedBoardArrays.length; i++) {
+        const boardArray = renderedBoardArrays[i];
+        renderColumn(boardArray.title, boardArray.id, boardArray.array);
     }
 }
 
 
-function renderColumn(columnArray, columnTitle, columnID) {     //Rendert die jeweilige Spalte mit ihren Karten
+function renderColumn(columnTitle, columnID, columnArray) {     //Rendert die jeweilige Spalte mit ihren Karten
     let columnContainer = document.getElementById(columnID);
     columnContainer.innerHTML = '';
 
@@ -121,12 +175,12 @@ function allowDrop(event) {    //Funktion, die das Fallenlassen (Drop) in andere
 
 
 function moveTo(id) {   //Funktion, die die Tasks/Karten verschiebet (ergänzt und entfernt die aktuelle Task von dem jeweiligen Array)
-    let targetArrayIndex = columns.findIndex(element => element.id == id);
-    let targetArray = columns[targetArrayIndex]['array'];
-    let startArrayIndex = columns.findIndex(element => element.id == currentDraggedElement.columnTitle);
-    let startArray = columns[startArrayIndex]['array'];
+    let targetArrayIndex = renderedBoardArrays.findIndex(element => element.id == id);
+    let targetArray = renderedBoardArrays[targetArrayIndex]['array'];
+    let startArrayIndex = renderedBoardArrays.findIndex(element => element.id == currentDraggedElement.columnTitle);
+    let startArray = renderedBoardArrays[startArrayIndex]['array'];
 
-    targetArray.push(columns[startArrayIndex]['array'][currentDraggedElement.taskNumber]);
+    targetArray.push(renderedBoardArrays[startArrayIndex]['array'][currentDraggedElement.taskNumber]);
     startArray.splice(currentDraggedElement.taskNumber, 1);
     renderAll();
 }
@@ -142,19 +196,22 @@ function startDragging(columnID, taskID) {  //Die Infos des aktuellen Drag-Eleme
 
 function searchTasks() {
     let searchField = document.getElementById('search_field');
-    let searchInput = searchField.value.trim().toLowerCase();
+    let searchFieldInput = searchField.value.trim().toLowerCase();
 
-    for (let i = 0; i < columns.length; i++) {
-        const searchedArray = columns[i]['array'];
+    for (let i = 0; i < allBoardArrays.length; i++) {   //wenn man seine Eingabe wieder löscht, sollen wieder alle Tasks angezeigt werden (zurücksetzen). Daher wird immer durch allBoardArrays iteriert!
+        const searchedArray = allBoardArrays[i]['array'];
+        filteredBoardArrays[i]['array'] = [];   //Bevor in das filteredBoardArrays die Tasks reingepusht werden, muss es zurückgesetzt werden, damit nur die aktuell gefilterten Tasks angezeigt werden! (und keine früheren, gefilterten Tasks!)
         
         for (let j = 0; j < searchedArray.length; j++) {
             const singleTask = searchedArray[j];
-            if (singleTask['title'].toLowerCase().includes(searchInput)) {
-                console.log('Ist enthalten in ' + columns[i]['title']);
-                
+            if (singleTask['title'].trim().toLowerCase().includes(searchFieldInput)) {
+                console.log('Ist enthalten in ' + renderedBoardArrays[i]['title']);
+                filteredBoardArrays[i]['array'].push(singleTask);
             } else {
-                console.warn('Ist nicht enthalten in ' + columns[i]['title']);
+                console.warn('Ist nicht enthalten in ' + renderedBoardArrays[i]['title']);
             }
         }
     }
+    renderedBoardArrays = filteredBoardArrays;
+    renderAll();
 }
