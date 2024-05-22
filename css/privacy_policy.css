@@ -1,0 +1,32 @@
+body {
+    overflow: hidden;
+}
+
+.privacy-police {
+    position: absolute;
+    width: 70vw;
+    height: 943px;
+    top: 311px;
+    left: 328px;
+    gap: 24px;
+}
+
+.subtitle {
+    margin-bottom: 24px;
+}
+
+svg {
+    position: fixed;
+    top: 225px;
+    left: 90vw;
+    padding: 2.5px 0px 0px 0px;
+}
+
+.title-privat {
+    position: absolute;
+    width: Hug (371px)px;
+    height: Hug (73px)px;
+    top: 206px;
+    left: 328px;
+    gap: 30px;
+}
