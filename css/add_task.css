@@ -115,6 +115,16 @@ justify-content: center;
   gap: 4px;
 }
 
+.edit-icons-subtasks {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+
+.li-subtask:hover .edit-icons-subtasks {
+  display: flex;
+}
+
 .icon-box {
   width: 24px;
   height: 24px;
@@ -145,7 +155,7 @@ justify-content: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 80px;
+  margin-left: 96px;
   margin-right: 80px;
 }
 
@@ -354,4 +364,8 @@ ul {
 
 .m-bot-0 {
   margin-bottom: 0;
+}
+
+.outline-red {
+  outline:1px solid #FF8190;
 }
