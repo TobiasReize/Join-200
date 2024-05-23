@@ -41,6 +41,7 @@ h1 {
     width: 100%;
     display: flex;  /* --> muss dem template hinzugefügt werden! */
     flex-direction: column; /* --> muss dem template hinzugefügt werden! */
+    background-color: #F6F7F8;
 }
 
 /* -------------------- header -------------------- */ 

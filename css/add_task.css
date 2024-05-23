@@ -1,13 +1,5 @@
 /* Code/ Design, der nur für die Add Task Seite relevant ist! */
 
-@font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    src: url('../font/inter-v13-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-  }
-
 .content {
   width: 100%;
   font-size: 20px;
@@ -16,17 +8,13 @@
   flex-direction: column;
 }
 
-.content > h1 {
-  font-size: 61px;
-  margin-left: 80px;
-}
-
 .information-container {
   display: flex;
   justify-content: space-between;
-  margin-left: 70px;
+  margin-left: 96px;
   margin-right: 70px;
   margin-bottom: 70px;
+  margin-top: 48px;
 }
 
 .left-side {
@@ -45,14 +33,18 @@
 
 .input {
   padding: 12px 21px;
-  color: #D1D1D1;
+  background-color: #FFFFFF;
   border-radius: 10px;
   border: 1px solid #D1D1D1;
   margin-top: 6px;
   margin-bottom: 32px;
   font-size: 20px;
-  width: 396px;
+  width: 440px;
   cursor: pointer;
+}
+
+.input::placeholder {
+  color: #D1D1D1;
 }
 
 .input:focus {
@@ -117,6 +109,35 @@ justify-content: center;
   background-color: #D1D1D1;
 }
 
+.icons-subtask {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.edit-icons-subtasks {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+
+.li-subtask:hover .edit-icons-subtasks {
+  display: flex;
+}
+
+.icon-box {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.b-right {
+  border-right: 1px solid #D1D1D1;
+  padding-right: 8px;
+}
+
 .select-field {
   font-size: 20px;
   color: black !important;
@@ -134,7 +155,7 @@ justify-content: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 80px;
+  margin-left: 96px;
   margin-right: 80px;
 }
 
@@ -197,6 +218,7 @@ justify-content: center;
 .option {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 6px;
   margin-bottom: 6px;
   border-radius: 10px;
@@ -205,6 +227,19 @@ justify-content: center;
 
 .option:hover {
   background-color: #EEEEEE;
+}
+
+.option:has(input:checked) {
+  background-color: #2A3647;
+  color: white;
+}
+
+.option:has(input:checked):hover {
+  background-color: #091931;
+}
+
+.white-checkbox path {
+  stroke: white;
 }
 
 .short-and-fullname {
@@ -219,6 +254,7 @@ justify-content: center;
   background-color: #FF7A00;
   border-radius: 50%;
   color: white;
+  border: 2px solid white;
 }
 
 .category-container {
@@ -254,8 +290,6 @@ justify-content: center;
 }
 
 .checked-contact {
-  height: 30px;
-  width: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -275,4 +309,63 @@ justify-content: center;
 .low-btn-change {
   background-color: #7AE229;
   color: white;
+}
+
+.ul-subtasks {
+  margin-top: -24px;
+  position: absolute;
+  min-width: 440px;
+  font-size: 16px;
+}
+
+.li-subtask {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 16px;
+  border-radius: 10px;
+}
+
+.li-subtask:hover {
+  background-color: #EEEEEE;
+}
+
+ul {
+  list-style: disc inside; /* Marker innerhalb des `li` setzen */
+}
+
+.li-subtask > li {
+  margin-left: 16px;
+}
+
+.edit-subtask-div {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 4px 16px;
+  border-bottom: 1px solid #29ABE2;
+}
+
+.edit-input-subtask {
+  outline: none;
+  border: none;
+  flex: 1;
+}
+
+.edit-subtask-container {
+  margin-top: -6px;
+}
+
+.required {
+  font-size: 12px;
+  color: #FF8190;
+  height: 15px;
+  margin-bottom: 16px;
+}
+
+.m-bot-0 {
+  margin-bottom: 0;
+}
+
+.outline-red {
+  outline:1px solid #FF8190;
 }
