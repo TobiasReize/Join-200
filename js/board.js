@@ -33,7 +33,7 @@ let awaitFeedbackTasks = [
     {
         category: 'Technical Task',
         title: 'HTML Base Template Creation',
-        description: 'Create reusable HTML base templates...',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil laboriosam, illum laudantium vitae voluptatem tempora tenetur est harum autem? Nostrum, quam. Eos asperiores necessitatibus minus fuga obcaecati amet? Molestiae, nobis.',
         persons: ['DE', 'BZ', 'AS'],
         priority: low
     },
@@ -47,7 +47,7 @@ let awaitFeedbackTasks = [
 ];
 let doneTasks = [];
 
-let allBoardArrays = [     //Hilfsarray, in dem nochmal alle Board-Arrays zusammengefasst sind!
+let allBoardArrays = [     //Hilfsarray, in dem nochmal alle Board-Arrays zusammengefasst sind! --> Dieses wird in der Regel vom Backend runtergeladen!
     {
         title: 'To Do',
         id: 'to_do',
@@ -70,7 +70,7 @@ let allBoardArrays = [     //Hilfsarray, in dem nochmal alle Board-Arrays zusamm
     }
 ];
 
-let renderedBoardArrays = [
+let renderedBoardArrays = [     //Hilfsarray für die tatsächlich dargestellten Spalten (am Anfang immer leer!)
     {
         title: 'To Do',
         id: 'to_do',
@@ -93,7 +93,7 @@ let renderedBoardArrays = [
     }
 ];
 
-let filteredBoardArrays = [
+let filteredBoardArrays = [     //Hilfsarray für die gefilterten Tasks durch die Suchleiste (am Anfang immer leer!)
     {
         title: 'To Do',
         id: 'to_do',
@@ -119,7 +119,7 @@ let filteredBoardArrays = [
 let currentDraggedElement;
 
 
-function start() {
+function initBoard() {
     includeHTML();
     renderedBoardArrays = allBoardArrays;
     renderAll();
@@ -156,10 +156,16 @@ function renderColumn(columnTitle, columnID, columnArray) {     //Rendert die je
 
 function taskCardHTML(columnID, i, task) {  //HTML-Template für ausgefüllte Karten
     return /*html*/ `
-        <div draggable="true" class="full-card" ondragstart="startDragging(${columnID}, ${i})">
+        <div draggable="true" id="card_${columnID}_${i}" class="full-card" ondragstart="startDragging(${columnID}, ${i})" onmousedown="rotateCard(${columnID}, ${i})" onmouseup="endRotateCard(${columnID}, ${i})">
             <div class="task-category category-color-mint">${task.category}</div>
             <div class="task-title">${task.title}</div>
             <p class="task-description">${task.description}</p>
+            <div class="subtasks-container df-ai-ctr">
+                <div class="progress-bar">
+                    <div class="bar-of-progress" id="bar_of_progress"></div>
+                </div>
+                <span class="subtask-text">1/2 Subtasks</span>
+            </div>
             <div class="persons-priority-container ai-ctr-space-btwn">
                 <div id="${columnID}_persons_container_${i}" class="persons-container df-ai-ctr"></div>
                 ${task.priority}
@@ -174,19 +180,21 @@ function allowDrop(event) {    //Funktion, die das Fallenlassen (Drop) in andere
 }
 
 
-function moveTo(id) {   //Funktion, die die Tasks/Karten verschiebet (ergänzt und entfernt die aktuelle Task von dem jeweiligen Array)
-    let targetArrayIndex = renderedBoardArrays.findIndex(element => element.id == id);
+function moveTo(idColumn) {   //Funktion, die die Tasks/Karten verschiebt (ergänzt und entfernt die aktuelle Task von dem jeweiligen Array)
+    let targetArrayIndex = renderedBoardArrays.findIndex(element => element.id == idColumn);
     let targetArray = renderedBoardArrays[targetArrayIndex]['array'];
     let startArrayIndex = renderedBoardArrays.findIndex(element => element.id == currentDraggedElement.columnTitle);
     let startArray = renderedBoardArrays[startArrayIndex]['array'];
 
     targetArray.push(renderedBoardArrays[startArrayIndex]['array'][currentDraggedElement.taskNumber]);
     startArray.splice(currentDraggedElement.taskNumber, 1);
+    // allBoardArrays = renderedBoardArrays; --> darf ich nicht machen, da vorher renderedBoardArrays = filteredBoardArrays gemacht wird!
+    // renderedBoardArrays = allBoardArrays; --> sobald man eine Task verschiebt, werden wieder alle Tasks angezeigt!
     renderAll();
 }
 
 
-function startDragging(columnID, taskID) {  //Die Infos des aktuellen Drag-Elements werden in einer globalen Variable gespeichert
+function startDragging(columnID, taskID) {  //Die Infos des aktuellen Drag-Elements werden in einer globalen Variable zwischengespeichert
     currentDraggedElement = {
         columnTitle: columnID.id,
         taskNumber: taskID
@@ -194,21 +202,29 @@ function startDragging(columnID, taskID) {  //Die Infos des aktuellen Drag-Eleme
 }
 
 
-function searchTasks() {
+function rotateCard(columnID, taskID) {     //Karte wird beim Mausklick gedreht
+    document.getElementById(`card_${columnID.id}_${taskID}`).classList.add('rotate-card');
+}
+
+
+function endRotateCard(columnID, taskID) {      //Karte wird wieder in den Ausgangszustand zurückversetzt, wenn die Maustaste losgelassen wird
+    document.getElementById(`card_${columnID.id}_${taskID}`).classList.remove('rotate-card');
+}
+
+
+function searchTasks() {    //Funktion für die Suchleiste. Die gerenderten Arrays werden gefiltert und in ein extra-Array gespeichert!
     let searchField = document.getElementById('search_field');
     let searchFieldInput = searchField.value.trim().toLowerCase();
+    renderedBoardArrays = allBoardArrays;   //wenn man seine Eingabe wieder löscht, sollen wieder alle Tasks angezeigt werden (zurücksetzen)!
 
-    for (let i = 0; i < allBoardArrays.length; i++) {   //wenn man seine Eingabe wieder löscht, sollen wieder alle Tasks angezeigt werden (zurücksetzen). Daher wird immer durch allBoardArrays iteriert!
-        const searchedArray = allBoardArrays[i]['array'];
+    for (let i = 0; i < renderedBoardArrays.length; i++) {
+        const searchedArray = renderedBoardArrays[i]['array'];
         filteredBoardArrays[i]['array'] = [];   //Bevor in das filteredBoardArrays die Tasks reingepusht werden, muss es zurückgesetzt werden, damit nur die aktuell gefilterten Tasks angezeigt werden! (und keine früheren, gefilterten Tasks!)
         
         for (let j = 0; j < searchedArray.length; j++) {
             const singleTask = searchedArray[j];
             if (singleTask['title'].trim().toLowerCase().includes(searchFieldInput)) {
-                console.log('Ist enthalten in ' + renderedBoardArrays[i]['title']);
-                filteredBoardArrays[i]['array'].push(singleTask);
-            } else {
-                console.warn('Ist nicht enthalten in ' + renderedBoardArrays[i]['title']);
+                filteredBoardArrays[i]['array'].push(singleTask);   //Die gefilterten Arrays werden in einem extra-Array gespeichert
             }
         }
     }

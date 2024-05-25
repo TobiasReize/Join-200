@@ -119,10 +119,11 @@
 
 /* Section: Board distribution */
 .board-distribution {
-    margin-top: 8px;
+    padding-top: 8px;
     display: flex;
     gap: 26px;
     flex: 1;
+    overflow-y: scroll;
 }
 
 .board-columns {
@@ -153,6 +154,13 @@
     box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
     background-color: #FFFFFF;
     cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    transform-origin: bottom left;
+}
+
+.rotate-card {
+    transform: rotate(5deg);
+    transform-origin: bottom left;
 }
 
 .task-category {
@@ -185,6 +193,33 @@
     font-weight: 400;
     color: #A8A8A8;
     margin-bottom: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.subtasks-container {
+    gap: 11px;
+    margin: 4px 0 24px 0;
+}
+
+.progress-bar {
+    flex: 1;
+    background-color: #F4F4F4;
+    border-radius: 8px;
+}
+
+.bar-of-progress {
+    width: 50%;
+    height: 8px;
+    background-color: #4589FF;
+    border-radius: 8px;
+}
+
+.subtask-text {
+    font-size: 12px;
+    font-weight: 400;
+    white-space: nowrap;
 }
 
 .initials {
@@ -215,3 +250,5 @@
 .prio-urgent {
     fill: #FF3D00;
 }
+
+/* neue Sektion... */

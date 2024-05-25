@@ -14,8 +14,8 @@ async function setItem(path = '', value) {          //Neuer User wird in der Dat
 }
 
 
-async function getItem(path = '') {     //ladet die User-Daten aus der Datenbank herunter und übergibt diese
+async function getItem(path = '') {     //ladet die User-Daten aus der Datenbank (Firebase) herunter und übergibt diese
     let response = await fetch(BASE_URL + path + '.json');
     let responseToJson = await response.json();
-    return responseToJson;
+    return responseToJson;  //Es wird ein JSON-Objekt übergeben!
 }
