@@ -10,6 +10,9 @@
     align-items: center;
 }
 
+.d-none {
+    display: none !important;
+}
 
 /* Section: Board Headline */
 .searchbar-button-container {
@@ -199,18 +202,19 @@
 }
 
 .subtasks-container {
+    display: flex;
+    align-items: flex-start;
     gap: 11px;
-    margin: 4px 0 24px 0;
 }
 
 .progress-bar {
     flex: 1;
     background-color: #F4F4F4;
     border-radius: 8px;
+    margin: 4px 0 24px 0;
 }
 
 .bar-of-progress {
-    width: 50%;
     height: 8px;
     background-color: #4589FF;
     border-radius: 8px;
@@ -251,4 +255,24 @@
     fill: #FF3D00;
 }
 
-/* neue Sektion... */
+/* Section: Big view */
+.big-view-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.big-view-card {
+    background-color: #ffffff;
+    width: 525px;
+    padding: 48px 40px;
+    border-radius: 30px;
+}

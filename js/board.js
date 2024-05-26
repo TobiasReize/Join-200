@@ -22,97 +22,120 @@ let urgent = `
 let toDoTasks = [];
 let inProgressTasks = [
     {
-        category: 'User Story',
-        title: 'Daily Kochwelt Recipe',
-        description: 'Implement daily recipe and portion calculator...',
-        persons: ['MK', 'OS', 'XG'],
-        priority: medium
+        'category': 'User Story',
+        'title': 'Daily Kochwelt Recipe',
+        'description': 'Implement daily recipe and portion calculator...',
+        'subtasks': [
+            {
+            'subtaskTitle': 'Subtask 1',
+            'status': 'open'
+            },
+            {
+            'subtaskTitle': 'Subtask 2',
+            'status': 'open'
+            }],
+        'persons': ['MK', 'OS', 'XG'],
+        'priority': medium
     }
 ];
 let awaitFeedbackTasks = [
     {
-        category: 'Technical Task',
-        title: 'HTML Base Template Creation',
-        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil laboriosam, illum laudantium vitae voluptatem tempora tenetur est harum autem? Nostrum, quam. Eos asperiores necessitatibus minus fuga obcaecati amet? Molestiae, nobis.',
-        persons: ['DE', 'BZ', 'AS'],
-        priority: low
+        'category': 'Technical Task',
+        'title': 'HTML Base Template Creation',
+        'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil laboriosam, illum laudantium vitae voluptatem tempora tenetur est harum autem? Nostrum, quam. Eos asperiores necessitatibus minus fuga obcaecati amet? Molestiae, nobis.',
+        'subtasks': [],
+        'persons': ['DE', 'BZ', 'AS'],
+        'priority': low
     },
     {
-        category: 'User Story',
-        title: 'Daily Kochwelt Recipe',
-        description: 'Implement daily recipe and portion calculator...',
-        persons: ['MK', 'OS', 'XG'],
-        priority: urgent
+        'category': 'User Story',
+        'title': 'Daily Kochwelt Recipe',
+        'description': 'Implement daily recipe and portion calculator...',
+        'subtasks': [
+            {
+            'subtaskTitle': 'Subtask 1',
+            'status': 'done'
+            },
+            {
+            'subtaskTitle': 'Subtask 2',
+            'status': 'done'
+            },
+            {
+            'subtaskTitle': 'Subtask 3',
+            'status': 'open'
+            }],
+        'persons': ['MK', 'OS', 'XG'],
+        'priority': urgent
     }
 ];
 let doneTasks = [];
 
 let allBoardArrays = [     //Hilfsarray, in dem nochmal alle Board-Arrays zusammengefasst sind! --> Dieses wird in der Regel vom Backend runtergeladen!
     {
-        title: 'To Do',
-        id: 'to_do',
-        array: toDoTasks
+        'title': 'To Do',
+        'id': 'to_do',
+        'array': toDoTasks
     },
     {
-        title: 'In Progress',
-        id: 'in_progress',
-        array: inProgressTasks
+        'title': 'In Progress',
+        'id': 'in_progress',
+        'array': inProgressTasks
     },
     {
-        title: 'Await Feedback',
-        id: 'await_feedback',
-        array: awaitFeedbackTasks
+        'title': 'Await Feedback',
+        'id': 'await_feedback',
+        'array': awaitFeedbackTasks
     },
     {
-        title: 'Done',
-        id: 'done',
-        array: doneTasks
+        'title': 'Done',
+        'id': 'done',
+        'array': doneTasks
     }
 ];
 
 let renderedBoardArrays = [     //Hilfsarray für die tatsächlich dargestellten Spalten (am Anfang immer leer!)
     {
-        title: 'To Do',
-        id: 'to_do',
-        array: []
+        'title': 'To Do',
+        'id': 'to_do',
+        'array': []
     },
     {
-        title: 'In Progress',
-        id: 'in_progress',
-        array: []
+        'title': 'In Progress',
+        'id': 'in_progress',
+        'array': []
     },
     {
-        title: 'Await Feedback',
-        id: 'await_feedback',
-        array: []
+        'title': 'Await Feedback',
+        'id': 'await_feedback',
+        'array': []
     },
     {
-        title: 'Done',
-        id: 'done',
-        array: []
+        'title': 'Done',
+        'id': 'done',
+        'array': []
     }
 ];
 
 let filteredBoardArrays = [     //Hilfsarray für die gefilterten Tasks durch die Suchleiste (am Anfang immer leer!)
     {
-        title: 'To Do',
-        id: 'to_do',
-        array: []
+        'title': 'To Do',
+        'id': 'to_do',
+        'array': []
     },
     {
-        title: 'In Progress',
-        id: 'in_progress',
-        array: []
+        'title': 'In Progress',
+        'id': 'in_progress',
+        'array': []
     },
     {
-        title: 'Await Feedback',
-        id: 'await_feedback',
-        array: []
+        'title': 'Await Feedback',
+        'id': 'await_feedback',
+        'array': []
     },
     {
-        title: 'Done',
-        id: 'done',
-        array: []
+        'title': 'Done',
+        'id': 'done',
+        'array': []
     }
 ];
 
@@ -129,7 +152,7 @@ function initBoard() {
 function renderAll() {  //Diese Funktion rendert alle Board-Spalten mit ihren Karten
     for (let i = 0; i < renderedBoardArrays.length; i++) {
         const boardArray = renderedBoardArrays[i];
-        renderColumn(boardArray.title, boardArray.id, boardArray.array);
+        renderColumn(boardArray['title'], boardArray['id'], boardArray['array']);
     }
 }
 
@@ -138,15 +161,39 @@ function renderColumn(columnTitle, columnID, columnArray) {     //Rendert die je
     let columnContainer = document.getElementById(columnID);
     columnContainer.innerHTML = '';
 
+    //Prüft ob die einzelnen Spalten leer oder voll sind:
     if (columnArray.length == 0) {
-        columnContainer.innerHTML = `<div class="empty-card">No tasks ${columnTitle}</div>`;
+        columnContainer.innerHTML = `<div class="empty-card">No tasks ${columnTitle}</div>`;    //für leere Spalten
     } else {
         for (let i = 0; i < columnArray.length; i++) {
             const task = columnArray[i];
             columnContainer.innerHTML += taskCardHTML(columnID, i, task);
             
-            for (let j = 0; j < task.persons.length; j++) {
-                const person = task.persons[j];
+            //prüft ob die aktuelle Task Subtasks enthält, wenn ja wird die Progress-bar ergänzt sonst nicht:
+            if (task['subtasks'].length != 0) {
+                
+                //Zählen der erledigten Subtasks:
+                let doneSubtasks = 0;
+                for (let j = 0; j < task['subtasks'].length; j++) {
+                    const singleSubtask = task['subtasks'][j];
+                    if (singleSubtask['status'] == 'done') {
+                        doneSubtasks++;
+                    }
+                }
+                //Einfügen der Progress-bar und Text:
+                document.getElementById(`${columnID}_subtasks_container_${i}`).innerHTML = /*html*/ `
+                    <div class="progress-bar">
+                        <div class="bar-of-progress" style="width: ${(doneSubtasks/task['subtasks'].length)*100}%"></div>
+                    </div>
+                    <span class="subtask-text">
+                        ${doneSubtasks}/${task['subtasks'].length} Subtasks
+                    </span>
+                `;
+            }
+
+            //fügt die Kontakte hinzu:
+            for (let k = 0; k < task['persons'].length; k++) {
+                const person = task['persons'][k];
                 document.getElementById(`${columnID}_persons_container_${i}`).innerHTML += `<div class="initials">${person}</div>`;
             }
         }
@@ -156,16 +203,11 @@ function renderColumn(columnTitle, columnID, columnArray) {     //Rendert die je
 
 function taskCardHTML(columnID, i, task) {  //HTML-Template für ausgefüllte Karten
     return /*html*/ `
-        <div draggable="true" id="card_${columnID}_${i}" class="full-card" ondragstart="startDragging(${columnID}, ${i})" onmousedown="rotateCard(${columnID}, ${i})" onmouseup="endRotateCard(${columnID}, ${i})">
+        <div draggable="true" id="card_${columnID}_${i}" class="full-card" ondragstart="startDragging(${columnID}, ${i})" onmousedown="rotateCard(${columnID}, ${i})" onmouseup="endRotateCard(${columnID}, ${i})" onclick="showBigView(${columnID}, ${i})">
             <div class="task-category category-color-mint">${task.category}</div>
             <div class="task-title">${task.title}</div>
             <p class="task-description">${task.description}</p>
-            <div class="subtasks-container df-ai-ctr">
-                <div class="progress-bar">
-                    <div class="bar-of-progress" id="bar_of_progress"></div>
-                </div>
-                <span class="subtask-text">1/2 Subtasks</span>
-            </div>
+            <div id="${columnID}_subtasks_container_${i}" class="subtasks-container"></div>
             <div class="persons-priority-container ai-ctr-space-btwn">
                 <div id="${columnID}_persons_container_${i}" class="persons-container df-ai-ctr"></div>
                 ${task.priority}
@@ -175,18 +217,60 @@ function taskCardHTML(columnID, i, task) {  //HTML-Template für ausgefüllte Ka
 }
 
 
+function showBigView(columnID, index) {
+    let bigViewContainer = document.getElementById('big_view_container');
+    let currentArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == columnID['id']);
+    let currentArray = renderedBoardArrays[currentArrayIndex]['array'];
+    
+    bigViewContainer.classList.remove('d-none');
+    bigViewContainer.innerHTML = /*html*/ `
+    <div class="big-view-card" onclick="stopPropagation(event)">
+        <div>
+            <div>Kategorie</div>
+            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <mask id="mask0_71720_5473" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
+                    <rect y="0.96582" width="24" height="24" fill="#D9D9D9"/>
+                </mask>
+                <g mask="url(#mask0_71720_5473)">
+                    <path d="M11.9998 14.3659L7.0998 19.2659C6.91647 19.4492 6.68314 19.5409 6.3998 19.5409C6.11647 19.5409 5.88314 19.4492 5.6998 19.2659C5.51647 19.0825 5.4248 18.8492 5.4248 18.5659C5.4248 18.2825 5.51647 18.0492 5.6998 17.8659L10.5998 12.9659L5.6998 8.06587C5.51647 7.88254 5.4248 7.6492 5.4248 7.36587C5.4248 7.08254 5.51647 6.8492 5.6998 6.66587C5.88314 6.48254 6.11647 6.39087 6.3998 6.39087C6.68314 6.39087 6.91647 6.48254 7.0998 6.66587L11.9998 11.5659L16.8998 6.66587C17.0831 6.48254 17.3165 6.39087 17.5998 6.39087C17.8831 6.39087 18.1165 6.48254 18.2998 6.66587C18.4831 6.8492 18.5748 7.08254 18.5748 7.36587C18.5748 7.6492 18.4831 7.88254 18.2998 8.06587L13.3998 12.9659L18.2998 17.8659C18.4831 18.0492 18.5748 18.2825 18.5748 18.5659C18.5748 18.8492 18.4831 19.0825 18.2998 19.2659C18.1165 19.4492 17.8831 19.5409 17.5998 19.5409C17.3165 19.5409 17.0831 19.4492 16.8998 19.2659L11.9998 14.3659Z" fill="#2A3647"/>
+                </g>
+            </svg>
+        </div>
+        <h1>${currentArray[index]['title']}</h1>
+        <p>Beschreibung</p>
+        <div>Datum</div>
+        <div>Priorität</div>
+        <div>Kontakte</div>
+        <div>Subtasks</div>
+        <div>Delete + Edit</div>
+    </div>
+    `;
+}
+
+
+function closeBigView() {
+    let bigViewContainer = document.getElementById('big_view_container');
+    bigViewContainer.classList.add('d-none');
+}
+
+
+function stopPropagation(event) {           //Verhindert das Event Bubbling beim Schließen der Großansicht
+    event.stopPropagation();
+}
+
+
 function allowDrop(event) {    //Funktion, die das Fallenlassen (Drop) in andere Elemente ermöglicht (ist standardmäßig nicht erlaubt, daher muss es umgestellt werden!)
     event.preventDefault();
 }
 
 
 function moveTo(idColumn) {   //Funktion, die die Tasks/Karten verschiebt (ergänzt und entfernt die aktuelle Task von dem jeweiligen Array)
-    let targetArrayIndex = renderedBoardArrays.findIndex(element => element.id == idColumn);
+    let targetArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == idColumn);
     let targetArray = renderedBoardArrays[targetArrayIndex]['array'];
-    let startArrayIndex = renderedBoardArrays.findIndex(element => element.id == currentDraggedElement.columnTitle);
+    let startArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == currentDraggedElement['columnTitle']);
     let startArray = renderedBoardArrays[startArrayIndex]['array'];
 
-    targetArray.push(renderedBoardArrays[startArrayIndex]['array'][currentDraggedElement.taskNumber]);
+    targetArray.push(renderedBoardArrays[startArrayIndex]['array'][currentDraggedElement['taskNumber']]);
     startArray.splice(currentDraggedElement.taskNumber, 1);
     // allBoardArrays = renderedBoardArrays; --> darf ich nicht machen, da vorher renderedBoardArrays = filteredBoardArrays gemacht wird!
     // renderedBoardArrays = allBoardArrays; --> sobald man eine Task verschiebt, werden wieder alle Tasks angezeigt!
@@ -196,19 +280,24 @@ function moveTo(idColumn) {   //Funktion, die die Tasks/Karten verschiebt (ergä
 
 function startDragging(columnID, taskID) {  //Die Infos des aktuellen Drag-Elements werden in einer globalen Variable zwischengespeichert
     currentDraggedElement = {
-        columnTitle: columnID.id,
-        taskNumber: taskID
+        'columnTitle': columnID['id'],  //Hier muss nochmal extra die 'id' angesprochen werden?
+        'taskNumber': taskID
     }
+
+    //In der Spalte vor und nach dem aktuellen Drag-Elements soll ein gestricheltes Rechteck (Platzhalter) angezeigt werden:
+    // let startArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == currentDraggedElement['columnTitle']);
+    // renderedBoardArrays[startArrayIndex + 1]['array'].push();
+    // renderedBoardArrays[startArrayIndex - 1]['array'].push();
 }
 
 
 function rotateCard(columnID, taskID) {     //Karte wird beim Mausklick gedreht
-    document.getElementById(`card_${columnID.id}_${taskID}`).classList.add('rotate-card');
+    document.getElementById(`card_${columnID['id']}_${taskID}`).classList.add('rotate-card');
 }
 
 
 function endRotateCard(columnID, taskID) {      //Karte wird wieder in den Ausgangszustand zurückversetzt, wenn die Maustaste losgelassen wird
-    document.getElementById(`card_${columnID.id}_${taskID}`).classList.remove('rotate-card');
+    document.getElementById(`card_${columnID['id']}_${taskID}`).classList.remove('rotate-card');
 }
 
 
@@ -221,9 +310,11 @@ function searchTasks() {    //Funktion für die Suchleiste. Die gerenderten Arra
         const searchedArray = renderedBoardArrays[i]['array'];
         filteredBoardArrays[i]['array'] = [];   //Bevor in das filteredBoardArrays die Tasks reingepusht werden, muss es zurückgesetzt werden, damit nur die aktuell gefilterten Tasks angezeigt werden! (und keine früheren, gefilterten Tasks!)
         
-        for (let j = 0; j < searchedArray.length; j++) {
+        for (let j = 0; j < searchedArray.length; j++) {    //Durchsucht jeweils den Titel und die Beschreibung der Aufgabe
             const singleTask = searchedArray[j];
-            if (singleTask['title'].trim().toLowerCase().includes(searchFieldInput)) {
+            const singleTaskTitle = singleTask['title'].trim().toLowerCase();
+            const singleTaskDescription = singleTask['description'].trim().toLowerCase();
+            if (singleTaskTitle.includes(searchFieldInput) || singleTaskDescription.includes(searchFieldInput)) {
                 filteredBoardArrays[i]['array'].push(singleTask);   //Die gefilterten Arrays werden in einem extra-Array gespeichert
             }
         }

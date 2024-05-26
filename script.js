@@ -1,3 +1,22 @@
+// let tasks = [
+//     {
+//         'title' : '',
+//         'description' : '',
+//         'contact' : [],
+//         'date' : '',
+//         'priorities' : [
+//             {
+//                 'urgent' : false,
+//                 'medium' : false,
+//                 'low' : false
+//             }
+//         ],
+//         'categories' : '',
+//         'subtasks' : [...subtasks]
+//     }
+// ]
+
+
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {

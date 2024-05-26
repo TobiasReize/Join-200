@@ -404,5 +404,5 @@ function addAllToTasks() {
         task['subtasks'] = [...subtasks];
     }
     addCheckedContactsToTasks(contacts, tasks) 
-    location.reload();
+    // location.reload();
 }
