@@ -19,6 +19,21 @@ let urgent = `
     </svg>
 `;
 
+let colorsCategories = {
+    'Technical Task': '#1FD7C1',
+    'User Story': '#0038FF'
+}
+
+let subtaskCheckbox = {
+    'open': `<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4.96582" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>
+            </svg>`,
+    'done': `<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 11.9658V17.9658C20 19.6227 18.6569 20.9658 17 20.9658H7C5.34315 20.9658 4 19.6227 4 17.9658V7.96582C4 6.30897 5.34315 4.96582 7 4.96582H15" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                <path d="M8 12.9658L12 16.9658L20 5.46582" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>`
+}
+
 let toDoTasks = [];
 let inProgressTasks = [
     {
@@ -35,6 +50,7 @@ let inProgressTasks = [
             'status': 'open'
             }],
         'persons': ['MK', 'OS', 'XG'],
+        'date': '2024-05-02',
         'priority': medium
     }
 ];
@@ -45,6 +61,7 @@ let awaitFeedbackTasks = [
         'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil laboriosam, illum laudantium vitae voluptatem tempora tenetur est harum autem? Nostrum, quam. Eos asperiores necessitatibus minus fuga obcaecati amet? Molestiae, nobis.',
         'subtasks': [],
         'persons': ['DE', 'BZ', 'AS'],
+        'date': '2023-06-09',
         'priority': low
     },
     {
@@ -65,6 +82,7 @@ let awaitFeedbackTasks = [
             'status': 'open'
             }],
         'persons': ['MK', 'OS', 'XG'],
+        'date': '2024-07-18',
         'priority': urgent
     }
 ];
@@ -204,13 +222,13 @@ function renderColumn(columnTitle, columnID, columnArray) {     //Rendert die je
 function taskCardHTML(columnID, i, task) {  //HTML-Template für ausgefüllte Karten
     return /*html*/ `
         <div draggable="true" id="card_${columnID}_${i}" class="full-card" ondragstart="startDragging(${columnID}, ${i})" onmousedown="rotateCard(${columnID}, ${i})" onmouseup="endRotateCard(${columnID}, ${i})" onclick="showBigView(${columnID}, ${i})">
-            <div class="task-category category-color-mint">${task.category}</div>
-            <div class="task-title">${task.title}</div>
-            <p class="task-description">${task.description}</p>
+            <div class="task-category" style="background-color: ${colorsCategories[task['category']]}">${task['category']}</div>
+            <div class="task-title">${task['title']}</div>
+            <p class="task-description">${task['description']}</p>
             <div id="${columnID}_subtasks_container_${i}" class="subtasks-container"></div>
             <div class="persons-priority-container ai-ctr-space-btwn">
                 <div id="${columnID}_persons_container_${i}" class="persons-container df-ai-ctr"></div>
-                ${task.priority}
+                ${task['priority']}
             </div>
         </div>
     `;
@@ -220,31 +238,70 @@ function taskCardHTML(columnID, i, task) {  //HTML-Template für ausgefüllte Ka
 function showBigView(columnID, index) {
     let bigViewContainer = document.getElementById('big_view_container');
     let currentArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == columnID['id']);
-    let currentArray = renderedBoardArrays[currentArrayIndex]['array'];
+    let currentTask = renderedBoardArrays[currentArrayIndex]['array'][index];
     
     bigViewContainer.classList.remove('d-none');
     bigViewContainer.innerHTML = /*html*/ `
-    <div class="big-view-card" onclick="stopPropagation(event)">
-        <div>
-            <div>Kategorie</div>
-            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <mask id="mask0_71720_5473" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
-                    <rect y="0.96582" width="24" height="24" fill="#D9D9D9"/>
-                </mask>
-                <g mask="url(#mask0_71720_5473)">
-                    <path d="M11.9998 14.3659L7.0998 19.2659C6.91647 19.4492 6.68314 19.5409 6.3998 19.5409C6.11647 19.5409 5.88314 19.4492 5.6998 19.2659C5.51647 19.0825 5.4248 18.8492 5.4248 18.5659C5.4248 18.2825 5.51647 18.0492 5.6998 17.8659L10.5998 12.9659L5.6998 8.06587C5.51647 7.88254 5.4248 7.6492 5.4248 7.36587C5.4248 7.08254 5.51647 6.8492 5.6998 6.66587C5.88314 6.48254 6.11647 6.39087 6.3998 6.39087C6.68314 6.39087 6.91647 6.48254 7.0998 6.66587L11.9998 11.5659L16.8998 6.66587C17.0831 6.48254 17.3165 6.39087 17.5998 6.39087C17.8831 6.39087 18.1165 6.48254 18.2998 6.66587C18.4831 6.8492 18.5748 7.08254 18.5748 7.36587C18.5748 7.6492 18.4831 7.88254 18.2998 8.06587L13.3998 12.9659L18.2998 17.8659C18.4831 18.0492 18.5748 18.2825 18.5748 18.5659C18.5748 18.8492 18.4831 19.0825 18.2998 19.2659C18.1165 19.4492 17.8831 19.5409 17.5998 19.5409C17.3165 19.5409 17.0831 19.4492 16.8998 19.2659L11.9998 14.3659Z" fill="#2A3647"/>
-                </g>
-            </svg>
+        <div class="big-view-card" onclick="stopPropagation(event)">
+            <div class="big-view-category-container ai-ctr-space-btwn">
+                <div class="big-view-category" style="background-color: ${colorsCategories[currentTask['category']]}">${currentTask['category']}</div>
+                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="mask0_71720_5473" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
+                        <rect y="0.96582" width="24" height="24" fill="#D9D9D9"/>
+                    </mask>
+                    <g mask="url(#mask0_71720_5473)">
+                        <path d="M11.9998 14.3659L7.0998 19.2659C6.91647 19.4492 6.68314 19.5409 6.3998 19.5409C6.11647 19.5409 5.88314 19.4492 5.6998 19.2659C5.51647 19.0825 5.4248 18.8492 5.4248 18.5659C5.4248 18.2825 5.51647 18.0492 5.6998 17.8659L10.5998 12.9659L5.6998 8.06587C5.51647 7.88254 5.4248 7.6492 5.4248 7.36587C5.4248 7.08254 5.51647 6.8492 5.6998 6.66587C5.88314 6.48254 6.11647 6.39087 6.3998 6.39087C6.68314 6.39087 6.91647 6.48254 7.0998 6.66587L11.9998 11.5659L16.8998 6.66587C17.0831 6.48254 17.3165 6.39087 17.5998 6.39087C17.8831 6.39087 18.1165 6.48254 18.2998 6.66587C18.4831 6.8492 18.5748 7.08254 18.5748 7.36587C18.5748 7.6492 18.4831 7.88254 18.2998 8.06587L13.3998 12.9659L18.2998 17.8659C18.4831 18.0492 18.5748 18.2825 18.5748 18.5659C18.5748 18.8492 18.4831 19.0825 18.2998 19.2659C18.1165 19.4492 17.8831 19.5409 17.5998 19.5409C17.3165 19.5409 17.0831 19.4492 16.8998 19.2659L11.9998 14.3659Z" fill="#2A3647"/>
+                    </g>
+                </svg>
+            </div>
+            <h1>${currentTask['title']}</h1>
+            <p class="big-view-description">${currentTask['description']}</p>
+            <div>Due date: ${currentTask['date']}</div>
+            <div>Priority: ${currentTask['priority']}</div>
+            <div>Assigned To:</div>
+            <div id="big_view_subtasks_container">
+                <div class="big-view-subtask-headline">Subtasks</div>
+            </div>
+            <div class="big-view-lowest-container df-ai-ctr">
+                <div class="big-view-delete-edit-container df-ai-ctr">
+                    <div class="big-view-delete df-ai-ctr">
+                        <svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <mask id="mask0_75592_9951" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
+                                <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
+                            </mask>
+                            <g mask="url(#mask0_75592_9951)">
+                                <path d="M7.14453 21C6.59453 21 6.1237 20.8042 5.73203 20.4125C5.34036 20.0208 5.14453 19.55 5.14453 19V6C4.8612 6 4.6237 5.90417 4.43203 5.7125C4.24036 5.52083 4.14453 5.28333 4.14453 5C4.14453 4.71667 4.24036 4.47917 4.43203 4.2875C4.6237 4.09583 4.8612 4 5.14453 4H9.14453C9.14453 3.71667 9.24036 3.47917 9.43203 3.2875C9.6237 3.09583 9.8612 3 10.1445 3H14.1445C14.4279 3 14.6654 3.09583 14.857 3.2875C15.0487 3.47917 15.1445 3.71667 15.1445 4H19.1445C19.4279 4 19.6654 4.09583 19.857 4.2875C20.0487 4.47917 20.1445 4.71667 20.1445 5C20.1445 5.28333 20.0487 5.52083 19.857 5.7125C19.6654 5.90417 19.4279 6 19.1445 6V19C19.1445 19.55 18.9487 20.0208 18.557 20.4125C18.1654 20.8042 17.6945 21 17.1445 21H7.14453ZM7.14453 6V19H17.1445V6H7.14453ZM9.14453 16C9.14453 16.2833 9.24036 16.5208 9.43203 16.7125C9.6237 16.9042 9.8612 17 10.1445 17C10.4279 17 10.6654 16.9042 10.857 16.7125C11.0487 16.5208 11.1445 16.2833 11.1445 16V9C11.1445 8.71667 11.0487 8.47917 10.857 8.2875C10.6654 8.09583 10.4279 8 10.1445 8C9.8612 8 9.6237 8.09583 9.43203 8.2875C9.24036 8.47917 9.14453 8.71667 9.14453 9V16ZM13.1445 16C13.1445 16.2833 13.2404 16.5208 13.432 16.7125C13.6237 16.9042 13.8612 17 14.1445 17C14.4279 17 14.6654 16.9042 14.857 16.7125C15.0487 16.5208 15.1445 16.2833 15.1445 16V9C15.1445 8.71667 15.0487 8.47917 14.857 8.2875C14.6654 8.09583 14.4279 8 14.1445 8C13.8612 8 13.6237 8.09583 13.432 8.2875C13.2404 8.47917 13.1445 8.71667 13.1445 9V16Z" fill="#2A3647"/>
+                            </g>
+                        </svg>
+                        <span>Delete</span>
+                    </div>
+                    <div class="big-view-separator"></div>
+                    <div class="big-view-edit df-ai-ctr">
+                        <svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
+                                <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
+                            </mask>
+                            <g mask="url(#mask0_75592_9969)">
+                                <path d="M5.14453 19H6.54453L15.1695 10.375L13.7695 8.975L5.14453 17.6V19ZM19.4445 8.925L15.1945 4.725L16.5945 3.325C16.9779 2.94167 17.4487 2.75 18.007 2.75C18.5654 2.75 19.0362 2.94167 19.4195 3.325L20.8195 4.725C21.2029 5.10833 21.4029 5.57083 21.4195 6.1125C21.4362 6.65417 21.2529 7.11667 20.8695 7.5L19.4445 8.925ZM17.9945 10.4L7.39453 21H3.14453V16.75L13.7445 6.15L17.9945 10.4Z" fill="#2A3647"/>
+                            </g>
+                        </svg>
+                        <span>Edit</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h1>${currentArray[index]['title']}</h1>
-        <p>Beschreibung</p>
-        <div>Datum</div>
-        <div>Priorität</div>
-        <div>Kontakte</div>
-        <div>Subtasks</div>
-        <div>Delete + Edit</div>
-    </div>
     `;
+
+    for (let i = 0; i < currentTask['subtasks'].length; i++) {
+        const singleSubtask = currentTask['subtasks'][i];
+        document.getElementById('big_view_subtasks_container').innerHTML += /*html*/ `
+            <div class="big-view-subtask df-ai-ctr">
+                ${subtaskCheckbox[singleSubtask['status']]}
+                <div>${singleSubtask['subtaskTitle']}</div>
+            </div>
+        `;
+    }
+
 }
 
 

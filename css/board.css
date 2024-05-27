@@ -176,14 +176,6 @@
     margin-bottom: 20px;
 }
 
-.category-color-mint {
-    background-color: #1FD7C1;
-}
-
-.category-color-blue {
-    background-color: #0038FF;
-}
-
 .task-title {
     font-size: 16px;
     font-weight: 700;
@@ -275,4 +267,64 @@
     width: 525px;
     padding: 48px 40px;
     border-radius: 30px;
+}
+
+.big-view-category-container {
+    margin-bottom: 24px;
+}
+
+.big-view-category {
+    border-radius: 8px;
+    padding: 4px 24px;
+    font-size: 23px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+.big-view-description {
+    margin: 24px 0;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.big-view-subtask-headline {
+    color: var(--default-color);
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.big-view-subtask {
+    gap: 16px;
+    padding: 6.5px 16px;
+}
+
+.big-view-lowest-container {
+    width: 100%;
+    justify-content: flex-end;
+    padding-top: 24px;
+}
+
+.big-view-delete-edit-container {
+    gap: 8px;
+}
+
+.big-view-delete-edit-container span {
+    color: var(--default-color);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.big-view-delete {
+    gap: 8px;
+}
+
+.big-view-separator {
+    height: 24px;
+    width: 1px;
+    background-color: #D1D1D1;
+}
+
+.big-view-edit {
+    gap: 8px;
 }
