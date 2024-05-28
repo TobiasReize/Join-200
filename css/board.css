@@ -14,6 +14,19 @@
     display: none !important;
 }
 
+.default-color {
+    color: var(--default-color);
+}
+
+.fs20-fw400 {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.m-btm24 {
+    margin-bottom: 24px;
+}
+
 /* Section: Board Headline */
 .searchbar-button-container {
     gap: 32px;
@@ -66,8 +79,16 @@
 }
 
 .searchbar-icon:hover {
-    background-color: #D1D1D1;
+    background-color: #EEEEEE;
     border-radius: 50%;
+}
+
+.searchbar-icon:active {
+    background-color: unset;
+}
+
+.searchbar-icon:active path {
+    fill: var(--hover-color);
 }
 
 .add-task-button {
@@ -269,10 +290,6 @@
     border-radius: 30px;
 }
 
-.big-view-category-container {
-    margin-bottom: 24px;
-}
-
 .big-view-category {
     border-radius: 8px;
     padding: 4px 24px;
@@ -281,28 +298,52 @@
     color: #FFFFFF;
 }
 
-.big-view-description {
-    margin: 24px 0;
-    font-size: 20px;
-    font-weight: 400;
+.big-view-close:hover {
+    cursor: pointer;
+    background-color: #EEEEEE;
+    border-radius: 56px;
+}
+
+.big-view-date-container div:first-child {
+    padding-right: 25px;
+}
+
+.big-view-priority-container div:first-child {
+    padding-right: 43px;
 }
 
 .big-view-subtask-headline {
-    color: var(--default-color);
-    font-size: 20px;
-    font-weight: 400;
     margin-bottom: 8px;
 }
 
 .big-view-subtask {
     gap: 16px;
-    padding: 6.5px 16px;
+    padding: 4px 16px;
+    width: fit-content;
+    border-radius: 10px;
+}
+
+.big-view-subtask:hover {
+    background-color: #EEEEEE;
+}
+
+.big-view-subtask:hover .big-view-checkbox {
+    border-radius: 43px;
+    background-color: #D1D1D1;
+}
+
+.big-view-checkbox:hover {
+    cursor: pointer;
+}
+
+.big-view-subtask-text {
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .big-view-lowest-container {
     width: 100%;
     justify-content: flex-end;
-    padding-top: 24px;
 }
 
 .big-view-delete-edit-container {
@@ -315,8 +356,21 @@
     font-weight: 400;
 }
 
-.big-view-delete {
+.big-view-delete-container {
     gap: 8px;
+}
+
+.big-view-delete-container:hover, .big-view-edit-container:hover {
+    cursor: pointer;
+}
+
+.big-view-delete-container:hover path, .big-view-edit-container:hover path {
+    fill: var(--hover-color);
+}
+
+.big-view-delete-container:hover span, .big-view-edit-container:hover span {
+    color: var(--hover-color);
+    font-weight: 700;
 }
 
 .big-view-separator {
@@ -325,6 +379,6 @@
     background-color: #D1D1D1;
 }
 
-.big-view-edit {
+.big-view-edit-container {
     gap: 8px;
 }

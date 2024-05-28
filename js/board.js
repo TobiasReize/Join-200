@@ -25,10 +25,10 @@ let colorsCategories = {
 }
 
 let subtaskCheckbox = {
-    'open': `<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+    'open': `<svg width="24" height="24" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="4" y="4.96582" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>
             </svg>`,
-    'done': `<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+    'done': `<svg width="24" height="24" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M20 11.9658V17.9658C20 19.6227 18.6569 20.9658 17 20.9658H7C5.34315 20.9658 4 19.6227 4 17.9658V7.96582C4 6.30897 5.34315 4.96582 7 4.96582H15" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                 <path d="M8 12.9658L12 16.9658L20 5.46582" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>`
@@ -49,7 +49,16 @@ let inProgressTasks = [
             'subtaskTitle': 'Subtask 2',
             'status': 'open'
             }],
-        'persons': ['MK', 'OS', 'XG'],
+        'contacts': [
+            {
+                'firstName': 'Emmanuel',
+                'lastName': 'Mauer'
+            },
+            {
+                'firstName': 'Marcel',
+                'lastName': 'Bauer'
+            }
+        ],
         'date': '2024-05-02',
         'priority': medium
     }
@@ -60,7 +69,20 @@ let awaitFeedbackTasks = [
         'title': 'HTML Base Template Creation',
         'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil laboriosam, illum laudantium vitae voluptatem tempora tenetur est harum autem? Nostrum, quam. Eos asperiores necessitatibus minus fuga obcaecati amet? Molestiae, nobis.',
         'subtasks': [],
-        'persons': ['DE', 'BZ', 'AS'],
+        'contacts': [
+            {
+                'firstName': 'Anton',
+                'lastName': 'Mayer'
+            },
+            {
+                'firstName': 'Sofia',
+                'lastName': 'Müller'
+            },
+            {
+                'firstName': 'Benedikt',
+                'lastName': 'Ziegler'
+            }
+        ],
         'date': '2023-06-09',
         'priority': low
     },
@@ -81,7 +103,20 @@ let awaitFeedbackTasks = [
             'subtaskTitle': 'Subtask 3',
             'status': 'open'
             }],
-        'persons': ['MK', 'OS', 'XG'],
+        'contacts': [
+            {
+                'firstName': 'Marcel',
+                'lastName': 'Bauer'
+            },
+            {
+                'firstName': 'Klaus',
+                'lastName': 'Lang'
+            },
+            {
+                'firstName': 'Sofia',
+                'lastName': 'Müller'
+            }
+        ],
         'date': '2024-07-18',
         'priority': urgent
     }
@@ -210,9 +245,11 @@ function renderColumn(columnTitle, columnID, columnArray) {     //Rendert die je
             }
 
             //fügt die Kontakte hinzu:
-            for (let k = 0; k < task['persons'].length; k++) {
-                const person = task['persons'][k];
-                document.getElementById(`${columnID}_persons_container_${i}`).innerHTML += `<div class="initials">${person}</div>`;
+            for (let k = 0; k < task['contacts'].length; k++) {
+                const personFirstName = task['contacts'][k]['firstName'];
+                const personLastName = task['contacts'][k]['lastName'];
+                const initials = `${firstLetterUppercase(personFirstName)}${firstLetterUppercase(personLastName)}`;
+                document.getElementById(`${columnID}_contacts_container_${i}`).innerHTML += `<div class="initials">${initials}</div>`;
             }
         }
     }
@@ -226,12 +263,17 @@ function taskCardHTML(columnID, i, task) {  //HTML-Template für ausgefüllte Ka
             <div class="task-title">${task['title']}</div>
             <p class="task-description">${task['description']}</p>
             <div id="${columnID}_subtasks_container_${i}" class="subtasks-container"></div>
-            <div class="persons-priority-container ai-ctr-space-btwn">
-                <div id="${columnID}_persons_container_${i}" class="persons-container df-ai-ctr"></div>
+            <div class="ai-ctr-space-btwn">
+                <div id="${columnID}_contacts_container_${i}" class="df-ai-ctr"></div>
                 ${task['priority']}
             </div>
         </div>
     `;
+}
+
+
+function firstLetterUppercase(word) {           //Hilfsfunktion, damit der erste Buchstabe großgeschrieben wird
+    return word.charAt(0).toUpperCase();
 }
 
 
@@ -243,9 +285,9 @@ function showBigView(columnID, index) {
     bigViewContainer.classList.remove('d-none');
     bigViewContainer.innerHTML = /*html*/ `
         <div class="big-view-card" onclick="stopPropagation(event)">
-            <div class="big-view-category-container ai-ctr-space-btwn">
+            <div class="ai-ctr-space-btwn m-btm24">
                 <div class="big-view-category" style="background-color: ${colorsCategories[currentTask['category']]}">${currentTask['category']}</div>
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg onclick="closeBigView()" class="big-view-close" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_71720_5473" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
                         <rect y="0.96582" width="24" height="24" fill="#D9D9D9"/>
                     </mask>
@@ -254,17 +296,25 @@ function showBigView(columnID, index) {
                     </g>
                 </svg>
             </div>
-            <h1>${currentTask['title']}</h1>
-            <p class="big-view-description">${currentTask['description']}</p>
-            <div>Due date: ${currentTask['date']}</div>
-            <div>Priority: ${currentTask['priority']}</div>
-            <div>Assigned To:</div>
-            <div id="big_view_subtasks_container">
-                <div class="big-view-subtask-headline">Subtasks</div>
+            <h1 class="m-btm24">${currentTask['title']}</h1>
+            <p class="fs20-fw400 m-btm24">${currentTask['description']}</p>
+            <div class="big-view-date-container df-ai-ctr fs20-fw400 m-btm24">
+                <div class="default-color">Due date:</div>
+                <div>${currentTask['date']}</div>
+            </div>
+            <div class="big-view-priority-container df-ai-ctr fs20-fw400 m-btm24">
+                <div class="default-color">Priority:</div>
+                <div>${currentTask['priority']}</div>
+            </div>
+            <div id="big_view_contacts_container" class="m-btm24">
+                <div class="default-color fs20-fw400">Assigned To:</div>
+            </div>
+            <div id="big_view_subtasks_container" class="m-btm24">
+                <div class="big-view-subtask-headline default-color fs20-fw400">Subtasks</div>
             </div>
             <div class="big-view-lowest-container df-ai-ctr">
                 <div class="big-view-delete-edit-container df-ai-ctr">
-                    <div class="big-view-delete df-ai-ctr">
+                    <div class="big-view-delete-container df-ai-ctr">
                         <svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_75592_9951" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                                 <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
@@ -276,7 +326,7 @@ function showBigView(columnID, index) {
                         <span>Delete</span>
                     </div>
                     <div class="big-view-separator"></div>
-                    <div class="big-view-edit df-ai-ctr">
+                    <div class="big-view-edit-container df-ai-ctr">
                         <svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                                 <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
@@ -292,16 +342,24 @@ function showBigView(columnID, index) {
         </div>
     `;
 
-    for (let i = 0; i < currentTask['subtasks'].length; i++) {
-        const singleSubtask = currentTask['subtasks'][i];
+    //fügt die Kontakte der Großansicht hinzu:
+    // for (let i = 0; i < currentTask['contacts'].length; i++) {
+    //     const person = currentTask['contacts'][i];
+    //     const personFirstName = person['firstName'];
+    //     const personLastName = person['lastName'];
+    //     const initials = `${firstLetterUppercase(personFirstName)}${firstLetterUppercase(personLastName)}`;
+    // }
+
+    //fügt die Subtasks der Großansicht hinzu:
+    for (let j = 0; j < currentTask['subtasks'].length; j++) {
+        const singleSubtask = currentTask['subtasks'][j];
         document.getElementById('big_view_subtasks_container').innerHTML += /*html*/ `
             <div class="big-view-subtask df-ai-ctr">
-                ${subtaskCheckbox[singleSubtask['status']]}
-                <div>${singleSubtask['subtaskTitle']}</div>
+                <div class="big-view-checkbox df-ai-ctr">${subtaskCheckbox[singleSubtask['status']]}</div>
+                <div class="big-view-subtask-text">${singleSubtask['subtaskTitle']}</div>
             </div>
         `;
     }
-
 }
 
 
@@ -363,19 +421,23 @@ function searchTasks() {    //Funktion für die Suchleiste. Die gerenderten Arra
     let searchFieldInput = searchField.value.trim().toLowerCase();
     renderedBoardArrays = allBoardArrays;   //wenn man seine Eingabe wieder löscht, sollen wieder alle Tasks angezeigt werden (zurücksetzen)!
 
-    for (let i = 0; i < renderedBoardArrays.length; i++) {
-        const searchedArray = renderedBoardArrays[i]['array'];
-        filteredBoardArrays[i]['array'] = [];   //Bevor in das filteredBoardArrays die Tasks reingepusht werden, muss es zurückgesetzt werden, damit nur die aktuell gefilterten Tasks angezeigt werden! (und keine früheren, gefilterten Tasks!)
-        
-        for (let j = 0; j < searchedArray.length; j++) {    //Durchsucht jeweils den Titel und die Beschreibung der Aufgabe
-            const singleTask = searchedArray[j];
-            const singleTaskTitle = singleTask['title'].trim().toLowerCase();
-            const singleTaskDescription = singleTask['description'].trim().toLowerCase();
-            if (singleTaskTitle.includes(searchFieldInput) || singleTaskDescription.includes(searchFieldInput)) {
-                filteredBoardArrays[i]['array'].push(singleTask);   //Die gefilterten Arrays werden in einem extra-Array gespeichert
+    if (searchFieldInput.length > 2) {
+        for (let i = 0; i < renderedBoardArrays.length; i++) {
+            const searchedArray = renderedBoardArrays[i]['array'];
+            filteredBoardArrays[i]['array'] = [];   //Bevor in das filteredBoardArrays die Tasks reingepusht werden, muss es zurückgesetzt werden, damit nur die aktuell gefilterten Tasks angezeigt werden! (und keine früheren, gefilterten Tasks!)
+            
+            for (let j = 0; j < searchedArray.length; j++) {    //Durchsucht jeweils den Titel und die Beschreibung der Aufgabe
+                const singleTask = searchedArray[j];
+                const singleTaskTitle = singleTask['title'].trim().toLowerCase();
+                const singleTaskDescription = singleTask['description'].trim().toLowerCase();
+                if (singleTaskTitle.includes(searchFieldInput) || singleTaskDescription.includes(searchFieldInput)) {
+                    filteredBoardArrays[i]['array'].push(singleTask);   //Die gefilterten Arrays werden in einem extra-Array gespeichert
+                }
             }
         }
+        renderedBoardArrays = filteredBoardArrays;
+        renderAll();
+    } else if (searchFieldInput.length == 0) {      //falls die Eingabe wieder gelöscht wird
+        renderAll();
     }
-    renderedBoardArrays = filteredBoardArrays;
-    renderAll();
 }
