@@ -90,7 +90,7 @@ function tempRenderActiveContact(i) {
             <div class="d-fl full-name-edit-delete">
                 <span>${importContacts[i]['first-name']} ${importContacts[i]['name']}</span>
                 <div class="d-fl edit-delete">
-                    <div class="d-fl show-contact-edit">
+                    <div class="d-fl show-contact-edit" onclick="editContact(${i})">
                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                                 <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
@@ -101,7 +101,7 @@ function tempRenderActiveContact(i) {
                         </svg>
                         Edit
                     </div>
-                    <div class="d-fl show-contact-edit">
+                    <div class="d-fl show-contact-edit" onclick="deleteContact(${i})">
                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_75592_9951" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                                 <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
@@ -138,14 +138,16 @@ function openAddNewContact() {
 }
 
 function createContact() {
-    let lastName = document.getElementById(`input_name`).value;
+    let fullName = document.getElementById(`input_name`).value.trim();
     let mail = document.getElementById(`input_mail`).value;
     let tel = document.getElementById(`input_tel`).value;
     let color = getRandomColor();
 
+    let [firstName, lastName] = fullName.split(' ');
+
     let newContact = {
-        "first-name": '',
-        "name": lastName,
+        "first-name": firstName ||'',
+        "name": lastName || '',
         "checked": false,
         "color": color,
         "mail": mail,
@@ -154,12 +156,11 @@ function createContact() {
 
     // Füge den neuen Kontakt zum importContacts-Array hinzu
     importContacts.push(newContact);
-    console.log(importContacts);
 
     // Beispielpfad für die neue Kontaktliste
-    let path = 'contacts';
-    setItem(path, importContacts);
-    init();
+    setItem('contacts', importContacts);
+    renderContacts();
+    closeContactCard();
 }
 
 function getRandomColor() {
@@ -170,4 +171,80 @@ function getRandomColor() {
 function closeContactCard() {
     let content = document.getElementById('overlay_container');
     content.classList.add('d-none');
+    renderContacts();
+}
+
+function deleteContact(i) {
+    importContacts.splice(i, 1);
+    setItem('contacts', importContacts);
+    renderContacts();
+    document.getElementById(`active_contact`).innerHTML = '';
+}
+
+function deleteContactEdit() {
+    let index = document.getElementById('delete_btn').dataset.index;
+    importContacts.splice(index, 1);
+    setItem('contacts', importContacts);
+    document.getElementById(`active_contact`).innerHTML = '';
+    renderContacts();
+    closeContactCard();
+}
+
+function editContact(i) {
+    let fullName = document.getElementById(`input_name`);
+    let mail = document.getElementById(`input_mail`);
+    let tel = document.getElementById(`input_tel`);
+    let saveButton = document.getElementById('save_btn');
+    let deleteButton = document.getElementById('delete_btn');
+
+    saveButton.dataset.index = i;
+    deleteButton.dataset.index = i;
+
+    renderEditContact();
+    fullName.value = importContacts[i]['first-name'] + ' ' + importContacts[i]['name'];
+    mail.value = importContacts[i]['mail'];
+    tel.value = importContacts[i]['tel'];
+}
+
+function renderEditContact() {
+    let title = document.getElementById('title_edit_contact');
+    let description = document.getElementById('description_edit_contact');
+    let cancelBtn = document.getElementById('cancel_btn');
+    let createBtn = document.getElementById('create_btn');
+    let saveBtn = document.getElementById('save_btn');
+    let deleteBtn = document.getElementById('delete_btn');
+    openAddNewContact();
+    title.innerHTML = 'Edit contact';
+    description.classList.add('d-none');
+    cancelBtn.classList.add('d-none');
+    createBtn.classList.add('d-none');
+    saveBtn.classList.remove('d-none');
+    deleteBtn.classList.remove('d-none');
+}
+
+function saveContact() {
+    let index = document.getElementById('save_btn').dataset.index;
+    let fullName = document.getElementById(`input_name`).value.trim();
+    let mail = document.getElementById(`input_mail`).value;
+    let tel = document.getElementById(`input_tel`).value;
+    let color = importContacts[index].color; // Behalte die bestehende Farbe
+
+    let [firstName, lastName] = fullName.split(' ');
+
+    let updatedContact = {
+        "first-name": firstName,
+        "name": lastName,
+        "checked": false,
+        "color": color,
+        "mail": mail,
+        "tel": tel
+    };
+
+    importContacts[index] = updatedContact;
+
+    setItem('contacts', importContacts);
+
+    closeContactCard();
+    renderContacts();
+    setActiveContact(index)
 }
