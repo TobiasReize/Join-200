@@ -27,6 +27,10 @@
     margin-bottom: 24px;
 }
 
+.gap-10 {
+    gap: 10px;
+}
+
 /* Section: Board Headline */
 .searchbar-button-container {
     gap: 32px;
@@ -281,6 +285,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
 }
 
 .big-view-card {
@@ -288,6 +293,12 @@
     width: 525px;
     padding: 48px 40px;
     border-radius: 30px;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100vw);
+}
+
+.translateX-0 {
+    transform: translateX(0);
 }
 
 .big-view-category {
@@ -304,11 +315,11 @@
     border-radius: 56px;
 }
 
-.big-view-date-container div:first-child {
+.big-view-date-container > div:first-child {
     padding-right: 25px;
 }
 
-.big-view-priority-container div:first-child {
+.big-view-priority-container > div:first-child {
     padding-right: 43px;
 }
 
@@ -338,6 +349,29 @@
 
 .big-view-subtask-text {
     font-size: 16px;
+    font-weight: 400;
+}
+
+.big-view-contacts {
+    gap: 16px;
+    padding: 7px 16px;
+}
+
+.big-view-initials {
+    width: 42px;
+    height: 42px;
+    border-radius: 45px;
+    border: 2px solid #FFFFFF;
+    text-align: center;
+    line-height: 40px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #FFFFFF;
+    background-color: lightcoral;
+}
+
+.big-view-contacts-name {
+    font-size: 19px;
     font-weight: 400;
 }
 
