@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="../css/add_task.css">
     <script src="../script.js"></script>
     <script src="../js/add_task.js"></script>
+    <script src="../js/storage.js"></script>
     <link rel="icon" type="image/x-icon" href="../assets/img/00_general-elements/join-logo-dark.svg">
 </head>
-<body onload="includeHTML()">
+<body onload="init()">
     <div class="page-content">
         <nav w3-include-html="./navbar.html"></nav>
         <main class="main-content">
@@ -30,7 +31,7 @@
                         <span for="contacts">Assignet to</span>
                         <div class="input sub-task-div outline" onclick="assignMenu(); getContacts()">
                             <input id="input_search_contact" class="sub-task-input" type="text" placeholder="Select contacts to assign" oninput="searchContact()">
-                            <img id="arrow_drop_down_contact" class="add-icon" src="../assets/img/00_general-elements/arrow_drop_down.svg">
+                            <img id="arrow_drop_down_contact" class="add-icon p-8" src="../assets/img/00_general-elements/arrow_drop_down.svg">
                         </div>
                         <div>
                             <div id="contact_container" class="contacts-container d-none">
@@ -70,9 +71,9 @@
                         </div>
 
                         <span for="contacts">Category<span class="red-star">*</span></span>
-                        <div class="input sub-task-div outline m-bot-0" onclick="categoryMenu(); renderCategories()">
+                        <div id="input_category" class="input sub-task-div outline m-bot-0" onclick="categoryMenu(); renderCategories()">
                             <input id="category_input" class="sub-task-input" type="text" placeholder="Select task category">
-                            <img id="arrow_drop_down_category" class="add-icon" src="../assets/img/00_general-elements/arrow_drop_down.svg">
+                            <img id="arrow_drop_down_category" class="add-icon p-8" src="../assets/img/00_general-elements/arrow_drop_down.svg">
                         </div>
                         <span id="required_category" class="required"></span>
                         <div>
@@ -99,7 +100,7 @@
                 <div class="clear-create-container">
                     <span><span class="red-star">*</span>This field is required</span>
                     <div class="prio-btns clear-create-btn">
-                        <button class="prio-btn clear-btn clear-x">Clear 
+                        <button class="prio-btn clear-btn clear-x" onclick="location.reload()">Clear 
                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <mask id="mask0_71720_5473" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
                                 <rect y="0.96582" width="24" height="24" fill="#D9D9D9"/>
@@ -113,6 +114,7 @@
                     </div>
                 </div>
             </div>
+            <button id="animate_btn" class="prio-btn create-btn task_added d-none">Task added to board <img src="../assets/img/00_general-elements/board-grey.svg"></button>
         </main>
     </div>
 </body>

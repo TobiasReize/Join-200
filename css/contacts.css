@@ -218,6 +218,36 @@ body{
     width: fit-content;
 }
 
+.fly-in { 
+    animation: fly-in-animation 400ms ease-out forwards;
+}
+
+@keyframes fly-in-animation {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.fly-out { 
+    animation: fly-out-animation 400ms ease-out forwards;
+}
+
+@keyframes fly-out-animation {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(150%);
+    }
+}
+
+.dir-col{
+    flex-direction: column;
+}
+
 /* ---------------------------------------------- Add Contact Overlay ---------------------------------------------- */
 
 .overlay-container {
@@ -386,4 +416,16 @@ body{
 
 .dark-btn:hover {
     background-color: var(--hover-color);
+}
+
+.btn-successfully-added {
+    width: 326px;
+    height: 74px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 400;
+    padding: 30.5px 25px;
+    position: absolute;
+    bottom: 10%;
 }

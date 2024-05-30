@@ -6,13 +6,13 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  position: relative;
 }
 
 .information-container {
   display: flex;
-  justify-content: space-between;
+  gap: 48px;
   margin-left: 96px;
-  margin-right: 70px;
   margin-bottom: 70px;
   margin-top: 48px;
 }
@@ -105,6 +105,10 @@ justify-content: center;
   padding: 3px;
 }
 
+.p-8 {
+  padding: 8px;
+}
+
 .add-icon:hover {
   background-color: #D1D1D1;
 }
@@ -153,10 +157,9 @@ justify-content: center;
 
 .clear-create-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 490px;
   margin-left: 96px;
-  margin-right: 80px;
 }
 
 .clear-create-btn {
@@ -367,5 +370,33 @@ ul {
 }
 
 .outline-red {
-  outline:1px solid #FF8190;
+  border: 1px solid #FF8190;
+}
+
+.task_added {
+  justify-content: space-between;
+  border-radius: 20px;
+  width: 326px;
+  height: 74px;
+  padding: 30.5px 25px;
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  cursor: none;
+}
+
+.animate {
+  animation: fly-in 900ms ease-out forwards;
+}
+
+@keyframes fly-in {
+  0% {
+      bottom: -50px;
+  }
+  50% {
+      bottom: 50%;
+  }
+  100% {
+      bottom: 50%;
+  }
 }

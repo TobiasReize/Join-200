@@ -12,7 +12,6 @@ async function loadData(path = '') {
     let response = await fetch(BASE_URL + path + '.json');
     let responseToJson = await response.json();
     importContacts = responseToJson; // Daten aus der Datenbank werden in Array gespeichert
-    console.log(importContacts);
     return responseToJson;
 }
 
@@ -85,6 +84,7 @@ function setActiveContact(i) {
 
 function tempRenderActiveContact(i) {
     return /* html */ `
+    <div class="fly-in d-fl dir-col">
         <div class="contact-name d-fl">
             <span class="short-name big-short-name" style="background-color: ${importContacts[i]['color']}">${importContacts[i]['first-name'].charAt(0) + importContacts[i]['name'].charAt(0)}</span>
             <div class="d-fl full-name-edit-delete">
@@ -120,6 +120,7 @@ function tempRenderActiveContact(i) {
         <a class="show-contact-mail" href="mailto:${importContacts[i]['mail']}">${importContacts[i]['mail']}</a>
         <span><b>Phone</b></span>
         <a class="show-contact-tel" href="tel:${importContacts[i]['tel']}">${importContacts[i]['tel']}</a>
+    </div>    
     `;
 }
 
@@ -131,10 +132,26 @@ function activeColor(i) {
 
 function openAddNewContact() {
     let content = document.getElementById('overlay_container');
+    let contactCard = document.getElementById('contact_card');
+    let editCard = document.getElementById('edit_card');
+
     content.classList.remove('d-none');
+    contactCard.classList.remove('d-none');
+    editCard.classList.add('d-none');
+    contactCard.classList.add('fly-in');
     document.getElementById(`input_name`).value = '';
     document.getElementById(`input_mail`).value = '';
     document.getElementById(`input_tel`).value = '';
+}
+
+function openEditContact() {
+    let content = document.getElementById('overlay_container');
+    let editCard = document.getElementById('edit_card');
+    let contactCard = document.getElementById('contact_card');
+    
+    content.classList.remove('d-none');
+    contactCard.classList.add('d-none');
+    editCard.classList.add('fly-in');
 }
 
 function createContact() {
@@ -161,6 +178,26 @@ function createContact() {
     setItem('contacts', importContacts);
     renderContacts();
     closeContactCard();
+    successfullyAddedAnimation();
+}
+
+function successfullyAddedAnimation() {
+    let btn = document.getElementById('btn_suc_added');
+    btn.classList.remove('d-none');
+    btn.classList.add('fly-in');
+
+    setTimeout(() => {
+        btn.classList.remove('fly-in');
+    }, 400); // Entferne die fly-in Klasse nach 400ms
+
+    setTimeout(() => {
+        btn.classList.add('fly-out');
+    }, 800); // Füge die fly-out Klasse nach weiteren 400ms hinzu (insgesamt 800ms)
+
+    setTimeout(() => {
+        btn.classList.add('d-none');
+        btn.classList.remove('fly-out');
+    }, 1200); // Füge die d-none Klasse nach der Ausblendanimation hinzu (insgesamt 1200ms)
 }
 
 function getRandomColor() {
@@ -170,7 +207,17 @@ function getRandomColor() {
 
 function closeContactCard() {
     let content = document.getElementById('overlay_container');
-    content.classList.add('d-none');
+    let contactCard = document.getElementById('contact_card');
+    let editCard = document.getElementById('edit_card');
+    contactCard.classList.add('fly-out');
+    editCard.classList.add('fly-out');
+    setTimeout(() => {
+        content.classList.add('d-none');
+        contactCard.classList.add('d-none')
+        contactCard.classList.remove('fly-out');
+        editCard.classList.add('d-none')
+        editCard.classList.remove('fly-out');
+    }, 400);
     renderContacts();
 }
 
@@ -199,7 +246,7 @@ function editContact(i) {
 
     saveButton.dataset.index = i;
     deleteButton.dataset.index = i;
-
+    openEditContact();
     renderEditContact();
     fullName.value = importContacts[i]['first-name'] + ' ' + importContacts[i]['name'];
     mail.value = importContacts[i]['mail'];
@@ -207,19 +254,8 @@ function editContact(i) {
 }
 
 function renderEditContact() {
-    let title = document.getElementById('title_edit_contact');
-    let description = document.getElementById('description_edit_contact');
-    let cancelBtn = document.getElementById('cancel_btn');
-    let createBtn = document.getElementById('create_btn');
-    let saveBtn = document.getElementById('save_btn');
-    let deleteBtn = document.getElementById('delete_btn');
-    openAddNewContact();
-    title.innerHTML = 'Edit contact';
-    description.classList.add('d-none');
-    cancelBtn.classList.add('d-none');
-    createBtn.classList.add('d-none');
-    saveBtn.classList.remove('d-none');
-    deleteBtn.classList.remove('d-none');
+    let content = document.getElementById('edit_card');
+    content.classList.remove('d-none')    
 }
 
 function saveContact() {
@@ -247,4 +283,8 @@ function saveContact() {
     closeContactCard();
     renderContacts();
     setActiveContact(index)
+}
+
+function stopPropagation(event) {           //Verhindert das Event Bubbling beim Schließen der Großansicht
+    event.stopPropagation();
 }
