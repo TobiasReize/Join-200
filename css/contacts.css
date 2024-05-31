@@ -1,10 +1,7 @@
-body{
-    font-weight: 400;
-    font-size: 20px;
-}
-
 .content {
     display: flex;
+    font-weight: 400;
+    font-size: 20px;
 }
 
 .d-none {
@@ -287,7 +284,7 @@ body{
     font-size: 61px;
     font-weight: 700;
     line-height: 73.2px;
-    margin-top: 16px;
+    margin-top: 32px;
     margin-bottom: 8px;
 }
 
@@ -301,6 +298,7 @@ body{
     background-color: var(--hover-color);
     width: 90px;
     height: 3px;
+    margin-top: 16px;
 }
 
 .card-logo {
@@ -338,6 +336,17 @@ body{
 
 .contact-card-add-img-person > svg path{
     fill: white;
+}
+
+.edit-card-shortname > span {
+    font-size: 47px;
+    font-weight: 500;
+    color: white;
+    width: 120px;
+    height: 120px;
+    margin-right: 72px;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    border: 3px solid #FFFFFF;
 }
 
 .contact-card-input-div {

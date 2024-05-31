@@ -15,9 +15,20 @@ let priority = [
 let subtasks = [];
 
 let tasks = [ {
+    'columnID' : 'ToDo', // Standartmäßig in ToDo 
     'title' : '',
     'description' : '',
-    'contact' : [],
+    'contact' : [
+        {
+            'firstName' : '',
+            'lastName' : '',
+            'color' : '',
+            'tel' : '',
+            'mail' : '',
+            'checked' : false
+        }
+    ],
+
     'date' : '',
     'priorities' : [
         {
@@ -26,8 +37,15 @@ let tasks = [ {
             'low' : false
         }
     ],
+    
     'categories' : '',
-    'subtasks' : []
+    'subtasks' : [
+        {
+            'subtaskTitle' : '',
+            'status' : 'open'
+        }
+    ],
+    
 }];
 
 async function init() {
@@ -75,8 +93,8 @@ function renderContacts(i) {
     return /* html */ `
         <li id="listed_names${i}" class="option" onclick="changeCheckboxContacts(${i})">
             <div class="short-and-fullname">
-                <div id="short_name${i}" class="short-name" style="background-color: ${importContacts[i]['color']}">${importContacts[i]['first-name'].charAt(0) + importContacts[i]['name'].charAt(0)}</div>
-                <span id="full_name">${importContacts[i]['first-name'] + ' ' + importContacts[i]['name']}</span>
+                <div id="short_name${i}" class="short-name" style="background-color: ${importContacts[i]['color']}">${importContacts[i]['firstName'].charAt(0) + importContacts[i]['lastName'].charAt(0)}</div>
+                <span id="full_name">${importContacts[i]['firstName'] + ' ' + importContacts[i]['lastName']}</span>
             </div>
             <input class="d-none" id="checkbox_contacts${i}" type="checkbox">
             <svg class="d-none" id="img_checkbox_contacts${i}" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -160,7 +178,7 @@ function searchContact() {
     
     content.innerHTML = '';
     for (let i = 0; i < importContacts.length; i++) {
-        if (importContacts[i]['first-name'].toLowerCase().includes(input) || importContacts[i]['name'].toLowerCase().includes(input)) {
+        if (importContacts[i]['firstName'].toLowerCase().includes(input) || importContacts[i]['lastName'].toLowerCase().includes(input)) {
             content.innerHTML += renderContacts(i);
         }
     }
@@ -175,8 +193,8 @@ function renderCheckedContacts() {
     for (let i = 0; i < importContacts.length; i++) {
         const contact = importContacts[i];
         if (contact['checked'] == true) {
-            let name = contact['name'];
-            let firstName = contact['first-name'];
+            let name = contact['lastName'];
+            let firstName = contact['firstName'];
             content.innerHTML += /* html */ `
                 <div id="checked_contact${i}" class="short-name checked-contact" style="background-color: ${importContacts[i]['color']}">${firstName.charAt(0) + name.charAt(0)}</div>
             `;
@@ -185,41 +203,28 @@ function renderCheckedContacts() {
 }   
 
 // Färbt den gewählten Prio Btn ein und setzt alle anderen wieder auf die Standart Farbe
-function colorChangeUrgent() {
-    document.getElementById('urgent_btn').classList.toggle('urgent-btn-change');
-    document.getElementById('img_urgent').classList.toggle('d-none');
-    document.getElementById('img_urgent_white').classList.toggle('d-none');
-    document.getElementById('medium_btn').classList.remove('medium-btn-change');
-    document.getElementById('img_medium').classList.remove('d-none');
-    document.getElementById('img_medium_white').classList.add('d-none');
-    document.getElementById('low_btn').classList.remove('low-btn-change');
-    document.getElementById('img_low').classList.remove('d-none');
-    document.getElementById('img_low_white').classList.add('d-none');
+function colorChange(priority) {
+    let priorities = ['urgent', 'medium', 'low'];
+    priorities.forEach(pri => {
+        let isActive = pri === priority;
+        document.getElementById(`${pri}_btn`).classList.toggle(`${pri}-btn-change`, isActive);
+        document.getElementById(`img_${pri}`).classList.toggle('d-none', isActive);
+        document.getElementById(`img_${pri}_white`).classList.toggle('d-none', !isActive);
+    });
 }
- 
+
+function colorChangeUrgent() {
+    colorChange('urgent');
+}
+
 function colorChangeMedium() {
-    document.getElementById('medium_btn').classList.toggle('medium-btn-change');
-    document.getElementById('img_medium').classList.toggle('d-none');
-    document.getElementById('img_medium_white').classList.toggle('d-none');
-    document.getElementById('urgent_btn').classList.remove('urgent-btn-change');
-    document.getElementById('img_urgent').classList.remove('d-none');
-    document.getElementById('img_urgent_white').classList.add('d-none');
-    document.getElementById('low_btn').classList.remove('low-btn-change');
-    document.getElementById('img_low').classList.remove('d-none');
-    document.getElementById('img_low_white').classList.add('d-none');
+    colorChange('medium');
 }
 
 function colorChangeLow() {
-    document.getElementById('low_btn').classList.toggle('low-btn-change');
-    document.getElementById('img_low').classList.toggle('d-none');
-    document.getElementById('img_low_white').classList.toggle('d-none');
-    document.getElementById('urgent_btn').classList.remove('urgent-btn-change');
-    document.getElementById('img_urgent').classList.remove('d-none');
-    document.getElementById('img_urgent_white').classList.add('d-none');
-    document.getElementById('medium_btn').classList.remove('medium-btn-change');
-    document.getElementById('img_medium').classList.remove('d-none');
-    document.getElementById('img_medium_white').classList.add('d-none');
+    colorChange('low');
 }
+
 
 // Änderung der Prio Boolean
 function changePrio(priorityLevel) {
@@ -348,19 +353,23 @@ async function createNewTask() {
     }
 }
 
-
-
-
 // Fügt die ausgeäwhlten Kontakte zum JSON "tasks['contact']" hinzu
-function addCheckedContactsToTasks(importContacts, importTasks) {
-    const checkedContacts = importContacts.filter(contact => contact.checked)
-                                    .map(contact => ({
-                                        'first-name': contact['first-name'],
-                                        'name': contact['name']
-                                    }));
-    importTasks[0].contact = checkedContacts;
+// vergleicht die Arrays "importContacts" und "importTasks"
+// Filtert nach checked Parameter 
+function addCheckedContactsToTasks(importContacts, newTask) {
+    let checkedContacts = importContacts.filter(contact => contact.checked)
+        .map(contact => ({
+            firstName: contact.firstName,
+            lastName: contact.lastName,
+            checked: contact.checked,
+            color: contact.color,
+            mail: contact.mail,
+            tel: contact.tel
+        }));
+    newTask.contact = checkedContacts;
 }
 
+// Fügt den beschrieben Task zur Datenbank hinzu
 async function addAllToTasks() {
     let inputTitle = document.getElementById('input_title');
     let inputDescription = document.getElementById('input_description');
@@ -368,31 +377,35 @@ async function addAllToTasks() {
     let inputCategory = document.getElementById('category_input');
 
     let newTask = {
+        'columnID' : 'ToDo',
         'title': inputTitle.value || '',
         'description': inputDescription.value || '',
-        'contact': [], 
+        'contact': [] || '', 
         'date': inputDate.value || '',
-        'priorities': [
-            {
-                'urgent': false,
-                'medium': false,
-                'low': false
-            }
-        ],
+        'priorities': [...priority],
         'categories': inputCategory.value || '',
-        'subtasks': [...subtasks] || []
+        'subtasks': [
+            {
+                'subtaskTitle' : [...subtasks] || '',
+                'status' : 'open'
+            }
+        ]
     };
 
-    importTasks.push(newTask);
-    await setItem('tasks', importTasks);
+    // Füge die geprüften Kontakte zum neuen Task hinzu
+    addCheckedContactsToTasks(importContacts, newTask); 
 
-    addCheckedContactsToTasks(importContacts, importTasks); 
+    // Füge den neuen Task zu importTasks hinzu
+    importTasks.push(newTask);
+
+    // Speichere die aktualisierten Tasks
+    await setItem('tasks', importTasks);
 }
 
 function addtaskAnimation() {
     document.getElementById('animate_btn').classList.add('animate'); 
     document.getElementById('animate_btn').classList.remove('d-none'); 
-    setTimeout(function() {
+    /* setTimeout(function() {
         window.location.href = "./board.html"; // Ziel URL - board.html
-    }, 1600 );
+    }, 1600 ); */
 }
