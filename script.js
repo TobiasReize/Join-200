@@ -1,9 +1,14 @@
-// Vorschlag:
-// async function init() {
-//     await getUsers();   //Zuerst müssen die Users/ Kontakte aus der Datenbank runtergeladen werden
-//     await includeHTML();    //Dann muss das Template/ Layout der Seite erstellt werden
-//     await getTasks();       //Dann können die Aufgaben geladen werden
-// }
+let importContacts = [];
+let importTasks = [];
+let importCategories = [];
+
+
+async function init() {
+    includeHTML();
+    await loadData('contacts', importContacts); // Kontakte von Datenbank laden
+    await loadData('tasks', importTasks); // Tasks von Datenbank laden
+    await loadData('categories', importCategories); // Tasks von Datenbank laden
+}
 
 
 async function includeHTML() {

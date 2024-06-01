@@ -58,8 +58,16 @@
     margin-bottom: 8px;
 }
 
+.m-top24 {
+    margin-top: 24px;
+}
+
 .gap-10 {
     gap: 10px;
+}
+
+.gap-8 {
+    gap: 8px;
 }
 
 .padding-12-16 {
@@ -279,7 +287,6 @@
 }
 
 .initials {
-    background-color: lightcoral;
     width: 32px;
     height: 32px;
     border-radius: 45px;
@@ -409,7 +416,6 @@
     font-size: 12px;
     font-weight: 400;
     color: #FFFFFF;
-    background-color: lightcoral;
 }
 
 .big-view-contacts-name {

@@ -32,152 +32,8 @@ let toDoTasks = [];
 let inProgressTasks = [];
 let awaitFeedbackTasks = [];
 let doneTasks= [];
-// let inProgressTasks = [
-//     {
-//         'categories': 'User Story',
-//         'columnID': 'InProgress',
-//         'contact': [
-//             {
-//                 'checked': false,
-//                 'color': '#9747FF',
-//                 'firstName': 'Emmanuel',
-//                 'lastName': 'Mauer',
-//                 'mail': 'thomas@web.de',
-//                 'tel': '01738474833'
-//             },
-//             {
-//                 'checked': false,
-//                 'color': '#9747FF',
-//                 'firstName': 'Marcel',
-//                 'lastName': 'Bauer',
-//                 'mail': 'marcel@web.de',
-//                 'tel': '01738474833'
-//             }
-//         ],
-//         'date': '2024-05-02',
-//         'description': 'Implement daily recipe and portion calculator',
-//         'priorities': [
-//             {
-//                 'urgent' : false,
-//                 'medium' : true,
-//                 'low' : false
-//             }
-//         ],
-//         'subtasks': [
-//             {
-//             'subtaskTitle': 'In Progress Subtask 1',
-//             'status': 'open'
-//             },
-//             {
-//             'subtaskTitle': 'In Progress Subtask 2',
-//             'status': 'open'
-//             }],
-//         'title': 'Daily Kochwelt Recipe',
-//         }
-// ];
-// let awaitFeedbackTasks = [
-//     {
-//         'categories': 'Technical Task',
-//         'columnID': 'AwaitFeedback',
-//         'contact': [
-//             {
-//                 'checked': false,
-//                 'color': '#9747FF',
-//                 'firstName': 'Anton',
-//                 'lastName': 'Mayer',
-//                 'mail': 'mayer@web.de',
-//                 'tel': '01738474833'
-//             },
-//             {
-//                 'checked': false,
-//                 'color': '#9747FF',
-//                 'firstName': 'Sofia',
-//                 'lastName': 'Müller',
-//                 'mail': 'sofia@web.de',
-//                 'tel': '01738474833'
-//             },
-//             {
-//                 'checked': false,
-//                 'color': '#9747FF',
-//                 'firstName': 'Benedikt',
-//                 'lastName': 'Ziegler',
-//                 'mail': 'ziegler@web.de',
-//                 'tel': '01738474833'
-//             }
-//         ],
-//         'date': '2024-01-02',
-//         'description': 'Implement portion calculator',
-//         'priorities': [
-//             {
-//                 'urgent' : true,
-//                 'medium' : false,
-//                 'low' : false
-//             }
-//         ],
-//         'subtasks': [
-//             {
-//             'subtaskTitle': 'Await Feedback Subtask 1',
-//             'status': 'done'
-//             },
-//             {
-//             'subtaskTitle': 'Await Feedback Subtask 2',
-//             'status': 'open'
-//             }],
-//         'title': 'HTML Base Template Creation',
-//         },
-//         {
-//         'categories': 'Technical Task',
-//         'columnID': 'AwaitFeedback',
-//         'contact': [
-//             {
-//                 'checked': false,
-//                 'color': '#9747FF',
-//                 'firstName': 'Anton',
-//                 'lastName': 'Mayer',
-//                 'mail': 'mayer@web.de',
-//                 'tel': '01738474833'
-//             },
-//             {
-//                 'checked': false,
-//                 'color': '#9747FF',
-//                 'firstName': 'Sofia',
-//                 'lastName': 'Müller',
-//                 'mail': 'sofia@web.de',
-//                 'tel': '01738474833'
-//             },
-//             {
-//                 'checked': false,
-//                 'color': '#9747FF',
-//                 'firstName': 'Benedikt',
-//                 'lastName': 'Ziegler',
-//                 'mail': 'ziegler@web.de',
-//                 'tel': '01738474833'
-//             }
-//         ],
-//         'date': '2024-01-02',
-//         'description': 'Implement portion calculator',
-//         'priorities': [
-//             {
-//                 'urgent' : false,
-//                 'medium' : false,
-//                 'low' : true
-//             }
-//         ],
-//         'subtasks': [
-//             {
-//             'subtaskTitle': 'Await Feedback Subtask 1',
-//             'status': 'done'
-//             },
-//             {
-//             'subtaskTitle': 'Await Feedback Subtask 2',
-//             'status': 'open'
-//             }],
-//         'title': 'HTML Base Template Creation 2',
-//         }         
-// ];
-// let doneTasks = [];
 
-let allBoardArrays = [     //Hilfsarray, in dem nochmal alle Board-Arrays zusammengefasst sind! --> Dieses wird in der Regel vom Backend runtergeladen!
+let allBoardArrays = [     //Hilfsarray, in dem nochmal alle Board-Arrays zusammengefasst sind!
     {
         'title': 'To Do',
         'id': 'to_do',
@@ -200,7 +56,7 @@ let allBoardArrays = [     //Hilfsarray, in dem nochmal alle Board-Arrays zusamm
     }
 ];
 
-let renderedBoardArrays = [     //Hilfsarray für die tatsächlich dargestellten Spalten (am Anfang immer leer!)
+let renderedBoardArrays = [     //Hilfsarray für die tatsächlich dargestellten Aufgaben!
     {
         'title': 'To Do',
         'id': 'to_do',
@@ -248,32 +104,12 @@ let filteredBoardArrays = [     //Hilfsarray für die gefilterten Tasks durch di
 
 let currentDraggedElement;
 
-let importContacts = [];
-let importTasks = [];
-let importCategories = [];
-
 
 async function initBoard() {
     await init();
     sortTasks();
     renderedBoardArrays = allBoardArrays;
     renderAll();
-}
-
-
-async function init() {
-    includeHTML();
-    await loadData('contacts', importContacts); // Kontakte von Datenbank laden
-    await loadData('tasks', importTasks); // Tasks von Datenbank laden
-    await loadData('categories', importCategories); // Tasks von Datenbank laden
-}
-
-
-async function loadData(path = '', importArray) {
-    let response = await fetch(BASE_URL + path + '.json');
-    let responseToJson = await response.json();
-    importArray =  importArray.push(...responseToJson); // Daten aus der Datenbank werden in Array gespeichert
-    // return responseToJson;
 }
 
 
@@ -345,10 +181,11 @@ function renderColumn(columnTitle, columnID, columnArray) {     //Rendert die je
 
             //fügt die Kontakte hinzu:
             for (let k = 0; k < task['contact'].length; k++) {
-                const personFirstName = task['contact'][k]['firstName'];
-                const personLastName = task['contact'][k]['lastName'];
+                const person = task['contact'][k];
+                const personFirstName = person['firstName'];
+                const personLastName = person['lastName'];
                 const initials = `${oneLetterUppercase(personFirstName)}${oneLetterUppercase(personLastName)}`;
-                document.getElementById(`${columnID}_contacts_container_${i}`).innerHTML += `<div class="initials">${initials}</div>`;
+                document.getElementById(`${columnID}_contacts_container_${i}`).innerHTML += /*html*/ `<div class="initials" style="background-color: ${person['color']}">${initials}</div>`;
             }
         }
     }
@@ -445,7 +282,7 @@ function showBigView(columnID, taskID) {
         const initials = `${oneLetterUppercase(person['firstName'])}${oneLetterUppercase(person['lastName'])}`;
         document.getElementById('big_view_contacts_container').innerHTML += /*html*/ `
             <div class="big-view-contacts df-ai-ctr">
-                <div class="big-view-initials">${initials}</div>
+                <div class="big-view-initials" style="background-color: ${person['color']}">${initials}</div>
                 <div class="big-view-contacts-name">${person['firstName']} ${person['lastName']}</div>
             </div>
         `;
@@ -470,6 +307,7 @@ function showBigView(columnID, taskID) {
 function editTask(columnID, taskID) {
     let currentArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == columnID['id']);
     let currentTask = renderedBoardArrays[currentArrayIndex]['array'][taskID];
+    let currentTaskPriority = getPriority(currentTask['priorities']);
     let bigViewContainer = document.getElementById('big_view_container');
 
     bigViewContainer.innerHTML = /*html*/ `
@@ -492,12 +330,12 @@ function editTask(columnID, taskID) {
                 <div class="fs20-fw400 default-color">Description</div>
                 <textarea class="fs20-fw400 big-view-input-style big-view-description-input" rows="4">${currentTask['description']}</textarea>
             </div>
-            <div class="df-column-gap-8 m-btm16">
+            <div class="df-column-gap-8 m-btm24">
                 <div class="fs20-fw400 default-color">Due date</div>
-                <input class="fs20-fw400 big-view-input-style padding-12-16" type="date" value="${currentTask['date']}">
+                <input class="fs20-fw400 big-view-input-style padding-12-16 m-btm16" type="date" value="${currentTask['date']}">
             </div>
-            <div>
-                <div class="big-view-edit-priority-text m-btm8">Priority</div>
+            <div class="df-column-gap-8 m-btm24">
+                <div class="big-view-edit-priority-text">Priority</div>
                 <div class="ai-ctr-space-btwn">
                     <div id="priority_urgent" class="priority-btn ai-ctr-jc-ctr" onclick="changePriority('urgent', ${columnID['id']}, ${taskID})">
                         <div class="fs20-fw400">Urgent</div>
@@ -522,44 +360,36 @@ function editTask(columnID, taskID) {
                     </div>
                 </div>
             </div>
+            <div class="df-column-gap-8 m-btm24">
+                <div class="fs20-fw400 default-color">Assigned To</div>
+                <div id="big_view_edit_contacts_container" class="df-ai-ctr gap-8"></div>
+            </div>
+            <div class="df-column-gap-8">
+                <div class="fs20-fw400 default-color">Subtasks</div>
+                <div id="big_view_edit_subtasks_container" class="df-column-gap-8"></div>
+            </div>
 
 
-            
-            <div id="big_view_contacts_container" class="m-btm24">
-                <div class="default-color fs20-fw400">Assigned To:</div>
-            </div>
-            <div id="big_view_subtasks_container" class="m-btm24">
-                <div class="big-view-subtask-headline default-color fs20-fw400">Subtasks</div>
-            </div>
-            <div class="big-view-lowest-container df-ai-ctr">
-                <div class="big-view-delete-edit-container df-ai-ctr">
-                    <div class="big-view-delete-container df-ai-ctr" onclick="deleteTask(${columnID['id']}, ${taskID})">
-                        <svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <mask id="mask0_75592_9951" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
-                                <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
-                            </mask>
-                            <g mask="url(#mask0_75592_9951)">
-                                <path d="M7.14453 21C6.59453 21 6.1237 20.8042 5.73203 20.4125C5.34036 20.0208 5.14453 19.55 5.14453 19V6C4.8612 6 4.6237 5.90417 4.43203 5.7125C4.24036 5.52083 4.14453 5.28333 4.14453 5C4.14453 4.71667 4.24036 4.47917 4.43203 4.2875C4.6237 4.09583 4.8612 4 5.14453 4H9.14453C9.14453 3.71667 9.24036 3.47917 9.43203 3.2875C9.6237 3.09583 9.8612 3 10.1445 3H14.1445C14.4279 3 14.6654 3.09583 14.857 3.2875C15.0487 3.47917 15.1445 3.71667 15.1445 4H19.1445C19.4279 4 19.6654 4.09583 19.857 4.2875C20.0487 4.47917 20.1445 4.71667 20.1445 5C20.1445 5.28333 20.0487 5.52083 19.857 5.7125C19.6654 5.90417 19.4279 6 19.1445 6V19C19.1445 19.55 18.9487 20.0208 18.557 20.4125C18.1654 20.8042 17.6945 21 17.1445 21H7.14453ZM7.14453 6V19H17.1445V6H7.14453ZM9.14453 16C9.14453 16.2833 9.24036 16.5208 9.43203 16.7125C9.6237 16.9042 9.8612 17 10.1445 17C10.4279 17 10.6654 16.9042 10.857 16.7125C11.0487 16.5208 11.1445 16.2833 11.1445 16V9C11.1445 8.71667 11.0487 8.47917 10.857 8.2875C10.6654 8.09583 10.4279 8 10.1445 8C9.8612 8 9.6237 8.09583 9.43203 8.2875C9.24036 8.47917 9.14453 8.71667 9.14453 9V16ZM13.1445 16C13.1445 16.2833 13.2404 16.5208 13.432 16.7125C13.6237 16.9042 13.8612 17 14.1445 17C14.4279 17 14.6654 16.9042 14.857 16.7125C15.0487 16.5208 15.1445 16.2833 15.1445 16V9C15.1445 8.71667 15.0487 8.47917 14.857 8.2875C14.6654 8.09583 14.4279 8 14.1445 8C13.8612 8 13.6237 8.09583 13.432 8.2875C13.2404 8.47917 13.1445 8.71667 13.1445 9V16Z" fill="#2A3647"/>
-                            </g>
-                        </svg>
-                        <span>Delete</span>
-                    </div>
-                    <div class="big-view-separator"></div>
-                    <div class="big-view-edit-container df-ai-ctr" onclick="editTask(${columnID['id']}, ${taskID})">
-                        <svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
-                                <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
-                            </mask>
-                            <g mask="url(#mask0_75592_9969)">
-                                <path d="M5.14453 19H6.54453L15.1695 10.375L13.7695 8.975L5.14453 17.6V19ZM19.4445 8.925L15.1945 4.725L16.5945 3.325C16.9779 2.94167 17.4487 2.75 18.007 2.75C18.5654 2.75 19.0362 2.94167 19.4195 3.325L20.8195 4.725C21.2029 5.10833 21.4029 5.57083 21.4195 6.1125C21.4362 6.65417 21.2529 7.11667 20.8695 7.5L19.4445 8.925ZM17.9945 10.4L7.39453 21H3.14453V16.75L13.7445 6.15L17.9945 10.4Z" fill="#2A3647"/>
-                            </g>
-                        </svg>
-                        <span>Edit</span>
-                    </div>
-                </div>
-            </div>
         </div>
     `;
+
+    //Die aktuelle Priorität wird ge-highlighted:
+    let priorityButton = document.getElementById(`priority_${currentTaskPriority}`);
+    let priorityIcon = document.getElementsByClassName(`priority-path-${currentTaskPriority}`);
+    priorityButton.classList.add(`priority-${currentTaskPriority}-highlight`);
+    priorityButton.children[0].classList.add('fs21-fw700');
+    for (let i = 0; i < priorityIcon.length; i++) {
+        priorityIcon[i].classList.add('fill-white');
+    }
+
+    //fügt die Kontakte der Edit-Ansicht hinzu:
+    for (let i = 0; i < currentTask['contact'].length; i++) {
+        const person = currentTask['contact'][i];
+        const initials = `${oneLetterUppercase(person['firstName'])}${oneLetterUppercase(person['lastName'])}`;
+        document.getElementById('big_view_edit_contacts_container').innerHTML += /*html*/ `
+            <div class="big-view-initials" style="background-color: ${person['color']}">${initials}</div>
+        `;
+    }
 }
 
 
@@ -575,13 +405,14 @@ function changeSubtaskStatus(columnID, taskID, subtaskID) {     //Ändert den St
     }
     currentSubtaskContainer.innerHTML = `${subtaskCheckbox[currentSubtask['status']]}`;
     renderAll();
+    saveAllTasks();
 }
 
 
 function changePriority(priority, columnID, taskID) {
-    let currentArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == columnID['id']);
-    let currentTask = renderedBoardArrays[currentArrayIndex]['array'][taskID];
-    let currentPriority = currentTask['priority'];
+    // let currentArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == columnID['id']);
+    // let currentTask = renderedBoardArrays[currentArrayIndex]['array'][taskID];
+    // let currentPriority = currentTask['priority'];
 
     let selectedPriorityButton = document.getElementById(`priority_${priority}`);
     let selectedPriorityIcon = document.getElementsByClassName(`priority-path-${priority}`);
@@ -633,6 +464,7 @@ function moveTo(idColumn) {   //Funktion, die die Tasks/Karten verschiebt (ergä
     // allBoardArrays = renderedBoardArrays; --> darf ich nicht machen, da vorher renderedBoardArrays = filteredBoardArrays gemacht wird!
     // renderedBoardArrays = allBoardArrays; --> sobald man eine Task verschiebt, werden wieder alle Tasks angezeigt!
     renderAll();
+    saveAllTasks();
 }
 
 
@@ -665,6 +497,7 @@ function deleteTask(columnID, taskID) {      //löscht die entsprechende Task au
     currentArray.splice(taskID, 1);
     closeBigView(1);
     renderAll();
+    saveAllTasks();
 }
 
 
@@ -695,6 +528,20 @@ function searchTasks() {    //Funktion für die Suchleiste. Die gerenderten Arra
 }
 
 
+function saveAllTasks() {       //Speichert die aktuellen Tasks in Firebase ab!
+    importTasks = [];       //zuerst muss das Array geleert werden, damit keine doppelten Tasks darin gespeichert werden!
+    for (let i = 0; i < renderedBoardArrays.length; i++) {
+        const boardArray = renderedBoardArrays[i]['array'];
+        
+        for (let j = 0; j < boardArray.length; j++) {
+            const singleTask = boardArray[j];
+            importTasks.push(singleTask);
+        }
+    }
+    setItem('tasks', importTasks);
+}
+
+
 // Hilfsfunktionen:
 function stopPropagation(event) {           //Verhindert das Event Bubbling beim Schließen der Großansicht
     event.stopPropagation();
@@ -716,7 +563,7 @@ function firstLetterUppercase(word) {           //Hilfsfunktion, die den ersten 
 }
 
 
-function getPriority(taskPriorities) {
+function getPriority(taskPriorities) {          //Hilfsfunktion, die die Priorität der Aufgabe zurückgibt, die "true" ist
     for (let key in taskPriorities[0]) {
         if (taskPriorities[0][key]) {
             return key;
