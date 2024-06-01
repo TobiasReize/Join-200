@@ -1,26 +1,8 @@
 // Code oder Funktionen, die nur für die Add Task Seite relevant sind!
 
-let contacts = [
-    {
-        'first-name' : 'Thomas',
-        'name' : 'Mueller',
-        'checked' : false
-    },
-    {
-        'first-name' : 'Bernd',
-        'name' : 'Schneider',
-        'checked' : false
-    },
-    {
-        'first-name' : 'Michael',
-        'name' : 'Ballack',
-        'checked' : false
-    }
-]
-
-let colors = ['#9747FF', '#FF5EB3', '#6E52FF', '#9327FF', '#00BEE8', '#1FD7C1', '#FF745E', '#FF745E', '#FC71FF', '#FFC701', '#0038FF', '#C3FF2B', '#FFE62B', '#FF4646', '#FF4646'];
-
-let = categories = ['Einkaufen', 'Arbeit', 'Privat'];
+let importContacts = [];
+let importTasks = [];
+let importCategories = [];
 
 let priority = [
     {
@@ -32,23 +14,53 @@ let priority = [
 
 let subtasks = [];
 
-let tasks = [
-    {
-        'title' : '',
-        'description' : '',
-        'contact' : [],
-        'date' : '',
-        'priorities' : [
-            {
-                'urgent' : false,
-                'medium' : false,
-                'low' : false
-            }
-        ],
-        'categories' : '',
-        'subtasks' : [...subtasks]
-    }
-]
+let tasks = [ {
+    'columnID' : 'ToDo', // Standartmäßig in ToDo 
+    'title' : '',
+    'description' : '',
+    'contact' : [
+        {
+            'firstName' : '',
+            'lastName' : '',
+            'color' : '',
+            'tel' : '',
+            'mail' : '',
+            'checked' : false
+        }
+    ],
+
+    'date' : '',
+    'priorities' : [
+        {
+            'urgent' : false,
+            'medium' : false,
+            'low' : false
+        }
+    ],
+    
+    'categories' : '',
+    'subtasks' : [
+        {
+            'subtaskTitle' : '',
+            'status' : 'open'
+        }
+    ],
+    
+}];
+
+async function init() {
+    includeHTML();
+    await loadData('contacts', importContacts); // Kontakte von Datenbank laden
+    await loadData('tasks', importTasks); // Tasks von Datenbank laden
+    await loadData('categories', importCategories); // Tasks von Datenbank laden
+}
+
+async function loadData(path = '', importArray) {
+    let response = await fetch(BASE_URL + path + '.json');
+    let responseToJson = await response.json();
+    importArray =  importArray.push(...responseToJson); // Daten aus der Datenbank werden in Array gespeichert
+    return responseToJson;
+}
 
 // Aufklappen des Assignet Menu
 function assignMenu() {
@@ -57,14 +69,6 @@ function assignMenu() {
     content.classList.toggle('d-none');
     arrow.classList.toggle('arrow-drop-down')
 }
-
-/* function closeMenus() {
-    let contacts = document.getElementById('contact_container');
-    let category = document.getElementById('category_container');
-    if (!contacts.classList.contains('d-none')) {
-        contacts.classList.add('d-none')
-    }
-} */
 
 // Aufklappen des Category Menu
 function categoryMenu() {
@@ -79,19 +83,18 @@ function getContacts() {
     let content = document.getElementById('list_options');
     content.innerHTML = '';
 
-    for (let i = 0; i < contacts.length; i++) {
+    for (let i = 0; i < importContacts.length; i++) {
         content.innerHTML += renderContacts(i);
     }
     renderCheckBox()
-    colorizeDropDownContacts(); 
 }
 
 function renderContacts(i) {
     return /* html */ `
         <li id="listed_names${i}" class="option" onclick="changeCheckboxContacts(${i})">
             <div class="short-and-fullname">
-                <div id="short_name${i}" class="short-name">${contacts[i]['first-name'].charAt(0) + contacts[i]['name'].charAt(0)}</div>
-                <span id="full_name">${contacts[i]['first-name'] + ' ' + contacts[i]['name']}</span>
+                <div id="short_name${i}" class="short-name" style="background-color: ${importContacts[i]['color']}">${importContacts[i]['firstName'].charAt(0) + importContacts[i]['lastName'].charAt(0)}</div>
+                <span id="full_name">${importContacts[i]['firstName'] + ' ' + importContacts[i]['lastName']}</span>
             </div>
             <input class="d-none" id="checkbox_contacts${i}" type="checkbox">
             <svg class="d-none" id="img_checkbox_contacts${i}" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -108,11 +111,11 @@ function renderContacts(i) {
 // Erstellen IMG Checkbox
 // richtige input type=checkbox ist ausgeblendet und überprüft ob true oder false und setzt so das IMG
 function renderCheckBox() {
-    for (let i = 0; i < contacts.length; i++) {
+    for (let i = 0; i < importContacts.length; i++) {
         let imgUnchecked = document.getElementById(`img_checkbox_contacts${i}`);
         let imgChecked = document.getElementById(`img_checkbox_checked_contacts${i}`);
         let checkbox = document.getElementById(`checkbox_contacts${i}`);
-        const contact = contacts[i];
+        const contact = importContacts[i];
 
         // Wenn bei der Suche "imgUnchecked", ... gerendert sind = null und es verlässte das Statement, SONST setze true oder false und render Ausgewählten Kontakt
         if (imgUnchecked === null ) {
@@ -136,8 +139,8 @@ function renderCategories() {
     let content = document.getElementById('list_options_category');
     content.innerHTML = '';
 
-    for (let i = 0; i < categories.length; i++) {
-        const category = categories[i];
+    for (let i = 0; i < importCategories.length; i++) {
+        const category = importCategories[i];
         content.innerHTML += /* html */ `
         <li class="categories-list" id="category_list${i}" onclick="chooseCategory(${i})">${category}</li>
         `; 
@@ -148,30 +151,8 @@ function renderCategories() {
 function chooseCategory(i) {
     let inputField = document.getElementById('category_input');
     let categoryContainer = document.getElementById('category_container');
-    inputField.value = categories[i];
+    inputField.value = importCategories[i];
     categoryMenu();
-}
-
-// Färbt die kurzen Namen (z.B. TM) ein
-function colorizeDropDownContacts() {
-    // Farben sind in einem Array colors definiert
-    let elements = document.getElementsByClassName('short-name');
-    for (let i = 0; i < elements.length; i++) {
-        elements[i].style.backgroundColor = colors[i % colors.length];
-    }
-}
-
-// Färbt die ausgeählten Kontakte unterhalb des Menus ein
-function colorizeCheckedContacts() {
-    for (let i = 0; i < colors.length; i++) {
-        let content = document.getElementById(`checked_contact${i}`);
-        const color = colors[i];
-        if (content == null) {
-            continue
-        } else {
-            content.style.backgroundColor += color;
-        }
-    }
 }
 
 // Setzt beim Klicken auf den Kontakt die input type=checkbox auf true bzw. false
@@ -181,10 +162,10 @@ function changeCheckboxContacts (i) {
     checkbox.checked = !checkbox.checked;
 
     if (checkbox.checked) {
-        contacts[i]['checked'] = true;
+        importContacts[i]['checked'] = true;
         
     } else {
-        contacts[i]['checked'] = false;
+        importContacts[i]['checked'] = false;
     }
     renderCheckBox()
     renderCheckedContacts()
@@ -196,13 +177,12 @@ function searchContact() {
     let content = document.getElementById('list_options');
     
     content.innerHTML = '';
-    for (let i = 0; i < contacts.length; i++) {
-        if (contacts[i]['first-name'].toLowerCase().includes(input) || contacts[i]['name'].toLowerCase().includes(input)) {
+    for (let i = 0; i < importContacts.length; i++) {
+        if (importContacts[i]['firstName'].toLowerCase().includes(input) || importContacts[i]['lastName'].toLowerCase().includes(input)) {
             content.innerHTML += renderContacts(i);
         }
     }
     renderCheckBox()
-    colorizeDropDownContacts();
     renderCheckedContacts();
 }
 
@@ -210,55 +190,41 @@ function searchContact() {
 function renderCheckedContacts() {
     let content = document.getElementById(`checked_contacts`);
     content.innerHTML = '';
-    for (let i = 0; i < contacts.length; i++) {
-        const contact = contacts[i];
+    for (let i = 0; i < importContacts.length; i++) {
+        const contact = importContacts[i];
         if (contact['checked'] == true) {
-            let name = contact['name'];
-            let firstName = contact['first-name'];
+            let name = contact['lastName'];
+            let firstName = contact['firstName'];
             content.innerHTML += /* html */ `
-                <div id="checked_contact${i}" class="short-name checked-contact">${firstName.charAt(0) + name.charAt(0)}</div>
+                <div id="checked_contact${i}" class="short-name checked-contact" style="background-color: ${importContacts[i]['color']}">${firstName.charAt(0) + name.charAt(0)}</div>
             `;
         }
     }
-    colorizeCheckedContacts();
 }   
 
 // Färbt den gewählten Prio Btn ein und setzt alle anderen wieder auf die Standart Farbe
-function colorChangeUrgent() {
-    document.getElementById('urgent_btn').classList.toggle('urgent-btn-change');
-    document.getElementById('img_urgent').classList.toggle('d-none');
-    document.getElementById('img_urgent_white').classList.toggle('d-none');
-    document.getElementById('medium_btn').classList.remove('medium-btn-change');
-    document.getElementById('img_medium').classList.remove('d-none');
-    document.getElementById('img_medium_white').classList.add('d-none');
-    document.getElementById('low_btn').classList.remove('low-btn-change');
-    document.getElementById('img_low').classList.remove('d-none');
-    document.getElementById('img_low_white').classList.add('d-none');
+function colorChange(priority) {
+    let priorities = ['urgent', 'medium', 'low'];
+    priorities.forEach(pri => {
+        let isActive = pri === priority;
+        document.getElementById(`${pri}_btn`).classList.toggle(`${pri}-btn-change`, isActive);
+        document.getElementById(`img_${pri}`).classList.toggle('d-none', isActive);
+        document.getElementById(`img_${pri}_white`).classList.toggle('d-none', !isActive);
+    });
 }
- 
+
+function colorChangeUrgent() {
+    colorChange('urgent');
+}
+
 function colorChangeMedium() {
-    document.getElementById('medium_btn').classList.toggle('medium-btn-change');
-    document.getElementById('img_medium').classList.toggle('d-none');
-    document.getElementById('img_medium_white').classList.toggle('d-none');
-    document.getElementById('urgent_btn').classList.remove('urgent-btn-change');
-    document.getElementById('img_urgent').classList.remove('d-none');
-    document.getElementById('img_urgent_white').classList.add('d-none');
-    document.getElementById('low_btn').classList.remove('low-btn-change');
-    document.getElementById('img_low').classList.remove('d-none');
-    document.getElementById('img_low_white').classList.add('d-none');
+    colorChange('medium');
 }
 
 function colorChangeLow() {
-    document.getElementById('low_btn').classList.toggle('low-btn-change');
-    document.getElementById('img_low').classList.toggle('d-none');
-    document.getElementById('img_low_white').classList.toggle('d-none');
-    document.getElementById('urgent_btn').classList.remove('urgent-btn-change');
-    document.getElementById('img_urgent').classList.remove('d-none');
-    document.getElementById('img_urgent_white').classList.add('d-none');
-    document.getElementById('medium_btn').classList.remove('medium-btn-change');
-    document.getElementById('img_medium').classList.remove('d-none');
-    document.getElementById('img_medium_white').classList.add('d-none');
+    colorChange('low');
 }
+
 
 // Änderung der Prio Boolean
 function changePrio(priorityLevel) {
@@ -353,56 +319,93 @@ function saveEditSubtask(i) {
 }
 
 // Hinzufügen aller Werte zum JSON "tasks"
-function createNewTask() {
+async function createNewTask() {
     let inputs = [
         {element: document.getElementById('input_title'), errorElement: document.getElementById('required_title')},
         {element: document.getElementById('input_date'), errorElement: document.getElementById('required_date')},
-        {element: document.getElementById('category_input'), errorElement: document.getElementById('required_category')}
+        {element: document.getElementById('category_input'), parentElement: document.getElementById('input_category'), errorElement: document.getElementById('required_category')}
     ];
 
     let allFilled = true;
 
     inputs.forEach(input => {
         if (input.element.value === '') {
-            input.element.classList.add('outline-red');
+            if (input.parentElement) {
+                input.parentElement.classList.add('outline-red'); // Hinzufügen der Klasse zum übergeordneten Div
+            } else {
+                input.element.classList.add('outline-red'); // Hinzufügen der Klasse zum Input-Feld
+            }
             input.errorElement.innerHTML = 'This field is required';
             allFilled = false;
         } else {
-            input.element.classList.remove('outline-red');
+            if (input.parentElement) {
+                input.parentElement.classList.remove('outline-red'); // Entfernen der Klasse vom übergeordneten Div
+            } else {
+                input.element.classList.remove('outline-red'); // Entfernen der Klasse vom Input-Feld
+            }
             input.errorElement.innerHTML = '';
         }
     });
 
     if (allFilled) {
         addAllToTasks();
+        addtaskAnimation();
     }
 }
 
 // Fügt die ausgeäwhlten Kontakte zum JSON "tasks['contact']" hinzu
-function addCheckedContactsToTasks(contacts, tasks) {
-    const checkedContacts = contacts.filter(contact => contact.checked)
-                                    .map(contact => ({
-                                        'first-name': contact['first-name'],
-                                        'name': contact['name']
-                                    }));
-    tasks[0].contact = checkedContacts;
+// vergleicht die Arrays "importContacts" und "importTasks"
+// Filtert nach checked Parameter 
+function addCheckedContactsToTasks(importContacts, newTask) {
+    let checkedContacts = importContacts.filter(contact => contact.checked)
+        .map(contact => ({
+            firstName: contact.firstName,
+            lastName: contact.lastName,
+            checked: contact.checked,
+            color: contact.color,
+            mail: contact.mail,
+            tel: contact.tel
+        }));
+    newTask.contact = checkedContacts;
 }
 
-function addAllToTasks() {
+// Fügt den beschrieben Task zur Datenbank hinzu
+async function addAllToTasks() {
     let inputTitle = document.getElementById('input_title');
     let inputDescription = document.getElementById('input_description');
     let inputDate = document.getElementById('input_date');
     let inputCategory = document.getElementById('category_input');
 
-    for (let i = 0; i < tasks.length; i++) {
-        const task = tasks[i];
-        task['title'] = inputTitle.value;
-        task['description'] = inputDescription.value;
-        task['date'] = inputDate.value;
-        task['priorities'] = [...priority];
-        task['categories'] = inputCategory.value;
-        task['subtasks'] = [...subtasks];
-    }
-    addCheckedContactsToTasks(contacts, tasks) 
-    // location.reload();
+    let newTask = {
+        'columnID' : 'ToDo',
+        'title': inputTitle.value || '',
+        'description': inputDescription.value || '',
+        'contact': [] || '', 
+        'date': inputDate.value || '',
+        'priorities': [...priority],
+        'categories': inputCategory.value || '',
+        'subtasks': [
+            {
+                'subtaskTitle' : [...subtasks] || '',
+                'status' : 'open'
+            }
+        ]
+    };
+
+    // Füge die geprüften Kontakte zum neuen Task hinzu
+    addCheckedContactsToTasks(importContacts, newTask); 
+
+    // Füge den neuen Task zu importTasks hinzu
+    importTasks.push(newTask);
+
+    // Speichere die aktualisierten Tasks
+    await setItem('tasks', importTasks);
+}
+
+function addtaskAnimation() {
+    document.getElementById('animate_btn').classList.add('animate'); 
+    document.getElementById('animate_btn').classList.remove('d-none'); 
+    /* setTimeout(function() {
+        window.location.href = "./board.html"; // Ziel URL - board.html
+    }, 1600 ); */
 }
