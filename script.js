@@ -1,20 +1,9 @@
-// let tasks = [
-//     {
-//         'title' : '',
-//         'description' : '',
-//         'contact' : [],
-//         'date' : '',
-//         'priorities' : [
-//             {
-//                 'urgent' : false,
-//                 'medium' : false,
-//                 'low' : false
-//             }
-//         ],
-//         'categories' : '',
-//         'subtasks' : [...subtasks]
-//     }
-// ]
+// Vorschlag:
+// async function init() {
+//     await getUsers();   //Zuerst müssen die Users/ Kontakte aus der Datenbank runtergeladen werden
+//     await includeHTML();    //Dann muss das Template/ Layout der Seite erstellt werden
+//     await getTasks();       //Dann können die Aufgaben geladen werden
+// }
 
 
 async function includeHTML() {
