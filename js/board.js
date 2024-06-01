@@ -1,4 +1,4 @@
-let priorities = {
+let priorityImages = {
     'low':      `<svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path class="prio-low" d="M10.3555 9.69779C10.1209 9.69819 9.89234 9.62335 9.70349 9.48427L0.800382 2.91453C0.684543 2.82898 0.586704 2.72146 0.512448 2.59812C0.438193 2.47478 0.388977 2.33803 0.367609 2.19569C0.324455 1.90821 0.397354 1.61537 0.57027 1.3816C0.743187 1.14782 1.00196 0.992265 1.28965 0.949143C1.57734 0.906021 1.8704 0.978866 2.10434 1.15165L10.3555 7.23414L18.6066 1.15165C18.7224 1.0661 18.854 1.00418 18.9938 0.969432C19.1336 0.934685 19.2788 0.927791 19.4213 0.949143C19.5637 0.970495 19.7006 1.01967 19.824 1.09388C19.9474 1.16808 20.055 1.26584 20.1407 1.3816C20.2263 1.49735 20.2883 1.62882 20.323 1.7685C20.3578 1.90818 20.3647 2.05334 20.3433 2.19569C20.322 2.33803 20.2727 2.47478 20.1985 2.59812C20.1242 2.72146 20.0264 2.82898 19.9106 2.91453L11.0075 9.48427C10.8186 9.62335 10.5901 9.69819 10.3555 9.69779Z" fill="white"/>
                     <path class="prio-low" d="M10.3555 15.4463C10.1209 15.4467 9.89234 15.3719 9.70349 15.2328L0.800381 8.66307C0.566436 8.49028 0.410763 8.2317 0.367609 7.94422C0.324455 7.65674 0.397354 7.3639 0.57027 7.13013C0.743187 6.89636 1.00196 6.7408 1.28965 6.69768C1.57734 6.65456 1.8704 6.7274 2.10434 6.90019L10.3555 12.9827L18.6066 6.90019C18.8405 6.7274 19.1336 6.65456 19.4213 6.69768C19.709 6.7408 19.9678 6.89636 20.1407 7.13013C20.3136 7.3639 20.3865 7.65674 20.3433 7.94422C20.3002 8.2317 20.1445 8.49028 19.9106 8.66307L11.0075 15.2328C10.8186 15.3719 10.5901 15.4467 10.3555 15.4463Z" fill="white"/>
@@ -29,93 +29,153 @@ let subtaskCheckbox = {
 }
 
 let toDoTasks = [];
-let inProgressTasks = [
-    {
-        'category': 'User Story',
-        'title': 'Daily Kochwelt Recipe',
-        'description': 'Implement daily recipe and portion calculator',
-        'subtasks': [
-            {
-            'subtaskTitle': 'In Progress Subtask 1',
-            'status': 'open'
-            },
-            {
-            'subtaskTitle': 'In Progress Subtask 2',
-            'status': 'open'
-            }],
-        'contacts': [
-            {
-                'firstName': 'Emmanuel',
-                'lastName': 'Mauer'
-            },
-            {
-                'firstName': 'Marcel',
-                'lastName': 'Bauer'
-            }
-        ],
-        'date': '2024-05-02',
-        'priority': 'medium'
-    }
-];
-let awaitFeedbackTasks = [
-    {
-        'category': 'Technical Task',
-        'title': 'HTML Base Template Creation',
-        'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil laboriosam, illum laudantium vitae voluptatem tempora tenetur est harum autem? Nostrum, quam. Eos asperiores necessitatibus minus fuga obcaecati amet? Molestiae, nobis.',
-        'subtasks': [],
-        'contacts': [
-            {
-                'firstName': 'Anton',
-                'lastName': 'Mayer'
-            },
-            {
-                'firstName': 'Sofia',
-                'lastName': 'Müller'
-            },
-            {
-                'firstName': 'Benedikt',
-                'lastName': 'Ziegler'
-            }
-        ],
-        'date': '2023-06-09',
-        'priority': 'low'
-    },
-    {
-        'category': 'User Story',
-        'title': 'Daily Kochwelt Recipe',
-        'description': 'Implement daily recipe and portion calculator',
-        'subtasks': [
-            {
-            'subtaskTitle': 'Await Feedback Subtask 1',
-            'status': 'done'
-            },
-            {
-            'subtaskTitle': 'Await Feedback Subtask 2',
-            'status': 'done'
-            },
-            {
-            'subtaskTitle': 'Await Feedback Subtask 3',
-            'status': 'open'
-            }],
-        'contacts': [
-            {
-                'firstName': 'Marcel',
-                'lastName': 'Bauer'
-            },
-            {
-                'firstName': 'Klaus',
-                'lastName': 'Lang'
-            },
-            {
-                'firstName': 'Sofia',
-                'lastName': 'Müller'
-            }
-        ],
-        'date': '2024-07-18',
-        'priority': 'urgent'
-    }
-];
-let doneTasks = [];
+let inProgressTasks = [];
+let awaitFeedbackTasks = [];
+let doneTasks= [];
+// let inProgressTasks = [
+//     {
+//         'categories': 'User Story',
+//         'columnID': 'InProgress',
+//         'contact': [
+//             {
+//                 'checked': false,
+//                 'color': '#9747FF',
+//                 'firstName': 'Emmanuel',
+//                 'lastName': 'Mauer',
+//                 'mail': 'thomas@web.de',
+//                 'tel': '01738474833'
+//             },
+//             {
+//                 'checked': false,
+//                 'color': '#9747FF',
+//                 'firstName': 'Marcel',
+//                 'lastName': 'Bauer',
+//                 'mail': 'marcel@web.de',
+//                 'tel': '01738474833'
+//             }
+//         ],
+//         'date': '2024-05-02',
+//         'description': 'Implement daily recipe and portion calculator',
+//         'priorities': [
+//             {
+//                 'urgent' : false,
+//                 'medium' : true,
+//                 'low' : false
+//             }
+//         ],
+//         'subtasks': [
+//             {
+//             'subtaskTitle': 'In Progress Subtask 1',
+//             'status': 'open'
+//             },
+//             {
+//             'subtaskTitle': 'In Progress Subtask 2',
+//             'status': 'open'
+//             }],
+//         'title': 'Daily Kochwelt Recipe',
+//         }
+// ];
+// let awaitFeedbackTasks = [
+//     {
+//         'categories': 'Technical Task',
+//         'columnID': 'AwaitFeedback',
+//         'contact': [
+//             {
+//                 'checked': false,
+//                 'color': '#9747FF',
+//                 'firstName': 'Anton',
+//                 'lastName': 'Mayer',
+//                 'mail': 'mayer@web.de',
+//                 'tel': '01738474833'
+//             },
+//             {
+//                 'checked': false,
+//                 'color': '#9747FF',
+//                 'firstName': 'Sofia',
+//                 'lastName': 'Müller',
+//                 'mail': 'sofia@web.de',
+//                 'tel': '01738474833'
+//             },
+//             {
+//                 'checked': false,
+//                 'color': '#9747FF',
+//                 'firstName': 'Benedikt',
+//                 'lastName': 'Ziegler',
+//                 'mail': 'ziegler@web.de',
+//                 'tel': '01738474833'
+//             }
+//         ],
+//         'date': '2024-01-02',
+//         'description': 'Implement portion calculator',
+//         'priorities': [
+//             {
+//                 'urgent' : true,
+//                 'medium' : false,
+//                 'low' : false
+//             }
+//         ],
+//         'subtasks': [
+//             {
+//             'subtaskTitle': 'Await Feedback Subtask 1',
+//             'status': 'done'
+//             },
+//             {
+//             'subtaskTitle': 'Await Feedback Subtask 2',
+//             'status': 'open'
+//             }],
+//         'title': 'HTML Base Template Creation',
+//         },
+//         {
+//         'categories': 'Technical Task',
+//         'columnID': 'AwaitFeedback',
+//         'contact': [
+//             {
+//                 'checked': false,
+//                 'color': '#9747FF',
+//                 'firstName': 'Anton',
+//                 'lastName': 'Mayer',
+//                 'mail': 'mayer@web.de',
+//                 'tel': '01738474833'
+//             },
+//             {
+//                 'checked': false,
+//                 'color': '#9747FF',
+//                 'firstName': 'Sofia',
+//                 'lastName': 'Müller',
+//                 'mail': 'sofia@web.de',
+//                 'tel': '01738474833'
+//             },
+//             {
+//                 'checked': false,
+//                 'color': '#9747FF',
+//                 'firstName': 'Benedikt',
+//                 'lastName': 'Ziegler',
+//                 'mail': 'ziegler@web.de',
+//                 'tel': '01738474833'
+//             }
+//         ],
+//         'date': '2024-01-02',
+//         'description': 'Implement portion calculator',
+//         'priorities': [
+//             {
+//                 'urgent' : false,
+//                 'medium' : false,
+//                 'low' : true
+//             }
+//         ],
+//         'subtasks': [
+//             {
+//             'subtaskTitle': 'Await Feedback Subtask 1',
+//             'status': 'done'
+//             },
+//             {
+//             'subtaskTitle': 'Await Feedback Subtask 2',
+//             'status': 'open'
+//             }],
+//         'title': 'HTML Base Template Creation 2',
+//         }         
+// ];
+// let doneTasks = [];
 
 let allBoardArrays = [     //Hilfsarray, in dem nochmal alle Board-Arrays zusammengefasst sind! --> Dieses wird in der Regel vom Backend runtergeladen!
     {
@@ -188,11 +248,56 @@ let filteredBoardArrays = [     //Hilfsarray für die gefilterten Tasks durch di
 
 let currentDraggedElement;
 
+let importContacts = [];
+let importTasks = [];
+let importCategories = [];
 
-function initBoard() {
-    includeHTML();
+
+async function initBoard() {
+    await init();
+    sortTasks();
     renderedBoardArrays = allBoardArrays;
     renderAll();
+}
+
+
+async function init() {
+    includeHTML();
+    await loadData('contacts', importContacts); // Kontakte von Datenbank laden
+    await loadData('tasks', importTasks); // Tasks von Datenbank laden
+    await loadData('categories', importCategories); // Tasks von Datenbank laden
+}
+
+
+async function loadData(path = '', importArray) {
+    let response = await fetch(BASE_URL + path + '.json');
+    let responseToJson = await response.json();
+    importArray =  importArray.push(...responseToJson); // Daten aus der Datenbank werden in Array gespeichert
+    // return responseToJson;
+}
+
+
+function sortTasks() {
+    for (let i = 0; i < importTasks.length; i++) {
+        const singleTask = importTasks[i];
+
+        switch (singleTask.columnID) {
+            case 'ToDo':
+                toDoTasks.push(singleTask);
+                break;
+                
+            case 'InProgress':
+                inProgressTasks.push(singleTask);
+                break;
+                
+            case 'AwaitFeedback':
+                awaitFeedbackTasks.push(singleTask);
+                break;
+            
+            case 'Done':
+                doneTasks.push(singleTask);        
+        }
+    }
 }
 
 
@@ -239,9 +344,9 @@ function renderColumn(columnTitle, columnID, columnArray) {     //Rendert die je
             }
 
             //fügt die Kontakte hinzu:
-            for (let k = 0; k < task['contacts'].length; k++) {
-                const personFirstName = task['contacts'][k]['firstName'];
-                const personLastName = task['contacts'][k]['lastName'];
+            for (let k = 0; k < task['contact'].length; k++) {
+                const personFirstName = task['contact'][k]['firstName'];
+                const personLastName = task['contact'][k]['lastName'];
                 const initials = `${oneLetterUppercase(personFirstName)}${oneLetterUppercase(personLastName)}`;
                 document.getElementById(`${columnID}_contacts_container_${i}`).innerHTML += `<div class="initials">${initials}</div>`;
             }
@@ -253,13 +358,13 @@ function renderColumn(columnTitle, columnID, columnArray) {     //Rendert die je
 function taskCardHTML(columnID, i, task) {  //HTML-Template für ausgefüllte Karten
     return /*html*/ `
         <div draggable="true" id="card_${columnID}_${i}" class="full-card" ondragstart="startDragging(${columnID}, ${i})" onmousedown="rotateCard(${columnID}, ${i})" onmouseup="endRotateCard(${columnID}, ${i})" onclick="showBigView(${columnID}, ${i})">
-            <div class="task-category" style="background-color: ${colorsCategories[task['category']]}">${task['category']}</div>
+            <div class="task-category" style="background-color: ${colorsCategories[task['categories']]}">${task['categories']}</div>
             <div class="task-title">${task['title']}</div>
             <p class="task-description">${task['description']}</p>
             <div id="${columnID}_subtasks_container_${i}" class="subtasks-container"></div>
             <div class="ai-ctr-space-btwn">
                 <div id="${columnID}_contacts_container_${i}" class="df-ai-ctr"></div>
-                ${priorities[task['priority']]}
+                ${priorityImages[getPriority(task['priorities'])]}
             </div>
         </div>
     `;
@@ -275,7 +380,7 @@ function showBigView(columnID, taskID) {
     bigViewContainer.innerHTML = /*html*/ `
         <div id="big_view_card" class="big-view-card" onclick="stopPropagation(event)">
             <div class="ai-ctr-space-btwn m-btm24">
-                <div class="big-view-category" style="background-color: ${colorsCategories[currentTask['category']]}">${currentTask['category']}</div>
+                <div class="big-view-category" style="background-color: ${colorsCategories[currentTask['categories']]}">${currentTask['categories']}</div>
                 <svg onclick="closeBigView(0)" class="big-view-close" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_71720_5473" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
                         <rect y="0.96582" width="24" height="24" fill="#D9D9D9"/>
@@ -294,8 +399,8 @@ function showBigView(columnID, taskID) {
             <div class="big-view-priority-container df-ai-ctr fs20-fw400 m-btm24">
                 <div class="default-color">Priority:</div>
                 <div class="df-ai-ctr gap-10">
-                    <div>${firstLetterUppercase(currentTask['priority'])}</div>
-                    <div>${priorities[currentTask['priority']]}</div>
+                    <div>${firstLetterUppercase(getPriority(currentTask['priorities']))}</div>
+                    <div>${priorityImages[getPriority(currentTask['priorities'])]}</div>
                 </div>
             </div>
             <div id="big_view_contacts_container" class="m-btm24">
@@ -335,8 +440,8 @@ function showBigView(columnID, taskID) {
     `;
 
     //fügt die Kontakte der Großansicht hinzu:
-    for (let i = 0; i < currentTask['contacts'].length; i++) {
-        const person = currentTask['contacts'][i];
+    for (let i = 0; i < currentTask['contact'].length; i++) {
+        const person = currentTask['contact'][i];
         const initials = `${oneLetterUppercase(person['firstName'])}${oneLetterUppercase(person['lastName'])}`;
         document.getElementById('big_view_contacts_container').innerHTML += /*html*/ `
             <div class="big-view-contacts df-ai-ctr">
@@ -608,4 +713,13 @@ function oneLetterUppercase(word) {           //Hilfsfunktion, die nur den erste
 
 function firstLetterUppercase(word) {           //Hilfsfunktion, die den ersten Buchstaben großschreibt und dann das ganze Wort wieder zurückgibt
     return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+
+function getPriority(taskPriorities) {
+    for (let key in taskPriorities[0]) {
+        if (taskPriorities[0][key]) {
+            return key;
+        }
+    }
 }
