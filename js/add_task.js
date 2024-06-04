@@ -158,6 +158,7 @@ function chooseCategory(i) {
 // Setzt beim Klicken auf den Kontakt die input type=checkbox auf true bzw. false
 function changeCheckboxContacts (i) {
     let checkbox = document.getElementById(`checkbox_contacts${i}`);
+    let input = document.getElementById(`input_search_contact`);
     // toggle der Checkbox zwischen true and false
     checkbox.checked = !checkbox.checked;
 
@@ -169,6 +170,7 @@ function changeCheckboxContacts (i) {
     }
     renderCheckBox()
     renderCheckedContacts()
+    input.value = '';
 }
 
 // Suchen der Kontakte im Menu
@@ -405,7 +407,7 @@ async function addAllToTasks() {
 function addtaskAnimation() {
     document.getElementById('animate_btn').classList.add('animate'); 
     document.getElementById('animate_btn').classList.remove('d-none'); 
-    /* setTimeout(function() {
-        window.location.href = "./board.html"; // Ziel URL - board.html
-    }, 1600 ); */
+    setTimeout(function() {
+        window.location.href = "./board.html"; // Ziel URL Weiterleitung - board.html
+    }, 1600 );
 }

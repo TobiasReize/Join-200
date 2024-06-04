@@ -58,7 +58,7 @@ header {
 }
 
 .title {
-    padding-left: 100px;
+    padding-left: 96px;
 }
 
 .help-user {
@@ -92,7 +92,6 @@ header {
 
 nav {
     height: 100%;
-    min-width: 232px;
     background-color: #2a3647;
     display: flex;
     justify-content: space-between;
@@ -121,7 +120,7 @@ nav {
     margin-bottom: 15px;
     text-decoration: none;
     color: #CDCDCD;
-    padding: 8px 0 8px 42px;
+    padding: 8px 42px;
 }
 
 .options:hover {
@@ -159,4 +158,86 @@ nav {
 .policy > a:hover{
     color: #29ABE2;
     transform: scale(1.05);
+}
+
+/* ----------------------------------- MEDIA ----------------------------------- */
+
+@media (max-width: 1120px){
+    .page-content {
+        position: relative;
+    }
+
+    .header {
+        position: fixed;
+        z-index: 10;
+    }
+
+    .content {
+        margin-top: 48px;
+    }
+
+    .policy {
+        display: none;
+    }
+
+    nav {
+        position: fixed;
+        bottom: 0;
+        height: auto;
+        width: 100%;
+        z-index: 4;
+    }
+
+    .logo-white-navbar {
+        display: none;
+    }
+
+    .logo-and-options {
+        flex-direction: row;
+    }
+
+    .center {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .options {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        font-size: 14px;
+        width: 80px;
+        height: 76px;
+        border-radius: 16px;
+        padding: 15px 0px;
+    }
+
+    .icon-navbar {
+        margin: 0;
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media (max-width: 920px) {
+    .title {
+        display: none;
+    }
+
+    .logo-header-dark {
+        display: block !important;
+        width: 32px;
+        height: 39px;
+        margin-left: 16px;
+    }
+
+    .content {
+        margin-bottom: 66px; /* höhe nav 66px für Darstellung content */
+        font-size: 16px !important;
+    }
+
+    h1 {
+        font-size: 47px;
+    }
 }

@@ -104,7 +104,14 @@ function renderContact(content, contact) {
 // Setzt den gewählten Kontakt und übergibt den Index an das Templay zum rendern
 function setActiveContact(i) {
     let content = document.getElementById(`active_contact`);
+    let showContact = document.getElementById('show_contact_container');
+    let allContacts = document.getElementById('contact_container');
     content.innerHTML = tempRenderActiveContact(i);
+ 
+    if (innerWidth <= 920) {
+        allContacts.classList.add('d-none');
+        showContact.style.display = "flex";
+    }
 }
 
 // Rendert den gewählten Kontakt
@@ -346,4 +353,12 @@ function saveContact() {
 //Verhindert das Event Bubbling beim Schließen der Großansicht
 function stopPropagation(event) {           
     event.stopPropagation();
+}
+
+function backToAllContacts() {
+    let showContact = document.getElementById('show_contact_container');
+    let allContacts = document.getElementById('contact_container');
+    
+    allContacts.classList.remove('d-none');
+    showContact.style.display = "none";
 }
