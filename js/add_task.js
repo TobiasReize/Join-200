@@ -1,9 +1,5 @@
 // Code oder Funktionen, die nur für die Add Task Seite relevant sind!
 
-let importContacts = [];
-let importTasks = [];
-let importCategories = [];
-
 let priority = [
     {
         'urgent' : false,
@@ -48,11 +44,8 @@ let tasks = [ {
     
 }];
 
-async function init() {
-    includeHTML();
-    await loadData('contacts', importContacts); // Kontakte von Datenbank laden
-    await loadData('tasks', importTasks); // Tasks von Datenbank laden
-    await loadData('categories', importCategories); // Tasks von Datenbank laden
+async function initAddtask() {
+    await init();
 }
 
 async function loadData(path = '', importArray) {

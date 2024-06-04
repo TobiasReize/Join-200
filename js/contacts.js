@@ -1,42 +1,9 @@
 // Array in dem die Datenbankdaten geladen werden
-let importContacts = [];
-
+// let importContacts = [];
 // Startfunktion
-async function init() {
-    includeHTML();
-    await loadData('contacts'); // Kontakte von Datenbank laden
+async function initContacts() {
+    await init();
     renderContacts();
-}
-
-// Lädt die Daten aus der Datenbank
-async function loadData(path = '') {
-    let response = await fetch(BASE_URL + path + '.json');
-    let responseToJson = await response.json();
-
-    // Daten aus der Datenbank werden in Array gespeichert, null-Werte werden durch leere Strings ersetzt
-    importContacts = responseToJson.map(contact => ({
-        firstName: contact.firstName || '',
-        lastName: contact.lastName || '',
-        checked: contact.checked || false,
-        color: contact.color || '',
-        mail: contact.mail || '',
-        tel: contact.tel || ''
-    })); 
-    sortContacts();
-    return responseToJson;
-}
-
-// Sortiert die Kontakte nach dem Vornamen
-function sortContacts() {
-    importContacts.sort((a, b) => {
-        if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) {
-            return -1;
-        }
-        if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) {
-            return 1;
-        }
-        return 0;
-    });
 }
 
 // Setzt den Inhalt zurück, gruppiert die Kontakte nach Anfangsbuchstaben und rendert die gruppierten Kontakte

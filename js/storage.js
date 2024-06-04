@@ -18,3 +18,20 @@ async function loadData(path = '', importArray) {
     let responseToJson = await response.json();
     importArray =  importArray.push(...responseToJson); // Daten aus der Datenbank werden in Array gespeichert
 }
+
+async function loadContacts(path = '') {
+    let response = await fetch(BASE_URL + path + '.json');
+    let responseToJson = await response.json();
+
+    // Daten aus der Datenbank werden in Array gespeichert, null-Werte werden durch leere Strings ersetzt
+    importContacts = responseToJson.map(contact => ({
+        firstName: contact.firstName || '',
+        lastName: contact.lastName || '',
+        checked: contact.checked || false,
+        color: contact.color || '',
+        mail: contact.mail || '',
+        tel: contact.tel || ''
+    })); 
+    sortContacts();
+    return responseToJson;
+}
