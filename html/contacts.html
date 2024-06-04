@@ -21,7 +21,7 @@
             <header w3-include-html="../assets/templates/header.html"></header>
             <div class="content">
 
-              <div class="contact-container">
+              <div class="contact-container" id="contact_container">
                 <div class="container-add-new-contact" id="add_new_contact">
                     <button class="btn-add-new-contact" onclick="openAddNewContact()"><span>Add new contact</span><img src="../assets/img/05_contacts/person_add.svg"></button>
                 </div>
@@ -31,18 +31,15 @@
               </div>
 
 
-              <div class="show-contact-container">
-
+              <div class="show-contact-container" id="show_contact_container">
                 <div class="contact-header">
                     <h1>Contacts</h1>
                     <div class="cut-line"></div>
                     <span>Better with a team</span>
                 </div>
-
-                <div class="active-contact" id="active_contact">
-                    
-                </div>
-                <button class="btn-add-new-contact btn-successfully-added d-none" id="btn_suc_added" >Contact succesfully created</button>
+                <div class="active-contact" id="active_contact"></div>
+                <button class="btn-add-new-contact btn-successfully-added d-none" id="btn_suc_added">Contact succesfully created</button>
+                <button class="arrow-back" onclick="backToAllContacts()"><img src="../assets/img/00_general-elements/arrow-back.svg" alt="Arrow_back"></button>
 
 
             </div>
@@ -50,6 +47,7 @@
             <div class="overlay-container d-none" id="overlay_container" onclick="closeContactCard()">
                 <div class="contact-card fly-in-animation" id="contact_card" onclick="stopPropagation(event)">
                     <div class="contact-card-left-side">
+                        <button class="close-btn-white" onclick="closeContactCard()"><img src="../assets/img/00_general-elements/close-white.svg" alt="Close_white"></button>
                         <img class="card-logo" src="../assets/img/00_general-elements/join-logo-white.svg" alt="Logo">
                         <h2>Add Contact</h2>
                         <span>Tasks are better with a team!</span>
@@ -77,8 +75,8 @@
                             <div class="contact-card-input-div">
                                 <input id="input_tel" type="tel" placeholder="Phone" required><img src="../assets/img/05_contacts/phone.svg">
                             </div>
-                            <div class="d-fl">
-                                <button class="contact-card-btn light-btn" onclick="closeContactCard()" type="button"><span>Cancel</span>
+                            <div class="d-fl jc-center">
+                                <button class="contact-card-btn light-btn close-btn" onclick="closeContactCard()" type="button"><span>Cancel</span>
                                     <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <mask id="mask0_71720_5473" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
                                         <rect y="0.96582" width="24" height="24" fill="#D9D9D9"/>
@@ -104,7 +102,8 @@
                 </div>
 
                 <div class="contact-card fly-in-animation d-none" id="edit_card" onclick="stopPropagation(event)">
-                    <div class="contact-card-left-side">
+                    <div class="contact-card-left-side">                       
+                        <button class="close-btn-white" onclick="closeContactCard()"><img src="../assets/img/00_general-elements/close-white.svg" alt="Close_white"></button>
                         <img class="card-logo" src="../assets/img/00_general-elements/join-logo-white.svg" alt="Logo">
                         <h2>Edit contact</h2>
                         <div></div>
@@ -123,7 +122,7 @@
                             <div class="contact-card-input-div">
                                 <input id="edit_input_tel" type="tel" placeholder="Phone" required><img src="../assets/img/05_contacts/phone.svg">
                             </div>
-                            <div class="d-fl">
+                            <div class="d-fl jc-center">
                                 <button id="delete_btn" class="contact-card-btn light-btn" onclick="deleteContactEdit()" type="button"><span>Delete</span></button>
                                 <button id="save_btn" class="contact-card-btn dark-btn" onclick="saveContact()" type="button"><span>Save</span>
                                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
