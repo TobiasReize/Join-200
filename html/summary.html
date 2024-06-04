@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0">
     <title>Summary</title>
 
     <link rel="stylesheet" href="../style.css">
-    <script src="../../js/templates.js"></script>
-    <link rel="icon" type="image/x-icon" href="../../assets/img/00_general-elements/join-logo-white.svg">
-    <script src="../js/summary.js"></script>
     <link rel="stylesheet" href="../css/summary.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/img/00_general-elements/join-logo-white.svg">
+
+    <!-- Stelle sicher, dass beide Skripte das defer-Attribut haben -->
+    <script src="../../js/templates.js" ></script>
+    <script src="../js/summary.js"></script>
+    <script src="../js/summary.js"></script>
 </head>
 
-<body onload="includeHTML(); greet()">
+<body onload="includeHTML()">
     <div class="page-content">
         <nav w3-include-html="../assets/templates/navbar.html"></nav>
         <main class="main-content">
@@ -111,6 +113,8 @@
             </div>
         </main>
     </div>
+    
 </body>
+
 
 </html>

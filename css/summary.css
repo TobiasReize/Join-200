@@ -193,8 +193,8 @@ body {
 
 .greeting {
     position: absolute;
-    width: Hug (338px)px;
-    height: Hug (56px)px;
+    width: 338px;
+    height: 56px;
     top: 587.5px;
     left: 968px;
     gap: 3px;
@@ -206,7 +206,6 @@ body {
     font-family: Inter;
     font-size: 47px;
     font-weight: 500;
-    line-height: 56.4px;
     margin: 0;
     color: #2A3647;
 
