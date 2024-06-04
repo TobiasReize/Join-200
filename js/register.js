@@ -8,7 +8,7 @@ async function init() {
 
 async function loadUsers() {                                 //die aktuellen Daten werden vom Server geladen und in das globale Array 'users' geladen
     try {
-        users = await getItem('users');
+        users = await getItem('users');                     //Normalerweise erhält man nur Objekte von der Datenbank (JSON-Objekt), keine Arrays!
         console.log(users);
     } catch (e) {
         console.error('Loading error:', e);                 //Error-handler: Wenn ein Fehler auftritt, wird dieser abgefangen

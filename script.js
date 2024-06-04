@@ -1,3 +1,16 @@
+let importContacts = [];
+let importTasks = [];
+let importCategories = [];
+
+
+async function init() {
+    includeHTML();
+    await loadContacts('contacts', importContacts); // Kontakte von Datenbank laden
+    await loadData('tasks', importTasks); // Tasks von Datenbank laden
+    await loadData('categories', importCategories); // Tasks von Datenbank laden
+}
+
+
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {
@@ -11,3 +24,16 @@ async function includeHTML() {
         }
     }
   }
+
+// Sortiert die Kontakte nach dem Vornamen
+function sortContacts() {
+    importContacts.sort((a, b) => {
+        if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) {
+            return -1;
+        }
+        if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) {
+            return 1;
+        }
+        return 0;
+    });
+}

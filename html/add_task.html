@@ -5,30 +5,33 @@
     <meta name="viewport" content="initial-scale=1.0">
     <title>JOIN - Add Task</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/add_task.css">
     <script src="../script.js"></script>
     <script src="../js/add_task.js"></script>
+    <script src="../js/storage.js"></script>
     <link rel="icon" type="image/x-icon" href="../assets/img/00_general-elements/join-logo-dark.svg">
 </head>
-<body onload="includeHTML()">
+<body onload="initAddtask()">
     <div class="page-content">
         <nav w3-include-html="../assets/templates/navbar.html"></nav>
         <main class="main-content">
-            <header w3-include-html="../assets/templates/header.html"></header>
-            <div class="content">
-                <h1>Add Task</h1>
+            <header w3-include-html="./header.html"></header>
+            <div class="content mt-110 ml-96">
+                <h1 class="">Add Task</h1>
                 <div class="information-container">
                     <div class="left-side">
                         <span>Title<span class="red-star">*</span></span>
-                        <input class="input" type="text" placeholder="Enter a title">
+                        <input id="input_title" class="input m-bot-0" type="text" placeholder="Enter a title">
+                        <span id="required_title" class="required"></span>
 
-                        <span>Title</span>
-                        <textarea class="input input-textarea" cols="30" rows="5" placeholder="Enter a Description"></textarea>
+                        <span>Description</span>
+                        <textarea id="input_description" class="input input-textarea" cols="30" rows="5" placeholder="Enter a Description"></textarea>
                         
                         <span for="contacts">Assignet to</span>
                         <div class="input sub-task-div outline" onclick="assignMenu(); getContacts()">
-                            <input class="sub-task-input" type="text" placeholder="Select contacts to assign">
-                            <img id="arrow_drop_down_contact" class="add-icon" src="../assets/img/00_general-elements/arrow_drop_down.svg">
+                            <input id="input_search_contact" class="sub-task-input" type="text" placeholder="Select contacts to assign" oninput="searchContact()">
+                            <img id="arrow_drop_down_contact" class="add-icon p-8" src="../assets/img/00_general-elements/arrow_drop_down.svg">
                         </div>
                         <div>
                             <div id="contact_container" class="contacts-container d-none">
@@ -45,52 +48,59 @@
                     <div class="line"></div>
                     <div class="right-side">
                         <span>Due Date<span class="red-star">*</span></span>
-                        <input class="input" type="date">
+                        <input id="input_date" class="input m-bot-0" type="date">
+                        <span id="required_date" class="required"></span>
 
                         <span>Prio</span>
                         <div class="prio-btns">
-                            <button id="urgent_btn" class="prio-btn prio-width" onclick="colorChangeUrgent()">
+                            <button id="urgent_btn" class="prio-btn prio-width" onclick="colorChangeUrgent(); changePrio('urgent')">
                                 Urgent 
                                 <img id="img_urgent" src="../assets/img/03_addtask/prio_urgent_red.svg">
                                 <img id="img_urgent_white" class="d-none" src="../assets/img/03_add-task/urgent-white.svg">
                             </button>
-                            <button id="medium_btn" class="prio-btn prio-width" onclick="colorChangeMedium()">
+                            <button id="medium_btn" class="prio-btn prio-width medium-btn-change" onclick="colorChangeMedium();changePrio('medium')">
                                 Medium 
-                                <img id="img_medium" src="../assets/img/03_addtask/prio_medium_orange.svg">
-                                <img id="img_medium_white" class="d-none" src="../assets/img/03_add-task/medium-white.svg">
+                                <img id="img_medium" class="d-none" src="../assets/img/03_addtask/prio_medium_orange.svg">
+                                <img id="img_medium_white" class="" src="../assets/img/03_add-task/medium-white.svg">
                             </button>
-                            <button id="low_btn" class="prio-btn prio-width" onclick="colorChangeLow()">
+                            <button id="low_btn" class="prio-btn prio-width" onclick="colorChangeLow(); changePrio('low')">
                                 Low 
                                 <img id="img_low" src="../assets/img/03_addtask/prio_low_green.svg">
                                 <img id="img_low_white" class="d-none" src="../assets/img/03_add-task/low-white.svg">
                             </button>
                         </div>
 
-                        <span for="contacts">Category</span>
-                        <div class="input sub-task-div outline" onclick="categoryMenu(); renderCategories()">
+                        <span for="contacts">Category<span class="red-star">*</span></span>
+                        <div id="input_category" class="input sub-task-div outline m-bot-0" onclick="categoryMenu(); renderCategories()">
                             <input id="category_input" class="sub-task-input" type="text" placeholder="Select task category">
-                            <img id="arrow_drop_down_category" class="add-icon" src="../assets/img/00_general-elements/arrow_drop_down.svg">
+                            <img id="arrow_drop_down_category" class="add-icon p-8" src="../assets/img/00_general-elements/arrow_drop_down.svg">
                         </div>
+                        <span id="required_category" class="required"></span>
                         <div>
                             <div id="category_container" class="contacts-container d-none">
                                 <ul id="list_options_category" class="list-options">
                                 </ul>
                             </div>
                         </div>
-                        
 
                         <span>Subtasks</span>
-                        <div class="input sub-task-div">
-                            <input class="sub-task-input" type="text" placeholder="Add new subtask">
-                            <img class="add-icon" src="../assets/img/03_addtask/add.svg">
+                        <div class="input sub-task-div" onclick="renderSubtask()">
+                            <input id="input_subtask" class="sub-task-input" type="text" placeholder="Add new subtask" required>
+                            <div class="icons-subtask">
+                                <div id="add_icon" class="icon-box"><img class="add-icon" src="../assets/img/03_addtask/add.svg"></div>
+                                <div id="close_icon" class="d-none icon-box b-right" onclick="clearInputField()"><img  class="add-icon" src="../assets/img/03_add-task/close.svg"></div>
+                                <div id="check_icon" class="d-none icon-box" onclick="addSubtasks()" ><img  class="add-icon" src="../assets/img/03_add-task/check.svg" alt=""></div>
+                            </div>                         
                         </div>
+                        <div><ul id="list_subtasks" class="ul-subtasks"></ul></div>
+                        
                     </div>
                 </div>
 
                 <div class="clear-create-container">
                     <span><span class="red-star">*</span>This field is required</span>
                     <div class="prio-btns clear-create-btn">
-                        <button class="prio-btn clear-btn clear-x">Clear 
+                        <button class="prio-btn clear-btn clear-x" onclick="location.reload()">Clear 
                             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <mask id="mask0_71720_5473" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
                                 <rect y="0.96582" width="24" height="24" fill="#D9D9D9"/>
@@ -100,10 +110,11 @@
                                 </g>
                             </svg>
                         </button>
-                        <button class="prio-btn create-btn">Create Task <img class="cancel-blue" src="../assets/img/00_general-elements/close-white.svg"></button>
+                        <button class="prio-btn create-btn" onclick="createNewTask()">Create Task <img class="cancel-blue" src="../assets/img/00_general-elements/check-white.svg"></button>
                     </div>
                 </div>
             </div>
+            <button id="animate_btn" class="prio-btn create-btn task_added d-none">Task added to board <img src="../assets/img/00_general-elements/board-grey.svg"></button>
         </main>
     </div>
 </body>

@@ -1,32 +1,21 @@
 /* Code/ Design, der nur für die Add Task Seite relevant ist! */
-
-@font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    src: url('../font/inter-v13-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-  }
+.main-content{
+  flex: 1;
+}
 
 .content {
-  width: 100%;
+  max-width: 100%;
   font-size: 20px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-}
-
-.content > h1 {
-  font-size: 61px;
-  margin-left: 80px;
+  position: relative;
+  flex: 1;
 }
 
 .information-container {
   display: flex;
-  justify-content: space-between;
-  margin-left: 70px;
-  margin-right: 70px;
-  margin-bottom: 70px;
+  gap: 48px;
 }
 
 .left-side {
@@ -45,14 +34,18 @@
 
 .input {
   padding: 12px 21px;
-  color: #D1D1D1;
+  background-color: #FFFFFF;
   border-radius: 10px;
   border: 1px solid #D1D1D1;
   margin-top: 6px;
   margin-bottom: 32px;
   font-size: 20px;
-  width: 396px;
+  width: 440px;
   cursor: pointer;
+}
+
+.input::placeholder {
+  color: #D1D1D1;
 }
 
 .input:focus {
@@ -113,8 +106,41 @@ justify-content: center;
   padding: 3px;
 }
 
+.p-8 {
+  padding: 8px;
+}
+
 .add-icon:hover {
   background-color: #D1D1D1;
+}
+
+.icons-subtask {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.edit-icons-subtasks {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+
+.li-subtask:hover .edit-icons-subtasks {
+  display: flex;
+}
+
+.icon-box {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.b-right {
+  border-right: 1px solid #D1D1D1;
+  padding-right: 8px;
 }
 
 .select-field {
@@ -132,10 +158,8 @@ justify-content: center;
 
 .clear-create-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-left: 80px;
-  margin-right: 80px;
+  gap: 490px;
 }
 
 .clear-create-btn {
@@ -197,6 +221,7 @@ justify-content: center;
 .option {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 6px;
   margin-bottom: 6px;
   border-radius: 10px;
@@ -205,6 +230,19 @@ justify-content: center;
 
 .option:hover {
   background-color: #EEEEEE;
+}
+
+.option:has(input:checked) {
+  background-color: #2A3647;
+  color: white;
+}
+
+.option:has(input:checked):hover {
+  background-color: #091931;
+}
+
+.white-checkbox path {
+  stroke: white;
 }
 
 .short-and-fullname {
@@ -219,6 +257,7 @@ justify-content: center;
   background-color: #FF7A00;
   border-radius: 50%;
   color: white;
+  border: 2px solid white;
 }
 
 .category-container {
@@ -254,8 +293,6 @@ justify-content: center;
 }
 
 .checked-contact {
-  height: 30px;
-  width: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -275,4 +312,180 @@ justify-content: center;
 .low-btn-change {
   background-color: #7AE229;
   color: white;
+}
+
+.ul-subtasks {
+  margin-top: -24px;
+  position: absolute;
+  min-width: 440px;
+  font-size: 16px;
+}
+
+.li-subtask {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 16px;
+  border-radius: 10px;
+}
+
+.li-subtask:hover {
+  background-color: #EEEEEE;
+}
+
+ul {
+  list-style: disc inside; /* Marker innerhalb des `li` setzen */
+}
+
+.li-subtask > li {
+  margin-left: 16px;
+}
+
+.edit-subtask-div {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 4px 16px;
+  border-bottom: 1px solid #29ABE2;
+}
+
+.edit-input-subtask {
+  outline: none;
+  border: none;
+  flex: 1;
+}
+
+.edit-subtask-container {
+  margin-top: -6px;
+}
+
+.required {
+  font-size: 12px;
+  color: #FF8190;
+  height: 15px;
+  margin-bottom: 16px;
+}
+
+.m-bot-0 {
+  margin-bottom: 0;
+}
+
+.outline-red {
+  border: 1px solid #FF8190;
+}
+
+.task_added {
+  justify-content: space-between;
+  border-radius: 20px;
+  width: 326px;
+  height: 74px;
+  padding: 30.5px 25px;
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  cursor: none;
+}
+
+.animate {
+  animation: fly-in 900ms ease-out forwards;
+}
+
+@keyframes fly-in {
+  0% {
+      bottom: -50px;
+  }
+  50% {
+      bottom: 50%;
+  }
+  100% {
+      bottom: 50%;
+  }
+}
+
+/* ------------------------------ MEDIA ------------------------------ */
+
+@media (max-width: 1320px) {
+  .title {
+    padding-left: 32px;
+  }
+  
+  .content {
+    margin-right: 32px;
+    justify-content: flex-start;
+  }
+  
+  .ml-96 {
+    margin-left: 32px;
+  }
+
+  .information-container {
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .clear-create-container {
+    gap: 0;
+    justify-content: space-between;
+  }
+
+  .input {
+    width: auto;
+  }
+}
+
+@media (max-width: 1120px) {
+  .clear-create-container {
+    position: fixed;
+    bottom: 8%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .clear-btn {
+    display: none !important;
+  }
+
+  .information-container {
+    margin-top: 32px;
+  }
+}
+
+@media (max-width: 920px) {
+  .page-content {
+    height: auto;
+  }
+
+  .information-container {
+    flex-direction: column;
+  }
+
+  .prio-btns {
+    justify-content: space-around;
+  }
+
+  .input {
+    font-size: 16px !important;
+  }
+
+  .sub-task-input {
+    font-size: 16px;
+  }
+
+  .prio-btn {
+    font-size: 16px;
+  }
+
+  .content {
+    margin-bottom: calc(66px + 96px + 32px); /* höhe header + höhe create task + hilföhe für subtasks */
+  }
+
+  .contacts-container {
+    width: 100%;
+  }
+
+  .ul-subtasks {
+    width: 100%;
+  }
 }

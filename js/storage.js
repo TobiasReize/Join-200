@@ -1,5 +1,4 @@
-const BASE_URL = 'https://test-login-884da-default-rtdb.europe-west1.firebasedatabase.app/';
-
+const BASE_URL = 'https://join-200-81e6b-default-rtdb.europe-west1.firebasedatabase.app/';
 
 async function setItem(path = '', value) {          //Neuer User wird in der Datenbank, mit allen Daten, gespeichert! --> path wird vorab als String deklariert
     let response = await fetch(BASE_URL + path + '.json', {
@@ -14,8 +13,25 @@ async function setItem(path = '', value) {          //Neuer User wird in der Dat
 }
 
 
-async function getItem(path = '') {     //ladet die User-Daten aus der Datenbank herunter und übergibt diese
+async function loadData(path = '', importArray) {
     let response = await fetch(BASE_URL + path + '.json');
     let responseToJson = await response.json();
+    importArray =  importArray.push(...responseToJson); // Daten aus der Datenbank werden in Array gespeichert
+}
+
+async function loadContacts(path = '') {
+    let response = await fetch(BASE_URL + path + '.json');
+    let responseToJson = await response.json();
+
+    // Daten aus der Datenbank werden in Array gespeichert, null-Werte werden durch leere Strings ersetzt
+    importContacts = responseToJson.map(contact => ({
+        firstName: contact.firstName || '',
+        lastName: contact.lastName || '',
+        checked: contact.checked || false,
+        color: contact.color || '',
+        mail: contact.mail || '',
+        tel: contact.tel || ''
+    })); 
+    sortContacts();
     return responseToJson;
 }
