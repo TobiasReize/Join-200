@@ -1,6 +1,7 @@
 // Es wird gewartet bis die Seite komplet fertig geladen ist, sonst kommt es zu überschneidungen mit der templates.js und dadurch wird der header / navbar nicht erzeugt
 document.addEventListener('DOMContentLoaded', function() {
     letsGreet();
+    loadNumber();
 });
 
 
@@ -55,4 +56,16 @@ function getGreeting() {
 
         resolve(greeting);
     });
+}
+
+
+function loadNumber() {
+    todoNumber = toDoTasks.length
+    doneNumber = doneTasks.length
+    awaitFeedbackNumber = awaitFeedbackTasks.length
+    inProgressNumber = inProgressTasks.length
+    document.getElementById('todoNumber').innerHTML = `${todoNumber}`
+    document.getElementById('doneNumber').innerHTML = `${doneNumber}`
+    document.getElementById('awaitFeedbackNumber').innerHTML = `${awaitFeedbackNumber}`
+    document.getElementById('inProgressNumber').innerHTML = `${inProgressNumber}`
 }
