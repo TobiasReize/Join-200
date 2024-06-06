@@ -1,5 +1,5 @@
 body {
-    background-color: lightgray;
+    background-color:  #F6F7F8;
 }
 
 .title-board {
@@ -54,8 +54,8 @@ body {
     background-color: #2A3647;
     animation-duration: 100ms;
     color: white;
-    padding: 10px 10px 10px 10px;
     box-shadow: 0px 4px 4px 0px #00000040;
+    transform: scale(1.1);
 }
 
 .open-todo:hover path {
@@ -93,8 +93,8 @@ body {
     background-color: #2A3647;
     animation-duration: 100ms;
     color: white;
-    padding: 10px 10px 10px 10px;
     box-shadow: 0px 4px 4px 0px #00000040;
+    transform: scale(1.1);
 }
 
 .open-done:hover path {
@@ -118,12 +118,10 @@ body {
 }
 
 .urgent-board {
-    position: absolute;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     background-color: white;
-    top: 531px;
     width: 560px;
     height: 168px;
     gap: 61px;
@@ -134,8 +132,8 @@ body {
     background-color: #2A3647;
     animation-duration: 100ms;
     color: white;
-    padding: 10px 10px 10px 10px;
     box-shadow: 0px 4px 4px 0px #00000040;
+    transform: scale(1.05);
 }
 
 .urgent-number {
@@ -174,13 +172,11 @@ body {
 }
 
 .task-numbers:hover {
-    width: 184px;
-    height: 184px;
-    top: 300px;
     background-color: #2A3647;
     animation-duration: 100ms;
     color: white;
     box-shadow: 0px 4px 4px 0px #00000040;
+    transform: scale(1.1);
 }
 
 .task-numbers b {
@@ -197,8 +193,8 @@ body {
 
 .greeting {
     position: absolute;
-    width: Hug (338px)px;
-    height: Hug (56px)px;
+    width: 338px;
+    height: 56px;
     top: 587.5px;
     left: 968px;
     gap: 3px;
@@ -210,7 +206,6 @@ body {
     font-family: Inter;
     font-size: 47px;
     font-weight: 500;
-    line-height: 56.4px;
     margin: 0;
     color: #2A3647;
 
