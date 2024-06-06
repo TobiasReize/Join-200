@@ -56,11 +56,23 @@ async function loadData(path = '', importArray) {
 }
 
 // Aufklappen des Assignet Menu
-function assignMenu() {
+function openAssignMenu() {
     let content = document.getElementById('contact_container');
     let arrow = document.getElementById('arrow_drop_down_contact');
-    content.classList.toggle('d-none');
-    arrow.classList.toggle('arrow-drop-down')
+    content.classList.remove('d-none');
+    arrow.classList.add('arrow-drop-down')
+}
+
+function closeAssignMenu() {
+    let contact = document.getElementById('contact_container');
+    let arrowContact = document.getElementById('arrow_drop_down_contact');
+    let category = document.getElementById('category_container');
+    let arrowCategory = document.getElementById('arrow_drop_down_category');
+
+    category.classList.add('d-none');
+    arrowCategory.classList.remove('arrow-drop-down')
+    contact.classList.add('d-none');
+    arrowContact.classList.remove('arrow-drop-down')
 }
 
 // Aufklappen des Category Menu
@@ -70,6 +82,7 @@ function categoryMenu() {
     content.classList.toggle('d-none');
     arrow.classList.toggle('arrow-drop-down')
 }
+
 
 // Rendern der Kontakte in das aufgeklappte Assignet Menu
 function getContacts() {
@@ -403,4 +416,9 @@ function addtaskAnimation() {
     setTimeout(function() {
         window.location.href = "./board.html"; // Ziel URL Weiterleitung - board.html
     }, 1600 );
+}
+
+//Verhindert das Event Bubbling beim Schließen der Großansicht
+function stopPropagation(event) {           
+    event.stopPropagation();
 }

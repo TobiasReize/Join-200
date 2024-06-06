@@ -15,11 +15,14 @@
 <body onload="initAddtask()">
     <div class="page-content">
         <nav w3-include-html="./navbar.html"></nav>
-        <main class="main-content">
+        <main class="main-content" onclick="closeAssignMenu()">
             <header w3-include-html="./header.html"></header>
-            <div class="content mt-110 ml-96">
+            <!-- Content -->
+            <section class="content mt-110 ml-96">
                 <h1 class="">Add Task</h1>
+                <!-- Container for all Inputs -->
                 <div class="information-container">
+                    <!-- left Side of the Information Container -->
                     <div class="left-side">
                         <span>Title<span class="red-star">*</span></span>
                         <input id="input_title" class="input m-bot-0" type="text" placeholder="Enter a title">
@@ -29,7 +32,7 @@
                         <textarea id="input_description" class="input input-textarea" cols="30" rows="5" placeholder="Enter a Description"></textarea>
                         
                         <span for="contacts">Assignet to</span>
-                        <div class="input sub-task-div outline" onclick="assignMenu(); getContacts()">
+                        <div class="input sub-task-div outline" onclick="openAssignMenu(); getContacts(); stopPropagation(event)">
                             <input id="input_search_contact" class="sub-task-input" type="text" placeholder="Select contacts to assign" oninput="searchContact()">
                             <img id="arrow_drop_down_contact" class="add-icon p-8" src="../assets/img/00_general-elements/arrow_drop_down.svg">
                         </div>
@@ -45,7 +48,11 @@
                         
                             
                     </div>
+
+                    <!-- parting Line for left and right Side -->
                     <div class="line"></div>
+
+                    <!-- left Side of the Information Container -->
                     <div class="right-side">
                         <span>Due Date<span class="red-star">*</span></span>
                         <input id="input_date" class="input m-bot-0" type="date">
@@ -71,7 +78,7 @@
                         </div>
 
                         <span for="contacts">Category<span class="red-star">*</span></span>
-                        <div id="input_category" class="input sub-task-div outline m-bot-0" onclick="categoryMenu(); renderCategories()">
+                        <div id="input_category" class="input sub-task-div outline m-bot-0" onclick="categoryMenu(); renderCategories(); stopPropagation(event)">
                             <input id="category_input" class="sub-task-input" type="text" placeholder="Select task category">
                             <img id="arrow_drop_down_category" class="add-icon p-8" src="../assets/img/00_general-elements/arrow_drop_down.svg">
                         </div>
@@ -97,6 +104,7 @@
                     </div>
                 </div>
 
+                <!-- Container with Button to Clear and Create a Task -->
                 <div class="clear-create-container">
                     <span><span class="red-star">*</span>This field is required</span>
                     <div class="prio-btns clear-create-btn">
@@ -113,7 +121,7 @@
                         <button class="prio-btn create-btn" onclick="createNewTask()">Create Task <img class="cancel-blue" src="../assets/img/00_general-elements/check-white.svg"></button>
                     </div>
                 </div>
-            </div>
+            </section>
             <button id="animate_btn" class="prio-btn create-btn task_added d-none">Task added to board <img src="../assets/img/00_general-elements/board-grey.svg"></button>
         </main>
     </div>

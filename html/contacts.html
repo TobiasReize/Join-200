@@ -19,8 +19,8 @@
         <nav w3-include-html="../assets/templates/navbar.html"></nav>
         <main class="main-content">
             <header w3-include-html="../assets/templates/header.html"></header>
-            <div class="content">
 
+            <section class="content">
               <div class="contact-container" id="contact_container">
                 <div class="container-add-new-contact" id="add_new_contact">
                     <button class="btn-add-new-contact" onclick="openAddNewContact()"><span>Add new contact</span><img src="../assets/img/05_contacts/person_add.svg"></button>
@@ -29,7 +29,6 @@
                     
                 </div>
               </div>
-
               <div class="show-contact-container" id="show_contact_container">
                 <div class="contact-header">
                     <h1>Contacts</h1>
@@ -39,11 +38,9 @@
                 <div class="active-contact" id="active_contact"></div>
                 <button class="btn-add-new-contact btn-successfully-added d-none" id="btn_suc_added">Contact succesfully created</button>
                 <button class="arrow-back" onclick="backToAllContacts()"><img src="../assets/img/00_general-elements/arrow-back.svg" alt="Arrow_back"></button>
+            </section>
 
-
-            </div>
-
-            <div class="overlay-container d-none" id="overlay_container" onclick="closeContactCard()">
+            <section class="overlay-container d-none" id="overlay_container" onclick="closeContactCard()">
                 <div class="contact-card fly-in-animation" id="contact_card" onclick="stopPropagation(event)">
                     <div class="contact-card-left-side">
                         <button class="close-btn-white" onclick="closeContactCard()"><img src="../assets/img/00_general-elements/close-white.svg" alt="Close_white"></button>
@@ -137,10 +134,8 @@
                         </form>
                     </div>
                 </div>
-
-
-            
-            </div>
+                
+            </section>
         </main>
     </div>
 </body>
