@@ -41,32 +41,7 @@
             align-items: center;
         }
 
-        #logo {
-            width: 274px;
-            height: 334px;
-            position: absolute;
-        }
 
-        .shrink-and-move {
-            animation: moveAndShrink 3s ease forwards;
-        }
-
-        @keyframes moveAndShrink {
-            0% {
-                width: 50vw;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            100% {
-                width: 100px;
-                height: 122px;
-                top: 80px;
-                left: 77px;
-                transform: translate(0, 0);
-            }
-        }
 
         .login-mainboard {
             position: absolute;
@@ -168,11 +143,11 @@
             font-size: 20px;
             font-weight: 400;
             line-height: 24px;
-            text-align: left;
             width: 279px;
             height: 49px;
-            left: 1039px;
+            left: 75vw;
             top: 67px;
+            transform: translateX(-50%);
         }
 
         .signup-btn button {
@@ -233,6 +208,126 @@
             align-items: center;
             justify-content: center;
         }
+
+        @media screen and (min-width: 650px) {
+
+            #logo {
+                width: 274px;
+                height: 334px;
+                position: absolute;
+            }
+
+            .shrink-and-move {
+                animation: moveAndShrink 3s ease forwards;
+            }
+
+            @keyframes moveAndShrink {
+                0% {
+                    width: 50vw;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                100% {
+                    width: 100px;
+                    height: 122px;
+                    top: 80px;
+                    left: 77px;
+                    transform: translate(0, 0);
+                }
+            }
+        }
+
+        @media screen and (max-width: 650px) {
+            body {
+                background-color: #FFFFFF;
+            }
+
+            body {
+                background-color: #2A3647;
+                animation: changeBackground 3s ease forwards 3s;
+            }
+
+            @keyframes changeBackground {
+                0% {
+                    background-color: #2A3647;
+                }
+
+                100% {
+                    background-color: white;
+                }
+            }
+
+            #logo {
+                width: 100px;
+                height: 122px;
+                position: absolute;
+            }
+
+            #logo path {
+                fill: white;
+                animation: changeLogo 3s ease forwards 3s;
+            }
+
+            @keyframes changeLogo {
+                0% {
+                    fill: white;
+                }
+
+                100% {
+                    fill: #2A3647;
+                }
+            }
+
+            .shrink-and-move {
+                animation: moveAndShrink 3s ease forwards;
+            }
+
+            @keyframes moveAndShrink {
+                0% {
+                    width: 50vw;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                100% {
+                    width: 64px;
+                    height: 78px;
+                    top: 37px;
+                    left: 38px;
+                    transform: translate(0, 0);
+                }
+            }
+
+            .login-mainboard {
+                width: 392px;
+                top: 205px;
+                height: 515px;
+                transform: translate(-50%, 0);
+            }
+
+            .login-input {
+                width: 364px;
+                height: 192px;
+            }
+
+            .login-input input {
+                width: 364px;
+                padding: 0;
+            }
+
+            .signup-btn {
+                top: 778px;
+                left: 50%;
+                transform: translate(-50%, 0);
+            }
+
+            .police-legal {
+                top: 869px;
+            }
+        }
     </style>
 
     <script>
@@ -253,7 +348,7 @@
 
 </head>
 
-<body onload="init()">
+<body onload="init(); initRegister()">
     <div class="page-content" id="logo-container">
         <svg id="logo" class="logo" width="274" height="335" viewBox="0 0 274 335" fill="none"
             xmlns="http://www.w3.org/2000/svg">
