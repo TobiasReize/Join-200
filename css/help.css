@@ -2,7 +2,7 @@ body {
     overflow: hidden;
 }
 
-.privacy-police {
+.legal-notice {
     position: absolute;
     width: 70vw;
     height: 943px;
@@ -22,7 +22,7 @@ svg {
     padding: 2.5px 0px 0px 0px;
 }
 
-.title-privat {
+.title-help {
     position: absolute;
     width: Hug (371px)px;
     height: Hug (73px)px;

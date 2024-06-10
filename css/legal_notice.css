@@ -1,17 +1,24 @@
+body {
+    overflow: hidden;
+}
+
 .legal-notice {
-    display: flex;
-    flex-direction: column;
-    width: 1014px;
+    position: absolute;
+    width: 70vw;
     height: 943px;
     top: 311px;
     left: 328px;
     gap: 24px;
 }
 
+.subtitle {
+    margin-bottom: 24px;
+}
+
 svg {
     position: fixed;
     top: 225px;
-    left: 1307px;
+    left: 90vw;
     padding: 2.5px 0px 0px 0px;
 }
 

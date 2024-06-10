@@ -5,7 +5,7 @@ let importCategories = [];
 
 async function init() {
     includeHTML();
-    await loadData('contacts', importContacts); // Kontakte von Datenbank laden
+    await loadContacts('contacts', importContacts); // Kontakte von Datenbank laden
     await loadData('tasks', importTasks); // Tasks von Datenbank laden
     await loadData('categories', importCategories); // Tasks von Datenbank laden
 }
@@ -24,3 +24,16 @@ async function includeHTML() {
         }
     }
   }
+
+// Sortiert die Kontakte nach dem Vornamen
+function sortContacts() {
+    importContacts.sort((a, b) => {
+        if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) {
+            return -1;
+        }
+        if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) {
+            return 1;
+        }
+        return 0;
+    });
+}

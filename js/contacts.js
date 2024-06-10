@@ -1,42 +1,9 @@
 // Array in dem die Datenbankdaten geladen werden
-let importContacts = [];
-
+// let importContacts = [];
 // Startfunktion
-async function init() {
-    includeHTML();
-    await loadData('contacts'); // Kontakte von Datenbank laden
+async function initContacts() {
+    await init();
     renderContacts();
-}
-
-// Lädt die Daten aus der Datenbank
-async function loadData(path = '') {
-    let response = await fetch(BASE_URL + path + '.json');
-    let responseToJson = await response.json();
-
-    // Daten aus der Datenbank werden in Array gespeichert, null-Werte werden durch leere Strings ersetzt
-    importContacts = responseToJson.map(contact => ({
-        firstName: contact.firstName || '',
-        lastName: contact.lastName || '',
-        checked: contact.checked || false,
-        color: contact.color || '',
-        mail: contact.mail || '',
-        tel: contact.tel || ''
-    })); 
-    sortContacts();
-    return responseToJson;
-}
-
-// Sortiert die Kontakte nach dem Vornamen
-function sortContacts() {
-    importContacts.sort((a, b) => {
-        if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) {
-            return -1;
-        }
-        if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) {
-            return 1;
-        }
-        return 0;
-    });
 }
 
 // Setzt den Inhalt zurück, gruppiert die Kontakte nach Anfangsbuchstaben und rendert die gruppierten Kontakte
@@ -104,7 +71,14 @@ function renderContact(content, contact) {
 // Setzt den gewählten Kontakt und übergibt den Index an das Templay zum rendern
 function setActiveContact(i) {
     let content = document.getElementById(`active_contact`);
+    let showContact = document.getElementById('show_contact_container');
+    let allContacts = document.getElementById('contact_container');
     content.innerHTML = tempRenderActiveContact(i);
+ 
+    if (innerWidth <= 920) {
+        allContacts.classList.add('d-none');
+        showContact.style.display = "flex";
+    }
 }
 
 // Rendert den gewählten Kontakt
@@ -115,7 +89,7 @@ function tempRenderActiveContact(i) {
             <span class="short-name big-short-name" style="background-color: ${importContacts[i]['color']}">${importContacts[i]['firstName'].charAt(0) + importContacts[i]['lastName'].charAt(0)}</span>
             <div class="d-fl full-name-edit-delete">
                 <span>${importContacts[i]['firstName']} ${importContacts[i]['lastName']}</span>
-                <div class="d-fl edit-delete">
+                <div id="edit_delete" class="d-fl edit-delete">
                     <div class="d-fl show-contact-edit" onclick="editContact(${i})">
                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
@@ -139,6 +113,7 @@ function tempRenderActiveContact(i) {
                         Delete
                     </div>
                 </div>
+                <img class="contact-menu-btn" src="../assets/img/05_contacts/more_vert.svg" onclick="openEditDeleteMenu(); stopPropagation(event)">
             </div>
         </div>
         <span class="show-contact-information-span">Contact Information</span>
@@ -346,4 +321,20 @@ function saveContact() {
 //Verhindert das Event Bubbling beim Schließen der Großansicht
 function stopPropagation(event) {           
     event.stopPropagation();
+}
+
+function backToAllContacts() {
+    let showContact = document.getElementById('show_contact_container');
+    let allContacts = document.getElementById('contact_container');
+    
+    allContacts.classList.remove('d-none');
+    showContact.style.display = "none";
+}
+
+function openEditDeleteMenu() {
+    document.getElementById('edit_delete').style.display = "flex";
+}
+
+function closeEditDeleteMenu() {
+    document.getElementById('edit_delete').style.display = "none";
 }

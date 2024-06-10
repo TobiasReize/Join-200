@@ -1,9 +1,5 @@
 // Code oder Funktionen, die nur für die Add Task Seite relevant sind!
 
-let importContacts = [];
-let importTasks = [];
-let importCategories = [];
-
 let priority = [
     {
         'urgent' : false,
@@ -48,11 +44,8 @@ let tasks = [ {
     
 }];
 
-async function init() {
-    includeHTML();
-    await loadData('contacts', importContacts); // Kontakte von Datenbank laden
-    await loadData('tasks', importTasks); // Tasks von Datenbank laden
-    await loadData('categories', importCategories); // Tasks von Datenbank laden
+async function initAddtask() {
+    await init();
 }
 
 async function loadData(path = '', importArray) {
@@ -63,11 +56,23 @@ async function loadData(path = '', importArray) {
 }
 
 // Aufklappen des Assignet Menu
-function assignMenu() {
+function openAssignMenu() {
     let content = document.getElementById('contact_container');
     let arrow = document.getElementById('arrow_drop_down_contact');
-    content.classList.toggle('d-none');
-    arrow.classList.toggle('arrow-drop-down')
+    content.classList.remove('d-none');
+    arrow.classList.add('arrow-drop-down')
+}
+
+function closeAssignMenu() {
+    let contact = document.getElementById('contact_container');
+    let arrowContact = document.getElementById('arrow_drop_down_contact');
+    let category = document.getElementById('category_container');
+    let arrowCategory = document.getElementById('arrow_drop_down_category');
+
+    category.classList.add('d-none');
+    arrowCategory.classList.remove('arrow-drop-down')
+    contact.classList.add('d-none');
+    arrowContact.classList.remove('arrow-drop-down')
 }
 
 // Aufklappen des Category Menu
@@ -77,6 +82,7 @@ function categoryMenu() {
     content.classList.toggle('d-none');
     arrow.classList.toggle('arrow-drop-down')
 }
+
 
 // Rendern der Kontakte in das aufgeklappte Assignet Menu
 function getContacts() {
@@ -158,6 +164,7 @@ function chooseCategory(i) {
 // Setzt beim Klicken auf den Kontakt die input type=checkbox auf true bzw. false
 function changeCheckboxContacts (i) {
     let checkbox = document.getElementById(`checkbox_contacts${i}`);
+    let input = document.getElementById(`input_search_contact`);
     // toggle der Checkbox zwischen true and false
     checkbox.checked = !checkbox.checked;
 
@@ -169,6 +176,7 @@ function changeCheckboxContacts (i) {
     }
     renderCheckBox()
     renderCheckedContacts()
+    input.value = '';
 }
 
 // Suchen der Kontakte im Menu
@@ -405,7 +413,12 @@ async function addAllToTasks() {
 function addtaskAnimation() {
     document.getElementById('animate_btn').classList.add('animate'); 
     document.getElementById('animate_btn').classList.remove('d-none'); 
-    /* setTimeout(function() {
-        window.location.href = "./board.html"; // Ziel URL - board.html
-    }, 1600 ); */
+    setTimeout(function() {
+        window.location.href = "./board.html"; // Ziel URL Weiterleitung - board.html
+    }, 1600 );
+}
+
+//Verhindert das Event Bubbling beim Schließen der Großansicht
+function stopPropagation(event) {           
+    event.stopPropagation();
 }

@@ -1,20 +1,21 @@
 /* Code/ Design, der nur für die Add Task Seite relevant ist! */
+.main-content{
+  flex: 1;
+}
 
 .content {
-  width: 100%;
+  max-width: 100%;
   font-size: 20px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   position: relative;
+  flex: 1;
 }
 
 .information-container {
   display: flex;
   gap: 48px;
-  margin-left: 96px;
-  margin-bottom: 70px;
-  margin-top: 48px;
 }
 
 .left-side {
@@ -159,7 +160,6 @@ justify-content: center;
   display: flex;
   align-items: center;
   gap: 490px;
-  margin-left: 96px;
 }
 
 .clear-create-btn {
@@ -398,5 +398,106 @@ ul {
   }
   100% {
       bottom: 50%;
+  }
+}
+
+.nav-addtask {
+  background-color: #091931;
+}
+
+/* ------------------------------ MEDIA ------------------------------ */
+
+@media (max-width: 1320px) {
+  .title {
+    padding-left: 32px;
+  }
+  
+  .content {
+    margin-right: 32px;
+    justify-content: flex-start;
+  }
+  
+  .ml-96 {
+    margin-left: 32px;
+  }
+
+  .information-container {
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .clear-create-container {
+    gap: 0;
+    justify-content: space-between;
+  }
+
+  .input {
+    width: auto;
+  }
+}
+
+@media (max-width: 1120px) {
+  .clear-create-container {
+    position: fixed;
+    bottom: 8%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .clear-btn {
+    display: none !important;
+  }
+
+  .information-container {
+    margin-top: 32px;
+  }
+}
+
+@media (max-width: 920px) {
+  .logo-header-dark {
+    display: block !important;
+  } 
+
+  .page-content {
+    height: auto;
+  }
+
+  .information-container {
+    flex-direction: column;
+  }
+
+  .prio-btns {
+    justify-content: space-around;
+  }
+
+  .input {
+    font-size: 16px !important;
+  }
+
+  .sub-task-input {
+    font-size: 16px;
+  }
+
+  .prio-btn {
+    font-size: 16px;
+  }
+
+  .content {
+    margin-bottom: calc(66px + 96px + 32px); /* höhe header + höhe create task + hilföhe für subtasks */
+  }
+
+  .contacts-container {
+    width: 100%;
+  }
+
+  .ul-subtasks {
+    width: 100%;
+  }
+
+  .ul-subtasks {
+    min-width: 0;
   }
 }

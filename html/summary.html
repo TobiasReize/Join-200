@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0">
-    <title>JOIN</title>
+    <title>Summary</title>
 
     <link rel="stylesheet" href="../style.css">
-    <script src="../../js/templates.js"></script>
-    <link rel="icon" type="image/x-icon" href="../../assets/img/00_general-elements/join-logo-white.svg">
-    <script src="../js/summary.js"></script>
     <link rel="stylesheet" href="../css/summary.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/img/00_general-elements/join-logo-white.svg">
+
+    <!-- Stelle sicher, dass beide Skripte das defer-Attribut haben -->
+    <script src="../script.js" ></script>
+    <script src="../js/board.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/summary.js"></script>
 </head>
 
-<body onload="includeHTML(); greet()">
+<body onload="includeHTML(); initBoard()">
     <div class="page-content">
         <nav w3-include-html="../assets/templates/navbar.html"></nav>
         <main class="main-content">
@@ -26,7 +29,7 @@
                     </div>
                     <div class="board">
                         <div class="open-board">
-                            <div class="open-todo">
+                            <div class="open-todo" onclick="location.href='board.html';">
                                 <svg width="69" height="70" viewBox="0 0 69 70" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="34.5" cy="35" r="34.5" fill="#2A3647" />
@@ -41,12 +44,12 @@
                                     </g>
                                 </svg>
                                 <div>
-                                    <b>1</b>
+                                    <b id="todoNumber"></b>
                                     <p>To-Do</p>
                                 </div>
 
                             </div>
-                            <div class="open-done">
+                            <div class="open-done" onclick="location.href='board.html';">
                                 <svg width="70" height="70" viewBox="0 0 70 70" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="35" cy="35" r="34.5" fill="#2A3647" />
@@ -54,14 +57,14 @@
                                         stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                                 <div>
-                                    <b>1</b>
+                                    <b id="doneNumber"></b>
                                     <p>Done</p>
                                 </div>
 
                             </div>
                         </div>
-                        <div class="urgent-board">
-                            <div class="urgent-number">
+                        <div class="urgent-board" onclick="location.href='board.html';">
+                            <div class="urgent-number" >
                                 <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="30" cy="30" r="30" fill="#FF3D00" />
@@ -91,27 +94,28 @@
                             </div>
                         </div>
                         <div class="task-board">
-                            <div class="task-numbers">
+                            <div class="task-numbers" onclick="location.href='board.html';">
                                 <b>5</b>
                                 <p>Task in <br> Board</p>
                             </div>
-                            <div class="task-numbers">
-                                <b>2</b>
+                            <div class="task-numbers" onclick="location.href='board.html';">
+                                <b id="inProgressNumber"></b>
                                 <p>Task in <br> Progress</p>
                             </div>
-                            <div class="task-numbers">
-                                <b>2</b>
+                            <div class="task-numbers" onclick="location.href='board.html';">
+                                <b id="awaitFeedbackNumber"></b>
                                 <p>Awaiting <br> Feedback</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="greeting" id="greeting">
-                        <p>Moin Steffen</p>
                     </div>
             </div>
         </main>
     </div>
+    
 </body>
+
 
 </html>
