@@ -15,12 +15,12 @@
 </head>
 
 <body onload="initContacts()">
-    <div class="page-content">
-        <nav w3-include-html="../assets/templates/navbar.html"></nav>
+    <div class="page-content" onclick="closeEditDeleteMenu()">
+        <nav w3-include-html="./navbar.html"></nav>
         <main class="main-content">
-            <header w3-include-html="../assets/templates/header.html"></header>
+            <header w3-include-html="./header.html"></header>
 
-            <section class="content">
+            <section class="content" >
               <div class="contact-container" id="contact_container">
                 <div class="container-add-new-contact" id="add_new_contact">
                     <button class="btn-add-new-contact" onclick="openAddNewContact()"><span>Add new contact</span><img src="../assets/img/05_contacts/person_add.svg"></button>

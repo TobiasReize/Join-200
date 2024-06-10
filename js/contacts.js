@@ -89,7 +89,7 @@ function tempRenderActiveContact(i) {
             <span class="short-name big-short-name" style="background-color: ${importContacts[i]['color']}">${importContacts[i]['firstName'].charAt(0) + importContacts[i]['lastName'].charAt(0)}</span>
             <div class="d-fl full-name-edit-delete">
                 <span>${importContacts[i]['firstName']} ${importContacts[i]['lastName']}</span>
-                <div class="d-fl edit-delete">
+                <div id="edit_delete" class="d-fl edit-delete">
                     <div class="d-fl show-contact-edit" onclick="editContact(${i})">
                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
@@ -113,6 +113,7 @@ function tempRenderActiveContact(i) {
                         Delete
                     </div>
                 </div>
+                <img class="contact-menu-btn" src="../assets/img/05_contacts/more_vert.svg" onclick="openEditDeleteMenu(); stopPropagation(event)">
             </div>
         </div>
         <span class="show-contact-information-span">Contact Information</span>
@@ -328,4 +329,12 @@ function backToAllContacts() {
     
     allContacts.classList.remove('d-none');
     showContact.style.display = "none";
+}
+
+function openEditDeleteMenu() {
+    document.getElementById('edit_delete').style.display = "flex";
+}
+
+function closeEditDeleteMenu() {
+    document.getElementById('edit_delete').style.display = "none";
 }
