@@ -19,6 +19,12 @@ async function loadData(path = '', importArray) {
     importArray =  importArray.push(...responseToJson); // Daten aus der Datenbank werden in Array gespeichert
 }
 
+async function getItem(path = '') {
+    let response = await fetch(BASE_URL + path + '.json');
+    let responseToJson = await response.json();
+    return responseToJson;
+}
+
 async function loadContacts(path = '') {
     let response = await fetch(BASE_URL + path + '.json');
     let responseToJson = await response.json();
