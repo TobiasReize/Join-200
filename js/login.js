@@ -1,12 +1,3 @@
-//Weiterleitung von register.html + Nachricht anzeigen: "Erfolgreiche Registrierung"
-const urlParams = new URLSearchParams(window.location.search);      //Query Parameter 'msg' auslesen
-const msg = urlParams.get('msg');
-let msgBox = document.getElementById('msg_box');
-
-if (msg) {
-    msgBox.innerHTML = msg;
-}
-
 
 async function login() {
     let loginBtn = document.getElementById('login_btn');
