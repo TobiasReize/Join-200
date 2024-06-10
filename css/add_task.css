@@ -401,6 +401,10 @@ ul {
   }
 }
 
+.nav-addtask {
+  background-color: #091931;
+}
+
 /* ------------------------------ MEDIA ------------------------------ */
 
 @media (max-width: 1320px) {
@@ -453,6 +457,10 @@ ul {
 }
 
 @media (max-width: 920px) {
+  .logo-header-dark {
+    display: block !important;
+  } 
+
   .page-content {
     height: auto;
   }
@@ -487,5 +495,9 @@ ul {
 
   .ul-subtasks {
     width: 100%;
+  }
+
+  .ul-subtasks {
+    min-width: 0;
   }
 }

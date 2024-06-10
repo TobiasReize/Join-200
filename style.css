@@ -172,10 +172,6 @@ nav {
         z-index: 10;
     }
 
-    .content {
-        margin-top: 48px;
-    }
-
     .policy {
         display: none;
     }
@@ -221,12 +217,27 @@ nav {
 }
 
 @media (max-width: 920px) {
+    header {
+        position: fixed;
+        z-index: 10;
+        top: 0;
+    }
+
+    .contact-header {
+        flex-direction: column ;
+        align-items: flex-start !important;
+    }
+
+    .contact-header > span {
+        font-size: 20px;
+    }
+
     .title {
         display: none;
     }
 
     .logo-header-dark {
-        display: block !important;
+        /* display: block !important; --> muss in der jeweiligen .css hinzugefügt werden, da es sonst nicht greift ! */
         width: 32px;
         height: 39px;
         margin-left: 16px;
