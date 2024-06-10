@@ -458,9 +458,12 @@ function moveTo(idColumn) {   //Funktion, die die Tasks/Karten verschiebt (ergä
     let targetArray = renderedBoardArrays[targetArrayIndex]['array'];
     let startArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == currentDraggedElement['columnTitle']);
     let startArray = renderedBoardArrays[startArrayIndex]['array'];
+    let task = renderedBoardArrays[startArrayIndex]['array'][currentDraggedElement.taskNumber];
 
     targetArray.push(renderedBoardArrays[startArrayIndex]['array'][currentDraggedElement['taskNumber']]);
     startArray.splice(currentDraggedElement.taskNumber, 1);
+    task['columnID'] = renderedBoardArrays[targetArrayIndex]['title'].replace(/ /g,'');
+    
     // allBoardArrays = renderedBoardArrays; --> darf ich nicht machen, da vorher renderedBoardArrays = filteredBoardArrays gemacht wird!
     // renderedBoardArrays = allBoardArrays; --> sobald man eine Task verschiebt, werden wieder alle Tasks angezeigt!
     renderAll();
