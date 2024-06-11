@@ -570,3 +570,24 @@ function getPriority(taskPriorities) {          //Hilfsfunktion, die die Priorit
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function openTask() {
+    document.getElementById('overlay_task').classList.remove('d-none');
+}
+
+function closeTask() {
+    document.getElementById('overlay_task').classList.add('d-none');
+}
