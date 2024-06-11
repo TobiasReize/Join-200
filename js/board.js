@@ -409,13 +409,13 @@ function changeSubtaskStatus(columnID, taskID, subtaskID) {     //Ändert den St
 }
 
 
-function changePriority(priority, columnID, taskID) {
-    // let currentArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == columnID['id']);
-    // let currentTask = renderedBoardArrays[currentArrayIndex]['array'][taskID];
-    // let currentPriority = currentTask['priority'];
+function changePriority(selectedPriority, columnID, taskID) {
+    let currentArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == columnID['id']);
+    let currentTask = renderedBoardArrays[currentArrayIndex]['array'][taskID];
+    let currentTaskPriority = getPriority(currentTask['priorities']);
 
-    let selectedPriorityButton = document.getElementById(`priority_${priority}`);
-    let selectedPriorityIcon = document.getElementsByClassName(`priority-path-${priority}`);
+    let selectedPriorityButton = document.getElementById(`priority_${selectedPriority}`);
+    let selectedPriorityIcon = document.getElementsByClassName(`priority-path-${selectedPriority}`);
     
     // Erst alles zurücksetzen:
     document.getElementById('priority_urgent').classList.remove('priority-urgent-highlight');
@@ -434,11 +434,16 @@ function changePriority(priority, columnID, taskID) {
     document.getElementsByClassName('priority-path-low')[1].classList.remove('fill-white');
 
     // Dann das ausgewählte highlighten:
-    selectedPriorityButton.classList.add(`priority-${priority}-highlight`);
+    selectedPriorityButton.classList.add(`priority-${selectedPriority}-highlight`);
     selectedPriorityButton.children[0].classList.add('fs21-fw700');
     for (let i = 0; i < selectedPriorityIcon.length; i++) {
         selectedPriorityIcon[i].classList.add('fill-white');
     }
+
+    // Priorität der Aufgabe ändern:
+    currentTask['priorities'][0][currentTaskPriority] = false;
+    currentTask['priorities'][0][selectedPriority] = true;
+    saveAllTasks();
 }
 
 
