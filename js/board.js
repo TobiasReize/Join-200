@@ -103,6 +103,7 @@ let filteredBoardArrays = [     //Hilfsarray für die gefilterten Tasks durch di
 ];
 
 let currentDraggedElement;
+let currentEditedTaskPriority;
 
 
 async function initBoard() {
@@ -410,9 +411,9 @@ function changeSubtaskStatus(columnID, taskID, subtaskID) {     //Ändert den St
 
 
 function changePriority(selectedPriority, columnID, taskID) {
-    let currentArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == columnID['id']);
-    let currentTask = renderedBoardArrays[currentArrayIndex]['array'][taskID];
-    let currentTaskPriority = getPriority(currentTask['priorities']);
+    // let currentArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == columnID['id']);
+    // let currentTask = renderedBoardArrays[currentArrayIndex]['array'][taskID];
+    // let currentTaskPriority = getPriority(currentTask['priorities']);
 
     let selectedPriorityButton = document.getElementById(`priority_${selectedPriority}`);
     let selectedPriorityIcon = document.getElementsByClassName(`priority-path-${selectedPriority}`);
@@ -441,9 +442,12 @@ function changePriority(selectedPriority, columnID, taskID) {
     }
 
     // Priorität der Aufgabe ändern:
-    currentTask['priorities'][0][currentTaskPriority] = false;
-    currentTask['priorities'][0][selectedPriority] = true;
-    saveAllTasks();
+    currentEditedTaskPriority = [{
+        'urgent' : false,
+        'medium' : false,
+        'low' : false
+    }];
+    currentEditedTaskPriority[0][selectedPriority] = true;
 }
 
 
