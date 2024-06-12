@@ -332,9 +332,20 @@ function backToAllContacts() {
 }
 
 function openEditDeleteMenu() {
-    document.getElementById('edit_delete').style.display = "flex";
+    try {
+        document.getElementById('edit_delete').style.display = "flex";
+    } catch (e) {
+
+    }
 }
 
 function closeEditDeleteMenu() {
-    document.getElementById('edit_delete').style.display = "none";
+    if (innerWidth <= 920) {
+        try {
+            document.getElementById('edit_delete').style.display = "none";
+        } catch (e) {
+            
+        } 
+    }
+    
 }

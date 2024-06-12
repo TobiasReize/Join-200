@@ -411,11 +411,17 @@ async function addAllToTasks() {
 }
 
 function addtaskAnimation() {
-    document.getElementById('animate_btn').classList.add('animate'); 
-    document.getElementById('animate_btn').classList.remove('d-none'); 
-    setTimeout(function() {
-        window.location.href = "./board.html"; // Ziel URL Weiterleitung - board.html
-    }, 1600 );
+    try {
+        document.getElementById('animate_btn_overlay').style.display = "flex"; 
+        document.getElementById('animate_btn').classList.remove('d-none');
+        setTimeout(function() {
+            document.getElementById('animate_btn_overlay').style.display = "none"; 
+            document.getElementById('animate_btn').classList.remove('d-none'); 
+            window.location.href = "./board.html"; // Ziel URL Weiterleitung - board.html
+        }, 3200 );
+    } catch (error) {
+        
+    }
 }
 
 //Verhindert das Event Bubbling beim Schließen der Großansicht

@@ -197,9 +197,6 @@ justify-content: center;
   padding-right: 21px;
 }
 
-
-
-
 .contacts-container {
   width: 440px;
   margin-top: -35px;
@@ -373,20 +370,31 @@ ul {
   border: 1px solid #FF8190;
 }
 
-.task_added {
+.task-added {
   justify-content: space-between;
   border-radius: 20px;
   width: 326px;
   height: 74px;
   padding: 30.5px 25px;
-  position: absolute;
-  bottom: -50px;
-  left: 50%;
   cursor: none;
+  position: absolute;
+  bottom: -50%;
 }
 
 .animate {
   animation: fly-in 900ms ease-out forwards;
+}
+
+.overlay-task-added {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
 }
 
 @keyframes fly-in {
@@ -403,6 +411,10 @@ ul {
 
 .nav-addtask {
   background-color: #091931;
+}
+
+.content > h1 {
+  margin-bottom: 16px;
 }
 
 /* ------------------------------ MEDIA ------------------------------ */
@@ -454,6 +466,10 @@ ul {
   .information-container {
     margin-top: 32px;
   }
+
+  .content {
+    margin-top: 64px;
+  }
 }
 
 @media (max-width: 920px) {
@@ -463,6 +479,10 @@ ul {
 
   .page-content {
     height: auto;
+  }
+
+  .content {
+    margin-top: 110px;
   }
 
   .information-container {

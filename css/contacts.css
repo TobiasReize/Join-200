@@ -176,7 +176,8 @@
 }
 
 .edit-delete {
-    gap: 16px
+    gap: 16px;
+    display: flex;
 }
 
 .edit-delete > div > svg {
@@ -589,6 +590,11 @@
         align-items: flex-start;
         margin-left: 16px;
         margin-right: 16px;
+        width: 100%;
+    }
+
+    .active-contact {
+        width: 100%;
     }
 
     .container-add-new-contact {
@@ -612,9 +618,9 @@
     }
 
     .big-short-name {
-        width: 80px;
-        height: 80px;
         font-size: 27px;
+        max-width: 80px;
+        max-height: 80px;
     }
 
     .full-name-edit-delete > span {
@@ -661,20 +667,24 @@
     }
 
     .contact-card-input-div {
-        width: 320px;
         margin-left: 24px;
         margin-right: 24px;
     }
 
+    .contact-card {
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+
     .edit-delete {
-        position: absolute;
+        position: fixed;
         bottom: -65%;
         right: 0;
         flex-direction: column;
         border-radius: 20px 20px 0px 20px;
         background-color: white;
         box-shadow: 0px 4px 4px 0px #00000040;
-        padding: 10px;
+        padding: 16px;
         z-index: 2;
         display: none;
         animation: fly-in-animation 400ms ease-out forwards;
@@ -687,7 +697,7 @@
         width: 56px;
         height: 56px;
         padding: 12px;
-        position: absolute;
+        position: fixed;
         bottom: -65%;
         right: 0;
         cursor: pointer;
@@ -696,7 +706,21 @@
     .contact-menu-btn:active {
         background-color: var(--hover-color);
     }
-    
+}
 
+@media (max-width: 440px) {
+    .contact-card-input-div {
+        width: auto;
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
 
+    .contact-card {
+        flex: 1;
+    }
+
+    .contact-edit-input-icon {
+        display: none;
+    }
 }
