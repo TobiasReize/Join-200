@@ -554,6 +554,18 @@ function saveAllTasks() {       //Speichert die aktuellen Tasks in Firebase ab!
 }
 
 
+// Add Task Overlay:
+function openTask(columnID) {
+    document.getElementById('overlay_task').classList.remove('d-none');
+    console.log(columnID);
+}
+
+
+function closeTask() {
+    document.getElementById('overlay_task').classList.add('d-none');
+}
+
+
 // Hilfsfunktionen:
 function stopPropagation(event) {           //Verhindert das Event Bubbling beim Schließen der Großansicht
     event.stopPropagation();
@@ -581,25 +593,4 @@ function getPriority(taskPriorities) {          //Hilfsfunktion, die die Priorit
             return key;
         }
     }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function openTask() {
-    document.getElementById('overlay_task').classList.remove('d-none');
-}
-
-function closeTask() {
-    document.getElementById('overlay_task').classList.add('d-none');
 }
