@@ -317,13 +317,13 @@ function editSubtask(i) {
         </div>
     `;
     let input = document.getElementById('edit_input_subtask');
-    input.value = subtasks[i];
+    input.value = subtasks[i]['subtaskTitle'];
 }
 
 // Speichern des edititerten Subtask
 function saveEditSubtask(i) {
     let input = document.getElementById('edit_input_subtask');
-    subtasks[i] = input.value;
+    subtasks[i]['subtaskTitle'] = input.value;
     addSubtasks();
 }
 

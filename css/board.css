@@ -74,6 +74,11 @@
     padding: 12px 16px;
 }
 
+.border-focus:focus-within, .border-focus:focus-visible {
+    border: 1px solid var(--hover-color);
+    outline: unset;
+}
+
 /* Section: Board Headline */
 .searchbar-button-container {
     gap: 32px;
@@ -86,10 +91,6 @@
     border-radius: 10px;
     border: 1px solid #A8A8A8;
     background-color: #FFFFFF;
-}
-
-.searchbar:focus-within {
-    border: 1px solid var(--hover-color);
 }
 
 .searchbar:hover {
@@ -145,8 +146,6 @@
     background-color: var(--default-color);
     border-radius: 10px;
     color: #ffffff;
-    font-size: 21px;
-    font-weight: 700;
 }
 
 .add-task-button:hover {
@@ -327,7 +326,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .big-view-card {
@@ -335,15 +334,21 @@
     width: 525px;
     padding: 48px 40px;
     border-radius: 30px;
-    transition: transform 0.3s ease-in-out;
-    transform: translateX(100vw);
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+    max-height: calc(100vh - 32px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
-.big-view-card-edit {
-    background-color: #ffffff;
-    width: 525px;
-    padding: 48px 40px;
-    border-radius: 30px;
+.big-view-card-content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.transition {
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100vw);
 }
 
 .translateX-0 {
@@ -358,10 +363,14 @@
     color: #FFFFFF;
 }
 
+.big-view-close {
+    border-radius: 50%;
+    padding: 4px;
+}
+
 .big-view-close:hover {
     cursor: pointer;
     background-color: #EEEEEE;
-    border-radius: 56px;
 }
 
 .big-view-date-container > div:first-child {
@@ -465,7 +474,7 @@
     gap: 8px;
 }
 
-/* Großansicht bearbeiten */
+/* Edit big view */
 .big-view-input-style {
     border: 1px solid #D1D1D1;
     border-radius: 10px;
@@ -473,7 +482,7 @@
 
 .big-view-description-input {
     padding: 18px 16px;
-    line-height: 25.2px;
+    line-height: 25px;
 }
 
 .big-view-edit-priority-text {
@@ -514,6 +523,53 @@
 .priority-low-highlight {
     background-color: #7AE229;
     color: #FFFFFF;
+}
+
+.edit-task-contact-container {
+    padding-right: 16px;
+    cursor: pointer;
+}
+
+.edit-task-contact-input {
+    flex: 1;
+    border: unset;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.edit-task-contact-input:focus-visible {
+    outline: unset;
+}
+
+.edit-task-dropdown-arrow {
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.edit-task-dropdown-arrow:hover {
+    background-color: #EEEEEE;
+}
+
+.edit-task-subtask-li {
+    padding: 6px 16px;
+}
+
+.edit-task-ok-button {
+    color: #FFFFFF;
+    background-color: var(--default-color);
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.edit-task-ok-button:hover {
+    cursor: pointer;
+    background-color: var(--hover-color);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.edit-task-ok-button:active {
+    background-color: var(--click-color);
+    box-shadow: none;
 }
 
 /* Section: Add Task Overlay */
