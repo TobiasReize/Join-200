@@ -556,6 +556,7 @@ function saveAllTasks() {       //Speichert die aktuellen Tasks in Firebase ab!
 
 // Add Task Overlay:
 function openTask(columnID) {
+    boardColumn = columnID;
     document.getElementById('overlay_task').classList.remove('d-none');
     console.log(columnID);
 }
