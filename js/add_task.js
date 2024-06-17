@@ -49,13 +49,6 @@ async function initAddtask() {
     await init();
 }
 
-async function loadData(path = '', importArray) {
-    let response = await fetch(BASE_URL + path + '.json');
-    let responseToJson = await response.json();
-    importArray =  importArray.push(...responseToJson); // Daten aus der Datenbank werden in Array gespeichert
-    return responseToJson;
-}
-
 // Aufklappen des Assignet Menu
 function openAssignMenu() {
     let content = document.getElementById('contact_container');
@@ -64,17 +57,14 @@ function openAssignMenu() {
     arrow.classList.add('arrow-drop-down')
 }
 
-function closeAssignMenu() {
-    let contact = document.getElementById('contact_container');
-    let arrowContact = document.getElementById('arrow_drop_down_contact');
-    let category = document.getElementById('category_container');
-    let arrowCategory = document.getElementById('arrow_drop_down_category');
 
-    category.classList.add('d-none');
-    arrowCategory.classList.remove('arrow-drop-down')
-    contact.classList.add('d-none');
-    arrowContact.classList.remove('arrow-drop-down')
+function closeAssignMenu() {
+    ['contact', 'category'].forEach(id => {
+        document.getElementById(`${id}_container`).classList.add('d-none');
+        document.getElementById(`arrow_drop_down_${id}`).classList.remove('arrow-drop-down');
+    });
 }
+
 
 // Aufklappen des Category Menu
 function categoryMenu() {
@@ -118,27 +108,17 @@ function renderContacts(i) {
 // Erstellen IMG Checkbox
 // richtige input type=checkbox ist ausgeblendet und überprüft ob true oder false und setzt so das IMG
 function renderCheckBox() {
-    for (let i = 0; i < importContacts.length; i++) {
+    importContacts.forEach((contact, i) => {
         let imgUnchecked = document.getElementById(`img_checkbox_contacts${i}`);
+        if (!imgUnchecked) return;
+
         let imgChecked = document.getElementById(`img_checkbox_checked_contacts${i}`);
         let checkbox = document.getElementById(`checkbox_contacts${i}`);
-        const contact = importContacts[i];
 
-        // Wenn bei der Suche "imgUnchecked", ... gerendert sind = null und es verlässte das Statement, SONST setze true oder false und render Ausgewählten Kontakt
-        if (imgUnchecked === null ) {
-            break
-        } else {
-            if (contact['checked'] == true) {
-                checkbox.checked = true;
-                imgChecked.classList.remove('d-none')
-                imgUnchecked.classList.add('d-none')
-            } else {
-                checkbox.checked = false;
-                imgChecked.classList.add('d-none')
-                imgUnchecked.classList.remove('d-none')
-            } 
-        }
-    }
+        checkbox.checked = contact['checked'];
+        imgChecked.classList.toggle('d-none', !contact['checked']);
+        imgUnchecked.classList.toggle('d-none', contact['checked']);
+    });
 }
 
 // Rendert Kategorien in das Category Menu
@@ -250,13 +230,9 @@ function changePrio(priorityLevel) {
 
 // Rendert die Icons "close" und "check" im Subtask Feld
 function renderSubtask() {
-    let addIcon = document.getElementById('add_icon');
-    let closeIcon = document.getElementById('close_icon');
-    let checkIcon = document.getElementById('check_icon');
-
-    addIcon.classList.toggle('d-none');
-    closeIcon.classList.toggle('d-none');
-    checkIcon.classList.toggle('d-none');
+    ['add_icon', 'close_icon', 'check_icon'].forEach(id => {
+        document.getElementById(id).classList.toggle('d-none');
+    });
 }
 
 // Fügt die eingegeben Subtask zu dem Array "subtasks" hinzu und rendert diese 
@@ -285,8 +261,7 @@ function addSubtasks() {
         <div id="edit_container${i}" class="edit-subtask-container"></div>
     `;
     }
-    input.value = '';
-    
+    input.value = ''; 
 }
 
 // Löscht die Eingabe im Input Feld bei Subtask

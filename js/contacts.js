@@ -1,5 +1,3 @@
-// Array in dem die Datenbankdaten geladen werden
-// let importContacts = [];
 // Startfunktion
 async function initContacts() {
     await init();
@@ -127,28 +125,17 @@ function tempRenderActiveContact(i) {
 
 // Öffnet der Overlay zum hinzufügen eines neuen Kontakts
 function openAddNewContact() {
-    let content = document.getElementById('overlay_container');
-    let contactCard = document.getElementById('contact_card');
-    let editCard = document.getElementById('edit_card');
-
-    content.classList.remove('d-none');
-    contactCard.classList.remove('d-none');
-    editCard.classList.add('d-none');
-    contactCard.classList.add('fly-in');
-    document.getElementById(`input_name`).value = '';
-    document.getElementById(`input_mail`).value = '';
-    document.getElementById(`input_tel`).value = '';
+    ['overlay_container', 'contact_card'].forEach(id => document.getElementById(id).classList.remove('d-none'));
+    document.getElementById('edit_card').classList.add('d-none');
+    document.getElementById('contact_card').classList.add('fly-in');
+    ['input_name', 'input_mail', 'input_tel'].forEach(id => document.getElementById(id).value = '');
 }
 
 // Öffnete das Overlay zum editieren eines Kontakts
 function openEditContact() {
-    let content = document.getElementById('overlay_container');
-    let editCard = document.getElementById('edit_card');
-    let contactCard = document.getElementById('contact_card');
-    
-    content.classList.remove('d-none');
-    contactCard.classList.add('d-none');
-    editCard.classList.add('fly-in');
+    document.getElementById('overlay_container').classList.remove('d-none');
+    document.getElementById('contact_card').classList.add('d-none');
+    document.getElementById('edit_card').classList.add('fly-in');
 }
 
 // Erstellt einen neuen Kontakt
@@ -197,20 +184,15 @@ function createContact() {
 // Animation bei hinzufügen eines Kontaktes
 function successfullyAddedAnimation() {
     let btn = document.getElementById('btn_suc_added');
-    btn.classList.remove('d-none');
+    btn.classList.remove('d-none', 'fly-out');
     btn.classList.add('fly-in');
 
     setTimeout(() => {
-        btn.classList.remove('fly-in');
-    }, 400); // Entferne die fly-in Klasse nach 400ms
-
-    setTimeout(() => {
-        btn.classList.add('fly-out');
-    }, 800); // Füge die fly-out Klasse nach weiteren 400ms hinzu (insgesamt 800ms)
+        btn.classList.replace('fly-in', 'fly-out');
+    }, 400); // Ersetze die fly-in Klasse durch fly-out nach 400ms
 
     setTimeout(() => {
         btn.classList.add('d-none');
-        btn.classList.remove('fly-out');
     }, 1200); // Füge die d-none Klasse nach der Ausblendanimation hinzu (insgesamt 1200ms)
 }
 
@@ -222,18 +204,16 @@ function getRandomColor() {
 
 // schließt das Overlay
 function closeContactCard() {
-    let content = document.getElementById('overlay_container');
-    let contactCard = document.getElementById('contact_card');
-    let editCard = document.getElementById('edit_card');
-    contactCard.classList.add('fly-out');
-    editCard.classList.add('fly-out');
+    const ids = ['overlay_container', 'contact_card', 'edit_card'];
+    const [content, contactCard, editCard] = ids.map(id => document.getElementById(id));
+
+    [contactCard, editCard].forEach(el => el.classList.add('fly-out'));
+
     setTimeout(() => {
-        content.classList.add('d-none');
-        contactCard.classList.add('d-none')
-        contactCard.classList.remove('fly-out');
-        editCard.classList.add('d-none')
-        editCard.classList.remove('fly-out');
+        ids.forEach(id => document.getElementById(id).classList.add('d-none'));
+        [contactCard, editCard].forEach(el => el.classList.remove('fly-out'));
     }, 400);
+
     renderContacts();
 }
 
@@ -347,5 +327,4 @@ function closeEditDeleteMenu() {
             
         } 
     }
-    
 }
