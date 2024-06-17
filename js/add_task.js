@@ -1,4 +1,3 @@
-// Code oder Funktionen, die nur für die Add Task Seite relevant sind!
 let boardColumn = [];
 
 let priority = [
@@ -49,7 +48,9 @@ async function initAddtask() {
     await init();
 }
 
-// Aufklappen des Assignet Menu
+/**
+ * function to open the assign menu 
+ */
 function openAssignMenu() {
     let content = document.getElementById('contact_container');
     let arrow = document.getElementById('arrow_drop_down_contact');
@@ -57,7 +58,9 @@ function openAssignMenu() {
     arrow.classList.add('arrow-drop-down')
 }
 
-
+/**
+ * function to close the assign menu
+ */
 function closeAssignMenu() {
     ['contact', 'category'].forEach(id => {
         document.getElementById(`${id}_container`).classList.add('d-none');
@@ -66,7 +69,9 @@ function closeAssignMenu() {
 }
 
 
-// Aufklappen des Category Menu
+/**
+ * function to open/close the category menu
+ */
 function categoryMenu() {
     let content = document.getElementById('category_container');
     let arrow = document.getElementById('arrow_drop_down_category');
@@ -76,6 +81,9 @@ function categoryMenu() {
 
 
 // Rendern der Kontakte in das aufgeklappte Assignet Menu
+/**
+ * function to put the single contacts html in an list 
+ */
 function getContacts() {
     let content = document.getElementById('list_options');
     content.innerHTML = '';
@@ -86,6 +94,11 @@ function getContacts() {
     renderCheckBox()
 }
 
+/**
+ * to render the html code for the assign menu contacts
+ * @param {integer} i 
+ * @returns 
+ */
 function renderContacts(i) {
     return /* html */ `
         <li id="listed_names${i}" class="option" onclick="changeCheckboxContacts(${i})">
@@ -105,8 +118,10 @@ function renderContacts(i) {
     `;
 }
 
-// Erstellen IMG Checkbox
-// richtige input type=checkbox ist ausgeblendet und überprüft ob true oder false und setzt so das IMG
+/**
+ * create img chechbox
+ * there is a input type=checkbox and return the checked or unchecked to the img
+ */
 function renderCheckBox() {
     importContacts.forEach((contact, i) => {
         let imgUnchecked = document.getElementById(`img_checkbox_contacts${i}`);
@@ -121,7 +136,9 @@ function renderCheckBox() {
     });
 }
 
-// Rendert Kategorien in das Category Menu
+/**
+ * function to render the html for the category menu
+ */
 function renderCategories() {
     let content = document.getElementById('list_options_category');
     content.innerHTML = '';
@@ -134,15 +151,21 @@ function renderCategories() {
     }
 }
 
-// Setzt die gewählt Kategorie in das Input Feld
+/**
+ * function to set the category to the input.value
+ * close the category menu after choosen
+ * @param {integer} i 
+ */
 function chooseCategory(i) {
     let inputField = document.getElementById('category_input');
-    let categoryContainer = document.getElementById('category_container');
     inputField.value = importCategories[i];
     categoryMenu();
 }
 
-// Setzt beim Klicken auf den Kontakt die input type=checkbox auf true bzw. false
+/**
+ * function to set the input type=checkbox to true or false
+ * @param {integer} i 
+ */
 function changeCheckboxContacts (i) {
     let checkbox = document.getElementById(`checkbox_contacts${i}`);
     let input = document.getElementById(`input_search_contact`);
@@ -160,7 +183,9 @@ function changeCheckboxContacts (i) {
     input.value = '';
 }
 
-// Suchen der Kontakte im Menu
+/**
+ * filter the contacs and and render them to the menu
+ */
 function searchContact() {
     let input = document.getElementById('input_search_contact').value.toLowerCase();
     let content = document.getElementById('list_options');
@@ -175,7 +200,9 @@ function searchContact() {
     renderCheckedContacts();
 }
 
-// Rendert die Auswählten Kontakte unterhalb des Input Feldes
+/**
+ * render the checked contacts html below the input search
+ */
 function renderCheckedContacts() {
     let content = document.getElementById(`checked_contacts`);
     content.innerHTML = '';
@@ -191,7 +218,10 @@ function renderCheckedContacts() {
     }
 }   
 
-// Färbt den gewählten Prio Btn ein und setzt alle anderen wieder auf die Standart Farbe
+/**
+ * function to set the color of the priority buttons and reset the others
+ * @param {string} priority 
+ */
 function colorChange(priority) {
     let priorities = ['urgent', 'medium', 'low'];
     priorities.forEach(pri => {
@@ -215,7 +245,10 @@ function colorChangeLow() {
 }
 
 
-// Änderung der Prio Boolean
+/**
+ * set and change the boolean of the priority 
+ * @param {boolean} priorityLevel 
+ */
 function changePrio(priorityLevel) {
     // Setze alle Werte auf false
     priority[0].urgent = false;
@@ -228,14 +261,18 @@ function changePrio(priorityLevel) {
     }
 }
 
-// Rendert die Icons "close" und "check" im Subtask Feld
+/**
+ * function to render the "close" ande "check" buttons in the subtasks
+ */
 function renderSubtask() {
     ['add_icon', 'close_icon', 'check_icon'].forEach(id => {
         document.getElementById(id).classList.toggle('d-none');
     });
 }
 
-// Fügt die eingegeben Subtask zu dem Array "subtasks" hinzu und rendert diese 
+/**
+ * function to add the subtask to the array and render them
+ */
 function addSubtasks() {
     let input= document.getElementById('input_subtask');
     let subtaskList = document.getElementById('list_subtasks');
@@ -264,19 +301,28 @@ function addSubtasks() {
     input.value = ''; 
 }
 
-// Löscht die Eingabe im Input Feld bei Subtask
+/**
+ * clear the input field subtask
+ */
 function clearInputField() {
     let input= document.getElementById('input_subtask');
     input.value = '';
 }
 
-// Löscht die erstellte Subtask
+/**
+ * delete the choosen subtask
+ * @param {integer} i - choosen subtask
+ */
 function deleteSubtask(i) {
     subtasks.splice(i, 1)
     addSubtasks();
 }
 
 // Öffnet ein Input Feld in das der Subtask geladen wird und bearbeitet und gespeichert/gelöscht werden kann
+/**
+ * open the input where the subtask can be edit to create or delete
+ * @param {integer} i - choosen subtask
+ */
 function editSubtask(i) {
     let subtaskList = document.getElementById(`edit_container${i}`);
     document.getElementById(`subtasks${i}`).innerHTML = '';
@@ -295,7 +341,10 @@ function editSubtask(i) {
     input.value = subtasks[i]['subtaskTitle'];
 }
 
-// Speichern des edititerten Subtask
+/**
+ * save the edit subtask
+ * @param {integer} i - choosen subtask 
+ */
 function saveEditSubtask(i) {
     let input = document.getElementById('edit_input_subtask');
     subtasks[i]['subtaskTitle'] = input.value;
@@ -303,6 +352,10 @@ function saveEditSubtask(i) {
 }
 
 // Hinzufügen aller Werte zum JSON "tasks"
+/**
+ * add all to the json "tasks"
+ * check if the required inputs are not empty and colorize the input outline and add the errorElement
+ */
 async function createNewTask() {
     let inputs = [
         {element: document.getElementById('input_title'), errorElement: document.getElementById('required_title')},
@@ -340,6 +393,13 @@ async function createNewTask() {
 // Fügt die ausgeäwhlten Kontakte zum JSON "tasks['contact']" hinzu
 // vergleicht die Arrays "importContacts" und "importTasks"
 // Filtert nach checked Parameter 
+/**
+ * add the choosen contact to "tasks" 
+ * compare "importContacts" and "importTasks"
+ * filter for the checked
+ * @param {string} importContacts - contacts from the database
+ * @param {string} newTask - created task
+ */
 function addCheckedContactsToTasks(importContacts, newTask) {
     let checkedContacts = importContacts.filter(contact => contact.checked)
         .map(contact => ({
@@ -354,6 +414,9 @@ function addCheckedContactsToTasks(importContacts, newTask) {
 }
 
 // Fügt den beschrieben Task zur Datenbank hinzu
+/**
+ * save the task with all values to the database
+ */
 async function addAllToTasks() {
     let inputTitle = document.getElementById('input_title');
     let inputDescription = document.getElementById('input_description');
@@ -381,6 +444,10 @@ async function addAllToTasks() {
     await setItem('tasks', importTasks);
 }
 
+/**
+ * animation for the added task
+ * forwarding to board.html
+ */
 function addtaskAnimation() {
     try {
         document.getElementById('animate_btn_overlay').style.display = "flex"; 
@@ -395,7 +462,6 @@ function addtaskAnimation() {
     }
 }
 
-//Verhindert das Event Bubbling beim Schließen der Großansicht
 function stopPropagation(event) {           
     event.stopPropagation();
 }
