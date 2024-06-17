@@ -1,4 +1,5 @@
 // Code oder Funktionen, die nur für die Add Task Seite relevant sind!
+let boardColumn = [];
 
 let priority = [
     {
@@ -266,7 +267,7 @@ function addSubtasks() {
     if (input.value == '') {
         
     } else {
-        subtasks.push(input.value);
+        subtasks.push({'subtaskTitle' : input.value, 'status' : 'open'});
     }
 
     subtaskList.innerHTML = '';
@@ -275,7 +276,7 @@ function addSubtasks() {
         const subtask = subtasks[i];
         subtaskList.innerHTML += /* html */ `
         <div id="subtasks${i}" class="li-subtask">
-            <li>${subtask}</li>
+            <li>${subtask.subtaskTitle}</li>
             <div class="edit-icons-subtasks">
                 <div class="icon-box b-right"><img  class="add-icon" src="../assets/img/03_add-task/pencil.svg" onclick="editSubtask(${i})"></div>
                 <div class="icon-box" onclick=""><img  class="add-icon" src="../assets/img/03_add-task/delete.svg" onclick="deleteSubtask(${i})"></div> 
@@ -316,13 +317,13 @@ function editSubtask(i) {
         </div>
     `;
     let input = document.getElementById('edit_input_subtask');
-    input.value = subtasks[i];
+    input.value = subtasks[i]['subtaskTitle'];
 }
 
 // Speichern des edititerten Subtask
 function saveEditSubtask(i) {
     let input = document.getElementById('edit_input_subtask');
-    subtasks[i] = input.value;
+    subtasks[i]['subtaskTitle'] = input.value;
     addSubtasks();
 }
 
@@ -385,19 +386,14 @@ async function addAllToTasks() {
     let inputCategory = document.getElementById('category_input');
 
     let newTask = {
-        'columnID' : 'ToDo',
+        'columnID' : boardColumn,
         'title': inputTitle.value || '',
         'description': inputDescription.value || '',
         'contact': [] || '', 
         'date': inputDate.value || '',
         'priorities': [...priority],
         'categories': inputCategory.value || '',
-        'subtasks': [
-            {
-                'subtaskTitle' : [...subtasks] || '',
-                'status' : 'open'
-            }
-        ]
+        'subtasks': subtasks
     };
 
     // Füge die geprüften Kontakte zum neuen Task hinzu
@@ -418,7 +414,7 @@ function addtaskAnimation() {
             document.getElementById('animate_btn_overlay').style.display = "none"; 
             document.getElementById('animate_btn').classList.remove('d-none'); 
             window.location.href = "./board.html"; // Ziel URL Weiterleitung - board.html
-        }, 3200 );
+        }, 2400 );
     } catch (error) {
         
     }
