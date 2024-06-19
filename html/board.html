@@ -43,7 +43,7 @@
                                     </g>
                                 </svg>
                             </div>
-                            <div class="add-task-button df-ai-ctr" onclick="openTask('ToDo')">
+                            <div class="add-task-button df-ai-ctr" onclick="showAddTaskOverlay('ToDo')">
                                 <span class="fs21-fw700">Add task</span>
                                 <img src="../assets/img/00_general-elements/plus-white.svg" alt="">
                             </div>
@@ -53,7 +53,7 @@
                     <div class="column-headlines-container df-ai-ctr ml-96">
                         <div class="column-headline ai-ctr-space-btwn">
                             <span class="column-title">To do</span>
-                            <svg onclick="openTask('ToDo')" class="plus-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg onclick="showAddTaskOverlay('ToDo')" class="plus-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
                                 <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                                 <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
@@ -61,7 +61,7 @@
                         </div>
                         <div class="column-headline ai-ctr-space-btwn">
                             <span class="column-title">In progress</span>
-                            <svg onclick="openTask('InProgress')" class="plus-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg onclick="showAddTaskOverlay('InProgress')" class="plus-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
                                 <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                                 <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
@@ -69,7 +69,7 @@
                         </div>
                         <div class="column-headline ai-ctr-space-btwn">
                             <span class="column-title">Await feedback</span>
-                            <svg onclick="openTask('AwaitFeedback')" class="plus-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg onclick="showAddTaskOverlay('AwaitFeedback')" class="plus-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
                                 <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                                 <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
@@ -93,8 +93,8 @@
                 <section id="big_view_container" class="overlay-container d-none" onclick="closeBigView(0)"></section>
 
                 <!-- Section: Add Task Overlay -->
-                <section id="overlay_task" class="overlay-container d-none" onclick="closeTask()">
-                    <div class="addtask-backlog" w3-include-html="../assets/templates/task_form.html" onclick="stopPropagation(event)"></div>
+                <section id="overlay_task" class="overlay-container d-none" onclick="closeAddTaskOverlay(), closeAssignMenu()">
+                    <div class="addtask-backlog" w3-include-html="../assets/templates/task_form.html" onclick="stopPropagation(event), closeAssignMenu()"></div>
                 </section>
                 <button id="animate_btn" class="prio-btn create-btn task_added d-none">Task added to board <img src="../assets/img/00_general-elements/board-grey.svg"></button>
 

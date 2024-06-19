@@ -15,7 +15,7 @@
             <input id="input_search_contact" class="sub-task-input" type="text" placeholder="Select contacts to assign" oninput="searchContact()">
             <img id="arrow_drop_down_contact" class="add-icon p-8" src="../assets/img/00_general-elements/arrow_drop_down.svg">
         </div>
-        <div>
+        <div onclick="stopPropagation(event)">
             <div id="contact_container" class="contacts-container d-none">
                 <ul id="list_options" class="list-options">
                 </ul>

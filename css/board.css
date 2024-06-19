@@ -550,8 +550,25 @@
     background-color: #EEEEEE;
 }
 
-.edit-task-subtask-li {
-    padding: 6px 16px;
+.edit-task-contacts-container {
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    background-color: white;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.checked-contacts {
+    position: unset;
+}
+
+.checked-contact {
+    margin: 0;
+}
+
+.edit-task-subtasks-ul {
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .edit-task-ok-button {
