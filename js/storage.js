@@ -9,7 +9,6 @@ async function setItem(path = '', value) {          //Neuer User wird in der Dat
         body: JSON.stringify(value)      //die Daten, die wir hochladen, werden vorher in reinen Text umgewandelt
     });
     let responseToJson = await response.json();
-    console.log(responseToJson);
 }
 
 

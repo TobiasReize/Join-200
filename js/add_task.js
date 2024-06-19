@@ -44,9 +44,11 @@ let tasks = [ {
     
 }];
 
+
 async function initAddtask() {
     await init();
 }
+
 
 /**
  * function to open the assign menu 
@@ -57,6 +59,7 @@ function openAssignMenu() {
     content.classList.remove('d-none');
     arrow.classList.add('arrow-drop-down')
 }
+
 
 /**
  * function to close the assign menu
@@ -80,7 +83,6 @@ function categoryMenu() {
 }
 
 
-// Rendern der Kontakte in das aufgeklappte Assignet Menu
 /**
  * function to put the single contacts html in an list 
  */
@@ -93,6 +95,7 @@ function getContacts() {
     }
     renderCheckBox()
 }
+
 
 /**
  * to render the html code for the assign menu contacts
@@ -118,6 +121,7 @@ function renderContacts(i) {
     `;
 }
 
+
 /**
  * create img chechbox
  * there is a input type=checkbox and return the checked or unchecked to the img
@@ -136,6 +140,7 @@ function renderCheckBox() {
     });
 }
 
+
 /**
  * function to render the html for the category menu
  */
@@ -151,6 +156,7 @@ function renderCategories() {
     }
 }
 
+
 /**
  * function to set the category to the input.value
  * close the category menu after choosen
@@ -161,6 +167,7 @@ function chooseCategory(i) {
     inputField.value = importCategories[i];
     categoryMenu();
 }
+
 
 /**
  * function to set the input type=checkbox to true or false
@@ -183,6 +190,7 @@ function changeCheckboxContacts (i) {
     input.value = '';
 }
 
+
 /**
  * filter the contacs and and render them to the menu
  */
@@ -199,6 +207,7 @@ function searchContact() {
     renderCheckBox()
     renderCheckedContacts();
 }
+
 
 /**
  * render the checked contacts html below the input search
@@ -218,6 +227,7 @@ function renderCheckedContacts() {
     }
 }   
 
+
 /**
  * function to set the color of the priority buttons and reset the others
  * @param {string} priority 
@@ -232,9 +242,11 @@ function colorChange(priority) {
     });
 }
 
+
 function colorChangeUrgent() {
     colorChange('urgent');
 }
+
 
 function colorChangeMedium() {
     colorChange('medium');
@@ -261,6 +273,7 @@ function changePrio(priorityLevel) {
     }
 }
 
+
 /**
  * function to render the "close" ande "check" buttons in the subtasks
  */
@@ -269,6 +282,7 @@ function renderSubtask() {
         document.getElementById(id).classList.toggle('d-none');
     });
 }
+
 
 /**
  * function to add the subtask to the array and render them
@@ -301,6 +315,7 @@ function addSubtasks() {
     input.value = ''; 
 }
 
+
 /**
  * clear the input field subtask
  */
@@ -308,6 +323,7 @@ function clearInputField() {
     let input= document.getElementById('input_subtask');
     input.value = '';
 }
+
 
 /**
  * delete the choosen subtask
@@ -318,7 +334,7 @@ function deleteSubtask(i) {
     addSubtasks();
 }
 
-// Öffnet ein Input Feld in das der Subtask geladen wird und bearbeitet und gespeichert/gelöscht werden kann
+
 /**
  * open the input where the subtask can be edit to create or delete
  * @param {integer} i - choosen subtask
@@ -340,6 +356,7 @@ function editSubtask(i) {
     let input = document.getElementById('edit_input_subtask');
     input.value = subtasks[i]['subtaskTitle'];
 }
+
 
 /**
  * save the edit subtask
@@ -390,9 +407,7 @@ async function createNewTask() {
     }
 }
 
-// Fügt die ausgeäwhlten Kontakte zum JSON "tasks['contact']" hinzu
-// vergleicht die Arrays "importContacts" und "importTasks"
-// Filtert nach checked Parameter 
+
 /**
  * add the choosen contact to "tasks" 
  * compare "importContacts" and "importTasks"
@@ -413,7 +428,7 @@ function addCheckedContactsToTasks(importContacts, newTask) {
     newTask.contact = checkedContacts;
 }
 
-// Fügt den beschrieben Task zur Datenbank hinzu
+
 /**
  * save the task with all values to the database
  */
@@ -444,6 +459,7 @@ async function addAllToTasks() {
     await setItem('tasks', importTasks);
 }
 
+
 /**
  * animation for the added task
  * forwarding to board.html
@@ -461,6 +477,7 @@ function addtaskAnimation() {
         
     }
 }
+
 
 function stopPropagation(event) {           
     event.stopPropagation();
