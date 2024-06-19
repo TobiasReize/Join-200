@@ -1,12 +1,13 @@
-// Array in dem die Datenbankdaten geladen werden
-// let importContacts = [];
-// Startfunktion
 async function initContacts() {
     await init();
     renderContacts();
 }
 
-// Setzt den Inhalt zurück, gruppiert die Kontakte nach Anfangsbuchstaben und rendert die gruppierten Kontakte
+
+/**
+ * Render the Contacts by alphabet
+ * Reset the Content
+ */
 function renderContacts() {
     let content = document.getElementById('all_contacts');
     content.innerHTML = '';
@@ -15,7 +16,12 @@ function renderContacts() {
     renderGroupedContacts(content, groupedContacts);
 }
 
-// Gruppiert die Kontakte nach dem ersten Buchstaben des Vornamens
+
+/**
+ * function to sort the contacts by there first name letter
+ * @param {string} contacts - these are all contacts
+ * @returns all contacts sorted
+ */
 function groupContactsByFirstLetter(contacts) {
     let groupedContacts = {};
 
@@ -30,7 +36,12 @@ function groupContactsByFirstLetter(contacts) {
     return groupedContacts;
 }
 
-// Iteriert über die gruppierten Kontakte und rendert die Buchstabenüberschriften und die zugehörigen Kontakte
+
+/**
+ * function to render the sorted contacts 
+ * @param {string} content 
+ * @param {string} groupedContacts - all sorted contacts
+ */
 function renderGroupedContacts(content, groupedContacts) {
     for (let letter in groupedContacts) {
         renderLetterSection(content, letter);
@@ -38,19 +49,33 @@ function renderGroupedContacts(content, groupedContacts) {
     }
 }
 
-// Rendert die Buchstabenüberschrift
+
+/**
+ * function to render the first letter before the contacts
+ * @param {string} content 
+ * @param {string} letter - first letter of the first name
+ */
 function renderLetterSection(content, letter) {
     content.innerHTML += /* html */ `<div class="first-letter">${letter}</div>`;
 }
 
-// Rendert alle Kontakte für einen bestimmten Buchstaben
+/**
+ * function to render the contacts with the letter
+ * @param {string} content 
+ * @param {string} contacts 
+ */
 function renderContactsForLetter(content, contacts) {
     contacts.forEach((contact, index) => {
         renderContact(content, contact, index);
     });
 }
 
-// Rendert einen einzelnen Kontakt
+
+/**
+ * function to render the single contact html
+ * @param {string} content 
+ * @param {string} contact 
+ */
 function renderContact(content, contact) {
     let index = importContacts.indexOf(contact);
     content.innerHTML += /* html */ `
@@ -68,7 +93,12 @@ function renderContact(content, contact) {
     `;
 }
 
-// Setzt den gewählten Kontakt und übergibt den Index an das Templay zum rendern
+
+/**
+ * function to set the choosen contact
+ * responsive they use under 920px width the single view 
+ * @param {integer} i - index of the contact
+ */
 function setActiveContact(i) {
     let content = document.getElementById(`active_contact`);
     let showContact = document.getElementById('show_contact_container');
@@ -81,7 +111,12 @@ function setActiveContact(i) {
     }
 }
 
-// Rendert den gewählten Kontakt
+
+/**
+ * function to render the active contact wich was choose
+ * @param {integer} i - index contact
+ * @returns 
+ */
 function tempRenderActiveContact(i) {
     return /* html */ `
     <div class="fly-in d-fl dir-col">
@@ -125,120 +160,131 @@ function tempRenderActiveContact(i) {
     `;
 }
 
-// Öffnet der Overlay zum hinzufügen eines neuen Kontakts
+
+/**
+ * function to open the overlay to add a new contact
+ */
 function openAddNewContact() {
-    let content = document.getElementById('overlay_container');
-    let contactCard = document.getElementById('contact_card');
-    let editCard = document.getElementById('edit_card');
-
-    content.classList.remove('d-none');
-    contactCard.classList.remove('d-none');
-    editCard.classList.add('d-none');
-    contactCard.classList.add('fly-in');
-    document.getElementById(`input_name`).value = '';
-    document.getElementById(`input_mail`).value = '';
-    document.getElementById(`input_tel`).value = '';
+    ['overlay_container', 'contact_card'].forEach(id => document.getElementById(id).classList.remove('d-none'));
+    document.getElementById('edit_card').classList.add('d-none');
+    document.getElementById('contact_card').classList.add('fly-in');
+    ['input_name', 'input_mail', 'input_tel'].forEach(id => document.getElementById(id).value = '');
 }
 
-// Öffnete das Overlay zum editieren eines Kontakts
+
+/**
+ * function to open the overlay to edit a contact
+ */
 function openEditContact() {
-    let content = document.getElementById('overlay_container');
-    let editCard = document.getElementById('edit_card');
-    let contactCard = document.getElementById('contact_card');
-    
-    content.classList.remove('d-none');
-    contactCard.classList.add('d-none');
-    editCard.classList.add('fly-in');
+    document.getElementById('overlay_container').classList.remove('d-none');
+    document.getElementById('contact_card').classList.add('d-none');
+    document.getElementById('edit_card').classList.add('fly-in');
 }
 
-// Erstellt einen neuen Kontakt
-// Nimmt die Werte aus den Input Feldern und setzt sie ein ein Hilfsarray "newContact"
-// "newContact" wird in "importContacts" gepushed
-// "importContacts" wird dann komplett in die Datenbank geladen und somit aktualisiert
+
+/**
+ * function to create a new contact
+ * value of the input set to a array "newContact"
+ * "newContact" push to "importContacts"
+ * load "importContacts" to database
+ */
 function createContact() {
-    let fullName = document.getElementById(`input_name`).value.trim();
-    let mail = document.getElementById(`input_mail`).value;
-    let tel = document.getElementById(`input_tel`).value;
-    let color = getRandomColor();
-
-    let [firstName, lastName] = fullName.split(' ');
-
+    let [firstName = '', lastName = ''] = document.getElementById('input_name').value.trim().split(' ');
     let newContact = {
-        "firstName": firstName ||'',
-        "lastName": lastName || '',
-        "checked": false,
-        "color": color,
-        "mail": mail,
-        "tel": tel
+        firstName,
+        lastName,
+        checked: false,
+        color: getRandomColor(),
+        mail: document.getElementById('input_mail').value,
+        tel: document.getElementById('input_tel').value
     };
 
-    // Füge den neuen Kontakt zum importContacts-Array hinzu
     importContacts.push(newContact);
     sortContacts();
-
-    // Finde den Index des neuen Kontakts nach dem Sortieren
-    let index = importContacts.findIndex(contact => 
-        contact.firstName === newContact.firstName && 
-        contact.lastName === newContact.lastName && 
-        contact.mail === newContact.mail && 
-        contact.tel === newContact.tel
-    );
-
-    // Pfad für die neue Kontaktliste
     setItem('contacts', importContacts);
     renderContacts();
     closeContactCard();
     successfullyAddedAnimation();
-
-    // Rufe tempRenderActiveContact mit dem Index des neuen Kontakts auf
-    setActiveContact(index);
+    setActiveContact(importContacts.findIndex(contact =>
+        contact.firstName === newContact.firstName &&
+        contact.lastName === newContact.lastName &&
+        contact.mail === newContact.mail &&
+        contact.tel === newContact.tel
+    ));
 }
 
-// Animation bei hinzufügen eines Kontaktes
+
+/**
+ * function to validate the form and set the function "createContact"
+ * @param {event} event - submit listener
+ */
+function formValidationAddNewContact(event) {
+    // Holt das Formular
+    let form = document.querySelector('.form-edit-contact');
+    
+    // Überprüft die native HTML5-Validierung des Formulars
+    if (!form.checkValidity()) {
+        // Falls das Formular nicht gültig ist, zeigt den Standardvalidierungsfehler an
+        event.preventDefault();
+        form.reportValidity(); // Zeigt die nativen Fehlermeldungen des Browsers an
+    } else {
+        // Falls das Formular gültig ist, führt die Funktion createContact aus
+        createContact();
+    }
+}
+
+
+/**
+ * function to add an animation by succesfully added a contact
+ */
 function successfullyAddedAnimation() {
     let btn = document.getElementById('btn_suc_added');
-    btn.classList.remove('d-none');
+    btn.classList.remove('d-none', 'fly-out');
     btn.classList.add('fly-in');
 
     setTimeout(() => {
-        btn.classList.remove('fly-in');
-    }, 400); // Entferne die fly-in Klasse nach 400ms
-
-    setTimeout(() => {
-        btn.classList.add('fly-out');
-    }, 800); // Füge die fly-out Klasse nach weiteren 400ms hinzu (insgesamt 800ms)
+        btn.classList.replace('fly-in', 'fly-out');
+    }, 400); // Ersetze die fly-in Klasse durch fly-out nach 400ms
 
     setTimeout(() => {
         btn.classList.add('d-none');
-        btn.classList.remove('fly-out');
     }, 1200); // Füge die d-none Klasse nach der Ausblendanimation hinzu (insgesamt 1200ms)
 }
 
-// Generierung einer Zufälligen Farbe für die erstellung eines neuen Kontaktes
+
+/**
+ * function to choose a random color
+ * @returns - a random color
+ */
 function getRandomColor() {
     let colors = ['#9747FF', '#FF5EB3', '#6E52FF', '#9327FF', '#00BEE8', '#1FD7C1', '#FF745E', '#FC71FF', '#FFC701', '#0038FF', '#C3FF2B', '#FFE62B', '#FF4646'];
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-// schließt das Overlay
+
+/**
+ * function to closse the overlay
+ */
 function closeContactCard() {
-    let content = document.getElementById('overlay_container');
-    let contactCard = document.getElementById('contact_card');
-    let editCard = document.getElementById('edit_card');
-    contactCard.classList.add('fly-out');
-    editCard.classList.add('fly-out');
+    const ids = ['overlay_container', 'contact_card', 'edit_card'];
+    const [content, contactCard, editCard] = ids.map(id => document.getElementById(id));
+
+    [contactCard, editCard].forEach(el => el.classList.add('fly-out'));
+
     setTimeout(() => {
-        content.classList.add('d-none');
-        contactCard.classList.add('d-none')
-        contactCard.classList.remove('fly-out');
-        editCard.classList.add('d-none')
-        editCard.classList.remove('fly-out');
+        ids.forEach(id => document.getElementById(id).classList.add('d-none'));
+        [contactCard, editCard].forEach(el => el.classList.remove('fly-out'));
     }, 400);
+
     renderContacts();
 }
 
-// löscht einen Kontakt aus dem Array "importContacts"
-// Aktualisiert dann die Datenbank
+
+/**
+ * function to delete the choosen contact from array "importContacts"
+ * set the array to the database
+ * @param {integer} i - index of the contact
+ */
 function deleteContact(i) {
     importContacts.splice(i, 1);
     setItem('contacts', importContacts);
@@ -246,7 +292,10 @@ function deleteContact(i) {
     document.getElementById(`active_contact`).innerHTML = '';
 }
 
-// löscht einen Kontakt im Edit Overlay
+
+/**
+ * function to delete a contact in the overlay edit 
+ */
 function deleteContactEdit() {
     let index = document.getElementById('delete_btn').dataset.index;
     importContacts.splice(index, 1);
@@ -256,7 +305,11 @@ function deleteContactEdit() {
     closeContactCard();
 }
 
-// Lädt die Daten in das zu editierende Input Feld
+
+/**
+ * function to load the data in the input fields 
+ * @param {integer} i - index of the contact
+ */
 function editContact(i) {
     let fullName = document.getElementById(`edit_input_name`);
     let mail = document.getElementById(`edit_input_mail`);
@@ -274,7 +327,11 @@ function editContact(i) {
     tel.value = importContacts[i]['tel'];
 }
 
-// rendert im Edit Overlay den Kurznamen
+
+/**
+ * function to render the html for the first letter of first name and last name
+ * @param {integer} i - index of the contact
+ */
 function renderEditShortname(i) {
     let content =  document.getElementById(`edit_card_shortname`);
     content.innerHTML = /* html */ `
@@ -284,45 +341,52 @@ function renderEditShortname(i) {
     `;
 }
 
-// dient zum sichtbar machen des Edit Overlay
+
+/**
+ * function to used to make the Edit Overlay visible
+ */
 function renderEditContact() {
     let content = document.getElementById('edit_card');
     content.classList.remove('d-none')    
 }
 
-// Speichert einen bearbeitet Kontakt
+/**
+ * function to save the edit contact
+ */
 function saveContact() {
     let index = document.getElementById('save_btn').dataset.index;
-    let fullName = document.getElementById(`edit_input_name`).value.trim();
-    let mail = document.getElementById(`edit_input_mail`).value;
-    let tel = document.getElementById(`edit_input_tel`).value;
-    let color = importContacts[index].color; // Behalte die bestehende Farbe
+    let [firstName, lastName] = document.getElementById('edit_input_name').value.trim().split(' ');
+    let { color } = importContacts[index];
 
-    let [firstName, lastName] = fullName.split(' ');
-
-    let updatedContact = {
-        "firstName": firstName,
-        "lastName": lastName,
-        "checked": false,
-        "color": color,
-        "mail": mail,
-        "tel": tel
+    importContacts[index] = {
+        firstName,
+        lastName,
+        checked: false,
+        color,
+        mail: document.getElementById('edit_input_mail').value,
+        tel: document.getElementById('edit_input_tel').value
     };
 
-    importContacts[index] = updatedContact;
     sortContacts();
     setItem('contacts', importContacts);
-
     closeContactCard();
     renderContacts();
     setActiveContact(index);
 }
 
-//Verhindert das Event Bubbling beim Schließen der Großansicht
+
+/**
+ * function to Prevents event bubbling when closing the full-screen view
+ * @param {event} event 
+ */
 function stopPropagation(event) {           
     event.stopPropagation();
 }
 
+
+/**
+ * function to went back to view all contacts
+ */
 function backToAllContacts() {
     let showContact = document.getElementById('show_contact_container');
     let allContacts = document.getElementById('contact_container');
@@ -331,10 +395,28 @@ function backToAllContacts() {
     showContact.style.display = "none";
 }
 
+
+/**
+ * function for responsive to open the menu for delete or edit a contact
+ */
 function openEditDeleteMenu() {
-    document.getElementById('edit_delete').style.display = "flex";
+    try {
+        document.getElementById('edit_delete').style.display = "flex";
+    } catch (e) {
+
+    }
 }
 
+
+/**
+ * function for responsive to close the menu for delete or edit a contact
+ */
 function closeEditDeleteMenu() {
-    document.getElementById('edit_delete').style.display = "none";
+    if (innerWidth <= 920) {
+        try {
+            document.getElementById('edit_delete').style.display = "none";
+        } catch (e) {
+            
+        } 
+    }
 }

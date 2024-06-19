@@ -60,16 +60,16 @@
                                 </g>
                             </svg>
                         </div>
-                        <form>
+                        <form class="form-edit-contact">
                             <div class="contact-card-close" ><img src="../assets/img/00_general-elements/close-dark.svg" onclick="closeContactCard()"></div>
                             <div class="contact-card-input-div">
-                                <input id="input_name" type="text" placeholder="Name" required><img src="../assets/img/05_contacts/person.svg">
+                                <input id="input_name" type="text" placeholder="Name" required><img class="contact-edit-input-icon" src="../assets/img/05_contacts/person.svg">
                             </div>
                             <div class="contact-card-input-div">
-                                <input id="input_mail" type="email" placeholder="Email" required><img src="../assets/img/05_contacts/mail.svg">
+                                <input id="input_mail" type="email" placeholder="Email" required><img class="contact-edit-input-icon" src="../assets/img/05_contacts/mail.svg">
                             </div>
                             <div class="contact-card-input-div">
-                                <input id="input_tel" type="tel" placeholder="Phone" required><img src="../assets/img/05_contacts/phone.svg">
+                                <input id="input_tel" type="tel" placeholder="Phone" required><img class="contact-edit-input-icon" src="../assets/img/05_contacts/phone.svg">
                             </div>
                             <div class="d-fl jc-center">
                                 <button class="contact-card-btn light-btn close-btn" onclick="closeContactCard()" type="button"><span>Cancel</span>
@@ -82,7 +82,7 @@
                                         </g>
                                     </svg>
                                 </button>
-                                <button class="contact-card-btn dark-btn" onclick="createContact()" type="button"><span>Create contact</span>
+                                <button class="contact-card-btn dark-btn" onclick="formValidationAddNewContact(event)" type="submit"><span>Create contact</span>
                                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <mask id="mask0_71766_6020" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                                         <rect x="0.0683594" width="24" height="24" fill="#D9D9D9"/>
@@ -110,13 +110,13 @@
                         <form>
                             <div class="contact-card-close" ><img src="../assets/img/00_general-elements/close-dark.svg" onclick="closeContactCard()"></div>
                             <div class="contact-card-input-div">
-                                <input id="edit_input_name" type="text" placeholder="Name" required><img src="../assets/img/05_contacts/person.svg">
+                                <input id="edit_input_name" type="text" placeholder="Name" required><img class="contact-edit-input-icon" src="../assets/img/05_contacts/person.svg">
                             </div>
                             <div class="contact-card-input-div">
-                                <input id="edit_input_mail" type="email" placeholder="Email" required><img src="../assets/img/05_contacts/mail.svg">
+                                <input id="edit_input_mail" type="email" placeholder="Email" required><img class="contact-edit-input-icon" src="../assets/img/05_contacts/mail.svg">
                             </div>
                             <div class="contact-card-input-div">
-                                <input id="edit_input_tel" type="tel" placeholder="Phone" required><img src="../assets/img/05_contacts/phone.svg">
+                                <input id="edit_input_tel" type="tel" placeholder="Phone" required><img class="contact-edit-input-icon" src="../assets/img/05_contacts/phone.svg">
                             </div>
                             <div class="d-fl jc-center">
                                 <button id="delete_btn" class="contact-card-btn light-btn" onclick="deleteContactEdit()" type="button"><span>Delete</span></button>
