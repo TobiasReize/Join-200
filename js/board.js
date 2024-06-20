@@ -162,35 +162,37 @@ function renderColumn(columnTitle, columnID, columnArray) {     //Rendert die je
             const task = columnArray[i];
             columnContainer.innerHTML += taskCardHTML(columnID, i, task);
             
-            //prüft ob die aktuelle Task Subtasks enthält, wenn ja wird die Progress-bar ergänzt sonst nicht:
-            if (task['subtasks'].length != 0) {
-                
-                //Zählen der erledigten Subtasks:
-                let doneSubtasks = 0;
-                for (let j = 0; j < task['subtasks'].length; j++) {
-                    const singleSubtask = task['subtasks'][j];
-                    if (singleSubtask['status'] == 'done') {
-                        doneSubtasks++;
+            if (task['subtasks']) {     //prüft ob die aktuelle Task Subtasks enthält, wenn ja wird die Progress-bar ergänzt sonst nicht
+                if (task['subtasks'].length > 0) {
+                    //Zählen der erledigten Subtasks:
+                    let doneSubtasks = 0;
+                    for (let j = 0; j < task['subtasks'].length; j++) {
+                        const singleSubtask = task['subtasks'][j];
+                        if (singleSubtask['status'] == 'done') {
+                            doneSubtasks++;
+                        }
                     }
+                    //Einfügen der Progress-bar und Text:
+                    document.getElementById(`${columnID}_subtasks_container_${i}`).innerHTML = /*html*/ `
+                        <div class="progress-bar">
+                            <div class="bar-of-progress" style="width: ${(doneSubtasks/task['subtasks'].length)*100}%"></div>
+                        </div>
+                        <span class="subtask-text">
+                            ${doneSubtasks}/${task['subtasks'].length} Subtasks
+                        </span>
+                    `;
                 }
-                //Einfügen der Progress-bar und Text:
-                document.getElementById(`${columnID}_subtasks_container_${i}`).innerHTML = /*html*/ `
-                    <div class="progress-bar">
-                        <div class="bar-of-progress" style="width: ${(doneSubtasks/task['subtasks'].length)*100}%"></div>
-                    </div>
-                    <span class="subtask-text">
-                        ${doneSubtasks}/${task['subtasks'].length} Subtasks
-                    </span>
-                `;
             }
 
-            //fügt die Kontakte hinzu:
-            for (let k = 0; k < task['contact'].length; k++) {
-                const person = task['contact'][k];
-                const personFirstName = person['firstName'];
-                const personLastName = person['lastName'];
-                const initials = `${oneLetterUppercase(personFirstName)}${oneLetterUppercase(personLastName)}`;
-                document.getElementById(`${columnID}_contacts_container_${i}`).innerHTML += /*html*/ `<div class="initials" style="background-color: ${person['color']}">${initials}</div>`;
+            if (task['contact']) {       //prüft zuerst ob die aktuelle Task Kontakte enthält
+                //fügt die Kontakte hinzu:
+                for (let k = 0; k < task['contact'].length; k++) {
+                    const person = task['contact'][k];
+                    const personFirstName = person['firstName'];
+                    const personLastName = person['lastName'];
+                    const initials = `${oneLetterUppercase(personFirstName)}${oneLetterUppercase(personLastName)}`;
+                    document.getElementById(`${columnID}_contacts_container_${i}`).innerHTML += /*html*/ `<div class="initials" style="background-color: ${person['color']}">${initials}</div>`;
+                }
             }
         }
     }
@@ -226,8 +228,8 @@ function showBigView(columnID, taskID) {    //Großansicht der jeweiligen Aufgab
                 <img onclick="closeBigView(0)" class="big-view-close" src="../assets/img/00_general-elements/close-dark.svg" alt="close">
             </div>
             <div class="big-view-card-content">
-                <h1 class="m-btm24">${currentTask['title']}</h1>
-                <p class="fs20-fw400 m-btm24">${currentTask['description']}</p>
+                <h1 class="m-btm24 overflow-wrap-break-word">${currentTask['title']}</h1>
+                <p class="fs20-fw400 m-btm24 overflow-wrap-break-word">${currentTask['description']}</p>
                 <div class="big-view-date-container df-ai-ctr fs20-fw400 m-btm24">
                     <div class="default-color">Due date:</div>
                     <div>${currentTask['date']}</div>
@@ -276,27 +278,31 @@ function showBigView(columnID, taskID) {    //Großansicht der jeweiligen Aufgab
         </div>
     `;
 
-    //fügt die Kontakte der Großansicht hinzu:
-    for (let i = 0; i < currentTask['contact'].length; i++) {
-        const person = currentTask['contact'][i];
-        const initials = `${oneLetterUppercase(person['firstName'])}${oneLetterUppercase(person['lastName'])}`;
-        document.getElementById('big_view_contacts_container').innerHTML += /*html*/ `
-            <div class="big-view-contacts df-ai-ctr">
-                <div class="big-view-initials" style="background-color: ${person['color']}">${initials}</div>
-                <div class="big-view-contacts-name">${person['firstName']} ${person['lastName']}</div>
-            </div>
-        `;
+    if (currentTask['contact']) { //prüft zuerst ob die aktuelle Task Kontakte enthält
+        //fügt die Kontakte der Großansicht hinzu:
+        for (let i = 0; i < currentTask['contact'].length; i++) {
+            const person = currentTask['contact'][i];
+            const initials = `${oneLetterUppercase(person['firstName'])}${oneLetterUppercase(person['lastName'])}`;
+            document.getElementById('big_view_contacts_container').innerHTML += /*html*/ `
+                <div class="big-view-contacts df-ai-ctr">
+                    <div class="big-view-initials" style="background-color: ${person['color']}">${initials}</div>
+                    <div class="big-view-contacts-name">${person['firstName']} ${person['lastName']}</div>
+                </div>
+            `;
+        }
     }
 
-    //fügt die Subtasks der Großansicht hinzu:
-    for (let j = 0; j < currentTask['subtasks'].length; j++) {
-        const singleSubtask = currentTask['subtasks'][j];
-        document.getElementById('big_view_subtasks_container').innerHTML += /*html*/ `
-            <div class="big-view-subtask df-ai-ctr">
-                <div onclick="changeSubtaskStatus(${columnID['id']}, ${taskID}, ${j})" id="subtask_checkbox_${columnID['id']}_t${taskID}_st${j}" class="big-view-checkbox df-ai-ctr">${subtaskCheckbox[singleSubtask['status']]}</div>
-                <div class="big-view-subtask-text">${singleSubtask['subtaskTitle']}</div>
-            </div>
-        `;
+    if (currentTask['subtasks']) { //prüft zuerst ob die aktuelle Task Subtask enthält
+        //fügt die Subtasks der Großansicht hinzu:
+        for (let j = 0; j < currentTask['subtasks'].length; j++) {
+            const singleSubtask = currentTask['subtasks'][j];
+            document.getElementById('big_view_subtasks_container').innerHTML += /*html*/ `
+                <div class="big-view-subtask df-ai-ctr">
+                    <div onclick="changeSubtaskStatus(${columnID['id']}, ${taskID}, ${j})" id="subtask_checkbox_${columnID['id']}_t${taskID}_st${j}" class="big-view-checkbox df-ai-ctr">${subtaskCheckbox[singleSubtask['status']]}</div>
+                    <div class="big-view-subtask-text">${singleSubtask['subtaskTitle']}</div>
+                </div>
+            `;
+        }
     }
 
     //lässt die Karte von rechts reinfliegen:
@@ -409,22 +415,26 @@ function editTask(columnID, taskID) {       //Bearbeiten der jeweiligen Aufgabe 
     }
     currentEditedTaskPriority[0][currentTaskPriority] = true;
 
-    //fügt die Kontakte der Edit-Ansicht hinzu:
-    for (let j = 0; j < currentTask['contact'].length; j++) {
-        const person = currentTask['contact'][j];
-        const initials = `${oneLetterUppercase(person['firstName'])}${oneLetterUppercase(person['lastName'])}`;
-        let currentContactIndex = importContacts.findIndex(element => element['firstName'] == person['firstName'] && element['lastName'] == person['lastName']);
-        importContacts[currentContactIndex]['checked'] = true;
+    if (currentTask['contact']) { //prüft zuerst ob die aktuelle Task Kontakte enthält
+        //fügt die Kontakte der Edit-Ansicht hinzu:
+        for (let j = 0; j < currentTask['contact'].length; j++) {
+            const person = currentTask['contact'][j];
+            const initials = `${oneLetterUppercase(person['firstName'])}${oneLetterUppercase(person['lastName'])}`;
+            let currentContactIndex = importContacts.findIndex(element => element['firstName'] == person['firstName'] && element['lastName'] == person['lastName']);
+            importContacts[currentContactIndex]['checked'] = true;
 
-        document.getElementById('checked_contacts_edit_task').innerHTML += /*html*/ `
-            <div class="big-view-initials" style="background-color: ${person['color']}">${initials}</div>
-        `;
+            document.getElementById('checked_contacts_edit_task').innerHTML += /*html*/ `
+                <div class="big-view-initials" style="background-color: ${person['color']}">${initials}</div>
+            `;
+        }
     }
 
-    //fügt die Subtasks der Edit-Ansicht hinzu:
-    for (let k = 0; k < currentTask['subtasks'].length; k++) {
-        const subtask = currentTask['subtasks'][k];
-        subtasks.push({'subtaskTitle': subtask['subtaskTitle'], 'status': subtask['status']});
+    if (currentTask['subtasks']) { //prüft zuerst ob die aktuelle Task Subtask enthält
+        //fügt die Subtasks der Edit-Ansicht hinzu:
+        for (let k = 0; k < currentTask['subtasks'].length; k++) {
+            const subtask = currentTask['subtasks'][k];
+            subtasks.push({'subtaskTitle': subtask['subtaskTitle'], 'status': subtask['status']});
+        }
     }
     addSubtaskToTask();
 }
@@ -486,7 +496,7 @@ function changePriority(selectedPriority) {   //Beim Bearbeiten der Aufgabe in d
 function closeBigView(id) {       //Schließt die Großansicht wieder
     if (id == 0) {      //zur Fall-Unterscheidung: Kenner "0" kommt vom Schließen der Großansicht (Animation wird ausgeführt)
         document.getElementById('big_view_card').classList.remove('translateX-0');
-        setTimeout(() => document.getElementById('big_view_container').classList.add('d-none'),300);    //zur Verzögerung für die Animation
+        setTimeout(() => document.getElementById('big_view_container').classList.add('d-none'),300);    //das Overlay soll erst verschwinden, wenn die Karte rausgeflogen ist!
     } else {    //Kenner "1" kommt vom Löschen oder Editieren der Aufgabe (Animation wird nicht ausgeführt)
         document.getElementById('big_view_container').classList.add('d-none');
         document.getElementById('big_view_card').classList.remove('translateX-0');
@@ -618,20 +628,30 @@ function saveAllTasks() {       //Speichert die aktuellen Tasks in Firebase ab!
 // Add Task Overlay:
 function showAddTaskOverlay(columnID) {   //Zeigt das Add Task Overlay an
     boardColumn = columnID;     //globale Variable in add_task.js
-    document.getElementById('overlay_task').classList.remove('d-none');
+    document.getElementById('overlay_add_task').classList.remove('d-none');
+    setTimeout(() => document.getElementById('add_task_overlay_card').classList.add('translateX-0'), 100);  //Verzögerung damit die Karte erst außerhalb des Bildschirms dargestellt wird und dann reinfliegt!
 }
 
 
 function closeAddTaskOverlay() {      //Entfernt das Add Task Overlay wieder und setzt alle Eingabefelder zurück
-    document.getElementById('overlay_task').classList.add('d-none');
     document.getElementById('input_title').value = '';
+    document.getElementById('input_title').classList.remove('outline-red');
     document.getElementById('input_description').value = '';
     document.getElementById('checked_contacts').innerHTML = '';
     document.getElementById('input_date').value = '';
+    document.getElementById('input_date').classList.remove('outline-red');
     document.getElementById('category_input').value = '';
+    document.getElementById('input_category').classList.remove('outline-red');
     document.getElementById('list_subtasks').innerHTML = '';
+    
+    document.getElementById('required_title').innerHTML = '';
+    document.getElementById('required_date').innerHTML = '';
+    document.getElementById('required_category').innerHTML = '';
+
     subtasks = [];
     uncheckContacts();
+    document.getElementById('add_task_overlay_card').classList.remove('translateX-0');
+    setTimeout(() => document.getElementById('overlay_add_task').classList.add('d-none'),300);    //zur Verzögerung für die Animation
 }
 
 

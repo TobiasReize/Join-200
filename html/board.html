@@ -93,11 +93,12 @@
                 <section id="big_view_container" class="overlay-container d-none" onclick="closeBigView(0)"></section>
 
                 <!-- Section: Add Task Overlay -->
-                <section id="overlay_task" class="overlay-container d-none" onclick="closeAddTaskOverlay(), closeAssignMenu()">
-                    <div class="addtask-backlog" w3-include-html="../assets/templates/task_form.html" onclick="stopPropagation(event), closeAssignMenu()"></div>
+                <section id="overlay_add_task" class="overlay-container d-none" onclick="closeAddTaskOverlay(), closeAssignMenu()">
+                    <div id="add_task_overlay_card" class="addtask-backlog transition" w3-include-html="../assets/templates/task_form.html" onclick="stopPropagation(event), closeAssignMenu()"></div>
                 </section>
-                <button id="animate_btn" class="prio-btn create-btn task_added d-none">Task added to board <img src="../assets/img/00_general-elements/board-grey.svg"></button>
-
+                <div id="animate_btn_overlay" class="overlay-task-added animate">
+                    <button id="animate_btn" class="prio-btn create-btn task-added">Task added to board <img src="../assets/img/00_general-elements/board-grey.svg"></button>
+                </div>
             </main>
         </div>
 

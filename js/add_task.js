@@ -1,4 +1,4 @@
-let boardColumn = [];
+let boardColumn = 'ToDo';
 
 let priority = [
     {

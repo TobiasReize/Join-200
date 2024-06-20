@@ -1,4 +1,7 @@
-<h1 class="">Add Task</h1>
+<div class="ai-ctr-space-btwn">
+    <h1>Add Task</h1>
+    <img onclick="closeAddTaskOverlay()" class="big-view-close" src="../assets/img/00_general-elements/close-dark.svg" alt="close">
+</div>
 <!-- Container for all Inputs -->
 <div class="information-container">
     <!-- left Side of the Information Container -->
@@ -85,7 +88,7 @@
 <div class="clear-create-container">
     <span><span class="red-star">*</span>This field is required</span>
     <div class="prio-btns clear-create-btn">
-        <button class="prio-btn clear-btn clear-x" onclick="location.reload()">Clear 
+        <button class="prio-btn clear-btn clear-x" onclick="closeAddTaskOverlay()">Cancel
             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_71720_5473" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
                 <rect y="0.96582" width="24" height="24" fill="#D9D9D9"></rect>
@@ -95,6 +98,8 @@
                 </g>
             </svg>
         </button>
-        <button class="prio-btn create-btn" onclick="createNewTask()">Create Task <img class="cancel-blue" src="../assets/img/00_general-elements/check-white.svg"></button>
+        <button class="prio-btn create-btn" onclick="createNewTask()">Create Task
+            <img class="cancel-blue" src="../assets/img/00_general-elements/check-white.svg">
+        </button>
     </div>
 </div>

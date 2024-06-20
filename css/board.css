@@ -79,6 +79,27 @@
     outline: unset;
 }
 
+.overflow-wrap-break-word {
+    overflow-wrap: break-word;
+}
+
+/* Navbar-Highlight */
+.nav-addtask {
+    background-color: unset;
+}
+
+.nav-board {
+    background-color: #091931;
+}
+
+.nav-board > img {
+    filter: brightness(0) invert(1);
+}
+
+.nav-board > span {
+    color: #FFFFFF;
+}
+
 /* Section: Board Headline */
 .searchbar-button-container {
     gap: 32px;
@@ -248,6 +269,9 @@
     font-weight: 700;
     color: var(--default-color);
     margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .task-description {
@@ -558,6 +582,12 @@
     overflow-y: auto;
 }
 
+.short-name {
+    width: 42px;
+    height: 42px;
+    text-align: center;
+}
+
 .checked-contacts {
     position: unset;
 }
@@ -619,6 +649,6 @@
     margin-bottom: 0;
 }
 
-#animate_btn {
-    z-index: 15;
+.overlay-task-added {
+    z-index: 10;
 }
