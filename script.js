@@ -1,6 +1,7 @@
 let importContacts = [];
 let importTasks = [];
 let importCategories = [];
+const initialsArray = [];
 
 
 async function init() {
@@ -37,3 +38,12 @@ function sortContacts() {
         return 0;
     });
 }
+
+function addInitials(initials) {
+    initialsArray.push(initials);
+    document.getElementById('user-short').innerHTML = initialsArray.join(', ');
+};
+
+function logOut() {
+    window.location.href = '../index.html';
+};
