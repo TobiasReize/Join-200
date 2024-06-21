@@ -32,6 +32,10 @@
                 loginContent.style.display = 'block';
             }, 4000);
         });
+
+        function addGuestName() {
+        location.href = '../html/summary.html?name=guest';
+    }
     </script>
 
 </head>
@@ -67,7 +71,8 @@
 
             <div class="login-input">
                 <input placeholder="E-Mail" type="email" id="login_email" required>
-                <svg class="email-svg" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="email-svg" width="24" height="25" viewBox="0 0 24 25" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_192988_5080" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
                         width="24" height="25">
                         <rect y="0.5" width="24" height="24" fill="#D9D9D9" />
@@ -80,7 +85,8 @@
                 </svg>
 
                 <input placeholder="Password" type="password" id="login_password" required>
-                <svg class="password-svg" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="password-svg" width="24" height="25" viewBox="0 0 24 25" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_192988_5087" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
                         width="24" height="25">
                         <rect y="0.5" width="24" height="24" fill="#D9D9D9" />
@@ -92,14 +98,20 @@
                     </g>
                 </svg>
 
-                
+
             </div>
             <p class="rememberme"><input type="checkbox" name="" id=""> Remember me</p>
             <div class="continue-btn">
                 <button onclick="login()" id="login_btn" class="login-btn">Log in</button>
-                <button id="guestLogin_btn" class="guestLogin-btn" onclick="location.href='../html/summary.html';">Guest
-                    Log
-                    in</button>
+                <button id="guestLogin_btn" class="guestLogin-btn" onclick="addGuestName()">Guest Log in</button>
+
+<script>
+    function addGuestName() {
+        location.href = '../html/summary.html?name=guest';
+    }
+</script>
+
+
             </div>
         </div>
 

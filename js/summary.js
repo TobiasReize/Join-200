@@ -7,12 +7,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function initializeApp() {
     await loadTasksFromFirebase();
-    letsGreet();
+    await letsGreet();
     loadNumber();
 };
 
+function getInitials(name) {
+    if (!name) {
+        return '';
+    }
+    let names = name.split(' ');
+    let initials = names.map(n => n.charAt(0).toUpperCase()).join('');
+    return initials;
+}
+
+
 async function letsGreet() {
-    let userName = getQueryParameter('name');
+    const userName = getQueryParameter('name');
     
     // Versuche den Namen aus dem localStorage zu lesen
     let storedName = localStorage.getItem('userName');
@@ -24,8 +34,14 @@ async function letsGreet() {
     } else if (storedName !== null) {
         await greet(storedName);
     } else {
-        await greet(DEFAULT_NAME); // Standardname verwenden
+        // Lösche den vorherigen Benutzernamen aus dem localStorage
+        localStorage.removeItem('userName');
+        await greet(null); // Kein Benutzername übergeben
     }
+
+    // Initialen speichern
+    const initials = getInitials(userName || storedName || DEFAULT_NAME);
+    addInitials(initials);
 };
 
 function getQueryParameter(name) {
@@ -37,7 +53,7 @@ async function greet(userName) {
     const greeting = await getGreeting();
     let greetingText;
     
-    if (userName === DEFAULT_NAME) {
+    if (userName === null || userName === DEFAULT_NAME) {
         greetingText = `<p>${greeting}!</p>`;
     } else {
         greetingText = `<p>${greeting},<br> ${userName}!</p>`;
@@ -63,6 +79,8 @@ function getGreeting() {
         resolve(greeting);
     });
 };
+
+
 
 let toDoTasks = [];
 let inProgressTasks = [];

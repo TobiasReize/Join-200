@@ -3,6 +3,7 @@ let importTasks = [];
 let importCategories = [];
 
 
+
 async function init() {
     includeHTML();
     await loadContacts('contacts', importContacts); // Kontakte von Datenbank laden
@@ -23,6 +24,7 @@ async function includeHTML() {
             element.innerHTML = 'Page not found';
         }
     }
+    displayInitials();
   }
 
 // Sortiert die Kontakte nach dem Vornamen
@@ -37,3 +39,24 @@ function sortContacts() {
         return 0;
     });
 }
+
+var storedInitials = localStorage.getItem('initialsArray');
+initialsArray = storedInitials ? JSON.parse(storedInitials) : [];
+
+function addInitials(initials) {
+    initialsArray = [];
+    initialsArray.push(initials);
+    document.getElementById('user-short').innerHTML = initialsArray.join(', ');
+
+    // Speichern im Local Storage
+    localStorage.setItem('initialsArray', JSON.stringify(initialsArray));
+}
+
+function displayInitials() {
+    document.getElementById('user-short').innerHTML = initialsArray.join(', ');
+}
+
+function logOut() {
+    localStorage.removeItem('initialsArray');
+    window.location.href = '../index.html';
+};
