@@ -104,14 +104,6 @@
             <div class="continue-btn">
                 <button onclick="login()" id="login_btn" class="login-btn">Log in</button>
                 <button id="guestLogin_btn" class="guestLogin-btn" onclick="addGuestName()">Guest Log in</button>
-
-<script>
-    function addGuestName() {
-        location.href = '../html/summary.html?name=guest';
-    }
-</script>
-
-
             </div>
         </div>
 
@@ -120,6 +112,8 @@
             <button onclick="window.open('../html/legal_notice.html', '_blank');">Legal Notice</button>
         </div>
     </div>
+
+    <div id="user-short" class="d-none"></div>
 
 
 </body>

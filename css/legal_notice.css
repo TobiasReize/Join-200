@@ -1,5 +1,6 @@
 body {
     overflow: hidden;
+    font-family: Inter;
 }
 
 .legal-notice {
@@ -13,6 +14,7 @@ body {
 
 .subtitle {
     margin-bottom: 24px;
+    font-family: Inter;
 }
 
 svg {
@@ -22,6 +24,10 @@ svg {
     padding: 2.5px 0px 0px 0px;
 }
 
+svg:hover {
+    cursor: pointer;
+}
+
 .title-legal {
     position: absolute;
     width: Hug (371px)px;
@@ -29,4 +35,30 @@ svg {
     top: 206px;
     left: 328px;
     gap: 30px;
+}
+
+@media screen and (max-width: 1120px) {
+    .title-legal {
+        position: absolute;
+        left: 120px;
+    }
+    .legal-notice {
+        left: 120px;
+    }
+    svg {
+        left: 85vw;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .title-legal {
+        position: absolute;
+        left: 20px;
+    }
+    .legal-notice {
+        left: 20px;
+    }
+    svg {
+        left: 75vw;
+    }
 }
