@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 async function initializeApp() {
     await loadTasksFromFirebase();
     await letsGreet();
-    loadNumber();
+    await loadNumber();
 };
 
 function getInitials(name) {
@@ -56,7 +56,9 @@ async function greet(userName) {
     if (userName === null || userName === DEFAULT_NAME) {
         greetingText = `<p>${greeting}!</p>`;
     } else {
-        greetingText = `<p>${greeting},<br> ${userName}!</p>`;
+        greetingText = `<p>${greeting},</p>
+        <br>
+        <p class="blue-name">${userName}!</p>`;
     }
     
     document.getElementById('greeting').innerHTML = greetingText;

@@ -1,6 +1,7 @@
 let importContacts = [];
 let importTasks = [];
 let importCategories = [];
+let initialsArray = [];
 
 
 
@@ -50,11 +51,11 @@ function addInitials(initials) {
 
     // Speichern im Local Storage
     localStorage.setItem('initialsArray', JSON.stringify(initialsArray));
-}
+};
 
 function displayInitials() {
     document.getElementById('user-short').innerHTML = initialsArray.join(', ');
-}
+};
 
 function logOut() {
     localStorage.removeItem('initialsArray');
