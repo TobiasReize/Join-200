@@ -601,6 +601,10 @@
     font-weight: 400;
 }
 
+.add-icon:hover {
+    cursor: pointer;
+}
+
 .edit-task-ok-button {
     color: #FFFFFF;
     background-color: var(--default-color);
