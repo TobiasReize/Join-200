@@ -47,6 +47,15 @@ let tasks = [ {
 
 async function initAddtask() {
     await init();
+    loadBoardColumn();
+}
+
+
+function loadBoardColumn() {
+    let columnID = localStorage.getItem('boardColumn');
+    if (columnID) {
+        boardColumn = columnID;
+    }
 }
 
 
