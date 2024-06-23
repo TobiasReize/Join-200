@@ -27,8 +27,8 @@
                 <header w3-include-html="../assets/templates/header.html"></header>
 
                 <!-- Section: Board Headline -->
-                <section class="bg-color">
-                    <div class="title-searchbar-container ai-ctr-space-btwn ml-96 mt-110">
+                <section class="bg-color ml-96 mt-110 m-rgt32">
+                    <div class="title-searchbar-container ai-ctr-space-btwn">
                         <h1>Board</h1>
                         <div class="searchbar-button-container df-ai-ctr">
                             <div class="searchbar border-focus df-ai-ctr">
@@ -48,45 +48,83 @@
                                 <img src="../assets/img/00_general-elements/plus-white.svg" alt="">
                             </div>
                         </div>
-                    </div>
-                    <!-- Column headlines -->
-                    <div class="column-headlines-container df-ai-ctr ml-96">
-                        <div class="column-headline ai-ctr-space-btwn">
-                            <span class="column-title">To do</span>
-                            <svg onclick="showAddTaskOverlay('ToDo')" class="plus-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
-                                <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="column-headline ai-ctr-space-btwn">
-                            <span class="column-title">In progress</span>
-                            <svg onclick="showAddTaskOverlay('InProgress')" class="plus-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
-                                <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="column-headline ai-ctr-space-btwn">
-                            <span class="column-title">Await feedback</span>
-                            <svg onclick="showAddTaskOverlay('AwaitFeedback')" class="plus-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
-                                <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="column-headline">
-                            <span class="column-title">Done</span>
-                        </div>
+                        <svg onclick="addTaskMobile('ToDo')" class="addtask-mobile-button d-none" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="40" height="40" rx="10" fill="#2A3647"/>
+                            <path d="M20 10V30" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M30 20L10.0005 20.138" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
                     </div>
                 </section>
-
+                
                 <!-- Section: Board distribution -->
-                <section class="board-distribution ml-96 bg-color">
-                    <div id="to_do" class="board-columns" ondragover="allowDrop(event)" ondrop="moveTo('to_do')"></div>
-                    <div id="in_progress" class="board-columns" ondragover="allowDrop(event)" ondrop="moveTo('in_progress')"></div>
-                    <div id="await_feedback" class="board-columns" ondragover="allowDrop(event)" ondrop="moveTo('await_feedback')"></div>
-                    <div id="done" class="board-columns" ondragover="allowDrop(event)" ondrop="moveTo('done')"></div>
+                <section class="board-distribution ml-96 m-rgt32 bg-color">
+                    <div class="board-columns-container">
+                        <!-- To Do -->
+                        <div class="board-column-container">
+                            <div class="column-headline-container ai-ctr-space-btwn">
+                                <span class="column-title">To do</span>
+                                <div>
+                                    <svg onclick="showAddTaskOverlay('ToDo')" class="plus-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
+                                        <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                    <svg onclick="addTaskMobile('ToDo')" class="plus-icon plus-icon-mobile" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
+                                        <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                
+                            </div>
+                            <div id="to_do" class="column-tasks-container" ondragover="allowDrop(event)" ondrop="moveTo('to_do')"></div>
+                        </div>
+
+                        <!-- In Progress -->
+                        <div class="board-column-container">
+                            <div class="column-headline-container ai-ctr-space-btwn">
+                                <span class="column-title">In progress</span>
+                                <svg onclick="showAddTaskOverlay('InProgress')" class="plus-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
+                                    <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <svg onclick="addTaskMobile('InProgress')" class="plus-icon plus-icon-mobile" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
+                                    <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div id="in_progress" class="column-tasks-container" ondragover="allowDrop(event)" ondrop="moveTo('in_progress')"></div>
+                        </div>
+
+                        <!-- Await Feedback -->
+                        <div class="board-column-container">
+                            <div class="column-headline-container ai-ctr-space-btwn">
+                                <span class="column-title">Await feedback</span>
+                                <svg onclick="showAddTaskOverlay('AwaitFeedback')" class="plus-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
+                                    <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <svg onclick="addTaskMobile('AwaitFeedback')" class="plus-icon plus-icon-mobile" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
+                                    <path d="M12 8V16" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div id="await_feedback" class="column-tasks-container" ondragover="allowDrop(event)" ondrop="moveTo('await_feedback')"></div>
+                        </div>
+
+                        <!-- Done -->
+                        <div class="board-column-container">
+                            <div class="column-headline-container">
+                                <span class="column-title">Done</span>
+                            </div>
+                            <div id="done" class="column-tasks-container" ondragover="allowDrop(event)" ondrop="moveTo('done')"></div>
+                        </div>
+                        
+                    </div>
                 </section>
 
                 <!-- Section: Big view -->
