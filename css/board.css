@@ -801,6 +801,7 @@
     .full-card {
         min-width: 252px;
         max-width: 252px;
+        height: 100%;
     }
 
     .m-btm24 {
