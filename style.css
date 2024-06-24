@@ -85,7 +85,11 @@ header {
     color: #29abe2;
     border-radius: 100%;
     border: 3px solid #2a3647;
-    padding: 10px;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .user-short:hover {

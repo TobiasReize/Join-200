@@ -473,6 +473,10 @@ ul {
 }
 
 @media (max-width: 920px) {
+  body {
+    overflow-x: hidden;
+  }
+
   .logo-header-dark {
     display: block !important;
   } 
