@@ -16,31 +16,9 @@
     <script src="./js/login.js" defer></script>
     <!-- Diese Datei darf erst geladen werden, wenn das HTML komplett geladen ist! Daher das Attribut "defer" -->
 
-
-    <!-- Das ist die Start-Seite (Login-Seite)! Keine extra Datei für den Login! -->
-
-    <script>
-        window.addEventListener('load', () => {
-            const logo = document.getElementById('logo');
-            const loginContent = document.getElementById('login-content');
-
-            setTimeout(() => {
-                logo.classList.add('shrink-and-move');
-            }, 2000);
-
-            setTimeout(() => {
-                loginContent.style.display = 'block';
-            }, 4000);
-        });
-
-        function addGuestName() {
-        location.href = '../html/summary.html?name=guest';
-    }
-    </script>
-
 </head>
 
-<body onload="init(); initRegister()">
+<body id="body" onload="init(); initRegister()">
     <div class="page-content" id="logo-container">
         <svg id="logo" class="logo" width="274" height="335" viewBox="0 0 274 335" fill="none"
             xmlns="http://www.w3.org/2000/svg">
@@ -83,6 +61,12 @@
                             fill="#A8A8A8" />
                     </g>
                 </svg>
+                <div id="userNotFoundMail" class="user-not-found-mail d-none">
+                    <p>
+                        User not found!
+                    </p>
+                </div>
+
 
                 <input placeholder="Password" type="password" id="login_password" required>
                 <svg class="password-svg" width="24" height="25" viewBox="0 0 24 25" fill="none"
@@ -97,10 +81,21 @@
                             fill="#A8A8A8" />
                     </g>
                 </svg>
+                <div id="userNotFoundPassword" class="user-not-found-password d-none">
+                    <p>
+                        User not found!
+                    </p>
+                </div>
 
 
             </div>
-            <p class="rememberme"><input type="checkbox" name="" id=""> Remember me</p>
+            <p class="rememberme" id="remenberMe">
+                <svg onclick="remenberMe()" width="24" height="25" viewBox="0 0 24 25" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="4.96582" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2" />
+                </svg>
+                Remenber me
+            </p>
             <div class="continue-btn">
                 <button onclick="login()" id="login_btn" class="login-btn">Log in</button>
                 <button id="guestLogin_btn" class="guestLogin-btn" onclick="addGuestName()">Guest Log in</button>

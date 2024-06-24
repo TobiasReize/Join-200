@@ -7,6 +7,22 @@ body {
     display: none;
 }
 
+.user-not-found-mail {
+    position: absolute;
+    top: 200px;
+    color: red;
+    font-family: Inter;
+    font-weight: 600;
+}
+
+.user-not-found-password {
+    position: absolute;
+    top: 285px;
+    color: red;
+    font-family: Inter;
+    font-weight: 600;
+}
+
 html {
     margin: 0;
     padding: 0;
@@ -100,6 +116,9 @@ html {
 
 .rememberme {
     position: absolute;
+    display: flex;
+    align-content: center;
+    gap: 10px;
     top: 341px;
     left: 154px;
     font-family: Inter;
@@ -246,6 +265,13 @@ html {
         position: absolute;
     }
 
+    .logo-final {
+        width: 100px !important;
+        height: 122px !important;
+        top: 80px;
+        left: 77px;
+    }
+
     .shrink-and-move {
         animation: moveAndShrink 3s ease forwards;
     }
@@ -269,17 +295,22 @@ html {
 }
 
 @media screen and (max-width: 650px) {
-    body {
-        background-color: #F6F7F8;
-    }
 
-    body {
-        background-color: #2A3647;
-        animation: changeBackground 3s ease forwards 3s;
+    .user-not-found-mail {
+        top: 175px;
+    }
+    
+    .user-not-found-password {
+        top: 255px;
     }
 
     .shrink-and-move {
         animation: moveAndShrink 3s ease forwards;
+    }
+
+    .change-background {
+        background-color: #2A3647;
+        animation: changeBackground 3ms ease forwards 3s;
     }
 
     @keyframes changeBackground {
@@ -290,31 +321,6 @@ html {
         100% {
             background-color: #F6F7F8;
         }
-    }
-
-    #logo {
-        width: 100px;
-        height: 122px;
-        position: absolute;
-    }
-
-    #logo path {
-        fill: white;
-        animation: changeLogo 3s ease forwards 3s;
-    }
-
-    @keyframes changeLogo {
-        0% {
-            fill: white;
-        }
-
-        100% {
-            fill: #2A3647;
-        }
-    }
-
-    .shrink-and-move {
-        animation: moveAndShrink 3s ease forwards;
     }
 
     @keyframes moveAndShrink {
@@ -328,9 +334,36 @@ html {
         100% {
             width: 64px;
             height: 78px;
-            top: 37px;
-            left: 38px;
-            transform: translate(0, 0);
+            top: 30px;
+            left: 37px;
+        }
+    }
+
+    #logo {
+        width: 100px;
+        height: 122px;
+        position: absolute;
+    }
+
+    .logo-final {
+        width: 64px !important;
+        height: 78px !important;
+        top: 30px;
+        left: 37px;
+    }
+
+    #logo path {
+        fill: white;
+        animation: changeLogo 1s ease forwards 1s;
+    }
+
+    @keyframes changeLogo {
+        0% {
+            fill: white;
+        }
+
+        100% {
+            fill: #2A3647;
         }
     }
 
@@ -362,7 +395,7 @@ html {
         height: 35px;
         display: flex;
         justify-content: space-between;
-        top: 869px;
+        bottom: 40px;
     }
 
     .continue-btn {
@@ -409,21 +442,40 @@ html {
 }
 
 @media screen and (max-width: 420px) {
-    body {
-        margin: 0;
-        padding: 0;
+
+    .logo-final {
+        width: 64px !important;
+        height: 78px !important;
+        top: 30px;
+        left: 37px;
     }
+
+    .login-mainboard {
+        transform: scale(0.85);
+        transform-origin: top center;
+        left: -10px;
+        top: 120px;
+    }
+
+    .signup-btn {
+        transform: scale(0.85);
+        transform-origin: top center;
+        top: 555px;
+        left: 70px;
+    }
+}
+
+@media screen and (max-width: 374px) {
 
     .login-mainboard {
         transform: scale(0.8);
         transform-origin: top center;
-        left: auto;
+        left: -35px;
+        top: 120px;
     }
 
     .signup-btn {
         transform: scale(0.8);
-        transform-origin: top center;
-        left: auto;
-        top: 622px;
+        left: 35px;
     }
 }

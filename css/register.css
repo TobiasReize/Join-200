@@ -1,6 +1,7 @@
 body {
     background-color: #F6F7F8;
     overflow: hidden;
+    font-family: Inter;
 }
 
 .logo {
@@ -19,6 +20,7 @@ body {
 }
 
 .police-legal button {
+    color: #A8A8A8;
     cursor: pointer;
     border: 0;
     background-color: #F6F7F8;
@@ -118,19 +120,19 @@ form {
 
 .email-svg {
     position: absolute;
-    top: 253px;
+    top: 258px;
     left: 465px;
 }
 
 .password-svg {
     position: absolute;
-    top: 325px;
+    top: 330px;
     left: 465px;
 }
 
 .cpassword-svg {
     position: absolute;
-    top: 397px;
+    top: 405px;
     left: 465px;
 }
 
@@ -208,6 +210,58 @@ form {
     animation: moveUp 2s forwards;
 }
 
+.fill-fields-name {
+    font-family: Inter;
+    color: red;
+    font-weight: 500;
+    position: absolute;
+    top: 205px;
+}
+
+.fill-fields-mail {
+    font-family: Inter;
+    color: red;
+    font-weight: 500;
+    position: absolute;
+    top: 280px;
+}
+
+.fill-fields-password {
+    font-family: Inter;
+    color: red;
+    font-weight: 500;
+    position: absolute;
+    top: 355px;
+}
+
+.no-match-password {
+    font-family: Inter;
+    color: red;
+    font-weight: 500;
+    position: absolute;
+    top: 355px;
+}
+
+.fill-fields-cpassword {
+    font-family: Inter;
+    color: red;
+    font-weight: 500;
+    position: absolute;
+    top: 430px;
+}
+
+.no-match-cpassword {
+    font-family: Inter;
+    color: red;
+    font-weight: 500;
+    position: absolute;
+    top: 430px;
+}
+
+.d-none {
+    display: none;
+}
+
 @keyframes moveUp {
     0% {
         bottom: 0;
@@ -251,30 +305,26 @@ form {
 
     .name-svg {
         position: absolute;
-        top: 141px;
+        top: 155px;
         left: 335px;
-        transform:translateY(50%);
     }
     
     .email-svg {
         position: absolute;
-        top: 215px;
+        top: 230px;
         left: 335px;
-        transform:translateY(50%);
     }
     
     .password-svg {
         position: absolute;
-        top: 289.5px;
+        top: 305px;
         left: 335px;
-        transform:translateY(50%);
     }
     
     .cpassword-svg {
         position: absolute;
-        top: 364.5px;
+        top: 385px;
         left: 335px;
-        transform:translateY(50%);
     }
 
     .signup-content h1 {
@@ -289,16 +339,40 @@ form {
         background-color: #29ABE2;
         margin-bottom: 22.5px;
     }
+
+    .fill-fields-name {
+        top: 180px;
+    }
+    
+    .fill-fields-mail {
+        top: 255px;
+    }
+    
+    .fill-fields-password {
+        top: 330px;
+    }
+    
+    .no-match-password {
+        top: 330px;
+    }
+    
+    .fill-fields-cpassword {
+        top: 410px;
+    }
+    
+    .no-match-cpassword {
+        top: 410px;
+    }
 }
 
-@media screen and (max-width: 405px) {
+@media screen and (max-width: 450px) {
     .signup-content {
-        transform: scale(0.8);
+        transform: scale(0.9);
         transform-origin: top center;
         top: 165px;
+        left: 20px;
         display: flex;
         justify-content: center;
-        left: auto;
     }
 
     .police-legal {
@@ -306,4 +380,38 @@ form {
         justify-content: center;
     }
 
+}
+
+@media screen and (max-width: 400px) {
+
+    .logo {
+        top: 20px;
+    }
+    .signup-content {
+        top: 110px;
+        left: -15px;
+        transform: scale(0.85);
+    }
+
+    .police-legal {
+        bottom: 10px;
+        width: 100vw;
+    }
+
+    #success-message {
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 370px) {
+
+    .logo {
+        top: 20px;
+    }
+
+    .signup-content {
+        top: 110px;
+        left: -35px;
+        transform: scale(0.75);
+    }
 }
