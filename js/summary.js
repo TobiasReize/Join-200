@@ -3,7 +3,24 @@ const DEFAULT_NAME = 'guest';
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
+    checkWidthAndAddClass();
 });
+
+function checkWidthAndAddClass() {
+    if (window.innerWidth < 920) {
+            document.getElementById('titleBoard').classList.add('d-none');
+            document.getElementById('board').classList.add('d-none');
+            document.getElementById('greeting').classList.add('greet-animation');
+            document.getElementById('body').classList.add('change-background');
+        setTimeout(() => {
+            document.getElementById('titleBoard').classList.remove('d-none');
+            document.getElementById('board').classList.remove('d-none');
+            document.getElementById('greeting').classList.remove('greet-animation');
+            document.getElementById('body').classList.remove('change-background');
+        }, 3000);
+    }
+    return;
+}
 
 async function initializeApp() {
     await loadTasksFromFirebase();
@@ -111,6 +128,7 @@ async function sortTasks() {
                 break;
         }
     }
+    return;
 };
 
 async function loadNumber() {
@@ -126,8 +144,10 @@ async function loadNumber() {
     document.getElementById('awaitFeedbackNumber').innerHTML = `${awaitFeedbackNumber}`;
     document.getElementById('inProgressNumber').innerHTML = `${inProgressNumber}`;
     document.getElementById('taskSum').innerHTML = `${sum}`;
+    return;
 };
 
 async function loadTasksFromFirebase() {
     await loadData('tasks', importTasks);
+    return;
 };

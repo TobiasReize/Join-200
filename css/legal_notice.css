@@ -1,6 +1,9 @@
 body {
-    overflow: hidden;
     font-family: Inter;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 .legal-notice {

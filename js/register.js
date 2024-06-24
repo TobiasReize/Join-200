@@ -28,14 +28,14 @@ async function addUser() {                                 // Neuer User wird im
 
     // Überprüfen, ob die Passwörter übereinstimmen
     if (password.value !== cpassword.value) {
-        alert('Die Passwörter stimmen nicht überein.');
+        await removeDnoneMatch();
         registerBtn.disabled = false;
         return;
     }
 
     // Überprüfen, ob alle Felder ausgefüllt sind
-    if (!userName.value || !email.value || !password.value || !checkbox > 0) {
-        alert('Bitte füllen Sie alle Felder aus.');        // Nachricht anzeigen, wenn ein Feld leer ist
+    if (!userName.value || !email.value || !password.value || !checkboxpp > 0) {
+        await removeDnoneFill();
         registerBtn.disabled = false;                     // Button wieder aktivieren
         return;                                           // Funktion beenden
     }
@@ -56,8 +56,22 @@ async function addUser() {                                 // Neuer User wird im
     // Benachrichtigung anzeigen
     showSuccessMessage();
 
+}
 
+function removeDnoneFill() {
+    document.getElementById('fillName').classList.remove('d-none');
+    document.getElementById('fillMail').classList.remove('d-none');
+    document.getElementById('noMatchPassword').classList.add('d-none');
+    document.getElementById('noMatchCpassword').classList.add('d-none');
+    document.getElementById('fillPassword').classList.remove('d-none');
+    document.getElementById('fillCpassword').classList.remove('d-none');
+};
 
+function removeDnoneMatch() {
+    document.getElementById('fillPassword').classList.add('d-none');
+    document.getElementById('fillCpassword').classList.add('d-none');
+    document.getElementById('noMatchPassword').classList.remove('d-none');
+    document.getElementById('noMatchCpassword').classList.remove('d-none');
 }
 
 function showSuccessMessage() {
@@ -85,10 +99,10 @@ function resetRegisterForm(registerBtn, userName, email, password) {            
 
 /* Bild von der Checkbox austauschen */
 
-let checkbox = 0;
+let checkboxpp = 0;
 
 function checkPolicy() {
-    checkbox++;
+    checkboxpp++;
     document.getElementById('checkPolicy').innerHTML = `
     <svg onclick="ncheckPolicy()" id="checkPolicy" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M20 11.9658V17.9658C20 19.6227 18.6569 20.9658 17 20.9658H7C5.34315 20.9658 4 19.6227 4 17.9658V7.96582C4 6.30897 5.34315 4.96582 7 4.96582H15" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
@@ -99,7 +113,7 @@ function checkPolicy() {
 };
 
 function ncheckPolicy() {
-    checkbox--;
+    checkboxpp--;
     document.getElementById('checkPolicy').innerHTML = `
     <svg onclick="checkPolicy()" id="checkPolicy" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="4.5" y="4" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>
