@@ -47,14 +47,14 @@ initialsArray = storedInitials ? JSON.parse(storedInitials) : [];
 function addInitials(initials) {
     initialsArray = [];
     initialsArray.push(initials);
-    document.getElementById('user-short').innerHTML = initialsArray.join(', ');
+    document.getElementById('user-short').innerHTML = initialsArray.join('');
 
     // Speichern im Local Storage
     localStorage.setItem('initialsArray', JSON.stringify(initialsArray));
 };
 
 function displayInitials() {
-    document.getElementById('user-short').innerHTML = initialsArray.join(', ');
+    document.getElementById('user-short').innerHTML = initialsArray.join('');
 };
 
 function logOut() {
