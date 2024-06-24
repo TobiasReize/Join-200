@@ -237,7 +237,7 @@
     flex-direction: column;
     gap: 16px;
     flex: 1;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 /* Board: cards */
@@ -696,6 +696,27 @@
     .board-column-container {
         width: calc((100vw - 145px) / 4);
     }
+
+    .overlay-container {
+        padding: 0 16px;
+    }
+
+    .addtask-backlog {
+        padding: 32px 16px;
+
+    }
+
+    .clear-create-container {
+        position: unset;
+    }
+
+    .clear-create-btn {
+        margin-top: 80px;
+    }
+
+    .clear-btn {
+        display: flex !important;
+    }
 }
 
 @media (max-width: 920px) {
@@ -768,7 +789,7 @@
     .column-tasks-container {
         overflow-y: unset;
         flex-direction: row;
-        overflow-x: scroll;
+        overflow-x: auto;
     }
 
     .plus-icon {
