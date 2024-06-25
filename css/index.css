@@ -187,9 +187,8 @@ html {
     line-height: 24px;
     width: 279px;
     height: 49px;
-    left: 75vw;
+    right: 77px;
     top: 67px;
-    transform: translateX(-50%);
 }
 
 .signup-btn button {
@@ -296,6 +295,10 @@ html {
 
 @media screen and (max-width: 650px) {
 
+    body {
+        overflow: hidden;
+    }
+
     .user-not-found-mail {
         top: 175px;
     }
@@ -395,7 +398,7 @@ html {
         height: 35px;
         display: flex;
         justify-content: space-between;
-        bottom: 40px;
+        bottom: 20px;
     }
 
     .continue-btn {
@@ -460,7 +463,7 @@ html {
     .signup-btn {
         transform: scale(0.85);
         transform-origin: top center;
-        top: 555px;
+        top: 565px;
         left: 70px;
     }
 }

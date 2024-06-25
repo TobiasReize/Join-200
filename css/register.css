@@ -226,6 +226,14 @@ form {
     top: 280px;
 }
 
+.invalid-email {
+    font-family: Inter;
+    color: red;
+    font-weight: 500;
+    position: absolute;
+    top: 280px;
+}
+
 .fill-fields-password {
     font-family: Inter;
     color: red;
@@ -345,6 +353,10 @@ form {
     }
     
     .fill-fields-mail {
+        top: 255px;
+    }
+
+    .invalid-email {
         top: 255px;
     }
     

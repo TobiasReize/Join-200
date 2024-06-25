@@ -1,17 +1,17 @@
 // Globale Konstante für den Standardnamen
 const DEFAULT_NAME = 'guest';
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     initializeApp();
     checkWidthAndAddClass();
 });
 
 function checkWidthAndAddClass() {
     if (window.innerWidth < 920) {
-            document.getElementById('titleBoard').classList.add('d-none');
-            document.getElementById('board').classList.add('d-none');
-            document.getElementById('greeting').classList.add('greet-animation');
-            document.getElementById('body').classList.add('change-background');
+        document.getElementById('titleBoard').classList.add('d-none');
+        document.getElementById('board').classList.add('d-none');
+        document.getElementById('greeting').classList.add('greet-animation');
+        document.getElementById('body').classList.add('change-background');
         setTimeout(() => {
             document.getElementById('titleBoard').classList.remove('d-none');
             document.getElementById('board').classList.remove('d-none');
@@ -40,10 +40,10 @@ function getInitials(name) {
 
 async function letsGreet() {
     const userName = getQueryParameter('name');
-    
+
     // Versuche den Namen aus dem localStorage zu lesen
     let storedName = localStorage.getItem('userName');
-    
+
     if (userName !== null) {
         await greet(userName);
         // Speichere den Namen im localStorage, falls er über die URL übergeben wurde
@@ -69,7 +69,7 @@ function getQueryParameter(name) {
 async function greet(userName) {
     const greeting = await getGreeting();
     let greetingText;
-    
+
     if (userName === null || userName === DEFAULT_NAME) {
         greetingText = `<p>${greeting}!</p>`;
     } else {
@@ -77,7 +77,7 @@ async function greet(userName) {
         <br>
         <p class="blue-name">${userName}!</p>`;
     }
-    
+
     document.getElementById('greeting').innerHTML = greetingText;
 };
 
@@ -105,6 +105,7 @@ let toDoTasks = [];
 let inProgressTasks = [];
 let awaitFeedbackTasks = [];
 let doneTasks = [];
+const tasks = [];
 
 async function sortTasks() {
     for (let i = 0; i < importTasks.length; i++) {
@@ -114,15 +115,15 @@ async function sortTasks() {
             case 'ToDo':
                 toDoTasks.push(singleTask);
                 break;
-                
+
             case 'InProgress':
                 inProgressTasks.push(singleTask);
                 break;
-                
+
             case 'AwaitFeedback':
                 awaitFeedbackTasks.push(singleTask);
                 break;
-            
+
             case 'Done':
                 doneTasks.push(singleTask);
                 break;
@@ -133,11 +134,14 @@ async function sortTasks() {
 
 async function loadNumber() {
     await sortTasks();
+    tasks.push(importTasks);
     const todoNumber = toDoTasks.length;
     const doneNumber = doneTasks.length;
     const awaitFeedbackNumber = awaitFeedbackTasks.length;
     const inProgressNumber = inProgressTasks.length;
     const sum = toDoTasks.length + doneTasks.length + awaitFeedbackTasks.length + inProgressTasks.length;
+
+    await countUrgent();
 
     document.getElementById('todoNumber').innerHTML = `${todoNumber}`;
     document.getElementById('doneNumber').innerHTML = `${doneNumber}`;
@@ -146,6 +150,65 @@ async function loadNumber() {
     document.getElementById('taskSum').innerHTML = `${sum}`;
     return;
 };
+
+async function countUrgent() {
+let urgentCount = 0;
+
+tasks.forEach(innerArray => {
+    innerArray.forEach(task => {
+        if (task.priorities && task.priorities.length > 0) {
+            task.priorities.forEach(priority => {
+                if (priority.urgent === true) {
+                    urgentCount++;
+                }
+            });
+        }
+    });
+});
+
+    document.getElementById('urgentNumber').innerHTML = `${urgentCount}`;
+
+    await findClosestDate()
+    return;
+}
+
+async function findClosestDate() {
+    let closestDate = null;
+
+    tasks.forEach(innerArray => {
+        innerArray.forEach(task => {
+            if (task.date) {
+                const currentDate = new Date(task.date);
+
+                if (!closestDate || currentDate < closestDate) {
+                    closestDate = currentDate;
+                }
+            }
+        });
+    });
+
+    const dateParts = extractDateParts(closestDate);
+
+    document.getElementById('upcomingDeadline').innerHTML = `${dateParts.month} ${dateParts.day}, ${dateParts.year}`;
+
+    return closestDate;
+}
+
+function extractDateParts(dateString) {
+    let date = new Date(dateString);
+
+
+    let month = date.toLocaleString('default', { month: 'short' });
+    let day = date.getDate();
+    let year = date.getFullYear();
+
+    return {
+        month: month,
+        day: day,
+        year: year
+    };
+}
+
 
 async function loadTasksFromFirebase() {
     await loadData('tasks', importTasks);
