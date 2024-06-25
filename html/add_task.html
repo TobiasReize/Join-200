@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../css/add_task.css">
     <script src="../script.js"></script>
     <script src="../js/add_task.js"></script>
+    <script src="../js/add_task2.js"></script>
+    <script src="../assets/templates/addtask_template.js"></script>
     <script src="../js/storage.js"></script>
     <link rel="icon" type="image/x-icon" href="../assets/img/00_general-elements/join-logo-dark.svg">
 </head>
@@ -37,7 +39,7 @@
                             <img id="arrow_drop_down_contact" class="add-icon p-8" src="../assets/img/00_general-elements/arrow_drop_down.svg">
                         </div>
                         <div>
-                            <div id="contact_container" class="contacts-container d-none">
+                            <div id="contact_container" class="contacts-container d-none" onclick="stopPropagation(event)">
                                 <ul id="list_options" class="list-options">
                                 </ul>
                             </div>

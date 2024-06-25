@@ -1,8 +1,12 @@
 let importContacts = [];
 let importTasks = [];
 let importCategories = [];
+let initialsArray = [];
 
 
+/**
+ * Initial function to load the database,
+ */
 async function init() {
     includeHTML();
     await loadContacts('contacts', importContacts); // Kontakte von Datenbank laden
@@ -11,6 +15,9 @@ async function init() {
 }
 
 
+/**
+ * funtion to laod the templates for the html
+ */
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {
@@ -23,9 +30,13 @@ async function includeHTML() {
             element.innerHTML = 'Page not found';
         }
     }
+    displayInitials();
   }
 
-// Sortiert die Kontakte nach dem Vornamen
+
+/**
+ * functtion to sort the imported contacts by first letter 
+ */
 function sortContacts() {
     importContacts.sort((a, b) => {
         if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) {
@@ -37,3 +48,50 @@ function sortContacts() {
         return 0;
     });
 }
+
+
+/**
+ * set the intitials for the user 
+ */
+var storedInitials = localStorage.getItem('initialsArray');
+initialsArray = storedInitials ? JSON.parse(storedInitials) : [];
+
+
+
+/**
+ * 
+ * @param {*} initials 
+ */
+function addInitials(initials) {
+    initialsArray = [];
+    initialsArray.push(initials);
+    try {
+        document.getElementById('user-short').innerHTML = initialsArray.join(', ');
+    } catch (error) {
+        
+    }
+    // Speichern im Local Storage
+    localStorage.setItem('initialsArray', JSON.stringify(initialsArray));
+};
+
+
+
+/**
+ * 
+ */
+function displayInitials() {
+    try {
+         document.getElementById('user-short').innerHTML = initialsArray.join(', ');
+    } catch (error) {
+        
+    }
+};
+
+
+/**
+ * function to log out and remove the initials
+ */
+function logOut() {
+    localStorage.removeItem('initialsArray');
+    window.location.href = '../index.html';
+};

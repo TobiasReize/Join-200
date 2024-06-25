@@ -1,11 +1,14 @@
 body {
-    overflow: hidden;
+    font-family: Inter;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 .legal-notice {
     position: absolute;
     width: 70vw;
-    height: 943px;
     top: 311px;
     left: 328px;
     gap: 24px;
@@ -22,6 +25,10 @@ svg {
     padding: 2.5px 0px 0px 0px;
 }
 
+svg:hover {
+    cursor: pointer;
+}
+
 .title-help {
     position: absolute;
     width: Hug (371px)px;
@@ -29,4 +36,33 @@ svg {
     top: 206px;
     left: 328px;
     gap: 30px;
+}
+
+@media screen and (max-width: 1120px) {
+    .title-help {
+        position: absolute;
+        left: 128px;
+    }
+    .legal-notice {
+        left: 128px;
+    }
+    svg {
+        left: 80vw;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .title-help {
+        position: absolute;
+        left: 28px;
+        top: 100px;
+    }
+    .legal-notice {
+        left: 28px;
+        top: 180px;
+    }
+    svg {
+        left: 70vw;
+        top: 100px;
+    }
 }

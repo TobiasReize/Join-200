@@ -1,5 +1,10 @@
 body {
-    background-color:  #F6F7F8;
+    background-color: #F6F7F8;
+    overflow: hidden;
+}
+
+.nav-summary {
+    background-color: #091931;
 }
 
 .title-board {
@@ -56,6 +61,7 @@ body {
     color: white;
     box-shadow: 0px 4px 4px 0px #00000040;
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 .open-todo:hover path {
@@ -95,6 +101,7 @@ body {
     color: white;
     box-shadow: 0px 4px 4px 0px #00000040;
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 .open-done:hover path {
@@ -122,7 +129,7 @@ body {
     align-items: center;
     justify-content: space-evenly;
     background-color: white;
-    width: 560px;
+    width: 100%;
     height: 168px;
     gap: 61px;
     border-radius: 30px;
@@ -134,6 +141,7 @@ body {
     color: white;
     box-shadow: 0px 4px 4px 0px #00000040;
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 .urgent-number {
@@ -177,6 +185,7 @@ body {
     color: white;
     box-shadow: 0px 4px 4px 0px #00000040;
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 .task-numbers b {
@@ -198,7 +207,7 @@ body {
     top: 587.5px;
     left: 968px;
     gap: 3px;
-    
+
 
 }
 
@@ -209,4 +218,156 @@ body {
     margin: 0;
     color: #2A3647;
 
+}
+
+.blue-name {
+    color: #29ABE2 !important;
+}
+
+.page-content {
+    z-index: 9998;
+}
+
+.d-none {
+    display: none !important;
+}
+
+@media screen and (max-width: 1310px) {
+    .greeting {
+        width: 562px;
+        margin-left: 96px;
+        left: auto;
+        top: 1000px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 920px) {
+    
+    .d-none {
+        display: none;
+    }
+
+    .greet-animation {
+        position: absolute;
+        top: 0 !important;
+        left: auto !important;
+        width: 100% !important;
+        height:100% !important;
+        margin: 0;
+    }
+
+    .change-background {
+        background-color: #F6F7F8;
+        width: 100%;
+        height: 100%;
+        z-index: 9999 !important;
+    }
+
+    .logo-header-dark {
+        display: block !important;
+    }
+}
+
+@media screen and (max-width: 680px) {
+
+    .greet-animation {
+        position: absolute;
+        top: 0 !important;
+        left: auto !important;
+        width: 100% !important;
+        height:100% !important;
+        margin: 0;
+    }
+
+    .title-board {
+        position: absolute;
+        top: 110px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 30px;
+        margin-top: 0px;
+        margin-left: 16px;
+    }
+
+    .board {
+        position: absolute;
+        top: 210px;
+        transform: scale(0.9);
+        transform-origin: top center;
+        margin-left: 0;
+    }
+
+    .greeting {
+        margin-left: 0;
+        transform: scale(0.9);
+        top: 900px;
+    }
+
+    .urgent-board:hover {
+        transform: scale(0);
+    }
+}
+
+@media screen and (max-width: 550px) {
+
+    .greet-animation {
+        position: absolute;
+        top: 0 !important;
+        left: auto !important;
+        width: 100% !important;
+        height:100% !important;
+        margin: 0;
+    }
+
+    .title-board {
+        transform: scale(0.8);
+    }
+
+    .board {
+        position: absolute;
+        top: 210px;
+        transform: scale(0.70);
+        transform-origin: top center;
+        left: -70px;
+    }
+
+    .greeting {
+        transform: scale(0.7);
+        top: 700px;
+        left: -70px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+
+    .greet-animation {
+        position: absolute;
+        left: auto !important;
+        top: 0 !important;
+        width: 100% !important;
+        height:100% !important;
+        margin: 0;
+    }
+
+    .title-board {
+        transform: scale(0.7);
+    }
+
+    .board {
+        position: absolute;
+        transform: scale(0.50);
+        transform-origin: top center;
+        left: -110px;
+    }
+
+    .greeting {
+        transform: scale(0.5);
+        top: 600px;
+        left: -120px;
+    }
 }

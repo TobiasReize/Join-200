@@ -7,7 +7,6 @@
   max-width: 100%;
   font-size: 20px;
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
   position: relative;
   flex: 1;
@@ -294,6 +293,7 @@ justify-content: center;
   justify-content: center;
   align-items: center;
   margin-top: -24px;
+  margin-right: -21px;
 }
 
 .urgent-btn-change {
@@ -313,7 +313,6 @@ justify-content: center;
 
 .ul-subtasks {
   margin-top: -24px;
-  position: absolute;
   min-width: 440px;
   font-size: 16px;
 }
@@ -321,8 +320,10 @@ justify-content: center;
 .li-subtask {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 4px 16px;
   border-radius: 10px;
+  height: 30px;
 }
 
 .li-subtask:hover {
@@ -414,7 +415,7 @@ ul {
 }
 
 .content > h1 {
-  margin-bottom: 16px;
+  margin-bottom: 48px;
 }
 
 /* ------------------------------ MEDIA ------------------------------ */
@@ -449,16 +450,6 @@ ul {
 }
 
 @media (max-width: 1120px) {
-  .clear-create-container {
-    position: fixed;
-    bottom: 8%;
-    left: 0;
-    right: 0;
-    background-color: white;
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-
   .clear-btn {
     display: none !important;
   }
@@ -473,6 +464,10 @@ ul {
 }
 
 @media (max-width: 920px) {
+  body {
+    overflow-x: hidden;
+  }
+
   .logo-header-dark {
     display: block !important;
   } 
@@ -503,10 +498,6 @@ ul {
 
   .prio-btn {
     font-size: 16px;
-  }
-
-  .content {
-    margin-bottom: calc(66px + 96px + 32px); /* höhe header + höhe create task + hilföhe für subtasks */
   }
 
   .contacts-container {

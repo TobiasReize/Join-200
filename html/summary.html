@@ -6,28 +6,28 @@
     <title>Summary</title>
 
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/summary.css">
+    <link rel="stylesheet" href="../css/fonts.css">
     <link rel="icon" type="image/x-icon" href="../../assets/img/00_general-elements/join-logo-white.svg">
 
-    <!-- Stelle sicher, dass beide Skripte das defer-Attribut haben -->
     <script src="../script.js" ></script>
-    <script src="../js/board.js"></script>
     <script src="../js/storage.js"></script>
     <script src="../js/summary.js"></script>
 </head>
 
-<body onload="includeHTML(); initBoard()">
+<body onload="includeHTML()" id="body">
     <div class="page-content">
         <nav w3-include-html="../assets/templates/navbar.html"></nav>
         <main class="main-content">
             <header w3-include-html="../assets/templates/header.html"></header>
             <div class="content">
 
-                    <div class="title-board">
+                    <div class="title-board" id="titleBoard">
                         <b>Join 360</b>
                         <p>Key Metrics at a Glance</p>
                     </div>
-                    <div class="board">
+                    <div class="board" id="board">
                         <div class="open-board">
                             <div class="open-todo" onclick="location.href='board.html';">
                                 <svg width="69" height="70" viewBox="0 0 69 70" fill="none"
@@ -84,18 +84,19 @@
                                     </defs>
                                 </svg>
                                 <div>
-                                    <b>1</b>
+                                    <b id="urgentNumber"></b>
                                     <p>Urgent</p>
                                 </div>
 
                             </div>
                             <div>
+                                <p id="upcomingDeadline">2022</p>
                                 <p>Upcoming Deadline</p>
                             </div>
                         </div>
                         <div class="task-board">
                             <div class="task-numbers" onclick="location.href='board.html';">
-                                <b>5</b>
+                                <b id="taskSum"></b>
                                 <p>Task in <br> Board</p>
                             </div>
                             <div class="task-numbers" onclick="location.href='board.html';">

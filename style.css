@@ -11,6 +11,10 @@
     font-family: "Inter";
 }
 
+.d-none {
+    display: none;
+}
+
 h1 {
     font-size: 61px;
     font-weight: 700;
@@ -81,11 +85,11 @@ header {
     color: #29abe2;
     border-radius: 100%;
     border: 3px solid #2a3647;
-    padding: 10px;
-}
-
-.user-short:hover {
-    background-color: #0c2e621f;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* -------------------- Navigations-Bar -------------------- */
@@ -237,7 +241,7 @@ nav {
     }
 
     .logo-header-dark {
-        /* display: block !important; --> muss in der jeweiligen .css hinzugefügt werden, da es sonst nicht greift ! */
+        display: block !important;
         width: 32px;
         height: 39px;
         margin-left: 16px;

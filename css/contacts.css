@@ -4,6 +4,11 @@
     font-size: 20px;
 }
 
+body {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
 .d-none {
     display: none !important;
 }
@@ -580,6 +585,7 @@
 
     .contact-container {
         margin-bottom: 72px;
+        min-width: 0;
     }
 
     .show-contact-container {
@@ -603,6 +609,7 @@
         bottom: 10%;
         width: auto;
         margin-right: 32px;
+        margin-bottom: 12px;
     }
 
     .btn-add-new-contact {
@@ -674,11 +681,12 @@
     .contact-card {
         margin-left: 12px;
         margin-right: 12px;
+        max-height: 100%;
     }
 
     .edit-delete {
         position: fixed;
-        bottom: -65%;
+        bottom: -44px;
         right: 0;
         flex-direction: column;
         border-radius: 20px 20px 0px 20px;
@@ -698,7 +706,7 @@
         height: 56px;
         padding: 12px;
         position: fixed;
-        bottom: -65%;
+        bottom: -44px;
         right: 0;
         cursor: pointer;
     }
