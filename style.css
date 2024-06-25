@@ -92,10 +92,6 @@ header {
     align-items: center;
 }
 
-.user-short:hover {
-    background-color: #0c2e621f;
-}
-
 /* -------------------- Navigations-Bar -------------------- */
 
 nav {
@@ -245,7 +241,7 @@ nav {
     }
 
     .logo-header-dark {
-        /* display: block !important; --> muss in der jeweiligen .css hinzugefügt werden, da es sonst nicht greift ! */
+        display: block !important;
         width: 32px;
         height: 39px;
         margin-left: 16px;
