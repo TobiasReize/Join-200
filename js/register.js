@@ -20,11 +20,22 @@ async function addUser() {                                 // Neuer User wird im
     let registerBtn = document.getElementById('register_btn');
     let userName = document.getElementById('register_name');
     let email = document.getElementById('register_email');
+    const emailField = email.value;
     let password = document.getElementById('register_password');
     let cpassword = document.getElementById('cregister_password');
 
+        // Debugging: Überprüfen, was im emailField steht
+        console.log('Email Field:', emailField);
+
     // Button wird deaktiviert
     registerBtn.disabled = true;
+
+    // Überprüfen, ob das @-Zeichen im E-Mail-Feld NICHT vorhanden ist
+    if (!emailField.includes('@')) {
+        await removeDnoneMail(); // Stelle sicher, dass diese Funktion existiert und korrekt ist
+        registerBtn.disabled = false;
+        return;
+    }
 
     // Überprüfen, ob die Passwörter übereinstimmen
     if (password.value !== cpassword.value) {
@@ -58,7 +69,7 @@ async function addUser() {                                 // Neuer User wird im
 
 }
 
-function removeDnoneFill() {
+async function removeDnoneFill() {
     document.getElementById('fillName').classList.remove('d-none');
     document.getElementById('fillMail').classList.remove('d-none');
     document.getElementById('noMatchPassword').classList.add('d-none');
@@ -67,11 +78,17 @@ function removeDnoneFill() {
     document.getElementById('fillCpassword').classList.remove('d-none');
 };
 
-function removeDnoneMatch() {
+async function removeDnoneMatch() {
     document.getElementById('fillPassword').classList.add('d-none');
     document.getElementById('fillCpassword').classList.add('d-none');
+    document.getElementById('invalidMail').classList.add('d-none');
     document.getElementById('noMatchPassword').classList.remove('d-none');
     document.getElementById('noMatchCpassword').classList.remove('d-none');
+}
+
+async function removeDnoneMail() {
+    document.getElementById('fillMail').classList.add('d-none');
+    document.getElementById('invalidMail').classList.remove('d-none');
 }
 
 function showSuccessMessage() {
