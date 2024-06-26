@@ -39,6 +39,10 @@ svg:hover {
     gap: 30px;
 }
 
+.nav-legal-notice {
+    background-color: #091931;
+}
+
 @media screen and (max-width: 1120px) {
     .title-legal {
         position: absolute;

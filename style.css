@@ -144,24 +144,26 @@ nav {
 
 .policy {
     display: flex;
-    margin-bottom: 15px;
     text-decoration: none;
     color: #CDCDCD;
     padding: 8px 0;
     flex-direction: column;
     margin-bottom: 64px;
+    width: 100%;
 }
 
 .policy > a {
     text-decoration: none;
     color: #CDCDCD;
-    margin-top: 8px;
     font-weight: 400;
+    padding: 8px 0 8px 42px;
 }
 
 .policy > a:hover{
     color: #29ABE2;
     transform: scale(1.05);
+    width: 97%;
+    cursor: pointer;
 }
 
 /* ----------------------------------- MEDIA ----------------------------------- */

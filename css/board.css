@@ -92,6 +92,14 @@
     background-color: unset;
 }
 
+.nav-addtask > img {
+    filter: unset;
+}
+
+.nav-addtask > span {
+    color: #CDCDCD;
+}
+
 .nav-board {
     background-color: #091931;
 }
