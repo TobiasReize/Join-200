@@ -465,6 +465,14 @@ body {
     background-color: #091931 !important;
 }
 
+.nav-contacts > img {
+    filter: brightness(0) invert(1);
+}
+
+.nav-contacts > span {
+    color: #FFFFFF;
+}
+
 /* ---------------------------------- MEDIA ---------------------------------- */
 
 @media (max-width: 1250px) {

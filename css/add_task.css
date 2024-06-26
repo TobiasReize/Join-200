@@ -414,6 +414,14 @@ ul {
   background-color: #091931;
 }
 
+.nav-addtask > img {
+  filter: brightness(0) invert(1);
+}
+
+.nav-addtask > span {
+  color: #FFFFFF;
+}
+
 .content > h1 {
   margin-bottom: 48px;
 }

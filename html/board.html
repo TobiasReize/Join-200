@@ -3,17 +3,23 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Board</title>
+        <title>JOIN - Board</title>
 
-        <link rel="stylesheet" href="../css/add_task.css">
         <link rel="stylesheet" href="../style.css">
-        <link rel="stylesheet" href="../css/board.css">
         <link rel="stylesheet" href="../css/fonts.css">
+        <link rel="stylesheet" href="../css/add_task.css">
+        <link rel="stylesheet" href="../css/board.css">
 
-        <script src="../js/add_task.js"></script>
         <script src="../script.js"></script>
-        <script src="../js/board.js"></script>
         <script src="../js/storage.js"></script>
+        <script src="../js/add_task.js"></script>
+        <script src="../js/add_task2.js"></script>
+        <script src="../assets/templates/addtask_template.js"></script>
+        <script src="../assets/templates/board_declaration.js"></script>
+        <script src="../js/board.js"></script>
+        <script src="../js/board2.js"></script>
+        <script src="../js/board_edit_task.js"></script>
+        <script src="../assets/templates/board_template.js"></script>
 
         <link rel="icon" type="image/x-icon" href="../../assets/img/00_general-elements/join-logo-dark.svg">
     </head>
@@ -61,7 +67,7 @@
                     <div class="board-columns-container">
                         <!-- To Do -->
                         <div class="board-column-container">
-                            <div class="ai-ctr-space-btwn">
+                            <div class="column-title-container ai-ctr-space-btwn">
                                 <span class="column-title">To do</span>
                                 <div>
                                     <svg onclick="showAddTaskOverlay('ToDo')" class="plus-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,12 +83,12 @@
                                 </div>
                                 
                             </div>
-                            <div id="to_do" class="column-tasks-container" ondragover="allowDrop(event)" ondrop="moveTo('to_do')"></div>
+                            <div id="to_do" class="column-tasks-container" ondragover="allowDrop(event); highlightColumn('to_do')" ondragleave="removeHighlight('to_do')" ondrop="moveTo('to_do')"></div>
                         </div>
 
                         <!-- In Progress -->
                         <div class="board-column-container">
-                            <div class="ai-ctr-space-btwn">
+                            <div class="column-title-container ai-ctr-space-btwn">
                                 <span class="column-title">In progress</span>
                                 <svg onclick="showAddTaskOverlay('InProgress')" class="plus-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
@@ -95,12 +101,12 @@
                                     <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                                 </svg>
                             </div>
-                            <div id="in_progress" class="column-tasks-container" ondragover="allowDrop(event)" ondrop="moveTo('in_progress')"></div>
+                            <div id="in_progress" class="column-tasks-container" ondragover="allowDrop(event); highlightColumn('in_progress')" ondragleave="removeHighlight('in_progress')" ondrop="moveTo('in_progress')"></div>
                         </div>
 
                         <!-- Await Feedback -->
                         <div class="board-column-container">
-                            <div class="ai-ctr-space-btwn">
+                            <div class="column-title-container ai-ctr-space-btwn">
                                 <span class="column-title">Await feedback</span>
                                 <svg onclick="showAddTaskOverlay('AwaitFeedback')" class="plus-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <rect x="1" y="1" width="22" height="22" rx="7" stroke="#2A3647" stroke-width="2"/>
@@ -113,15 +119,15 @@
                                     <path d="M16 12.0754L8 12.0754" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                                 </svg>
                             </div>
-                            <div id="await_feedback" class="column-tasks-container" ondragover="allowDrop(event)" ondrop="moveTo('await_feedback')"></div>
+                            <div id="await_feedback" class="column-tasks-container" ondragover="allowDrop(event); highlightColumn('await_feedback')" ondragleave="removeHighlight('await_feedback')" ondrop="moveTo('await_feedback')"></div>
                         </div>
 
                         <!-- Done -->
                         <div class="board-column-container">
-                            <div>
+                            <div class="column-title-container">
                                 <span class="column-title">Done</span>
                             </div>
-                            <div id="done" class="column-tasks-container" ondragover="allowDrop(event)" ondrop="moveTo('done')"></div>
+                            <div id="done" class="column-tasks-container" ondragover="allowDrop(event); highlightColumn('done')" ondragleave="removeHighlight('done')" ondrop="moveTo('done')"></div>
                         </div>
                         
                     </div>

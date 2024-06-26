@@ -7,6 +7,14 @@ body {
     background-color: #091931;
 }
 
+.nav-summary > img {
+    filter: brightness(0) invert(1);
+}
+
+.nav-summary > span {
+    color: #FFFFFF;
+}
+
 .title-board {
     display: flex;
     align-items: center;
