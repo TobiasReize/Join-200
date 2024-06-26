@@ -92,6 +92,65 @@ header {
     align-items: center;
 }
 
+.user-menu {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    background-color: var(--default-color);
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    position: fixed;
+    top: 56px;
+    right: 1%;
+    z-index: 100;
+    border-radius: 20px;
+    border-top-right-radius: 0;
+    
+}
+
+.user-menu > a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #CDCDCD;
+    border-radius: 8px;
+    gap: 8px;
+    padding: 8px;
+    width: 130px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+}
+
+.user-menu > a:hover {
+    background-color: #2A3D59;
+}
+
+.fly-in-user { 
+    animation: fly-in-animation-user 400ms ease-out forwards;
+}
+
+@keyframes fly-in-animation-user {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.fly-out-user { 
+    animation: fly-out-animation-user 400ms ease-out forwards;
+}
+
+@keyframes fly-out-animation-user {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
 /* -------------------- Navigations-Bar -------------------- */
 
 nav {
@@ -218,6 +277,18 @@ nav {
         width: 24px;
         height: 24px;
     }
+
+    .user-short {
+        cursor: pointer;
+    }
+
+    .help-user > a {
+        display: none;
+    }
+
+    .logout {
+        cursor: pointer;
+    }
 }
 
 @media (max-width: 920px) {
@@ -254,5 +325,11 @@ nav {
 
     h1 {
         font-size: 47px;
+    }
+
+    .user-short{
+        width: 40px;
+        height: 40px;
+        border: 2px solid var(--default-color);
     }
 }

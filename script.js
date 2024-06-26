@@ -95,3 +95,34 @@ function logOut() {
     localStorage.removeItem('initialsArray');
     window.location.href = '../index.html';
 };
+
+/**
+ * function to open the User Menu to Log-Out or go to to privacy,...
+ */
+function openUserMenu() {
+    if (innerWidth <= 1120) {
+        document.getElementById('user_menu').classList.remove('d-none');
+    }
+    
+}
+
+
+/**
+ * function to close the user menu
+ */
+function closeUserMenu() {
+    document.getElementById('user_menu').classList.add('fly-out-user');
+    setTimeout(() => {
+        document.getElementById('user_menu').classList.add('d-none');
+        document.getElementById('user_menu').classList.remove('fly-out-user');
+    }, 400); 
+}
+
+/**
+ * function to stop propagation
+ * used to close overlays onclick next to and not on the overlay
+ * @param {event} event 
+ */
+function stopPropagation(event) {           
+    event.stopPropagation();
+}

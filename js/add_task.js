@@ -347,13 +347,3 @@ async function addAllToTasks() {
     // Speichere die aktualisierten Tasks
     await setItem('tasks', importTasks);
 }
-
-
-/**
- * function to stop propagation
- * used to close overlays onclick next to and not on the overlay
- * @param {event} event 
- */
-function stopPropagation(event) {           
-    event.stopPropagation();
-}
