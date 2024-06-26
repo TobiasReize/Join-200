@@ -1,5 +1,14 @@
 body {
     font-family: Inter;
+    height: 100%;
+}
+
+.d-none {
+    display: none;
+}
+
+.center-pp {
+    width: 193px !important;
 }
 
 ::-webkit-scrollbar {
@@ -17,6 +26,20 @@ body {
 
 .subtitle {
     margin-bottom: 24px;
+}
+
+header {
+    overflow: hidden;
+    position: fixed;
+    left: 194px;
+    right: 0;
+    width: auto;
+}
+
+nav {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
 }
 
 svg {
@@ -41,6 +64,10 @@ svg:hover {
 }
 
 @media screen and (max-width: 1120px) {
+    header {
+        left: 0;
+    }
+
     .title-privat {
         position: absolute;
         left: 100px;
@@ -50,6 +77,11 @@ svg:hover {
     }
     svg {
         left: 90vw;
+    }
+    nav {
+        overflow: hidden;
+        position: fixed;
+        top: auto;
     }
 }
 

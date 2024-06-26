@@ -6,6 +6,14 @@ body {
     display: none;
 }
 
+.center-pp {
+    width: 193px !important;
+}
+
+.d-none {
+    display: none;
+}
+
 .legal-notice {
     position: absolute;
     width: 70vw;
