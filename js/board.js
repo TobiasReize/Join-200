@@ -15,20 +15,16 @@ async function initBoard() {
 function sortTasks() {
     for (let i = 0; i < importTasks.length; i++) {
         const singleTask = importTasks[i];
-
         switch (singleTask.columnID) {
             case 'ToDo':
                 toDoTasks.push(singleTask);
                 break;
-                
             case 'InProgress':
                 inProgressTasks.push(singleTask);
                 break;
-                
             case 'AwaitFeedback':
                 awaitFeedbackTasks.push(singleTask);
                 break;
-            
             case 'Done':
                 doneTasks.push(singleTask);        
         }
@@ -58,23 +54,36 @@ function renderColumn(columnTitle, columnID, columnArray) {
     columnContainer.innerHTML = '';
 
     //Prüft ob die einzelnen Spalten leer oder voll sind:
-    if (columnArray.length == 0) {
-        columnContainer.innerHTML = `<div class="empty-card">No tasks ${columnTitle}</div>`;    //für leere Spalten
+    if (columnArray.length == 0) {  //für leere Spalten
+        columnContainer.innerHTML = /*html*/ `
+            <div class="empty-card">No tasks ${columnTitle}</div>
+            <div id="rectangle_${columnID}" class="dashed-rectangle d-none"></div>
+        `;
     } else {
-        for (let i = 0; i < columnArray.length; i++) {
-            const task = columnArray[i];
-            columnContainer.innerHTML += taskCardHTML(columnID, i, task);
-            
-            if (task['subtasks']) {     //prüft ob die aktuelle Task Subtasks enthält, wenn ja wird die Progress-bar ergänzt sonst nicht
-                checkProgressBar(columnID, i, task);
-            }
+        renderTasks(columnID, columnArray);
+    }
+}
 
-            if (task['contact']) {       //prüft zuerst ob die aktuelle Task Kontakte enthält
-                //fügt die Kontakte hinzu:
-                addContactsToCard(columnID, i, task);
-            }
+
+/**
+ * Renders the tasks in the corresponding column
+ * @param {string} columnID 
+ * @param {array} columnArray 
+ */
+function renderTasks(columnID, columnArray) {
+    let columnContainer = document.getElementById(columnID);
+    for (let i = 0; i < columnArray.length; i++) {
+        const task = columnArray[i];
+        columnContainer.innerHTML += taskCardHTML(columnID, i, task);
+        if (task['subtasks']) {     //prüft ob die aktuelle Task Subtasks enthält, wenn ja wird die Progress-bar ergänzt sonst nicht
+            checkProgressBar(columnID, i, task);
+        }
+        if (task['contact']) {       //prüft zuerst ob die aktuelle Task Kontakte enthält
+            //fügt die Kontakte hinzu:
+            addContactsToCard(columnID, i, task);
         }
     }
+    columnContainer.innerHTML += /*html*/ `<div id="rectangle_${columnID}" class="dashed-rectangle d-none"></div>`;     //fügt am Ende ein gestricheltes Rechteck hinzu
 }
 
 
@@ -112,7 +121,13 @@ function addContactsToCard(columnID, i, task) {
         const personFirstName = person['firstName'];
         const personLastName = person['lastName'];
         const initials = `${oneLetterUppercase(personFirstName)}${oneLetterUppercase(personLastName)}`;
-        document.getElementById(`${columnID}_contacts_container_${i}`).innerHTML += /*html*/ `<div class="initials" style="background-color: ${person['color']}">${initials}</div>`;
+
+        if (k > 3) {
+            document.getElementById(`${columnID}_contacts_container_${i}`).innerHTML += /*html*/ `<div class="initials" style="background-color: lightgrey">+ ${task['contact'].length - 4}</div>`;
+            break;
+        } else {
+            document.getElementById(`${columnID}_contacts_container_${i}`).innerHTML += /*html*/ `<div class="initials" style="background-color: ${person['color']}">${initials}</div>`;
+        }
     }
 }
 
@@ -194,6 +209,26 @@ function endRotateCard(columnID, taskID) {      //Karte wird wieder in den Ausga
 
 
 /**
+ * Highlights the dragover-column
+ * @param {string} idColumn 
+ */
+function highlightColumn(idColumn) {
+    document.getElementById(`${idColumn}`).classList.add('highlight-column');
+    // document.getElementById(`rectangle_${idColumn}`).classList.remove('d-none');
+}
+
+
+/**
+ * Removes the column highlight
+ * @param {string} idColumn 
+ */
+function removeHighlight(idColumn) {
+    document.getElementById(`${idColumn}`).classList.remove('highlight-column');
+    // document.getElementById(`rectangle_${idColumn}`).classList.add('d-none');
+}
+
+
+/**
  * Moves the current task to the corresponding column
  * @param {string} idColumn 
  */
@@ -206,7 +241,8 @@ function moveTo(idColumn) {
 
     targetArray.push(renderedBoardArrays[startArrayIndex]['array'][currentDraggedElement['taskNumber']]);
     startArray.splice(currentDraggedElement.taskNumber, 1);
-    task['columnID'] = renderedBoardArrays[targetArrayIndex]['title'].replace(/ /g,'');
+    // task['columnID'] = renderedBoardArrays[targetArrayIndex]['title'].replace(/ /g,'');
+    document.getElementById(`${idColumn}`).classList.remove('highlight-column');
     
     // allBoardArrays = renderedBoardArrays; --> darf ich nicht machen, da vorher renderedBoardArrays = filteredBoardArrays gemacht wird!
     // renderedBoardArrays = allBoardArrays; --> sobald man eine Task verschiebt, werden wieder alle Tasks angezeigt!
@@ -329,64 +365,4 @@ function deleteTask(columnID, taskID) {
     closeBigView(1);
     renderAll();
     saveAllTasksToDatabase();
-}
-
-
-/**
- * Edit the corresponding task in the big view
- * @param {string} columnID 
- * @param {integer} taskID 
- */
-function editTask(columnID, taskID) {
-    let currentArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == columnID['id']);
-    let currentTask = renderedBoardArrays[currentArrayIndex]['array'][taskID];
-    let currentTaskPriority = getPriority(currentTask['priorities']);
-    let bigViewContainer = document.getElementById('big_view_container');
-
-    bigViewContainer.innerHTML = editTaskHTML(columnID, taskID, currentTask);
-
-    highlightCurrentPriority(currentTaskPriority);
-
-    if (currentTask['contact']) { //prüft zuerst ob die aktuelle Task Kontakte enthält
-        addContactsToEditView(currentTask);
-    }
-
-    if (currentTask['subtasks']) { //prüft zuerst ob die aktuelle Task Subtask enthält
-        addSubtasksToEditView(currentTask);
-    }
-    showSubtasksInEditView();
-}
-
-
-/**
- * Highlights the current priority of the task in the edit task view
- * @param {string} currentTaskPriority 
- */
-function highlightCurrentPriority(currentTaskPriority) {
-    let priorityButton = document.getElementById(`priority_${currentTaskPriority}`);
-    let priorityIcon = document.getElementsByClassName(`priority-path-${currentTaskPriority}`);
-    priorityButton.classList.add(`priority-${currentTaskPriority}-highlight`);
-    priorityButton.children[0].classList.add('fs21-fw700');
-    for (let i = 0; i < priorityIcon.length; i++) {
-        priorityIcon[i].classList.add('fill-white');
-    }
-    currentEditedTaskPriority[0][currentTaskPriority] = true;
-}
-
-
-/**
- * Adds the contacts to the editing view
- * @param {JSON} currentTask 
- */
-function addContactsToEditView(currentTask) {
-    for (let j = 0; j < currentTask['contact'].length; j++) {
-        const person = currentTask['contact'][j];
-        const initials = `${oneLetterUppercase(person['firstName'])}${oneLetterUppercase(person['lastName'])}`;
-        let currentContactIndex = importContacts.findIndex(element => element['firstName'] == person['firstName'] && element['lastName'] == person['lastName']);
-        importContacts[currentContactIndex]['checked'] = true;
-
-        document.getElementById('checked_contacts_edit_task').innerHTML += /*html*/ `
-            <div class="big-view-initials" style="background-color: ${person['color']}">${initials}</div>
-        `;
-    }
 }

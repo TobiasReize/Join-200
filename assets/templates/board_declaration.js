@@ -108,3 +108,4 @@ let currentEditedTaskPriority = [{
     'medium' : false,
     'low' : false
 }];
+let countCheckedContacts = 0;

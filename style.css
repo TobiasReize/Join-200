@@ -168,7 +168,7 @@ nav {
 
 /* ----------------------------------- MEDIA ----------------------------------- */
 
-@media (max-width: 1120px){
+@media (max-width: 1230px){ /*vorher: 1120px*/
     .page-content {
         position: relative;
     }
