@@ -230,10 +230,10 @@ function removeHighlight(idColumn) {
 
 /**
  * Moves the current task to the corresponding column
- * @param {string} idColumn 
+ * @param {string} targetColumn 
  */
-function moveTo(idColumn) {
-    let targetArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == idColumn);
+function moveTo(targetColumn) {
+    let targetArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == targetColumn);
     let targetArray = renderedBoardArrays[targetArrayIndex]['array'];
     let startArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == currentDraggedElement['columnTitle']);
     let startArray = renderedBoardArrays[startArrayIndex]['array'];
@@ -241,8 +241,8 @@ function moveTo(idColumn) {
 
     targetArray.push(renderedBoardArrays[startArrayIndex]['array'][currentDraggedElement['taskNumber']]);
     startArray.splice(currentDraggedElement.taskNumber, 1);
-    // task['columnID'] = renderedBoardArrays[targetArrayIndex]['title'].replace(/ /g,'');
-    document.getElementById(`${idColumn}`).classList.remove('highlight-column');
+    task['columnID'] = renderedBoardArrays[targetArrayIndex]['title'].replace(/ /g,'');
+    document.getElementById(`${targetColumn}`).classList.remove('highlight-column');
     
     // allBoardArrays = renderedBoardArrays; --> darf ich nicht machen, da vorher renderedBoardArrays = filteredBoardArrays gemacht wird!
     // renderedBoardArrays = allBoardArrays; --> sobald man eine Task verschiebt, werden wieder alle Tasks angezeigt!
@@ -365,4 +365,36 @@ function deleteTask(columnID, taskID) {
     closeBigView(1);
     renderAll();
     saveAllTasksToDatabase();
+}
+
+
+/**
+ * Moves the task to the previous column in the mobile view
+ * @param {string} columnID 
+ * @param {integer} taskID 
+ */
+function moveUp(columnID, taskID) {
+    let currentArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == columnID['id']);
+
+    if (currentArrayIndex > 0) {
+        startDragging(columnID, taskID);
+        moveTo(renderedBoardArrays[currentArrayIndex - 1]['id']);
+        closeBigView(1);
+    }
+}
+
+
+/**
+ * Moves the task to the next column in the mobile view
+ * @param {string} columnID 
+ * @param {integer} taskID 
+ */
+function moveDown(columnID, taskID) {
+    let currentArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == columnID['id']);
+
+    if (currentArrayIndex < 3) {
+        startDragging(columnID, taskID);
+        moveTo(renderedBoardArrays[currentArrayIndex + 1]['id']);
+        closeBigView(1);
+    }
 }

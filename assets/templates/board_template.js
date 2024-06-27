@@ -75,6 +75,10 @@ function bigViewHTML(columnID, taskID, currentTask) {
                 </div>
             </div>
             <div class="big-view-lowest-container df-ai-ctr m-top24">
+                <div class="df-ai-ctr gap-8">
+                    <img onclick="moveUp(${columnID['id']}, ${taskID})" class="arrow-mobile" src="../assets/img/04_board/arrow-up.png" alt="arrow-up">
+                    <img onclick="moveDown(${columnID['id']}, ${taskID})" class="arrow-mobile" src="../assets/img/04_board/arrow-down.png" alt="arrow-down">
+                </div>
                 <div class="big-view-delete-edit-container df-ai-ctr">
                     <div class="big-view-delete-container df-ai-ctr" onclick="deleteTask(${columnID['id']}, ${taskID})">
                         <svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
