@@ -33,7 +33,7 @@ async function addUser() {                                 // Neuer User wird im
     // Überprüfen, ob das @-Zeichen im E-Mail-Feld NICHT vorhanden ist oder vor dem @ kein Zeichen steht
     const atIndex = emailField.indexOf('@');
     if (atIndex <= 0) {
-        await removeDnoneMail(); // Stelle sicher, dass diese Funktion existiert und korrekt ist
+        await removeDnoneMail();
         registerBtn.disabled = false;
         return;
     };
@@ -42,7 +42,7 @@ async function addUser() {                                 // Neuer User wird im
     const dotIndex = emailField.lastIndexOf('.');
     const domainLength = emailField.length - dotIndex - 1;
     if (dotIndex === -1 || domainLength < 2 || domainLength > 3) {
-        await removeDnoneMail(); // Stelle sicher, dass diese Funktion existiert und korrekt ist
+        await removeDnoneMail();
         registerBtn.disabled = false;
         return;
     };
