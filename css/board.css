@@ -249,6 +249,7 @@
     flex: 1;
     border-radius: 24px;
     overflow-y: auto;
+    max-height: calc(100vh - 350px);
 }
 
 /* Board: cards */
@@ -496,7 +497,7 @@
 
 .big-view-lowest-container {
     width: 100%;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 .big-view-delete-edit-container {
@@ -534,6 +535,19 @@
 
 .big-view-edit-container {
     gap: 8px;
+}
+
+.arrow-mobile {
+    height: 32px;
+    width: 32px;
+    padding: 4px;
+    border-radius: 50%;
+    display: none;
+}
+
+.arrow-mobile:hover {
+    background-color: #EEEEEE;
+    cursor: pointer;
 }
 
 /* Edit big view */
@@ -714,18 +728,6 @@
     }
 }
 
-@media(max-width: 1020px) {
-    .column-title-container {
-        padding: 0;
-    }
-
-    .initials {
-        width: 27px;
-        height: 27px;
-        line-height: 26px
-    }
-}
-
 @media(max-width: 1230px) { /*vorher: 1120px*/
     main {
         margin-bottom: 76px;
@@ -733,6 +735,10 @@
     
     .board-column-container {
         width: calc((100vw - 145px) / 4);
+    }
+
+    .column-tasks-container {
+        max-height: calc(100vh - 426px);
     }
 
     .overlay-container {
@@ -754,6 +760,18 @@
 
     .clear-btn {
         display: flex !important;
+    }
+}
+
+@media(max-width: 1020px) {
+    .column-title-container {
+        padding: 0;
+    }
+
+    .initials {
+        width: 27px;
+        height: 27px;
+        line-height: 26px
     }
 }
 
@@ -875,6 +893,10 @@
 
     .big-view-card-content > h1 {
         font-size: 36px;
+    }
+
+    .arrow-mobile {
+        display: block;
     }
 }
 
