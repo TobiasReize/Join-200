@@ -230,6 +230,11 @@ html {
     color: #A8A8A8;
 }
 
+.police-legal button:hover {
+    color: #29ABE2;
+    transform: scale(1.05);
+}
+
 #login-content {
     display: none;
 }
