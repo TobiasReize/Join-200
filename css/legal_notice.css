@@ -1,7 +1,3 @@
-body {
-    font-family: Inter;
-}
-
 ::-webkit-scrollbar {
     display: none;
 }
@@ -14,23 +10,17 @@ body {
     display: none;
 }
 
-.legal-notice {
-    position: absolute;
-    width: 70vw;
-    top: 311px;
-    left: 328px;
-    gap: 24px;
+.content {
+    margin-left: 96px;
+    margin-right: 16px;
+    overflow: auto;
 }
 
 .subtitle {
     margin-bottom: 24px;
-    font-family: Inter;
 }
 
 svg {
-    position: fixed;
-    top: 225px;
-    left: 90vw;
     padding: 2.5px 0px 0px 0px;
 }
 
@@ -39,40 +29,18 @@ svg:hover {
 }
 
 .title-legal {
-    position: absolute;
-    width: Hug (371px)px;
-    height: Hug (73px)px;
-    top: 206px;
-    left: 328px;
-    gap: 30px;
+    margin-top: 110px;
+    margin-bottom: 48px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .nav-legal-notice {
     background-color: #091931;
 }
 
-@media screen and (max-width: 1120px) {
-    .title-legal {
-        position: absolute;
-        left: 120px;
-    }
-    .legal-notice {
-        left: 120px;
-    }
-    svg {
-        left: 85vw;
-    }
-}
-
-@media screen and (max-width: 450px) {
-    .title-legal {
-        position: absolute;
-        left: 20px;
-    }
-    .legal-notice {
-        left: 20px;
-    }
-    svg {
-        left: 75vw;
+@media screen and (max-width: 920px){
+    .content {
+        margin-left: 21px;
     }
 }

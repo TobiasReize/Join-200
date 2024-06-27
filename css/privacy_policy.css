@@ -1,5 +1,4 @@
 body {
-    font-family: Inter;
     height: 100%;
 }
 
@@ -15,37 +14,22 @@ body {
     display: none;
 }
 
+.content {
+    margin-left: 96px;
+    margin-right: 16px;
+    position: relative;
+    overflow: auto;
+}
+
 .privacy-police {
-    position: absolute;
-    width: 70vw;
-    top: 311px;
-    left: 328px;
     gap: 24px;
-    font-family: Inter;
 }
 
 .subtitle {
     margin-bottom: 24px;
 }
 
-header {
-    overflow: hidden;
-    position: fixed;
-    left: 194px;
-    right: 0;
-    width: auto;
-}
-
-nav {
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-}
-
 svg {
-    position: fixed;
-    top: 225px;
-    left: 90vw;
     padding: 2.5px 0px 0px 0px;
 }
 
@@ -54,50 +38,19 @@ svg:hover {
 }
 
 .title-privat {
-    position: absolute;
-    width: Hug (371px)px;
-    height: Hug (73px)px;
-    top: 206px;
-    left: 328px;
     gap: 30px;
-    font-family: Inter;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    margin-top: 110px;
 }
 
 .nav-privacy-policy {
     background-color: #091931;
 }
 
-@media screen and (max-width: 1120px) {
-    header {
-        left: 0;
-    }
-
-    .title-privat {
-        position: absolute;
-        left: 100px;
-    }
-    .privacy-police {
-        left: 100px;
-    }
-    svg {
-        left: 90vw;
-    }
-    nav {
-        overflow: hidden;
-        position: fixed;
-        top: auto;
-    }
-}
-
-@media screen and (max-width: 450px) {
-    .title-privat {
-        position: absolute;
-        left: 20px;
-    }
-    .privacy-police {
-        left: 20px;
-    }
-    svg {
-        left: 85vw;
+@media screen and (max-width: 920px) {
+    .content {
+        margin-left: 21px;
     }
 }

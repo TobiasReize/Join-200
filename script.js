@@ -126,3 +126,8 @@ function closeUserMenu() {
 function stopPropagation(event) {           
     event.stopPropagation();
 }
+
+
+function back() {
+    window.location.href = './summary.html'
+}
