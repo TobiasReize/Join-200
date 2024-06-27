@@ -8,7 +8,7 @@ async function initRegister() {
 
 async function loadUsers() {                                 //die aktuellen Daten werden vom Server geladen und in das globale Array 'users' geladen
     try {
-        users = await getItem('users',users);                     //Normalerweise erhält man nur Objekte von der Datenbank (JSON-Objekt), keine Arrays!
+        users = await getItem('users', users);                     //Normalerweise erhält man nur Objekte von der Datenbank (JSON-Objekt), keine Arrays!
         console.log(users);
     } catch (e) {
         console.error('Loading error:', e);                 //Error-handler: Wenn ein Fehler auftritt, wird dieser abgefangen
@@ -24,18 +24,28 @@ async function addUser() {                                 // Neuer User wird im
     let password = document.getElementById('register_password');
     let cpassword = document.getElementById('cregister_password');
 
-        // Debugging: Überprüfen, was im emailField steht
-        console.log('Email Field:', emailField);
+    // Debugging: Überprüfen, was im emailField steht
+    console.log('Email Field:', emailField);
 
     // Button wird deaktiviert
     registerBtn.disabled = true;
 
-    // Überprüfen, ob das @-Zeichen im E-Mail-Feld NICHT vorhanden ist
-    if (!emailField.includes('@')) {
+    // Überprüfen, ob das @-Zeichen im E-Mail-Feld NICHT vorhanden ist oder vor dem @ kein Zeichen steht
+    const atIndex = emailField.indexOf('@');
+    if (atIndex <= 0) {
         await removeDnoneMail(); // Stelle sicher, dass diese Funktion existiert und korrekt ist
         registerBtn.disabled = false;
         return;
-    }
+    };
+
+    // Überprüfen, ob ein Punkt (.) vorhanden ist und mindestens zwei, aber maximal drei Zeichen danach am Ende stehen
+    const dotIndex = emailField.lastIndexOf('.');
+    const domainLength = emailField.length - dotIndex - 1;
+    if (dotIndex === -1 || domainLength < 2 || domainLength > 3) {
+        await removeDnoneMail(); // Stelle sicher, dass diese Funktion existiert und korrekt ist
+        registerBtn.disabled = false;
+        return;
+    };
 
     // Überprüfen, ob die Passwörter übereinstimmen
     if (password.value !== cpassword.value) {
@@ -67,7 +77,8 @@ async function addUser() {                                 // Neuer User wird im
     // Benachrichtigung anzeigen
     showSuccessMessage();
 
-}
+};
+
 
 async function removeDnoneFill() {
     document.getElementById('fillName').classList.remove('d-none');
@@ -78,18 +89,21 @@ async function removeDnoneFill() {
     document.getElementById('fillCpassword').classList.remove('d-none');
 };
 
+
 async function removeDnoneMatch() {
     document.getElementById('fillPassword').classList.add('d-none');
     document.getElementById('fillCpassword').classList.add('d-none');
     document.getElementById('invalidMail').classList.add('d-none');
     document.getElementById('noMatchPassword').classList.remove('d-none');
     document.getElementById('noMatchCpassword').classList.remove('d-none');
-}
+};
+
 
 async function removeDnoneMail() {
     document.getElementById('fillMail').classList.add('d-none');
     document.getElementById('invalidMail').classList.remove('d-none');
-}
+};
+
 
 function showSuccessMessage() {
     let overlay = document.getElementById('overlay');
@@ -103,7 +117,7 @@ function showSuccessMessage() {
         messageDiv.classList.remove('show');
         window.location.href = '../index.html?msg=Du hast dich erfolgreich registriert';
     }, 5000);
-}
+};
 
 
 
@@ -112,7 +126,7 @@ function resetRegisterForm(registerBtn, userName, email, password) {            
     email.value = '';
     password.value = '';
     registerBtn.disabled = false;
-}
+};
 
 /* Bild von der Checkbox austauschen */
 
