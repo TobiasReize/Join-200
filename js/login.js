@@ -59,7 +59,7 @@ window.addEventListener('load', () => {
 
 
 function addGuestName() {
-    location.href = '../html/summary.html?name=guest';
+    location.href = './html/summary.html?name=guest';
 }
 
 let checkbox = 0;

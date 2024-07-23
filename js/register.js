@@ -121,6 +121,8 @@ function showSuccessMessage() {
 
 
 
+
+
 function resetRegisterForm(registerBtn, userName, email, password) {                  //Register-Form wird wieder geleert und der Button wieder aktiviert
     userName.value = '';
     email.value = '';
