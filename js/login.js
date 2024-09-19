@@ -6,10 +6,9 @@ async function login() {
     loginBtn.disabled = true;   // Button wird deaktiviert
 
     let user = await users.find(u => u.Email == email.value && u.Password == password.value);     // Sucht im (Datenbank-)Array 'users' nach übereinstimmenden Daten von Email und Passwort und gibt diese zurück!
-    console.log(user);
+    // console.log(user);
 
     if (user) {
-        console.log('User gefunden!');
         resetLoginForm(loginBtn, email, password);
 
         // Name des Benutzers aus dem user-Objekt extrahieren

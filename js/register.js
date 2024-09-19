@@ -9,7 +9,7 @@ async function initRegister() {
 async function loadUsers() {                                 //die aktuellen Daten werden vom Server geladen und in das globale Array 'users' geladen
     try {
         users = await getItem('users', users);                     //Normalerweise erhält man nur Objekte von der Datenbank (JSON-Objekt), keine Arrays!
-        console.log(users);
+        // console.log(users);
     } catch (e) {
         console.error('Loading error:', e);                 //Error-handler: Wenn ein Fehler auftritt, wird dieser abgefangen
     }
@@ -25,7 +25,7 @@ async function addUser() {                                 // Neuer User wird im
     let cpassword = document.getElementById('cregister_password');
 
     // Debugging: Überprüfen, was im emailField steht
-    console.log('Email Field:', emailField);
+    // console.log('Email Field:', emailField);
 
     // Button wird deaktiviert
     registerBtn.disabled = true;
