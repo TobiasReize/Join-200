@@ -8,8 +8,8 @@ let initialsArray = [];
  */
 async function init() {
     includeHTML();
-    await loadContacts('contacts', importContacts); // Kontakte von Datenbank laden
-    await loadData('tasks', importTasks); // Tasks von Datenbank laden
+    await loadContacts(); // Kontakte von Datenbank laden
+    await loadTasks(); // Tasks von Datenbank laden
     console.log('importContacts:', importContacts);
     console.log('importTasks:', importTasks);
 }
@@ -38,15 +38,17 @@ async function includeHTML() {
  * function to sort the imported contacts by first letter 
  */
 function sortContacts() {
-    importContacts.sort((a, b) => {
-        if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) {
-            return -1;
-        }
-        if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) {
-            return 1;
-        }
-        return 0;
-    });
+    if (importContacts.length > 0) {
+        importContacts.sort((a, b) => {
+            if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) {
+                return -1;
+            }
+            if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) {
+                return 1;
+            }
+            return 0;
+        });
+    }
 }
 
 

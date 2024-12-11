@@ -47,7 +47,7 @@ async function patchData(path='', id='', data={}) {
     return responseToJson = await response.json();
 }
 
-async function deleteData(path='', id='', data={}) {
+async function deleteData(path='', id='') {
     let response = await fetch(BASE_URL + path + '/' + id + '.json', {
         method: "DELETE"
     });
@@ -55,39 +55,14 @@ async function deleteData(path='', id='', data={}) {
 }
 
 
-
-// async function addEditSingleUser(id, user={}) {
-//     putData(`namen/${id}`, user);
-// }
-
-// let users =[];
-
-// async function onloadFunc() {
-//     let userResponse = await getAllUsers(path="namen"); //--> z. B. {11: {"name": "Kevin"}, 22: {"name": "Albert"}, ...}
-//     let userKeysArray = Object.keys(userResponse);      //--> Array aller keys (des übergebenen Objektes) --> [11, 22, 44]
-//     console.log(userKeysArray);
-
-//     for (let i = 0; i < userKeysArray.length; i++) {
-//         users.push(
-//             {
-//                 id : userKeysArray[i],                  //--> i=0: id=11
-//                 user : userResponse.userKeysArray[i]    //--> i=0: user={"name": "Kevin"}
-//             }
-//         )
-//     }
-
-//     await addEditSingleUser(users[2].id, users[2].user);
-// }
-
-
-async function loadData(path = '', importArray) {
-    let response = await fetch(BASE_URL + path + '.json');
+async function loadTasks() {
+    let response = await fetch(BASE_URL + 'tasks' + '.json');
     let responseToJson = await response.json();
     let objectKeysArray = Object.keys(responseToJson);
 
     for (let i = 0; i < objectKeysArray.length; i++) {
         responseToJson[objectKeysArray[i]]['id'] = objectKeysArray[i];  // fügt das Feld 'id' jedem Objekt hinzu
-        importArray.push(responseToJson[objectKeysArray[i]])
+        importTasks.push(responseToJson[objectKeysArray[i]]);
     }
 }
 
@@ -99,14 +74,14 @@ async function getItem(path = '') {
 }
 
 
-async function loadContacts(path = '') {
-    let response = await fetch(BASE_URL + path + '.json');
+async function loadContacts() {
+    let response = await fetch(BASE_URL + 'contacts' + '.json');
     let responseToJson = await response.json();
     let objectKeysArray = Object.keys(responseToJson);
 
     for (let i = 0; i < objectKeysArray.length; i++) {
         responseToJson[objectKeysArray[i]]['id'] = objectKeysArray[i];  // fügt das Feld 'id' jedem Objekt hinzu
-        importContacts.push(responseToJson[objectKeysArray[i]])
+        importContacts.push(responseToJson[objectKeysArray[i]]);
     }
     sortContacts();
 }

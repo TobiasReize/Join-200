@@ -10,11 +10,11 @@ let categories = ['Technical Task', 'User Story']
 
 let subtasks = [];
 
-let tasks = [ {
+let tasks = [{
     'columnID' : 'ToDo', // Standartmäßig in ToDo 
     'title' : '',
     'description' : '',
-    'contact' : [
+    'contacts' : [
         {
             'firstName' : '',
             'lastName' : '',
@@ -48,7 +48,7 @@ async function initAddtask() {
 }
 
 
-function loadBoardColumn() {
+function loadBoardColumn() {    // wird nur für mobile Ansicht verwendet!
     let columnID = localStorage.getItem('boardColumn');
     if (columnID) {
         boardColumn = columnID;
@@ -304,7 +304,7 @@ function addCheckedContactsToTasks(importContacts, newTask) {
             mail: contact.mail,
             tel: contact.tel
         }));
-    newTask.contact = checkedContacts;
+    newTask.contacts = checkedContacts;
 }
 
 
@@ -321,7 +321,7 @@ async function addAllToTasks() {
         'columnID' : boardColumn,
         'title': inputTitle.value || '',
         'description': inputDescription.value || '',
-        'contact': [] || '', 
+        'contacts': [] || '', 
         'date': inputDate.value || '',
         'priorities': priority,
         'category': inputCategory.value || '',

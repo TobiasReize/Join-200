@@ -23,14 +23,16 @@ function renderContacts() {
  */
 function groupContactsByFirstLetter() {
     let groupedContacts = {};
-    importContacts.forEach(contact => {
-        const firstLetter = (contact.firstName.charAt(0) || '').toUpperCase();
-        if (!groupedContacts[firstLetter]) {
-            groupedContacts[firstLetter] = [];
-        }
-        groupedContacts[firstLetter].push(contact);
-    });
-    return groupedContacts;
+    if (importContacts.length > 0) {
+        importContacts.forEach(contact => {
+            const firstLetter = (contact.firstName.charAt(0) || '').toUpperCase();
+            if (!groupedContacts[firstLetter]) {
+                groupedContacts[firstLetter] = [];
+            }
+            groupedContacts[firstLetter].push(contact);
+        });
+        return groupedContacts;
+    }
 }
 
 

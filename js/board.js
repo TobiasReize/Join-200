@@ -78,7 +78,7 @@ function renderTasks(columnID, columnArray) {
         if (task['subtasks']) {     //prüft ob die aktuelle Task Subtasks enthält, wenn ja wird die Progress-bar ergänzt sonst nicht
             checkProgressBar(columnID, i, task);
         }
-        if (task['contact']) {       //prüft zuerst ob die aktuelle Task Kontakte enthält
+        if (task['contacts']) {       //prüft zuerst ob die aktuelle Task Kontakte enthält
             //fügt die Kontakte hinzu:
             addContactsToCard(columnID, i, task);
         }
@@ -116,20 +116,25 @@ function checkProgressBar(columnID, i, task) {
  * @param {JSON} task 
  */
 function addContactsToCard(columnID, i, task) {
-    for (let k = 0; k < task['contact'].length; k++) {
-        const person = task['contact'][k];
+    for (let k = 0; k < task['contacts'].length; k++) {
+        const person = task['contacts'][k];
         const personFirstName = person['firstName'];
         const personLastName = person['lastName'];
         const initials = `${oneLetterUppercase(personFirstName)}${oneLetterUppercase(personLastName)}`;
 
         if (k > 3) {
-            document.getElementById(`${columnID}_contacts_container_${i}`).innerHTML += /*html*/ `<div class="initials" style="background-color: lightgrey">+ ${task['contact'].length - 4}</div>`;
+            document.getElementById(`${columnID}_contacts_container_${i}`).innerHTML += /*html*/ `<div class="initials" style="background-color: lightgrey">+ ${task['contacts'].length - 4}</div>`;
             break;
         } else {
             document.getElementById(`${columnID}_contacts_container_${i}`).innerHTML += /*html*/ `<div class="initials" style="background-color: ${person['color']}">${initials}</div>`;
         }
     }
 }
+
+
+// function getIndexFromContactsArray(id) {
+//     return importContacts.findIndex(contact => contact.id === id);
+// }
 
 
 /**
@@ -264,7 +269,7 @@ function showBigView(columnID, taskID) {
     bigViewContainer.classList.remove('d-none');
     bigViewContainer.innerHTML = bigViewHTML(columnID, taskID, currentTask);
 
-    if (currentTask['contact']) { //prüft zuerst ob die aktuelle Task Kontakte enthält
+    if (currentTask['contacts']) { //prüft zuerst ob die aktuelle Task Kontakte enthält
         addContactsToBigView(currentTask);
     }
 
@@ -281,8 +286,8 @@ function showBigView(columnID, taskID) {
  * @param {JSON} currentTask 
  */
 function addContactsToBigView(currentTask) {
-    for (let i = 0; i < currentTask['contact'].length; i++) {
-            const person = currentTask['contact'][i];
+    for (let i = 0; i < currentTask['contacts'].length; i++) {
+            const person = currentTask['contacts'][i];
             const initials = `${oneLetterUppercase(person['firstName'])}${oneLetterUppercase(person['lastName'])}`;
             document.getElementById('big_view_contacts_container').innerHTML += /*html*/ `
                 <div class="big-view-contacts df-ai-ctr">

@@ -193,5 +193,5 @@ function extractDateParts(dateString) {
 }
 
 async function loadTasksFromFirebase() {
-    await loadData('tasks', importTasks);
-};
+    await loadTasks();
+}
