@@ -35,7 +35,7 @@ async function includeHTML() {
 
 
 /**
- * functtion to sort the imported contacts by first letter 
+ * function to sort the imported contacts by first letter 
  */
 function sortContacts() {
     importContacts.sort((a, b) => {

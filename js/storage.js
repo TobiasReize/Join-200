@@ -89,7 +89,6 @@ async function loadData(path = '', importArray) {
         responseToJson[objectKeysArray[i]]['id'] = objectKeysArray[i];  // fügt das Feld 'id' jedem Objekt hinzu
         importArray.push(responseToJson[objectKeysArray[i]])
     }
-    // importArray =  importArray.push(...responseToJson);
 }
 
 
@@ -103,15 +102,11 @@ async function getItem(path = '') {
 async function loadContacts(path = '') {
     let response = await fetch(BASE_URL + path + '.json');
     let responseToJson = await response.json();
+    let objectKeysArray = Object.keys(responseToJson);
 
-    importContacts = responseToJson.map(contact => ({
-        firstName: contact.firstName || '',
-        lastName: contact.lastName || '',
-        checked: contact.checked || false,
-        color: contact.color || '',
-        mail: contact.mail || '',
-        tel: contact.tel || ''
-    })); 
+    for (let i = 0; i < objectKeysArray.length; i++) {
+        responseToJson[objectKeysArray[i]]['id'] = objectKeysArray[i];  // fügt das Feld 'id' jedem Objekt hinzu
+        importContacts.push(responseToJson[objectKeysArray[i]])
+    }
     sortContacts();
-    return responseToJson;
 }
