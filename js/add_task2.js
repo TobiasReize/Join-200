@@ -24,8 +24,8 @@ function renderCategories() {
     let content = document.getElementById('list_options_category');
     content.innerHTML = '';
 
-    for (let i = 0; i < importCategories.length; i++) {
-        const category = importCategories[i];
+    for (let i = 0; i < categories.length; i++) {
+        const category = categories[i];
         content.innerHTML += /* html */ `
         <li class="categories-list" id="category_list${i}" onclick="chooseCategory(${i})">${category}</li>
         `; 

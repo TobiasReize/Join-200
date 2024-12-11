@@ -1,6 +1,5 @@
 let importContacts = [];
 let importTasks = [];
-let importCategories = [];
 let initialsArray = [];
 
 
@@ -11,7 +10,8 @@ async function init() {
     includeHTML();
     await loadContacts('contacts', importContacts); // Kontakte von Datenbank laden
     await loadData('tasks', importTasks); // Tasks von Datenbank laden
-    await loadData('categories', importCategories); // Tasks von Datenbank laden
+    console.log('importContacts:', importContacts);
+    console.log('importTasks:', importTasks);
 }
 
 

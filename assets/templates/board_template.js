@@ -8,7 +8,7 @@
 function taskCardHTML(columnID, i, task) {
     return /*html*/ `
         <div draggable="true" id="card_${columnID}_${i}" class="full-card" ondragstart="startDragging(${columnID}, ${i})" onmousedown="rotateCard(${columnID}, ${i})" onmouseup="endRotateCard(${columnID}, ${i})" onclick="showBigView(${columnID}, ${i})">
-            <div class="task-category" style="background-color: ${colorsCategories[task['categories']]}">${task['categories']}</div>
+            <div class="task-category" style="background-color: ${colorsCategories[task['category']]}">${task['category']}</div>
             <div class="task-title">${task['title']}</div>
             <p class="task-description">${task['description']}</p>
             <div id="${columnID}_subtasks_container_${i}" class="subtasks-container"></div>
@@ -50,7 +50,7 @@ function bigViewHTML(columnID, taskID, currentTask) {
     return /*html*/ `
         <div id="big_view_card" class="big-view-card transition" onclick="stopPropagation(event)">
             <div class="ai-ctr-space-btwn m-btm24">
-                <div class="big-view-category fs16-fw400" style="background-color: ${colorsCategories[currentTask['categories']]}">${currentTask['categories']}</div>
+                <div class="big-view-category fs16-fw400" style="background-color: ${colorsCategories[currentTask['category']]}">${currentTask['category']}</div>
                 <img onclick="closeBigView(0)" class="big-view-close" src="../assets/img/00_general-elements/close-dark.svg" alt="close">
             </div>
             <div class="big-view-card-content">

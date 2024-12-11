@@ -6,6 +6,8 @@ let priority = {
     'low' : false
 }
 
+let categories = ['Technical Task', 'User Story']
+
 let subtasks = [];
 
 let tasks = [ {
@@ -29,7 +31,7 @@ let tasks = [ {
             'medium' : false,
             'low' : false
     },
-    'categories' : '',
+    'category' : '',
     'subtasks' : [
         {
             'subtaskTitle' : '',
@@ -77,7 +79,7 @@ function getContacts() {
  */
 function chooseCategory(i) {
     let inputField = document.getElementById('category_input');
-    inputField.value = importCategories[i];
+    inputField.value = categories[i];
     categoryMenu();
 }
 
@@ -325,7 +327,7 @@ async function addAllToTasks() {
         'contact': [] || '', 
         'date': inputDate.value || '',
         'priorities': priority,
-        'categories': inputCategory.value || '',
+        'category': inputCategory.value || '',
         'subtasks': subtasks
     };
 
@@ -336,5 +338,6 @@ async function addAllToTasks() {
     importTasks.push(newTask);
 
     // Speichere die aktualisierten Tasks
-    await setItem('tasks', importTasks);
+    // await setItem('tasks', importTasks);
+    await postData('tasks', newTask);
 }

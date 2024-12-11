@@ -1,5 +1,5 @@
-// const BASE_URL = 'https://join-new-bea24-default-rtdb.europe-west1.firebasedatabase.app/';
-const BASE_URL = 'https://join-200-default-rtdb.europe-west1.firebasedatabase.app/';
+const BASE_URL = 'https://join-new-bea24-default-rtdb.europe-west1.firebasedatabase.app/';
+// const BASE_URL = 'https://join-200-default-rtdb.europe-west1.firebasedatabase.app/';
 // const BASE_URL = 'http://127.0.0.1:8000/api/tasks/';
 
 async function setItem(path = '', data) {       //--> besser postData(path = '', data = {})
@@ -36,7 +36,7 @@ async function putData(path='', id='', data={}) {  // z. B. path='users/{id}' & 
     return responseToJson = await response.json();
 }
 
-async function patchData(path='', id='', data={}) {  // z. B. path='users/{id}' & data={"name": "Test"} einzelnes Feld
+async function patchData(path='', id='', data={}) {
     let response = await fetch(BASE_URL + path + '/' + id + '.json', {
         method: "PATCH",
         headers: {
@@ -47,10 +47,14 @@ async function patchData(path='', id='', data={}) {  // z. B. path='users/{id}' 
     return responseToJson = await response.json();
 }
 
+async function deleteData(path='', id='', data={}) {
+    let response = await fetch(BASE_URL + path + '/' + id + '.json', {
+        method: "DELETE"
+    });
+    return responseToJson = await response.json();
+}
 
-// async function putData(path="", data={}) {
-    
-// }
+
 
 // async function addEditSingleUser(id, user={}) {
 //     putData(`namen/${id}`, user);
@@ -79,7 +83,13 @@ async function patchData(path='', id='', data={}) {  // z. B. path='users/{id}' 
 async function loadData(path = '', importArray) {
     let response = await fetch(BASE_URL + path + '.json');
     let responseToJson = await response.json();
-    importArray =  importArray.push(...responseToJson);
+    let objectKeysArray = Object.keys(responseToJson);
+
+    for (let i = 0; i < objectKeysArray.length; i++) {
+        responseToJson[objectKeysArray[i]]['id'] = objectKeysArray[i];  // fügt das Feld 'id' jedem Objekt hinzu
+        importArray.push(responseToJson[objectKeysArray[i]])
+    }
+    // importArray =  importArray.push(...responseToJson);
 }
 
 
