@@ -146,18 +146,15 @@ async function loadNumber() {
     document.getElementById('awaitFeedbackNumber').innerHTML = `${awaitFeedbackNumber}`;
     document.getElementById('inProgressNumber').innerHTML = `${inProgressNumber}`;
     document.getElementById('taskSum').innerHTML = `${sum}`;
-    return;
 };
 
 async function countUrgent() {
     let urgentCount = 0;
     allTasks.forEach(task => {
-        if (task.priorities && task.priorities.length > 0) {
-            for (const key in task.priorities) {
-                const priority = task.priorities[key];
-                if (priority.urgent === true) {
-                    urgentCount++;
-                }
+        for (const key in task.priorities) {
+            const priority = task.priorities[key];
+            if (key == 'urgent' && priority) {
+                urgentCount++;
             }
         }
     });
