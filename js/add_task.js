@@ -1,12 +1,10 @@
 let boardColumn = 'ToDo';
 
-let priority = [
-    {
-        'urgent' : false,
-        'medium' : true,
-        'low' : false
-    }
-]
+let priority = {
+    'urgent' : false,
+    'medium' : true,
+    'low' : false
+}
 
 let subtasks = [];
 
@@ -26,14 +24,11 @@ let tasks = [ {
     ],
 
     'date' : '',
-    'priorities' : [
-        {
+    'priorities' : {
             'urgent' : false,
             'medium' : false,
             'low' : false
-        }
-    ],
-    
+    },
     'categories' : '',
     'subtasks' : [
         {
@@ -161,33 +156,19 @@ function colorChange(priority) {
 }
 
 
-function colorChangeUrgent() {
-    colorChange('urgent');
-}
-
-
-function colorChangeMedium() {
-    colorChange('medium');
-}
-
-function colorChangeLow() {
-    colorChange('low');
-}
-
-
 /**
  * set and change the boolean of the priority 
- * @param {boolean} priorityLevel 
+ * @param {string} priorityLevel 
  */
 function changePrio(priorityLevel) {
     // Setze alle Werte auf false
-    priority[0].urgent = false;
-    priority[0].medium = false;
-    priority[0].low = false;
+    priority.urgent = false;
+    priority.medium = false;
+    priority.low = false;
 
     // Setze den gewünschten Wert auf true basierend auf dem übergebenen Namen
-    if (priorityLevel in priority[0]) {
-        priority[0][priorityLevel] = true;
+    if (priorityLevel in priority) {
+        priority[priorityLevel] = true;
     }
 }
 
@@ -264,9 +245,19 @@ function saveEditSubtask(i) {
  */
 async function createNewTask() {
     let inputs = [
-        {element: document.getElementById('input_title'), errorElement: document.getElementById('required_title')},
-        {element: document.getElementById('input_date'), errorElement: document.getElementById('required_date')},
-        {element: document.getElementById('category_input'), parentElement: document.getElementById('input_category'), errorElement: document.getElementById('required_category')}
+        {
+            element: document.getElementById('input_title'), 
+            errorElement: document.getElementById('required_title')
+        },
+        {
+            element: document.getElementById('input_date'), 
+            errorElement: document.getElementById('required_date')
+        },
+        {
+            element: document.getElementById('category_input'), 
+            parentElement: document.getElementById('input_category'), 
+            errorElement: document.getElementById('required_category')
+        }
     ];
 
     let allFilled = true;
@@ -333,7 +324,7 @@ async function addAllToTasks() {
         'description': inputDescription.value || '',
         'contact': [] || '', 
         'date': inputDate.value || '',
-        'priorities': [...priority],
+        'priorities': priority,
         'categories': inputCategory.value || '',
         'subtasks': subtasks
     };

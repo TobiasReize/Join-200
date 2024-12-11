@@ -36,7 +36,7 @@ function highlightCurrentPriority(currentTaskPriority) {
     for (let i = 0; i < priorityIcon.length; i++) {
         priorityIcon[i].classList.add('fill-white');
     }
-    currentEditedTaskPriority[0][currentTaskPriority] = true;
+    currentEditedTaskPriority[currentTaskPriority] = true;
 }
 
 
@@ -80,7 +80,7 @@ function changePriority(selectedPriority) {
     resetPriorityButtons();
     highlightSelectedPriority(selectedPriority);
     resetCurrentEditedTaskPriority();
-    currentEditedTaskPriority[0][selectedPriority] = true;
+    currentEditedTaskPriority[selectedPriority] = true;
 }
 
 
@@ -124,11 +124,11 @@ function highlightSelectedPriority(selectedPriority) {
  * Resets the priority of the current task
  */
 function resetCurrentEditedTaskPriority() {
-    currentEditedTaskPriority = [{
+    currentEditedTaskPriority = {
         'urgent' : false,
         'medium' : false,
         'low' : false
-    }];
+    };
 }
 
 

@@ -96,8 +96,8 @@ function firstLetterUppercase(word) {
  * @returns 
  */
 function getPriority(taskPriorities) {
-    for (let key in taskPriorities[0]) {
-        if (taskPriorities[0][key]) {
+    for (let key in taskPriorities) {
+        if (taskPriorities[key]) {
             return key;
         }
     }

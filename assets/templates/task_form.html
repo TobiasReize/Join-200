@@ -40,17 +40,17 @@
 
         <span>Prio</span>
         <div class="prio-btns">
-            <button id="urgent_btn" class="prio-btn prio-width" onclick="colorChangeUrgent(); changePrio('urgent')">
+            <button id="urgent_btn" class="prio-btn prio-width" onclick="colorChange('urgent'); changePrio('urgent')">
                 Urgent 
                 <img id="img_urgent" src="../assets/img/03_addtask/prio_urgent_red.svg">
                 <img id="img_urgent_white" class="d-none" src="../assets/img/03_add-task/urgent-white.svg">
             </button>
-            <button id="medium_btn" class="prio-btn prio-width medium-btn-change" onclick="colorChangeMedium();changePrio('medium')">
+            <button id="medium_btn" class="prio-btn prio-width medium-btn-change" onclick="colorChange('medium');changePrio('medium')">
                 Medium 
                 <img id="img_medium" class="d-none" src="../assets/img/03_addtask/prio_medium_orange.svg">
                 <img id="img_medium_white" class="" src="../assets/img/03_add-task/medium-white.svg">
             </button>
-            <button id="low_btn" class="prio-btn prio-width" onclick="colorChangeLow(); changePrio('low')">
+            <button id="low_btn" class="prio-btn prio-width" onclick="colorChange('low'); changePrio('low')">
                 Low 
                 <img id="img_low" src="../assets/img/03_addtask/prio_low_green.svg">
                 <img id="img_low_white" class="d-none" src="../assets/img/03_add-task/low-white.svg">

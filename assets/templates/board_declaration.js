@@ -103,9 +103,9 @@ let filteredBoardArrays = [
 ];
 
 let currentDraggedElement;
-let currentEditedTaskPriority = [{
+let currentEditedTaskPriority = {
     'urgent' : false,
     'medium' : false,
     'low' : false
-}];
+};
 let countCheckedContacts = 0;

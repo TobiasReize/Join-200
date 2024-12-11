@@ -1,6 +1,12 @@
 // Globale Konstante für den Standardnamen
 const DEFAULT_NAME = 'guest';
 
+let toDoTasks = [];
+let inProgressTasks = [];
+let awaitFeedbackTasks = [];
+let doneTasks = [];
+const allTasks = [];
+
 document.addEventListener('DOMContentLoaded', function () {
     initializeApp();
     checkWidthAndAddClass();
@@ -100,13 +106,6 @@ function getGreeting() {
 };
 
 
-
-let toDoTasks = [];
-let inProgressTasks = [];
-let awaitFeedbackTasks = [];
-let doneTasks = [];
-const tasks = [];
-
 async function sortTasks() {
     for (let i = 0; i < importTasks.length; i++) {
         const singleTask = importTasks[i];
@@ -129,12 +128,11 @@ async function sortTasks() {
                 break;
         }
     }
-    return;
 };
 
 async function loadNumber() {
     await sortTasks();
-    tasks.push(importTasks);
+    allTasks.push(...importTasks);    
     const todoNumber = toDoTasks.length;
     const doneNumber = doneTasks.length;
     const awaitFeedbackNumber = awaitFeedbackTasks.length;
@@ -152,52 +150,40 @@ async function loadNumber() {
 };
 
 async function countUrgent() {
-let urgentCount = 0;
-
-tasks.forEach(innerArray => {
-    innerArray.forEach(task => {
+    let urgentCount = 0;
+    allTasks.forEach(task => {
         if (task.priorities && task.priorities.length > 0) {
-            task.priorities.forEach(priority => {
+            for (const key in task.priorities) {
+                const priority = task.priorities[key];
                 if (priority.urgent === true) {
                     urgentCount++;
                 }
-            });
+            }
         }
     });
-});
-
     document.getElementById('urgentNumber').innerHTML = `${urgentCount}`;
-
     await findClosestDate()
-    return;
 }
 
 async function findClosestDate() {
     let closestDate = null;
 
-    tasks.forEach(innerArray => {
-        innerArray.forEach(task => {
-            if (task.date) {
-                const currentDate = new Date(task.date);
+    allTasks.forEach(task => {
+        if (task.date) {
+            const currentDate = new Date(task.date);
 
-                if (!closestDate || currentDate < closestDate) {
-                    closestDate = currentDate;
-                }
+            if (!closestDate || currentDate < closestDate) {
+                closestDate = currentDate;
             }
-        });
+        }
     });
-
     const dateParts = extractDateParts(closestDate);
-
     document.getElementById('upcomingDeadline').innerHTML = `${dateParts.month} ${dateParts.day}, ${dateParts.year}`;
-
     return closestDate;
 }
 
 function extractDateParts(dateString) {
     let date = new Date(dateString);
-
-
     let month = date.toLocaleString('default', { month: 'short' });
     let day = date.getDate();
     let year = date.getFullYear();
@@ -209,8 +195,6 @@ function extractDateParts(dateString) {
     };
 }
 
-
 async function loadTasksFromFirebase() {
     await loadData('tasks', importTasks);
-    return;
 };
