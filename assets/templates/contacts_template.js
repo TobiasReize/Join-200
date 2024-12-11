@@ -1,5 +1,5 @@
 /**
- * function to render the active contact wich was choose
+ * function to render the active contact which was choose
  * @param {integer} i - index contact
  * @returns 
  */

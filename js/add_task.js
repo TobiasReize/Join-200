@@ -56,9 +56,6 @@ function loadBoardColumn() {
 }
 
 
-
-
-
 /**
  * function to put the single contacts html in an list 
  */
@@ -332,12 +329,6 @@ async function addAllToTasks() {
     };
 
     // Füge die geprüften Kontakte zum neuen Task hinzu
-    addCheckedContactsToTasks(importContacts, newTask); 
-
-    // Füge den neuen Task zu importTasks hinzu
-    importTasks.push(newTask);
-
-    // Speichere die aktualisierten Tasks
-    // await setItem('tasks', importTasks);
+    addCheckedContactsToTasks(importContacts, newTask);
     await postData('tasks', newTask);
 }

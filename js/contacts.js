@@ -11,8 +11,7 @@ async function initContacts() {
 function renderContacts() {
     let content = document.getElementById('all_contacts');
     content.innerHTML = '';
-
-    let groupedContacts = groupContactsByFirstLetter(importContacts);
+    let groupedContacts = groupContactsByFirstLetter();
     renderGroupedContacts(content, groupedContacts);
 }
 
@@ -22,17 +21,15 @@ function renderContacts() {
  * @param {string} contacts - these are all contacts
  * @returns all contacts sorted
  */
-function groupContactsByFirstLetter(contacts) {
+function groupContactsByFirstLetter() {
     let groupedContacts = {};
-
-    contacts.forEach(contact => {
+    importContacts.forEach(contact => {
         const firstLetter = (contact.firstName.charAt(0) || '').toUpperCase();
         if (!groupedContacts[firstLetter]) {
             groupedContacts[firstLetter] = [];
         }
         groupedContacts[firstLetter].push(contact);
     });
-
     return groupedContacts;
 }
 
@@ -40,7 +37,7 @@ function groupContactsByFirstLetter(contacts) {
 /**
  * function to render the sorted contacts 
  * @param {string} content 
- * @param {string} groupedContacts - all sorted contacts
+ * @param {object} groupedContacts - all sorted contacts
  */
 function renderGroupedContacts(content, groupedContacts) {
     for (let letter in groupedContacts) {
@@ -58,6 +55,7 @@ function renderGroupedContacts(content, groupedContacts) {
 function renderLetterSection(content, letter) {
     content.innerHTML += /* html */ `<div class="first-letter">${letter}</div>`;
 }
+
 
 /**
  * function to render the contacts with the letter
@@ -139,20 +137,19 @@ function openEditContact() {
  * "newContact" push to "importContacts"
  * load "importContacts" to database
  */
-function createContact() {
+async function createContact() {
     let [firstName = '', lastName = ''] = document.getElementById('input_name').value.trim().split(' ');
     let newContact = {
-        firstName,
-        lastName,
+        firstName: firstName,
+        lastName: lastName,
         checked: false,
         color: getRandomColor(),
         mail: document.getElementById('input_mail').value,
         tel: document.getElementById('input_tel').value
     };
-
     importContacts.push(newContact);
     sortContacts();
-    setItem('contacts', importContacts);
+    await postData('contacts', newContact);
     renderContacts();
     closeContactCard();
     successfullyAddedAnimation();

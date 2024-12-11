@@ -76,7 +76,7 @@ function addtaskAnimation() {
         setTimeout(function() {
             document.getElementById('animate_btn_overlay').style.display = "none"; 
             document.getElementById('animate_btn').classList.remove('d-none'); 
-            window.location.href = "./board.html"; // Ziel URL Weiterleitung - board.html
+            window.location.href = "./board.html";
         }, 2400 );
     } catch (error) {
         
