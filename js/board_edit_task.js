@@ -13,7 +13,7 @@ function editTask(columnID, taskID) {
 
     highlightCurrentPriority(currentTaskPriority);
 
-    if (currentTask['contact']) { //prüft zuerst ob die aktuelle Task Kontakte enthält
+    if (currentTask['contacts']) { //prüft zuerst ob die aktuelle Task Kontakte enthält
         addContactsToEditView(currentTask);
     }
 
@@ -45,8 +45,8 @@ function highlightCurrentPriority(currentTaskPriority) {
  * @param {JSON} currentTask 
  */
 function addContactsToEditView(currentTask) {
-    for (let j = 0; j < currentTask['contact'].length; j++) {
-        const person = currentTask['contact'][j];
+    for (let j = 0; j < currentTask['contacts'].length; j++) {
+        const person = currentTask['contacts'][j];
         const initials = `${oneLetterUppercase(person['firstName'])}${oneLetterUppercase(person['lastName'])}`;
         let currentContactIndex = importContacts.findIndex(element => element['firstName'] == person['firstName'] && element['lastName'] == person['lastName']);
         importContacts[currentContactIndex]['checked'] = true;
@@ -54,7 +54,7 @@ function addContactsToEditView(currentTask) {
         if (j < 4) {
             document.getElementById('checked_contacts_edit_task').innerHTML += /*html*/ `<div class="big-view-initials" style="background-color: ${person['color']}">${initials}</div>`;
         } else if (j == 4) {
-            document.getElementById('checked_contacts_edit_task').innerHTML += /*html*/ `<div class="big-view-initials" style="background-color: lightgrey">+ ${currentTask['contact'].length - 4}</div>`;
+            document.getElementById('checked_contacts_edit_task').innerHTML += /*html*/ `<div class="big-view-initials" style="background-color: lightgrey">+ ${currentTask['contacts'].length - 4}</div>`;
         }
     }
 }
@@ -145,7 +145,7 @@ function saveCurrentTask(columnID, taskID) {
     let editTaskDate = document.getElementById('edit_task_date').value;
     let editTaskContacts = importContacts.filter(contact => contact.checked);
     
-    currentTask['contact'] = editTaskContacts;
+    currentTask['contacts'] = editTaskContacts;
     currentTask['date'] = editTaskDate;
     currentTask['description'] = editTaskDescription;
     currentTask['priorities'] = currentEditedTaskPriority;
@@ -212,7 +212,7 @@ function showCheckBox() {
         let checkbox = document.getElementById(`checkbox_contacts_edit_task${i}`);
         const contact = importContacts[i];
 
-        // Wenn bei der Suche "imgUnchecked", ... gerendert sind = null und es verlässte das Statement, SONST setze true oder false und render Ausgewählten Kontakt
+        // Wenn bei der Suche "imgUnchecked", ... gerendert sind = null und es verlässte das Statement, SONST setze true oder false und render ausgewählten Kontakt
         if (imgUnchecked === null ) {
             break
         } else {
@@ -224,7 +224,7 @@ function showCheckBox() {
                 checkbox.checked = false;
                 imgChecked.classList.add('d-none')
                 imgUnchecked.classList.remove('d-none')
-            } 
+            }
         }
     }
 }

@@ -151,7 +151,8 @@ async function createContact() {
     };
     importContacts.push(newContact);
     sortContacts();
-    await postData('contacts', newContact);
+    // await postData('contacts', newContact);
+    await setItem('contacts', importContacts);
     renderContacts();
     closeContactCard();
     successfullyAddedAnimation();

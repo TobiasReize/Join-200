@@ -31,7 +31,7 @@ async function includeHTML() {
         }
     }
     displayInitials();
-  }
+}
 
 
 /**
@@ -74,8 +74,7 @@ function addInitials(initials) {
     }
     // Speichern im Local Storage
     localStorage.setItem('initialsArray', JSON.stringify(initialsArray));
-};
-
+}
 
 
 /**
@@ -87,7 +86,7 @@ function displayInitials() {
     } catch (error) {
         
     }
-};
+}
 
 
 /**
@@ -96,7 +95,7 @@ function displayInitials() {
 function logOut() {
     localStorage.removeItem('initialsArray');
     window.location.href = '../index.html';
-};
+}
 
 /**
  * function to open the User Menu to Log-Out or go to to privacy,...
@@ -105,7 +104,6 @@ function openUserMenu() {
     if (innerWidth <= 1120) {
         document.getElementById('user_menu').classList.remove('d-none');
     }
-    
 }
 
 

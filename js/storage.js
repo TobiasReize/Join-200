@@ -2,7 +2,7 @@ const BASE_URL = 'https://join-new-bea24-default-rtdb.europe-west1.firebasedatab
 // const BASE_URL = 'https://join-200-default-rtdb.europe-west1.firebasedatabase.app/';
 // const BASE_URL = 'http://127.0.0.1:8000/api/tasks/';
 
-async function setItem(path = '', data) {       //--> besser postData(path = '', data = {})
+async function setItem(path = '', data) {
     let response = await fetch(BASE_URL + path + '.json', {
         method: "PUT",
         headers: {
@@ -14,45 +14,45 @@ async function setItem(path = '', data) {       //--> besser postData(path = '',
 }
 
 // Neu:
-async function postData(path='', data={}) {     // z. B. path='users'
-    let response = await fetch(BASE_URL + path + '.json', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    return responseToJson = await response.json();
-}
+// async function postData(path='', data={}) {     // z. B. path='users'
+//     let response = await fetch(BASE_URL + path + '.json', {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(data)
+//     });
+//     return responseToJson = await response.json();
+// }
 
-async function putData(path='', id='', data={}) {  // z. B. path='users/{id}' & data= vollständiges Objekt
-    let response = await fetch(BASE_URL + path + '/' + id + '.json', {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    return responseToJson = await response.json();
-}
+// async function putData(path='', id='', data={}) {  // z. B. path='users/{id}' & data= vollständiges Objekt
+//     let response = await fetch(BASE_URL + path + '/' + id + '.json', {
+//         method: "PUT",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(data)
+//     });
+//     return responseToJson = await response.json();
+// }
 
-async function patchData(path='', id='', data={}) {
-    let response = await fetch(BASE_URL + path + '/' + id + '.json', {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    return responseToJson = await response.json();
-}
+// async function patchData(path='', id='', data={}) {
+//     let response = await fetch(BASE_URL + path + '/' + id + '.json', {
+//         method: "PATCH",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(data)
+//     });
+//     return responseToJson = await response.json();
+// }
 
-async function deleteData(path='', id='') {
-    let response = await fetch(BASE_URL + path + '/' + id + '.json', {
-        method: "DELETE"
-    });
-    return responseToJson = await response.json();
-}
+// async function deleteData(path='', id='') {
+//     let response = await fetch(BASE_URL + path + '/' + id + '.json', {
+//         method: "DELETE"
+//     });
+//     return responseToJson = await response.json();
+// }
 
 
 async function loadTasks() {
@@ -61,7 +61,7 @@ async function loadTasks() {
     let objectKeysArray = Object.keys(responseToJson);
 
     for (let i = 0; i < objectKeysArray.length; i++) {
-        responseToJson[objectKeysArray[i]]['id'] = objectKeysArray[i];  // fügt das Feld 'id' jedem Objekt hinzu
+        // responseToJson[objectKeysArray[i]]['id'] = objectKeysArray[i];  // fügt das Feld 'id' jedem Objekt hinzu
         importTasks.push(responseToJson[objectKeysArray[i]]);
     }
 }
@@ -80,7 +80,7 @@ async function loadContacts() {
     let objectKeysArray = Object.keys(responseToJson);
 
     for (let i = 0; i < objectKeysArray.length; i++) {
-        responseToJson[objectKeysArray[i]]['id'] = objectKeysArray[i];  // fügt das Feld 'id' jedem Objekt hinzu
+        // responseToJson[objectKeysArray[i]]['id'] = objectKeysArray[i];  // fügt das Feld 'id' jedem Objekt hinzu
         importContacts.push(responseToJson[objectKeysArray[i]]);
     }
     sortContacts();
