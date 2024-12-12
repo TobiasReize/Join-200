@@ -8,10 +8,8 @@ let initialsArray = [];
  */
 async function init() {
     includeHTML();
-    await loadContacts(); // Kontakte von Datenbank laden
-    await loadTasks(); // Tasks von Datenbank laden
-    console.log('importContacts:', importContacts);
-    console.log('importTasks:', importTasks);
+    await loadContacts();
+    await loadTasks();
 }
 
 

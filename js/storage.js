@@ -1,6 +1,4 @@
-const BASE_URL = 'https://join-new-bea24-default-rtdb.europe-west1.firebasedatabase.app/';
-// const BASE_URL = 'https://join-200-default-rtdb.europe-west1.firebasedatabase.app/';
-// const BASE_URL = 'http://127.0.0.1:8000/api/tasks/';
+const BASE_URL = 'https://join-200-default-rtdb.europe-west1.firebasedatabase.app/';
 
 async function setItem(path = '', data) {
     let response = await fetch(BASE_URL + path + '.json', {
