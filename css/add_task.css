@@ -457,6 +457,12 @@ ul {
   }
 }
 
+@media (max-width: 1230px) {
+  .contacts-container-addtask-mobile {
+    max-height: 130px;
+  }
+}
+
 @media (max-width: 1120px) {
   .clear-btn {
     display: none !important;
@@ -510,6 +516,10 @@ ul {
 
   .contacts-container {
     width: 100%;
+  }
+
+  .contacts-container-addtask-mobile {
+    max-height: 200px;
   }
 
   .ul-subtasks {

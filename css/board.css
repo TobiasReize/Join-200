@@ -250,6 +250,7 @@
     border-radius: 24px;
     overflow-y: auto;
     max-height: calc(100vh - 350px);
+    max-height: calc(100svh - 350px);
 }
 
 /* Board: cards */
@@ -384,6 +385,7 @@
     bottom: 0;
     left: 0;
     height: 100vh;
+    height: 100svh;
     background-color: rgba(0, 0, 0, 0.2);
     z-index: 10;
     display: flex;
@@ -399,6 +401,7 @@
     border-radius: 30px;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
     max-height: calc(100vh - 48px);
+    max-height: calc(100svh - 48px);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -739,6 +742,7 @@
 
     .column-tasks-container {
         max-height: calc(100vh - 426px);
+        max-height: calc(100svh - 426px);
     }
 
     .overlay-container {
@@ -782,6 +786,7 @@
 
     .page-content {
         height: 100vh;
+        height: 100svh;
     }
     
     .logo-header-dark {
