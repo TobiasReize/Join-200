@@ -622,6 +622,7 @@ body {
         width: auto;
         margin-right: 32px;
         margin-bottom: 12px;
+        background-color: unset;
     }
 
     .btn-add-new-contact {
@@ -730,6 +731,17 @@ body {
 }
 
 @media (max-width: 440px) {
+    .all-contacts {
+        padding: 16px 8px;
+        overflow-x: clip;
+    }
+    
+    .show-contact-container {
+        min-width: unset;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+    
     .contact-card-input-div {
         width: auto;
         margin-left: 0;
@@ -739,9 +751,19 @@ body {
 
     .contact-card {
         flex: 1;
+        height: unset;
+    }
+
+    .contact-card-left-side {
+        padding: 48px 16px;
+        height: unset;
     }
 
     .contact-edit-input-icon {
         display: none;
+    }
+
+    .btn-container {
+        margin-bottom: 8px;
     }
 }
