@@ -74,10 +74,10 @@ function renderContactsForLetter(content, contacts) {
 /**
  * function to render the single contact html
  * @param {string} content 
- * @param {string} contact 
+ * @param {object} contact 
  */
 function renderContact(content, contact) {
-    let index = importContacts.indexOf(contact);
+    let index = importContacts.findIndex(element => element['id'] == contact['id']);
     content.innerHTML += /* html */ `
     <div id="contact${index}" onclick="setActiveContact(${index})">
         <div class="contact-informations-box" id="contact_information_box${index}">
@@ -149,19 +149,14 @@ async function createContact() {
         mail: document.getElementById('input_mail').value,
         tel: document.getElementById('input_tel').value
     };
+    let response = await postData('contacts', newContact);
+    newContact['id'] = response['name']
     importContacts.push(newContact);
     sortContacts();
-    // await postData('contacts', newContact);
-    await setItem('contacts', importContacts);
     renderContacts();
     closeContactCard();
     successfullyAddedAnimation();
-    setActiveContact(importContacts.findIndex(contact =>
-        contact.firstName === newContact.firstName &&
-        contact.lastName === newContact.lastName &&
-        contact.mail === newContact.mail &&
-        contact.tel === newContact.tel
-    ));
+    setActiveContact(getContactIndex(newContact['id']));
 }
 
 
@@ -236,9 +231,9 @@ function closeContactCard() {
  * set the array to the database
  * @param {integer} i - index of the contact
  */
-function deleteContact(i) {
+async function deleteContact(i) {
+    await deleteData('contacts', importContacts[i]['id']);
     importContacts.splice(i, 1);
-    setItem('contacts', importContacts);
     renderContacts();
     document.getElementById(`active_contact`).innerHTML = '';
 }
@@ -247,10 +242,10 @@ function deleteContact(i) {
 /**
  * function to delete a contact in the overlay edit 
  */
-function deleteContactEdit() {
+async function deleteContactEdit() {
     let index = document.getElementById('delete_btn').dataset.index;
+    await deleteData('contacts', importContacts[index]['id']);
     importContacts.splice(index, 1);
-    setItem('contacts', importContacts);
     document.getElementById(`active_contact`).innerHTML = '';
     renderContacts();
     closeContactCard();
@@ -301,28 +296,32 @@ function renderEditContact() {
     content.classList.remove('d-none')    
 }
 
+
 /**
  * function to save the edit contact
  */
-function saveContact() {
+async function saveContact() {
     let index = document.getElementById('save_btn').dataset.index;
     let [firstName, lastName] = document.getElementById('edit_input_name').value.trim().split(' ');
-    let { color } = importContacts[index];
+    let color = importContacts[index]['color'];
+    let id = importContacts[index]['id'];
 
-    importContacts[index] = {
-        firstName,
-        lastName,
+    let contact = {
+        firstName: firstName,
+        lastName: lastName,
         checked: false,
-        color,
+        color: color,
         mail: document.getElementById('edit_input_mail').value,
         tel: document.getElementById('edit_input_tel').value
-    };
-
+    }
+    
+    await putData('contacts', id, contact);
+    contact['id'] = id
+    importContacts[index] = contact;
     sortContacts();
-    setItem('contacts', importContacts);
     closeContactCard();
     renderContacts();
-    setActiveContact(index);
+    setActiveContact(getContactIndex(id));
 }
 
 
@@ -370,4 +369,9 @@ function closeEditDeleteMenu() {
             
         } 
     }
+}
+
+
+function getContactIndex(id) {
+    return importContacts.findIndex(element => element['id'] == id);
 }
