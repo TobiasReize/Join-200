@@ -1,15 +1,7 @@
 let boardColumn = 'ToDo';
-
-let priority = {
-    'urgent' : false,
-    'medium' : true,
-    'low' : false
-}
-
+let currentPriority = '';
 let categories = ['Technical Task', 'User Story']
-
 let subtasks = [];
-
 let tasks = [{
     'columnID' : 'ToDo', // Standartmäßig in ToDo 
     'title' : '',
@@ -158,15 +150,7 @@ function colorChange(priority) {
  * @param {string} priorityLevel 
  */
 function changePrio(priorityLevel) {
-    // Setze alle Werte auf false
-    priority.urgent = false;
-    priority.medium = false;
-    priority.low = false;
-
-    // Setze den gewünschten Wert auf true basierend auf dem übergebenen Namen
-    if (priorityLevel in priority) {
-        priority[priorityLevel] = true;
-    }
+    currentPriority = priorityLevel;
 }
 
 
@@ -300,7 +284,8 @@ function addCheckedContactsToTasks(importContacts, newTask) {
             checked: contact.checked,
             color: contact.color,
             mail: contact.mail,
-            tel: contact.tel
+            tel: contact.tel,
+            id: contact.id
         }));
     newTask.contacts = checkedContacts;
 }
@@ -321,17 +306,12 @@ async function addAllToTasks() {
         'description': inputDescription.value || '',
         'contacts': [] || '', 
         'date': inputDate.value || '',
-        'priorities': priority,
+        'priority': currentPriority,
         'category': inputCategory.value || '',
         'subtasks': subtasks
     };
-
-    // Füge die geprüften Kontakte zum neuen Task hinzu
-    addCheckedContactsToTasks(importContacts, newTask);
-    // Füge den neuen Task zu importTasks hinzu
+    addCheckedContactsToTasks(importContacts, newTask); // Füge die geprüften Kontakte zum neuen Task hinzu
+    let response = await postData('tasks', newTask);
+    newTask['id'] = response['name'];
     importTasks.push(newTask);
-
-    // Speichere die aktualisierten Tasks
-    await setItem('tasks', importTasks);
-    // await postData('tasks', newTask);
 }

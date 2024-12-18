@@ -1,16 +1,16 @@
 // const BASE_URL = 'https://join-200-default-rtdb.europe-west1.firebasedatabase.app/';
 const BASE_URL = 'https://join-new-bea24-default-rtdb.europe-west1.firebasedatabase.app/';
 
-async function setItem(path = '', data) {
-    let response = await fetch(BASE_URL + path + '.json', {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    // let responseToJson = await response.json();
-}
+// async function setItem(path = '', data) {
+//     let response = await fetch(BASE_URL + path + '.json', {
+//         method: "PUT",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(data)
+//     });
+//     // let responseToJson = await response.json();
+// }
 
 // Neu:
 async function postData(path='', data={}) {     // z. B. path='users'
@@ -67,13 +67,6 @@ async function loadTasks() {
 }
 
 
-async function getItem(path = '') {
-    let response = await fetch(BASE_URL + path + '.json');
-    let responseToJson = await response.json();
-    return responseToJson;
-}
-
-
 async function loadContacts() {
     let response = await fetch(BASE_URL + 'contacts' + '.json');
     let responseToJson = await response.json();
@@ -85,4 +78,11 @@ async function loadContacts() {
         importContacts.push(responseToJson[objectKeysArray[i]]);
     }
     sortContacts();
+}
+
+
+async function getItem(path = '') {
+    let response = await fetch(BASE_URL + path + '.json');
+    let responseToJson = await response.json();
+    return responseToJson;
 }
