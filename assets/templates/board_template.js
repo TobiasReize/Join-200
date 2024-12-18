@@ -14,7 +14,7 @@ function taskCardHTML(columnID, i, task) {
             <div id="${columnID}_subtasks_container_${i}" class="subtasks-container"></div>
             <div class="ai-ctr-space-btwn">
                 <div id="${columnID}_contacts_container_${i}" class="df-ai-ctr"></div>
-                ${priorityImages[getPriority(task['priorities'])]}
+                ${priorityImages[task['priority']]}
             </div>
         </div>
     `;
@@ -63,8 +63,8 @@ function bigViewHTML(columnID, taskID, currentTask) {
                 <div class="big-view-priority-container df-ai-ctr fs20-fw400 m-btm24">
                     <div class="default-color fs16-fw400">Priority:</div>
                     <div class="df-ai-ctr gap-10">
-                        <div class="fs16-fw400">${firstLetterUppercase(getPriority(currentTask['priorities']))}</div>
-                        <div>${priorityImages[getPriority(currentTask['priorities'])]}</div>
+                        <div class="fs16-fw400">${firstLetterUppercase(currentTask['priority'])}</div>
+                        <div>${priorityImages[currentTask['priority']]}</div>
                     </div>
                 </div>
                 <div id="big_view_contacts_container" class="m-btm24">

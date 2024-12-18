@@ -1,5 +1,5 @@
 let boardColumn = 'ToDo';
-let currentPriority = '';
+let currentPriority = 'medium';
 let categories = ['Technical Task', 'User Story']
 let subtasks = [];
 let tasks = [{

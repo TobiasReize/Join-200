@@ -83,7 +83,7 @@ function renderTasks(columnID, columnArray) {
             addContactsToCard(columnID, i, task);
         }
     }
-    columnContainer.innerHTML += /*html*/ `<div id="rectangle_${columnID}" class="dashed-rectangle d-none"></div>`;     //fügt am Ende ein gestricheltes Rechteck hinzu
+    // columnContainer.innerHTML += /*html*/ `<div id="rectangle_${columnID}" class="dashed-rectangle d-none"></div>`;     //fügt am Ende ein gestricheltes Rechteck hinzu
 }
 
 
@@ -130,11 +130,6 @@ function addContactsToCard(columnID, i, task) {
         }
     }
 }
-
-
-// function getIndexFromContactsArray(id) {
-//     return importContacts.findIndex(contact => contact.id === id);
-// }
 
 
 /**
@@ -237,7 +232,7 @@ function removeHighlight(idColumn) {
  * Moves the current task to the corresponding column
  * @param {string} targetColumn 
  */
-function moveTo(targetColumn) {
+async function moveTo(targetColumn) {
     let targetArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == targetColumn);
     let targetArray = renderedBoardArrays[targetArrayIndex]['array'];
     let startArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == currentDraggedElement['columnTitle']);
@@ -248,11 +243,11 @@ function moveTo(targetColumn) {
     startArray.splice(currentDraggedElement.taskNumber, 1);
     task['columnID'] = renderedBoardArrays[targetArrayIndex]['title'].replace(/ /g,'');
     document.getElementById(`${targetColumn}`).classList.remove('highlight-column');
-    
+    await patchData('tasks', task['id'], {columnID: task['columnID']});
+
     // allBoardArrays = renderedBoardArrays; --> darf ich nicht machen, da vorher renderedBoardArrays = filteredBoardArrays gemacht wird!
     // renderedBoardArrays = allBoardArrays; --> sobald man eine Task verschiebt, werden wieder alle Tasks angezeigt!
     renderAll();
-    saveAllTasksToDatabase();
 }
 
 
@@ -324,9 +319,10 @@ function addSubtasksToBigView(columnID, taskID, currentTask) {
  * @param {integer} taskID 
  * @param {integer} subtaskID 
  */
-function changeSubtaskStatus(columnID, taskID, subtaskID) {
+async function changeSubtaskStatus(columnID, taskID, subtaskID) {
     let currentArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == columnID['id']);
-    let currentSubtask = renderedBoardArrays[currentArrayIndex]['array'][taskID]['subtasks'][subtaskID];
+    let currentTask = renderedBoardArrays[currentArrayIndex]['array'][taskID];
+    let currentSubtask = currentTask['subtasks'][subtaskID];
     let currentSubtaskContainer = document.getElementById(`subtask_checkbox_${columnID['id']}_t${taskID}_st${subtaskID}`);
 
     if (currentSubtask['status'] == 'open') {
@@ -335,8 +331,8 @@ function changeSubtaskStatus(columnID, taskID, subtaskID) {
         currentSubtask['status'] = 'open';
     }
     currentSubtaskContainer.innerHTML = `${subtaskCheckbox[currentSubtask['status']]}`;
+    await patchData('tasks', currentTask['id'], {subtasks: currentTask['subtasks']});
     renderAll();
-    saveAllTasksToDatabase();
 }
 
 
@@ -354,7 +350,6 @@ function closeBigView(id) {
     }
     uncheckContacts();
     subtasks = [];
-    resetCurrentEditedTaskPriority();
 }
 
 
@@ -363,13 +358,14 @@ function closeBigView(id) {
  * @param {string} columnID 
  * @param {integer} taskID 
  */
-function deleteTask(columnID, taskID) {
+async function deleteTask(columnID, taskID) {
     let currentArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == columnID['id']);
     let currentArray = renderedBoardArrays[currentArrayIndex]['array'];
+    let currentTask = currentArray[taskID];
+    await deleteData('tasks', currentTask['id']);
     currentArray.splice(taskID, 1);
     closeBigView(1);
     renderAll();
-    saveAllTasksToDatabase();
 }
 
 

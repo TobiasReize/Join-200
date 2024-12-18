@@ -91,20 +91,6 @@ function firstLetterUppercase(word) {
 
 
 /**
- * Returns the priority of the current task
- * @param {JSON} taskPriorities 
- * @returns 
- */
-function getPriority(taskPriorities) {
-    for (let key in taskPriorities) {
-        if (taskPriorities[key]) {
-            return key;
-        }
-    }
-}
-
-
-/**
  * Resets all contacts to the "unchecked" status
  */
 function uncheckContacts() {

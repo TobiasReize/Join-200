@@ -35,16 +35,16 @@ async function putData(path='', id='', data={}) {  // z. B. path='users/{id}' & 
     return responseToJson = await response.json();
 }
 
-// async function patchData(path='', id='', data={}) {
-//     let response = await fetch(BASE_URL + path + '/' + id + '.json', {
-//         method: "PATCH",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(data)
-//     });
-//     return responseToJson = await response.json();
-// }
+async function patchData(path='', id='', data={}) {
+    let response = await fetch(BASE_URL + path + '/' + id + '.json', {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    return responseToJson = await response.json();
+}
 
 async function deleteData(path='', id='') {
     let response = await fetch(BASE_URL + path + '/' + id + '.json', {
@@ -64,6 +64,7 @@ async function loadTasks() {
         responseToJson[objectKeysArray[i]]['id'] = objectKeysArray[i];  // fügt das Feld 'id' jedem Objekt hinzu
         importTasks.push(responseToJson[objectKeysArray[i]]);
     }
+    console.log('importTasks', importTasks);
 }
 
 
@@ -78,6 +79,7 @@ async function loadContacts() {
         importContacts.push(responseToJson[objectKeysArray[i]]);
     }
     sortContacts();
+    console.log('importContacts', importContacts);
 }
 
 

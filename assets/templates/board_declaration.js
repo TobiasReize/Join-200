@@ -28,6 +28,10 @@ let subtaskCheckbox = {
             </svg>`
 }
 
+let currentDraggedElement;
+let currentEditedTaskPriority = '';
+let countCheckedContacts = 0;
+
 let toDoTasks = [];
 let inProgressTasks = [];
 let awaitFeedbackTasks = [];
@@ -101,11 +105,3 @@ let filteredBoardArrays = [
         'array': []
     }
 ];
-
-let currentDraggedElement;
-let currentEditedTaskPriority = {
-    'urgent' : false,
-    'medium' : false,
-    'low' : false
-};
-let countCheckedContacts = 0;

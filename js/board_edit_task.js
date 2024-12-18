@@ -6,7 +6,7 @@
 function editTask(columnID, taskID) {
     let currentArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == columnID['id']);
     let currentTask = renderedBoardArrays[currentArrayIndex]['array'][taskID];
-    let currentTaskPriority = getPriority(currentTask['priorities']);
+    let currentTaskPriority = currentTask['priority'];
     let bigViewContainer = document.getElementById('big_view_container');
 
     bigViewContainer.innerHTML = editTaskHTML(columnID, taskID, currentTask);
@@ -36,7 +36,7 @@ function highlightCurrentPriority(currentTaskPriority) {
     for (let i = 0; i < priorityIcon.length; i++) {
         priorityIcon[i].classList.add('fill-white');
     }
-    currentEditedTaskPriority[currentTaskPriority] = true;
+    currentEditedTaskPriority = currentTaskPriority;
 }
 
 
@@ -79,8 +79,7 @@ function addSubtasksToEditView(currentTask) {
 function changePriority(selectedPriority) {
     resetPriorityButtons();
     highlightSelectedPriority(selectedPriority);
-    resetCurrentEditedTaskPriority();
-    currentEditedTaskPriority[selectedPriority] = true;
+    currentEditedTaskPriority = selectedPriority;
 }
 
 
@@ -121,57 +120,37 @@ function highlightSelectedPriority(selectedPriority) {
 
 
 /**
- * Resets the priority of the current task
- */
-function resetCurrentEditedTaskPriority() {
-    currentEditedTaskPriority = {
-        'urgent' : false,
-        'medium' : false,
-        'low' : false
-    };
-}
-
-
-/**
  * Saves the current data of the task
  * @param {string} columnID 
  * @param {integer} taskID 
  */
-function saveCurrentTask(columnID, taskID) {
+async function saveCurrentTask(columnID, taskID) {
     let currentArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == columnID['id']);
     let currentTask = renderedBoardArrays[currentArrayIndex]['array'][taskID];
     let editTaskTitel = document.getElementById('edit_task_title').value;
     let editTaskDescription = document.getElementById('edit_task_description').value;
     let editTaskDate = document.getElementById('edit_task_date').value;
     let editTaskContacts = importContacts.filter(contact => contact.checked);
-    
+
     currentTask['contacts'] = editTaskContacts;
     currentTask['date'] = editTaskDate;
     currentTask['description'] = editTaskDescription;
-    currentTask['priorities'] = currentEditedTaskPriority;
+    currentTask['priority'] = currentEditedTaskPriority;
     currentTask['subtasks'] = subtasks;
     currentTask['title'] = editTaskTitel;
 
+    let taskData = {
+        'title': editTaskTitel,
+        'description': editTaskDescription,
+        'contacts': editTaskContacts, 
+        'date': editTaskDate,
+        'priority': currentEditedTaskPriority,
+        'subtasks': subtasks
+    };
+
+    await patchData('tasks', currentTask['id'], taskData);
     renderAll();
-    saveAllTasksToDatabase();
     closeBigView(1);
-}
-
-
-/**
- * Saves all tasks to the Database
- */
-function saveAllTasksToDatabase() {
-    importTasks = [];       //zuerst muss das Array geleert werden, damit keine doppelten Tasks darin gespeichert werden!
-    for (let i = 0; i < renderedBoardArrays.length; i++) {
-        const boardArray = renderedBoardArrays[i]['array'];
-        
-        for (let j = 0; j < boardArray.length; j++) {
-            const singleTask = boardArray[j];
-            importTasks.push(singleTask);
-        }
-    }
-    setItem('tasks', importTasks);
 }
 
 
