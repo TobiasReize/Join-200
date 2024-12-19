@@ -117,7 +117,7 @@ function checkProgressBar(columnID, i, task) {
  */
 function addContactsToCard(columnID, i, task) {
     for (let k = 0; k < task['contacts'].length; k++) {
-        const person = task['contacts'][k];
+        const person = getContactWithID(task['contacts'][k]);
         const personFirstName = person['firstName'];
         const personLastName = person['lastName'];
         const initials = `${oneLetterUppercase(personFirstName)}${oneLetterUppercase(personLastName)}`;
@@ -282,7 +282,7 @@ function showBigView(columnID, taskID) {
  */
 function addContactsToBigView(currentTask) {
     for (let i = 0; i < currentTask['contacts'].length; i++) {
-            const person = currentTask['contacts'][i];
+            const person = getContactWithID(currentTask['contacts'][i]);
             const initials = `${oneLetterUppercase(person['firstName'])}${oneLetterUppercase(person['lastName'])}`;
             document.getElementById('big_view_contacts_container').innerHTML += /*html*/ `
                 <div class="big-view-contacts df-ai-ctr">

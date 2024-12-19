@@ -99,3 +99,13 @@ function uncheckContacts() {
         contact['checked'] = false;
     }
 }
+
+
+/**
+ * Returns the corresponding contact object
+ * @param {string} id
+ * @returns 
+ */
+function getContactWithID(id) {
+    return importContacts.find(contact => contact['id'] == id);
+}

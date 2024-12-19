@@ -46,7 +46,7 @@ function highlightCurrentPriority(currentTaskPriority) {
  */
 function addContactsToEditView(currentTask) {
     for (let j = 0; j < currentTask['contacts'].length; j++) {
-        const person = currentTask['contacts'][j];
+        const person = getContactWithID(currentTask['contacts'][j]);
         const initials = `${oneLetterUppercase(person['firstName'])}${oneLetterUppercase(person['lastName'])}`;
         let currentContactIndex = importContacts.findIndex(element => element['firstName'] == person['firstName'] && element['lastName'] == person['lastName']);
         importContacts[currentContactIndex]['checked'] = true;
@@ -130,7 +130,7 @@ async function saveCurrentTask(columnID, taskID) {
     let editTaskTitel = document.getElementById('edit_task_title').value;
     let editTaskDescription = document.getElementById('edit_task_description').value;
     let editTaskDate = document.getElementById('edit_task_date').value;
-    let editTaskContacts = importContacts.filter(contact => contact.checked);
+    let editTaskContacts = importContacts.filter(contact => contact.checked).map(contact => contact.id);
 
     currentTask['contacts'] = editTaskContacts;
     currentTask['date'] = editTaskDate;

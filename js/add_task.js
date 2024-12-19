@@ -273,21 +273,25 @@ async function createNewTask() {
  * add the choosen contact to "tasks" 
  * compare "importContacts" and "importTasks"
  * filter for the checked
- * @param {string} importContacts - contacts from the database
  * @param {string} newTask - created task
  */
-function addCheckedContactsToTasks(importContacts, newTask) {
-    let checkedContacts = importContacts.filter(contact => contact.checked)
-        .map(contact => ({
-            firstName: contact.firstName,
-            lastName: contact.lastName,
-            checked: contact.checked,
-            color: contact.color,
-            mail: contact.mail,
-            tel: contact.tel,
-            id: contact.id
-        }));
-    newTask.contacts = checkedContacts;
+function addCheckedContactsToTasks(newTask) {
+    let checkedContacts = importContacts.filter(contact => contact.checked);
+    checkedContacts.forEach(item => {
+        newTask.contacts.push(item['id']);
+    });
+    
+    // newTask.contacts = checkedContacts;
+
+        // .map(contact => ({
+        //     firstName: contact.firstName,
+        //     lastName: contact.lastName,
+        //     checked: contact.checked,
+        //     color: contact.color,
+        //     mail: contact.mail,
+        //     tel: contact.tel,
+        //     id: contact.id
+        // }));
 }
 
 
@@ -310,7 +314,7 @@ async function addAllToTasks() {
         'category': inputCategory.value || '',
         'subtasks': subtasks
     };
-    addCheckedContactsToTasks(importContacts, newTask); // Füge die geprüften Kontakte zum neuen Task hinzu
+    addCheckedContactsToTasks(newTask); // Füge die geprüften Kontakte zum neuen Task hinzu
     let response = await postData('tasks', newTask);
     newTask['id'] = response['name'];
     importTasks.push(newTask);

@@ -7,10 +7,13 @@ let awaitFeedbackTasks = [];
 let doneTasks = [];
 const allTasks = [];
 
-document.addEventListener('DOMContentLoaded', function () {
+
+function initSummary() {
+    includeHTML();
     initializeApp();
     checkWidthAndAddClass();
-});
+}
+
 
 function checkWidthAndAddClass() {
     if (window.innerWidth < 920) {
@@ -25,14 +28,15 @@ function checkWidthAndAddClass() {
             document.getElementById('body').classList.remove('change-background');
         }, 3000);
     }
-    return;
 }
 
+
 async function initializeApp() {
-    await loadTasksFromFirebase();
+    await loadTasks();
     await letsGreet();
     await loadNumber();
-};
+}
+
 
 function getInitials(name) {
     if (!name) {
@@ -65,12 +69,14 @@ async function letsGreet() {
     // Initialen speichern
     const initials = getInitials(userName || storedName || DEFAULT_NAME);
     addInitials(initials);
-};
+}
+
 
 function getQueryParameter(name) {
     let params = new URLSearchParams(window.location.search);
     return params.get(name);
-};
+}
+
 
 async function greet(userName) {
     const greeting = await getGreeting();
@@ -83,9 +89,9 @@ async function greet(userName) {
         <br>
         <p class="blue-name">${userName}!</p>`;
     }
-
     document.getElementById('greeting').innerHTML = greetingText;
-};
+}
+
 
 function getGreeting() {
     return new Promise(resolve => {
@@ -103,7 +109,7 @@ function getGreeting() {
 
         resolve(greeting);
     });
-};
+}
 
 
 async function sortTasks() {
@@ -128,7 +134,8 @@ async function sortTasks() {
                 break;
         }
     }
-};
+}
+
 
 async function loadNumber() {
     await sortTasks();
@@ -138,33 +145,29 @@ async function loadNumber() {
     const awaitFeedbackNumber = awaitFeedbackTasks.length;
     const inProgressNumber = inProgressTasks.length;
     const sum = toDoTasks.length + doneTasks.length + awaitFeedbackTasks.length + inProgressTasks.length;
-
     await countUrgent();
-
     document.getElementById('todoNumber').innerHTML = `${todoNumber}`;
     document.getElementById('doneNumber').innerHTML = `${doneNumber}`;
     document.getElementById('awaitFeedbackNumber').innerHTML = `${awaitFeedbackNumber}`;
     document.getElementById('inProgressNumber').innerHTML = `${inProgressNumber}`;
     document.getElementById('taskSum').innerHTML = `${sum}`;
-};
+}
+
 
 async function countUrgent() {
     let urgentCount = 0;
     allTasks.forEach(task => {
-        for (const key in task.priorities) {
-            const priority = task.priorities[key];
-            if (key == 'urgent' && priority) {
-                urgentCount++;
-            }
+        if (task.priority == 'urgent') {
+            urgentCount++;
         }
     });
     document.getElementById('urgentNumber').innerHTML = `${urgentCount}`;
-    await findClosestDate()
+    await findClosestDate();
 }
+
 
 async function findClosestDate() {
     let closestDate = null;
-
     allTasks.forEach(task => {
         if (task.date) {
             const currentDate = new Date(task.date);
@@ -179,6 +182,7 @@ async function findClosestDate() {
     return closestDate;
 }
 
+
 function extractDateParts(dateString) {
     let date = new Date(dateString);
     let month = date.toLocaleString('default', { month: 'short' });
@@ -189,9 +193,5 @@ function extractDateParts(dateString) {
         month: month,
         day: day,
         year: year
-    };
-}
-
-async function loadTasksFromFirebase() {
-    await loadTasks();
+    }
 }
