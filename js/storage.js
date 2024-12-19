@@ -1,5 +1,4 @@
-// const BASE_URL = 'https://join-200-default-rtdb.europe-west1.firebasedatabase.app/';
-const BASE_URL = 'https://join-new-bea24-default-rtdb.europe-west1.firebasedatabase.app/';
+const BASE_URL = 'https://join-200-default-rtdb.europe-west1.firebasedatabase.app/';
 
 
 async function postData(path='', data={}) {     // z. B. path='users'
@@ -50,13 +49,10 @@ async function loadTasks() {
     let response = await fetch(BASE_URL + 'tasks' + '.json');
     let responseToJson = await response.json();
     let objectKeysArray = Object.keys(responseToJson);
-    console.log('importTasks:', responseToJson);
-
     for (let i = 0; i < objectKeysArray.length; i++) {
         responseToJson[objectKeysArray[i]]['id'] = objectKeysArray[i];
         importTasks.push(responseToJson[objectKeysArray[i]]);
     }
-    console.log('importTasks', importTasks);
 }
 
 
@@ -64,14 +60,11 @@ async function loadContacts() {
     let response = await fetch(BASE_URL + 'contacts' + '.json');
     let responseToJson = await response.json();
     let objectKeysArray = Object.keys(responseToJson);
-    console.log('importContacts:', responseToJson);
-
     for (let i = 0; i < objectKeysArray.length; i++) {
         responseToJson[objectKeysArray[i]]['id'] = objectKeysArray[i];
         importContacts.push(responseToJson[objectKeysArray[i]]);
     }
     sortContacts();
-    console.log('importContacts', importContacts);
 }
 
 
