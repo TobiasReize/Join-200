@@ -6,26 +6,22 @@ async function initRegister() {
 }
 
 
-async function loadUsers() {                                 //die aktuellen Daten werden vom Server geladen und in das globale Array 'users' geladen
+async function loadUsers() {
     try {
-        users = await getItem('users', users);                     //Normalerweise erhält man nur Objekte von der Datenbank (JSON-Objekt), keine Arrays!
-        // console.log(users);
+        users = await getItem('users', users);
     } catch (e) {
-        console.error('Loading error:', e);                 //Error-handler: Wenn ein Fehler auftritt, wird dieser abgefangen
+        console.error('Loading error:', e);
     }
 }
 
 
-async function addUser() {                                 // Neuer User wird im Server abgespeichert
+async function addUser() {
     let registerBtn = document.getElementById('register_btn');
     let userName = document.getElementById('register_name');
     let email = document.getElementById('register_email');
     const emailField = email.value;
     let password = document.getElementById('register_password');
     let cpassword = document.getElementById('cregister_password');
-
-    // Debugging: Überprüfen, was im emailField steht
-    // console.log('Email Field:', emailField);
 
     // Button wird deaktiviert
     registerBtn.disabled = true;
@@ -57,8 +53,7 @@ async function addUser() {                                 // Neuer User wird im
     // Überprüfen, ob alle Felder ausgefüllt sind
     if (!userName.value || !email.value || !password.value || !checkboxpp > 0) {
         await removeDnoneFill();
-        registerBtn.disabled = false;                     // Button wieder aktivieren
-        return;                                           // Funktion beenden
+        registerBtn.disabled = false;
     }
 
     // Neuer User wird dem Array hinzugefügt
@@ -69,15 +64,14 @@ async function addUser() {                                 // Neuer User wird im
     });
 
     // Daten werden in der Datenbank gespeichert
-    await setItem('users', users);                         // setItem-Funktion wird mit dem String 'users' und dem users-Array aufgerufen --> Das Array 'users' und die Datenbank müssen immer synchron sein!
+    await setItem('users', users);
 
     // Formular zurücksetzen
     resetRegisterForm(registerBtn, userName, email, password), cpassword;
 
     // Benachrichtigung anzeigen
     showSuccessMessage();
-
-};
+}
 
 
 async function removeDnoneFill() {
@@ -87,7 +81,7 @@ async function removeDnoneFill() {
     document.getElementById('noMatchCpassword').classList.add('d-none');
     document.getElementById('fillPassword').classList.remove('d-none');
     document.getElementById('fillCpassword').classList.remove('d-none');
-};
+}
 
 
 async function removeDnoneMatch() {
@@ -96,13 +90,13 @@ async function removeDnoneMatch() {
     document.getElementById('invalidMail').classList.add('d-none');
     document.getElementById('noMatchPassword').classList.remove('d-none');
     document.getElementById('noMatchCpassword').classList.remove('d-none');
-};
+}
 
 
 async function removeDnoneMail() {
     document.getElementById('fillMail').classList.add('d-none');
     document.getElementById('invalidMail').classList.remove('d-none');
-};
+}
 
 
 function showSuccessMessage() {
@@ -117,22 +111,19 @@ function showSuccessMessage() {
         messageDiv.classList.remove('show');
         window.location.href = '../index.html?msg=Du hast dich erfolgreich registriert';
     }, 5000);
-};
+}
 
 
-
-
-
-function resetRegisterForm(registerBtn, userName, email, password) {                  //Register-Form wird wieder geleert und der Button wieder aktiviert
+function resetRegisterForm(registerBtn, userName, email, password) {
     userName.value = '';
     email.value = '';
     password.value = '';
     registerBtn.disabled = false;
-};
+}
 
 /* Bild von der Checkbox austauschen */
-
 let checkboxpp = 0;
+
 
 function checkPolicy() {
     checkboxpp++;
@@ -143,7 +134,8 @@ function checkPolicy() {
     </svg>
     I accept the <a href="./privacy_policy.html" target="_blank">Privacy policy</a>
     `;
-};
+}
+
 
 function ncheckPolicy() {
     checkboxpp--;
@@ -151,6 +143,5 @@ function ncheckPolicy() {
     <svg onclick="checkPolicy()" id="checkPolicy" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="4.5" y="4" width="16" height="16" rx="3" stroke="#2A3647" stroke-width="2"/>
     </svg> I accept the <a href="./privacy_policy.html" target="_blank">Privacy policy</a>
-
     `;
-};
+}

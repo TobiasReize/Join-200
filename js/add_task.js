@@ -280,18 +280,6 @@ function addCheckedContactsToTasks(newTask) {
     checkedContacts.forEach(item => {
         newTask.contacts.push(item['id']);
     });
-    
-    // newTask.contacts = checkedContacts;
-
-        // .map(contact => ({
-        //     firstName: contact.firstName,
-        //     lastName: contact.lastName,
-        //     checked: contact.checked,
-        //     color: contact.color,
-        //     mail: contact.mail,
-        //     tel: contact.tel,
-        //     id: contact.id
-        // }));
 }
 
 

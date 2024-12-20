@@ -303,25 +303,23 @@ function renderEditContact() {
 async function saveContact() {
     let index = document.getElementById('save_btn').dataset.index;
     let [firstName, lastName] = document.getElementById('edit_input_name').value.trim().split(' ');
-    let color = importContacts[index]['color'];
-    let id = importContacts[index]['id'];
 
-    let contact = {
+    let contactData = {
         firstName: firstName,
         lastName: lastName,
-        checked: false,
-        color: color,
         mail: document.getElementById('edit_input_mail').value,
         tel: document.getElementById('edit_input_tel').value
     }
-    
-    await putData('contacts', id, contact);
-    contact['id'] = id
-    importContacts[index] = contact;
+
+    importContacts[index]['firstName'] = contactData.firstName;
+    importContacts[index]['lastName'] = contactData.lastName;
+    importContacts[index]['mail'] = contactData.mail;
+    importContacts[index]['tel'] = contactData.tel;
+    await patchData('contacts', importContacts[index]['id'], contactData);
     sortContacts();
     closeContactCard();
     renderContacts();
-    setActiveContact(getContactIndex(id));
+    setActiveContact(getContactIndex(importContacts[index]['id']));
 }
 
 

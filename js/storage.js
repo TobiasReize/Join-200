@@ -1,7 +1,19 @@
 const BASE_URL = 'https://join-200-default-rtdb.europe-west1.firebasedatabase.app/';
 
 
-async function postData(path='', data={}) {     // z. B. path='users'
+async function setItem(path = '', data) {
+    let response = await fetch(BASE_URL + path + '.json', {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    return responseToJson = await response.json();
+}
+
+
+async function postData(path='', data={}) {
     let response = await fetch(BASE_URL + path + '.json', {
         method: "POST",
         headers: {
@@ -10,18 +22,6 @@ async function postData(path='', data={}) {     // z. B. path='users'
         body: JSON.stringify(data)
     });
     return responseToJson = await response.json();    
-}
-
-
-async function putData(path='', id='', data={}) {  // z. B. path='users/{id}' & data= vollständiges Objekt
-    let response = await fetch(BASE_URL + path + '/' + id + '.json', {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    return responseToJson = await response.json();
 }
 
 
