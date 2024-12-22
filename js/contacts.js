@@ -149,14 +149,13 @@ async function createContact() {
         mail: document.getElementById('input_mail').value,
         tel: document.getElementById('input_tel').value
     };
-    let response = await postData('contacts', newContact);
-    newContact['id'] = response['name']
-    importContacts.push(newContact);
+    let response = await postData('contacts/', newContact);
+    importContacts.push(response);
     sortContacts();
     renderContacts();
     closeContactCard();
     successfullyAddedAnimation();
-    setActiveContact(getContactIndex(newContact['id']));
+    setActiveContact(getContactIndex(response['id']));
 }
 
 

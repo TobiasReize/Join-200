@@ -278,7 +278,7 @@ async function createNewTask() {
 function addCheckedContactsToTasks(newTask) {
     let checkedContacts = importContacts.filter(contact => contact.checked);
     checkedContacts.forEach(item => {
-        newTask.contacts.push(item['id']);
+        newTask.contact_ids.push(item['id']);
     });
 }
 
@@ -296,14 +296,13 @@ async function addAllToTasks() {
         'columnID' : boardColumn,
         'title': inputTitle.value || '',
         'description': inputDescription.value || '',
-        'contacts': [] || '', 
+        'contact_ids': [] || '', 
         'date': inputDate.value || '',
         'priority': currentPriority,
         'category': inputCategory.value || '',
         'subtasks': subtasks
     };
     addCheckedContactsToTasks(newTask); // Füge die geprüften Kontakte zum neuen Task hinzu
-    let response = await postData('tasks', newTask);
-    newTask['id'] = response['name'];
-    importTasks.push(newTask);
+    let response = await postData('tasks/', newTask);
+    importTasks.push(response);
 }

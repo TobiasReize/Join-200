@@ -67,7 +67,7 @@ function addContactsToEditView(currentTask) {
 function addSubtasksToEditView(currentTask) {
     for (let k = 0; k < currentTask['subtasks'].length; k++) {
         const subtask = currentTask['subtasks'][k];
-        subtasks.push({'subtaskTitle': subtask['subtaskTitle'], 'status': subtask['status']});
+        subtasks.push(subtask);
     }
 }
 
@@ -142,12 +142,12 @@ async function saveCurrentTask(columnID, taskID) {
     let taskData = {
         'title': editTaskTitel,
         'description': editTaskDescription,
-        'contacts': editTaskContacts, 
+        'contact_ids': editTaskContacts, 
         'date': editTaskDate,
         'priority': currentEditedTaskPriority,
         'subtasks': subtasks
     };
-
+    // console.log('taskData:', taskData);
     await patchData('tasks', currentTask['id'], taskData);
     renderAll();
     closeBigView(1);
