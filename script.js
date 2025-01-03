@@ -127,9 +127,17 @@ function stopPropagation(event) {
 
 
 function checkCredentials() {
-    let userID = localStorage.getItem('user_id');
-    if (!userID) {
+    let token = localStorage.getItem('token');
+    if (!token) {
         logOut();
+    }
+}
+
+
+function getUserToken() {
+    let token = localStorage.getItem('token');
+    if (token) {
+        return token;
     }
 }
 

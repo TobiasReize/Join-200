@@ -11,8 +11,8 @@ async function login() {
     document.getElementById('userNotFoundMail').classList.add('d-none');
     document.getElementById('userNotFoundPassword').classList.add('d-none');
 
-    let user = await postData('auth/login/', {'username': email.value, 'password': password.value});
-    console.log('login user:', user);
+    let user = await registerPostData('auth/login/', {'username': email.value, 'password': password.value});
+    // console.log('login user:', user);
 
     if (user && user.token) {
         resetLoginForm(loginBtn, email, password);
@@ -30,7 +30,7 @@ function populateStorage(user) {
     localStorage.setItem("first_name", user.first_name);
     localStorage.setItem("last_name", user.last_name);
     localStorage.setItem("email", user.email);
-    localStorage.setItem("user_id", user.user_id);
+    localStorage.setItem("token", user.token);
 }
 
 
@@ -63,8 +63,9 @@ window.addEventListener('load', () => {
 });
 
 
-function addGuestName() {
-    localStorage.setItem('user_id', 'guest');
+async function loginGuest() {
+    let guestUser = await registerPostData('auth/login/', {'username': 'gast@test.de', 'password': 'gast123'});
+    populateStorage(guestUser);
     location.href = './html/summary.html';
 }
 

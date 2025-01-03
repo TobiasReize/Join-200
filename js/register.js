@@ -39,15 +39,10 @@ async function addUser(username, email, password) {
         'email': email,
         'password': password
     }
-
     // let response = await postData('users/', newUser);
     // users.push(response);
-    console.log('newUser:', newUser);
-    
-    // let response = await postData('auth/registration/', newUser);
-    // console.log('response (newUser)', response);
 
-    // Benachrichtigung anzeigen
+    let response = await registerPostData('auth/registration/', newUser);
     showSuccessMessage();
 }
 

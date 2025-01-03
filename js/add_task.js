@@ -303,6 +303,6 @@ async function addAllToTasks() {
         'subtasks': subtasks
     };
     addCheckedContactsToTasks(newTask); // Füge die geprüften Kontakte zum neuen Task hinzu
-    let response = await postData('tasks/', newTask);
+    let response = await postData('tasks/', newTask, getUserToken());
     importTasks.push(response);
 }

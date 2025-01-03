@@ -243,7 +243,7 @@ async function moveTo(targetColumn) {
     startArray.splice(currentDraggedElement.taskNumber, 1);
     task['columnID'] = renderedBoardArrays[targetArrayIndex]['title'].replace(/ /g,'');
     document.getElementById(`${targetColumn}`).classList.remove('highlight-column');
-    await patchData('tasks', task['id'], {columnID: task['columnID']});
+    await patchData('tasks', task['id'], {columnID: task['columnID']}, getUserToken());
 
     // allBoardArrays = renderedBoardArrays; --> darf ich nicht machen, da vorher renderedBoardArrays = filteredBoardArrays gemacht wird!
     // renderedBoardArrays = allBoardArrays; --> sobald man eine Task verschiebt, werden wieder alle Tasks angezeigt!
@@ -331,7 +331,7 @@ async function changeSubtaskStatus(columnID, taskID, subtaskID) {
         currentSubtask['status'] = 'open';
     }
     currentSubtaskContainer.innerHTML = `${subtaskCheckbox[currentSubtask['status']]}`;
-    await patchData('tasks', currentTask['id'], {subtasks: currentTask['subtasks']});
+    await patchData('tasks', currentTask['id'], {subtasks: currentTask['subtasks']}, getUserToken());
     renderAll();
 }
 
@@ -362,7 +362,7 @@ async function deleteTask(columnID, taskID) {
     let currentArrayIndex = renderedBoardArrays.findIndex(element => element['id'] == columnID['id']);
     let currentArray = renderedBoardArrays[currentArrayIndex]['array'];
     let currentTask = currentArray[taskID];
-    await deleteData('tasks', currentTask['id']);
+    await deleteData('tasks', currentTask['id'], getUserToken());
     currentArray.splice(taskID, 1);
     closeBigView(1);
     renderAll();

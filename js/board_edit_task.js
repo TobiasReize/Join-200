@@ -148,7 +148,7 @@ async function saveCurrentTask(columnID, taskID) {
         'subtasks': subtasks
     };
     // console.log('taskData:', taskData);
-    await patchData('tasks', currentTask['id'], taskData);
+    await patchData('tasks', currentTask['id'], taskData, getUserToken());
     renderAll();
     closeBigView(1);
 }

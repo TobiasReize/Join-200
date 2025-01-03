@@ -149,7 +149,7 @@ async function createContact() {
         mail: document.getElementById('input_mail').value,
         tel: document.getElementById('input_tel').value
     };
-    let response = await postData('contacts/', newContact);
+    let response = await postData('contacts/', newContact, getUserToken());
     importContacts.push(response);
     sortContacts();
     renderContacts();
@@ -231,7 +231,7 @@ function closeContactCard() {
  * @param {integer} i - index of the contact
  */
 async function deleteContact(i) {
-    await deleteData('contacts', importContacts[i]['id']);
+    await deleteData('contacts', importContacts[i]['id'], getUserToken());
     importContacts.splice(i, 1);
     renderContacts();
     document.getElementById(`active_contact`).innerHTML = '';
@@ -243,7 +243,7 @@ async function deleteContact(i) {
  */
 async function deleteContactEdit() {
     let index = document.getElementById('delete_btn').dataset.index;
-    await deleteData('contacts', importContacts[index]['id']);
+    await deleteData('contacts', importContacts[index]['id'], getUserToken());
     importContacts.splice(index, 1);
     document.getElementById(`active_contact`).innerHTML = '';
     renderContacts();
@@ -314,7 +314,7 @@ async function saveContact() {
     importContacts[index]['lastName'] = contactData.lastName;
     importContacts[index]['mail'] = contactData.mail;
     importContacts[index]['tel'] = contactData.tel;
-    await patchData('contacts', importContacts[index]['id'], contactData);
+    await patchData('contacts', importContacts[index]['id'], contactData, getUserToken());
     sortContacts();
     closeContactCard();
     renderContacts();
