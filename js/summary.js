@@ -49,32 +49,19 @@ function getInitials(name) {
 
 
 async function letsGreet() {
-    const userName = getQueryParameter('name');
+    const firstName = localStorage.getItem('first_name') ? localStorage.getItem('first_name') : '';
+    const lastName = localStorage.getItem('last_name') ? localStorage.getItem('last_name') : '';
+    let userName = `${firstName} ${lastName}`;
 
-    // Versuche den Namen aus dem localStorage zu lesen
-    let storedName = localStorage.getItem('userName');
-
-    if (userName !== null) {
+    if (firstName) {
         await greet(userName);
-        // Speichere den Namen im localStorage, falls er über die URL übergeben wurde
-        localStorage.setItem('userName', userName);
-    } else if (storedName !== null) {
-        await greet(storedName);
     } else {
-        // Lösche den vorherigen Benutzernamen aus dem localStorage
-        localStorage.removeItem('userName');
-        await greet(null); // Kein Benutzername übergeben
+        userName = DEFAULT_NAME
+        await greet(userName);
     }
 
-    // Initialen speichern
-    const initials = getInitials(userName || storedName || DEFAULT_NAME);
+    const initials = getInitials(userName);
     addInitials(initials);
-}
-
-
-function getQueryParameter(name) {
-    let params = new URLSearchParams(window.location.search);
-    return params.get(name);
 }
 
 

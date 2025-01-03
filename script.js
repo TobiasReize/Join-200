@@ -91,7 +91,7 @@ function displayInitials() {
  * function to log out and remove the initials
  */
 function logOut() {
-    localStorage.removeItem('initialsArray');
+    localStorage.clear();
     window.location.href = '../index.html';
 }
 
@@ -123,6 +123,14 @@ function closeUserMenu() {
  */
 function stopPropagation(event) {           
     event.stopPropagation();
+}
+
+
+function checkCredentials() {
+    let userID = localStorage.getItem('user_id');
+    if (!userID) {
+        logOut();
+    }
 }
 
 

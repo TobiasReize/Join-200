@@ -115,7 +115,7 @@ html {
     border-radius: 10px;
 }
 
-.rememberme {
+.remember-me {
     position: absolute;
     display: flex;
     align-content: center;
@@ -127,7 +127,6 @@ html {
     font-weight: 400;
     margin-top: 0px;
     height: 24px;
-    width: 142px;
 }
 
 .login-btn {
@@ -444,7 +443,7 @@ html {
         width: 88px;
     }
 
-    .rememberme {
+    .remember-me {
         top: 304px;
         left: 32px;
     }
