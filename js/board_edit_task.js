@@ -132,13 +132,6 @@ async function saveCurrentTask(columnID, taskID) {
     let editTaskDate = document.getElementById('edit_task_date').value;
     let editTaskContacts = importContacts.filter(contact => contact.checked).map(contact => contact.id);
 
-    currentTask['contacts'] = editTaskContacts;
-    currentTask['date'] = editTaskDate;
-    currentTask['description'] = editTaskDescription;
-    currentTask['priority'] = currentEditedTaskPriority;
-    currentTask['subtasks'] = subtasks;
-    currentTask['title'] = editTaskTitel;
-
     let taskData = {
         'title': editTaskTitel,
         'description': editTaskDescription,
@@ -147,8 +140,14 @@ async function saveCurrentTask(columnID, taskID) {
         'priority': currentEditedTaskPriority,
         'subtasks': subtasks
     };
-    // console.log('taskData:', taskData);
-    await patchData('tasks', currentTask['id'], taskData, getUserToken());
+    
+    let response = await patchData('tasks', currentTask['id'], taskData, getUserToken());
+    currentTask['subtasks'] = response['subtasks'];
+    currentTask['contacts'] = editTaskContacts;
+    currentTask['date'] = editTaskDate;
+    currentTask['description'] = editTaskDescription;
+    currentTask['priority'] = currentEditedTaskPriority;
+    currentTask['title'] = editTaskTitel;
     renderAll();
     closeBigView(1);
 }
