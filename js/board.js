@@ -1,5 +1,5 @@
 /**
- * Initial function to display the content
+ * initial function to display the content
  */
 async function initBoard() {
     await init();
@@ -10,7 +10,7 @@ async function initBoard() {
 
 
 /**
- * Sorts all tasks according to the columns and pushes them into the corresponding array
+ * sorts all tasks according to the columns and pushes them into the corresponding array
  */
 function sortTasks() {
     for (let i = 0; i < importTasks.length; i++) {
@@ -33,7 +33,7 @@ function sortTasks() {
 
 
 /**
- * Renders all 4 columns with their tasks
+ * renders all 4 columns with their tasks
  */
 function renderAll() {
     for (let i = 0; i < renderedBoardArrays.length; i++) {
@@ -44,7 +44,7 @@ function renderAll() {
 
 
 /**
- * Renders the corresponding column with its tasks
+ * renders the corresponding column with its tasks
  * @param {string} columnTitle 
  * @param {string} columnID 
  * @param {array} columnArray 
@@ -66,7 +66,7 @@ function renderColumn(columnTitle, columnID, columnArray) {
 
 
 /**
- * Renders the tasks in the corresponding column
+ * renders the tasks in the corresponding column
  * @param {string} columnID 
  * @param {array} columnArray 
  */
@@ -88,7 +88,7 @@ function renderTasks(columnID, columnArray) {
 
 
 /**
- * Checks the number of subtasks and inserts the progress bar
+ * checks the number of subtasks and inserts the progress bar
  * @param {string} columnID 
  * @param {integer} i 
  * @param {JSON} task 
@@ -110,7 +110,7 @@ function checkProgressBar(columnID, i, task) {
 
 
 /**
- * Adds the contacts to the tasks
+ * adds the contacts to the tasks
  * @param {string} columnID 
  * @param {integer} i 
  * @param {JSON} task 
@@ -133,7 +133,7 @@ function addContactsToCard(columnID, i, task) {
 
 
 /**
- * Search function, shows only the matching tasks
+ * search function, shows only the matching tasks
  */
 function showSearchedTasks() {
     let searchField = document.getElementById('search_field');
@@ -151,7 +151,7 @@ function showSearchedTasks() {
 
 
 /**
- * Searches all tasks and pushes the matching tasks into an array
+ * searches all tasks and pushes the matching tasks into an array
  * @param {string} searchFieldInput 
  */
 function searchTasks(searchFieldInput) {
@@ -172,7 +172,7 @@ function searchTasks(searchFieldInput) {
 
 
 /**
- * Rotate card on mouse click
+ * rotate card on mouse click
  * @param {string} columnID 
  * @param {integer} taskID 
  */
@@ -182,7 +182,7 @@ function rotateCard(columnID, taskID) {
 
 
 /**
- * Saves the data of the current drag element in a global variable
+ * saves the data of the current drag element in a global variable
  * @param {string} columnID 
  * @param {integer} taskID 
  */
@@ -199,7 +199,7 @@ function startDragging(columnID, taskID) {
 
 
 /**
- * End rotate card
+ * end rotate card
  * @param {string} columnID 
  * @param {integer} taskID 
  */
@@ -209,7 +209,7 @@ function endRotateCard(columnID, taskID) {      //Karte wird wieder in den Ausga
 
 
 /**
- * Highlights the dragover-column
+ * highlights the dragover-column
  * @param {string} idColumn 
  */
 function highlightColumn(idColumn) {
@@ -219,7 +219,7 @@ function highlightColumn(idColumn) {
 
 
 /**
- * Removes the column highlight
+ * removes the column highlight
  * @param {string} idColumn 
  */
 function removeHighlight(idColumn) {
@@ -229,7 +229,7 @@ function removeHighlight(idColumn) {
 
 
 /**
- * Moves the current task to the corresponding column
+ * moves the current task to the corresponding column
  * @param {string} targetColumn 
  */
 async function moveTo(targetColumn) {
@@ -252,7 +252,7 @@ async function moveTo(targetColumn) {
 
 
 /**
- * Big view of the corresponding task as an overlay
+ * big view of the corresponding task as an overlay
  * @param {string} columnID 
  * @param {integer} taskID 
  */
@@ -277,7 +277,7 @@ function showBigView(columnID, taskID) {
 
 
 /**
- * Adds the contacts to the big view
+ * adds the contacts to the big view
  * @param {JSON} currentTask 
  */
 function addContactsToBigView(currentTask) {
@@ -295,7 +295,7 @@ function addContactsToBigView(currentTask) {
 
 
 /**
- * Adds the subtasks to the big view
+ * adds the subtasks to the big view
  * @param {string} columnID 
  * @param {integer} taskID 
  * @param {JSON} currentTask 
@@ -314,7 +314,7 @@ function addSubtasksToBigView(columnID, taskID, currentTask) {
 
 
 /**
- * Changes the status of the subtask to "open" or "done" and then re-renders the columns
+ * changes the status of the subtask to "open" or "done" and then re-renders the columns
  * @param {string} columnID 
  * @param {integer} taskID 
  * @param {integer} subtaskID 
@@ -337,7 +337,7 @@ async function changeSubtaskStatus(columnID, taskID, subtaskID) {
 
 
 /**
- * Closes the big view either with animation or without
+ * closes the big view either with animation or without
  * @param {integer} id 
  */
 function closeBigView(id) {
@@ -354,7 +354,7 @@ function closeBigView(id) {
 
 
 /**
- * Delets the current task
+ * delets the current task
  * @param {string} columnID 
  * @param {integer} taskID 
  */
@@ -370,7 +370,7 @@ async function deleteTask(columnID, taskID) {
 
 
 /**
- * Moves the task to the previous column in the mobile view
+ * moves the task to the previous column in the mobile view
  * @param {string} columnID 
  * @param {integer} taskID 
  */
@@ -386,7 +386,7 @@ function moveUp(columnID, taskID) {
 
 
 /**
- * Moves the task to the next column in the mobile view
+ * moves the task to the next column in the mobile view
  * @param {string} columnID 
  * @param {integer} taskID 
  */

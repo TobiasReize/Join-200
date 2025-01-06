@@ -1,4 +1,3 @@
-// Globale Konstante für den Standardnamen
 const DEFAULT_NAME = 'guest';
 
 let toDoTasks = [];
@@ -8,6 +7,9 @@ let doneTasks = [];
 const allTasks = [];
 
 
+/**
+ * init function
+ */
 function initSummary() {
     includeHTML();
     initializeApp();
@@ -15,6 +17,9 @@ function initSummary() {
 }
 
 
+/**
+ * checks the width and adds style for responsive design
+ */
 function checkWidthAndAddClass() {
     if (window.innerWidth < 920) {
         document.getElementById('titleBoard').classList.add('d-none');
@@ -31,6 +36,9 @@ function checkWidthAndAddClass() {
 }
 
 
+/**
+ * loads all tasks, count tasks and displays the greeting
+ */
 async function initializeApp() {
     await loadTasks();
     await letsGreet();
@@ -38,6 +46,11 @@ async function initializeApp() {
 }
 
 
+/**
+ * returns the initials array from the name
+ * @param {string} name 
+ * @returns initials string-array
+ */
 function getInitials(name) {
     if (!name) {
         return '';
@@ -48,6 +61,9 @@ function getInitials(name) {
 }
 
 
+/**
+ * runs the greeting
+ */
 async function letsGreet() {
     const firstName = localStorage.getItem('first_name') ? localStorage.getItem('first_name') : '';
     const lastName = localStorage.getItem('last_name') ? localStorage.getItem('last_name') : '';
@@ -65,6 +81,10 @@ async function letsGreet() {
 }
 
 
+/**
+ * displays the greet message
+ * @param {string} userName 
+ */
 async function greet(userName) {
     const greeting = await getGreeting();
     let greetingText;
@@ -80,6 +100,10 @@ async function greet(userName) {
 }
 
 
+/**
+ * returns the correct greeting message depending on the time
+ * @returns 
+ */
 function getGreeting() {
     return new Promise(resolve => {
         const now = new Date();
@@ -99,6 +123,9 @@ function getGreeting() {
 }
 
 
+/**
+ * sorts all tasks
+ */
 async function sortTasks() {
     for (let i = 0; i < importTasks.length; i++) {
         const singleTask = importTasks[i];
@@ -124,6 +151,9 @@ async function sortTasks() {
 }
 
 
+/**
+ * counts the sorted tasks
+ */
 async function loadNumber() {
     await sortTasks();
     allTasks.push(...importTasks);    
@@ -141,6 +171,9 @@ async function loadNumber() {
 }
 
 
+/**
+ * counts the urgent tasks
+ */
 async function countUrgent() {
     let urgentCount = 0;
     allTasks.forEach(task => {
@@ -153,6 +186,10 @@ async function countUrgent() {
 }
 
 
+/**
+ * returns the closest date
+ * @returns date
+ */
 async function findClosestDate() {
     let closestDate = null;
     allTasks.forEach(task => {
@@ -170,6 +207,11 @@ async function findClosestDate() {
 }
 
 
+/**
+ * returns the whole date-object
+ * @param {date} dateString 
+ * @returns object
+ */
 function extractDateParts(dateString) {
     let date = new Date(dateString);
     let month = date.toLocaleString('default', { month: 'short' });

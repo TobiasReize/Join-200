@@ -2,6 +2,13 @@ const BASE_URL = 'http://127.0.0.1:8000/api/';
 // const BASE_URL = 'https://join-new-bea24-default-rtdb.europe-west1.firebasedatabase.app/';
 
 
+/**
+ * make a POST-Request with authorization token
+ * @param {string} path 
+ * @param {object} data 
+ * @param {string} token 
+ * @returns 
+ */
 async function postData(path='', data={}, token) {
     // let response = await fetch(BASE_URL + path + '.json', {
     let response = await fetch(BASE_URL + path, {
@@ -16,6 +23,14 @@ async function postData(path='', data={}, token) {
 }
 
 
+/**
+ * make a PATCH-Request with authorization token
+ * @param {string} path 
+ * @param {string} id 
+ * @param {object} data 
+ * @param {string} token 
+ * @returns 
+ */
 async function patchData(path='', id='', data={}, token) {
     let response = await fetch(BASE_URL + path + '/' + id + '/', {
         method: "PATCH",
@@ -29,6 +44,12 @@ async function patchData(path='', id='', data={}, token) {
 }
 
 
+/**
+ * make a DELETE-Request with authorization token
+ * @param {string} path 
+ * @param {string} id 
+ * @param {string} token 
+ */
 async function deleteData(path='', id='', token) {
     let response = await fetch(BASE_URL + path + '/' + id + '/', {
         method: "DELETE",
@@ -39,6 +60,12 @@ async function deleteData(path='', id='', token) {
 }
 
 
+/**
+ * POST-Request for registration (without authorization token)
+ * @param {string} path 
+ * @param {object} data 
+ * @returns 
+ */
 async function registerPostData(path='', data={}) {
     let response = await fetch(BASE_URL + path, {
         method: "POST",
@@ -51,6 +78,9 @@ async function registerPostData(path='', data={}) {
 }
 
 
+/**
+ * load all tasks from backend
+ */
 async function loadTasks() {
     // let response = await fetch(BASE_URL + 'tasks' + '.json');
     let response = await fetch(BASE_URL + 'tasks/');
@@ -70,6 +100,9 @@ async function loadTasks() {
 }
 
 
+/**
+ * load all contacts from backend
+ */
 async function loadContacts() {
     // let response = await fetch(BASE_URL + 'contacts' + '.json');
     let response = await fetch(BASE_URL + 'contacts/');
@@ -91,6 +124,9 @@ async function loadContacts() {
 }
 
 
+/**
+ * load all users from backend
+ */
 async function loadUsers() {
     try {
         // let response = await fetch(BASE_URL + 'users' + '.json');
@@ -114,6 +150,9 @@ async function loadUsers() {
 }
 
 
+/**
+ * clear the local storage
+ */
 function clearStorage() {
     localStorage.clear();
 }

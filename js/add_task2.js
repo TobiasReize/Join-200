@@ -65,6 +65,7 @@ function categoryMenu() {
     arrow.classList.toggle('arrow-drop-down')
 }
 
+
 /**
  * animation for the added task
  * forwarding to board.html

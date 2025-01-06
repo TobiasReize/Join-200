@@ -4,7 +4,7 @@ let initialsArray = [];
 
 
 /**
- * Initial function to load the database,
+ * initial function to load the database,
  */
 async function init() {
     includeHTML();
@@ -14,7 +14,7 @@ async function init() {
 
 
 /**
- * funtion to laod the templates for the html
+ * funtion to load the templates for the html
  */
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
@@ -57,10 +57,9 @@ var storedInitials = localStorage.getItem('initialsArray');
 initialsArray = storedInitials ? JSON.parse(storedInitials) : [];
 
 
-
 /**
- * 
- * @param {*} initials 
+ * adds the initials in the header and stores them in the local storage
+ * @param {string-array} initials 
  */
 function addInitials(initials) {
     initialsArray = [];
@@ -76,7 +75,7 @@ function addInitials(initials) {
 
 
 /**
- * 
+ * displays the initials in the header
  */
 function displayInitials() {
     try {
@@ -94,6 +93,7 @@ function logOut() {
     localStorage.clear();
     window.location.href = '../index.html';
 }
+
 
 /**
  * function to open the User Menu to Log-Out or go to to privacy,...
@@ -116,6 +116,7 @@ function closeUserMenu() {
     }, 400); 
 }
 
+
 /**
  * function to stop propagation
  * used to close overlays onclick next to and not on the overlay
@@ -126,6 +127,9 @@ function stopPropagation(event) {
 }
 
 
+/**
+ * checks the saved credentials
+ */
 function checkCredentials() {
     let token = localStorage.getItem('token');
     if (!token) {
@@ -134,6 +138,10 @@ function checkCredentials() {
 }
 
 
+/**
+ * get the saved user token
+ * @returns user token
+ */
 function getUserToken() {
     let token = localStorage.getItem('token');
     if (token) {
@@ -142,6 +150,9 @@ function getUserToken() {
 }
 
 
+/**
+ * redirects to the summary page
+ */
 function back() {
     window.location.href = './summary.html'
 }

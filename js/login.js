@@ -1,6 +1,9 @@
 let checkbox = 0;
 
 
+/**
+ * function for login and redirects to the summary page
+ */
 async function login() {
     let loginBtn = document.getElementById('login_btn');
     let email = document.getElementById('login_email');
@@ -26,6 +29,10 @@ async function login() {
 }
 
 
+/**
+ * fill the local storage with user data
+ * @param {object} user 
+ */
 function populateStorage(user) {
     localStorage.setItem("first_name", user.first_name);
     localStorage.setItem("last_name", user.last_name);
@@ -34,6 +41,12 @@ function populateStorage(user) {
 }
 
 
+/**
+ * resets the login form
+ * @param {html element} loginBtn 
+ * @param {html element} email 
+ * @param {html element} password 
+ */
 function resetLoginForm(loginBtn, email, password) {
     email.value = '';
     password.value = '';
@@ -41,6 +54,9 @@ function resetLoginForm(loginBtn, email, password) {
 }
 
 
+/**
+ * runs the logo animation
+ */
 window.addEventListener('load', () => {
     const logo = document.getElementById('logo');
     const body = document.getElementById('body');
@@ -63,6 +79,9 @@ window.addEventListener('load', () => {
 });
 
 
+/**
+ * function for login in the guest user
+ */
 async function loginGuest() {
     let guestUser = await registerPostData('auth/login/', {'username': 'gast@test.de', 'password': 'gast123'});
     populateStorage(guestUser);
@@ -70,6 +89,9 @@ async function loginGuest() {
 }
 
 
+/**
+ * check the checkbox for remember me
+ */
 function rememberMe() {
     checkbox++;
     document.getElementById('remember_me').innerHTML = `
@@ -81,6 +103,9 @@ function rememberMe() {
 }
 
 
+/**
+ * uncheck the checkbox for remember me
+ */
 function nrememberMe() {
     checkbox--;
     document.getElementById('remember_me').innerHTML = `

@@ -369,6 +369,11 @@ function closeEditDeleteMenu() {
 }
 
 
+/**
+ * get the user with the correct id
+ * @param {integer} id 
+ * @returns user object
+ */
 function getContactIndex(id) {
     return importContacts.findIndex(element => element['id'] == id);
 }

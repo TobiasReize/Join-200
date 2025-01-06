@@ -3,7 +3,7 @@ let currentPriority = 'medium';
 let categories = ['Technical Task', 'User Story']
 let subtasks = [];
 let tasks = [{
-    'columnID' : 'ToDo', // Standartmäßig in ToDo 
+    'columnID' : 'ToDo',
     'title' : '',
     'description' : '',
     'contacts' : [
@@ -32,12 +32,18 @@ let tasks = [{
 }];
 
 
+/**
+ * init function
+ */
 async function initAddtask() {
     await init();
     loadBoardColumn();
 }
 
 
+/**
+ * get the column id from the local storage
+ */
 function loadBoardColumn() {    // wird nur für mobile Ansicht verwendet!
     let columnID = localStorage.getItem('boardColumn');
     if (columnID) {
@@ -58,6 +64,7 @@ function getContacts() {
     }
     renderCheckBox()
 }
+
 
 /**
  * function to set the category to the input.value
@@ -219,7 +226,7 @@ function saveEditSubtask(i) {
     addSubtasks();
 }
 
-// Hinzufügen aller Werte zum JSON "tasks"
+
 /**
  * add all to the json "tasks"
  * check if the required inputs are not empty and colorize the input outline and add the errorElement

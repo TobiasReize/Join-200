@@ -2,6 +2,9 @@ let users = [];
 let privacyPolicy = false;
 
 
+/**
+ * checks the form validation for register new user
+ */
 function checkFormValidation() {
     let form = document.getElementById('signup_form');
     let username = document.getElementById('register_name');
@@ -28,6 +31,12 @@ function checkFormValidation() {
 }
 
 
+/**
+ * adds the new user to backend
+ * @param {string} username 
+ * @param {string} email 
+ * @param {string} password 
+ */
 async function addUser(username, email, password) {
     let namesArray = username.split(' ');
     let firstName = namesArray[0] ? namesArray[0] : '';
@@ -47,6 +56,9 @@ async function addUser(username, email, password) {
 }
 
 
+/**
+ * displays the success message overlay after registration
+ */
 function showSuccessMessage() {
     let overlay = document.getElementById('overlay');
     let message = document.getElementById('success_message');
@@ -60,6 +72,9 @@ function showSuccessMessage() {
 }
 
 
+/**
+ * check the privacy policy checkbox
+ */
 function checkPolicy() {
     privacyPolicy = true;
     document.getElementById('check_policy').innerHTML = `
@@ -73,6 +88,9 @@ function checkPolicy() {
 }
 
 
+/**
+ * uncheck the privacy policy checkbox
+ */
 function ncheckPolicy() {
     privacyPolicy = false;
     document.getElementById('check_policy').innerHTML = `

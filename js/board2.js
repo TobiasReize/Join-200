@@ -1,5 +1,5 @@
 /**
- * Shows the Add Task overlay
+ * shows the Add Task overlay
  * @param {string} columnID 
  */
 function showAddTaskOverlay(columnID) {
@@ -10,7 +10,7 @@ function showAddTaskOverlay(columnID) {
 
 
 /**
- * Saves the column ID in the local storage and redirects to the Add Task site
+ * saves the column ID in the local storage and redirects to the Add Task site
  * @param {string} columnID 
  */
 function addTaskMobile(columnID) {
@@ -20,7 +20,7 @@ function addTaskMobile(columnID) {
 
 
 /**
- * Closes the Add Task overlay
+ * closes the Add Task overlay
  */
 function closeAddTaskOverlay() {
     resetInputOfAddTaskOverlay();
@@ -32,7 +32,7 @@ function closeAddTaskOverlay() {
 
 
 /**
- * Resets the input fields of the Add Task overlay
+ * resets the input fields of the Add Task overlay
  */
 function resetInputOfAddTaskOverlay() {
     document.getElementById('input_title').value = '';
@@ -53,7 +53,7 @@ function resetInputOfAddTaskOverlay() {
 
 // Auxiliary functions:
 /**
- * Prevents event bubbling when closing the big view
+ * prevents event bubbling when closing the big view
  * @param {event} event 
  */
 function stopPropagation(event) {
@@ -62,7 +62,7 @@ function stopPropagation(event) {
 
 
 /**
- * Function that allows dropping elements into other elements (is not allowed by default!)
+ * function that allows dropping elements into other elements (is not allowed by default!)
  * @param {event} event 
  */
 function allowDrop(event) {
@@ -71,7 +71,7 @@ function allowDrop(event) {
 
 
 /**
- * Returns only the first letter of the word capitalized
+ * returns only the first letter of the word capitalized
  * @param {string} word 
  * @returns 
  */
@@ -81,7 +81,7 @@ function oneLetterUppercase(word) {
 
 
 /**
- * Returns the whole word with the first letter capitalized
+ * returns the whole word with the first letter capitalized
  * @param {string} word 
  * @returns 
  */
@@ -91,7 +91,7 @@ function firstLetterUppercase(word) {
 
 
 /**
- * Resets all contacts to the "unchecked" status
+ * resets all contacts to the "unchecked" status
  */
 function uncheckContacts() {
     for (let i = 0; i < importContacts.length; i++) {
@@ -102,7 +102,7 @@ function uncheckContacts() {
 
 
 /**
- * Returns the corresponding contact object
+ * returns the corresponding contact object
  * @param {string} id
  * @returns 
  */

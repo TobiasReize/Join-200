@@ -1,5 +1,5 @@
 /**
- * Edit the corresponding task in the big view
+ * edit the corresponding task in the big view
  * @param {string} columnID 
  * @param {integer} taskID 
  */
@@ -25,7 +25,7 @@ function editTask(columnID, taskID) {
 
 
 /**
- * Highlights the current priority of the task in the edit task view
+ * highlights the current priority of the task in the edit task view
  * @param {string} currentTaskPriority 
  */
 function highlightCurrentPriority(currentTaskPriority) {
@@ -41,7 +41,7 @@ function highlightCurrentPriority(currentTaskPriority) {
 
 
 /**
- * Adds the contacts to the editing view and sets the status of the contacts
+ * adds the contacts to the editing view and sets the status of the contacts
  * @param {JSON} currentTask 
  */
 function addContactsToEditView(currentTask) {
@@ -61,7 +61,7 @@ function addContactsToEditView(currentTask) {
 
 
 /**
- * Adds the subtasks to the editing view
+ * adds the subtasks to the editing view
  * @param {JSON} currentTask 
  */
 function addSubtasksToEditView(currentTask) {
@@ -73,7 +73,7 @@ function addSubtasksToEditView(currentTask) {
 
 
 /**
- * Changes the priority of the task in the editing view
+ * changes the priority of the task in the editing view
  * @param {string} selectedPriority 
  */
 function changePriority(selectedPriority) {
@@ -84,7 +84,7 @@ function changePriority(selectedPriority) {
 
 
 /**
- * Resets all priority buttons in the editing view
+ * resets all priority buttons in the editing view
  */
 function resetPriorityButtons() {
     document.getElementById('priority_urgent').classList.remove('priority-urgent-highlight');
@@ -105,7 +105,7 @@ function resetPriorityButtons() {
 
 
 /**
- * Highlights the selected priority button in the editing view
+ * highlights the selected priority button in the editing view
  * @param {string} selectedPriority 
  */
 function highlightSelectedPriority(selectedPriority) {
@@ -120,7 +120,7 @@ function highlightSelectedPriority(selectedPriority) {
 
 
 /**
- * Saves the current data of the task
+ * saves the current data of the task
  * @param {string} columnID 
  * @param {integer} taskID 
  */
@@ -156,7 +156,7 @@ async function saveCurrentTask(columnID, taskID) {
 
 // Additional Edit Task functions (copies of add_task.js):
 /**
- * Shows the contact dropdown list in the editing view
+ * shows the contact dropdown list in the editing view
  */
 function showContactList() {
     document.getElementById('contact_container_edit_task').classList.remove('d-none');
@@ -173,7 +173,7 @@ function showContactList() {
 
 
 /**
- * Closes the contact dropdown list in the editing view
+ * closes the contact dropdown list in the editing view
  */
 function editTaskCloseAssignMenu() {
     document.getElementById('contact_container_edit_task').classList.add('d-none');
@@ -182,7 +182,7 @@ function editTaskCloseAssignMenu() {
 
 
 /**
- * Shows the correct checkbox of the contact in the dropdown list in the editing view
+ * shows the correct checkbox of the contact in the dropdown list in the editing view
  */
 function showCheckBox() {
     for (let i = 0; i < importContacts.length; i++) {
@@ -210,7 +210,7 @@ function showCheckBox() {
 
 
 /**
- * Changes the checkbox icon of the corresponding contact
+ * changes the checkbox icon of the corresponding contact
  * @param {integer} i 
  */
 function changeContactsCheckbox (i) {
@@ -232,7 +232,7 @@ function changeContactsCheckbox (i) {
 
 
 /**
- * Shows the selected contacts
+ * shows the selected contacts
  */
 function showCheckedContacts() {
     let content = document.getElementById('checked_contacts_edit_task');
@@ -250,7 +250,7 @@ function showCheckedContacts() {
 
 
 /**
- * Checks the number of contacts and renders the initials
+ * checks the number of contacts and renders the initials
  * @param {integer} amountCheckedContacts 
  * @param {JSON} contact 
  * @param {integer} i 
@@ -272,7 +272,7 @@ function checkAmountOfContacts(amountCheckedContacts, contact, i) {
 
 
 /**
- * Shows the add- and the cancel-icon for the subtasks in the editing view
+ * shows the add- and the cancel-icon for the subtasks in the editing view
  */
 function showSubtaskIcons() {
     document.getElementById('add_icon_edit_task').classList.toggle('d-none');
@@ -282,7 +282,7 @@ function showSubtaskIcons() {
 
 
 /**
- * Clears the input of the subtask field in the editing view
+ * clears the input of the subtask field in the editing view
  */
 function clearSubtaskField() {
     document.getElementById('input_subtask_edit_task').value = '';
@@ -290,7 +290,7 @@ function clearSubtaskField() {
 
 
 /**
- * Shows the subtasks of the current task in the editing view
+ * shows the subtasks of the current task in the editing view
  */
 function showSubtasksInEditView() {
     let input = document.getElementById('input_subtask_edit_task');
@@ -311,7 +311,7 @@ function showSubtasksInEditView() {
 
 
 /**
- * Removes the subtask of the current task in the editing view
+ * removes the subtask of the current task in the editing view
  * @param {integer} i 
  */
 function removeSubtask(i) {
@@ -321,7 +321,7 @@ function removeSubtask(i) {
 
 
 /**
- * Edit current subtask in the editing view
+ * edit current subtask in the editing view
  * @param {integer} i 
  */
 function changeSubtask(i) {
@@ -334,7 +334,7 @@ function changeSubtask(i) {
 
 
 /**
- * Saves the edited subtask
+ * saves the edited subtask
  * @param {integer} i 
  */
 function saveChangedSubtask(i) {
