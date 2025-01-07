@@ -1,5 +1,4 @@
 const BASE_URL = 'http://127.0.0.1:8000/api/';
-// const BASE_URL = 'https://join-new-bea24-default-rtdb.europe-west1.firebasedatabase.app/';
 
 
 /**
@@ -83,12 +82,9 @@ async function registerPostData(path='', data={}) {
  */
 async function loadTasks() {
     // let response = await fetch(BASE_URL + 'tasks' + '.json');
-    let responseJson = [];
-    try {
-        let response = await fetch(BASE_URL + 'tasks/');
-        let responseToText = await response.text();
-        responseJson = JSON.parse(responseToText);
-    }
+    let response = await fetch(BASE_URL + 'tasks/');
+    let responseToText = await response.text();
+    let responseJson = JSON.parse(responseToText);
     // let responseToJson = await response.json();
     // console.log('responseToJson (Tasks):', responseToJson);
 
@@ -97,9 +93,6 @@ async function loadTasks() {
     //     responseToJson[objectKeysArray[i]]['id'] = objectKeysArray[i];
     //     importTasks.push(responseToJson[objectKeysArray[i]]);
     // }
-    catch {
-        responseJson = [];
-    }
     
     for (let i = 0; i < responseJson.length; i++) {
         importTasks.push(responseJson[i]);
@@ -112,12 +105,9 @@ async function loadTasks() {
  */
 async function loadContacts() {
     // let response = await fetch(BASE_URL + 'contacts' + '.json');
-    let responseJson = [];
-    try {
-        let response = await fetch(BASE_URL + 'contacts/');
-        let responseToText = await response.text();
-        responseJson = JSON.parse(responseToText);
-    }
+    let response = await fetch(BASE_URL + 'contacts/');
+    let responseToText = await response.text();
+    let responseJson = JSON.parse(responseToText);
     // let responseToJson = await response.json();
     // console.log('responseToJson (Contacts):', responseToJson);
 
@@ -126,9 +116,6 @@ async function loadContacts() {
     //     responseToJson[objectKeysArray[i]]['id'] = objectKeysArray[i];
     //     importContacts.push(responseToJson[objectKeysArray[i]]);
     // }
-    catch {
-        responseJson = [];
-    }
 
     for (let i = 0; i < responseJson.length; i++) {
         importContacts.push(responseJson[i]);
